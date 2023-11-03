@@ -33,6 +33,7 @@ import 'java_generator.dart';
 import 'kotlin_generator.dart';
 import 'objc_generator.dart';
 import 'swift_generator.dart';
+import 'arkts_generator.dart';
 
 class _Asynchronous {
   const _Asynchronous();
@@ -179,6 +180,8 @@ class PigeonOptions {
     this.javaOptions,
     this.swiftOut,
     this.swiftOptions,
+    this.arkTSOut,
+    this.arkTSOptions,
     this.kotlinOut,
     this.kotlinOptions,
     this.cppHeaderOut,
@@ -216,6 +219,12 @@ class PigeonOptions {
 
   /// Options that control how Java will be generated.
   final JavaOptions? javaOptions;
+
+  /// Path to the arkTS file that will be generated.
+  final String? arkTSOut;
+
+  /// Options that control how ArkTS will be generated.
+  final ArkTSOptions? arkTSOptions;
 
   /// Path to the swift file that will be generated.
   final String? swiftOut;
@@ -279,6 +288,10 @@ class PigeonOptions {
       swiftOptions: map.containsKey('swiftOptions')
           ? SwiftOptions.fromList(map['swiftOptions']! as Map<String, Object>)
           : null,
+      arkTSOut: map['arkTSOut'] as String?,
+      arkTSOptions: map.containsKey('arkTSOptions')
+          ? ArkTSOptions.fromMap(map['arkTSOptions']! as Map<String, Object>)
+          : null,
       kotlinOut: map['kotlinOut'] as String?,
       kotlinOptions: map.containsKey('kotlinOptions')
           ? KotlinOptions.fromMap(map['kotlinOptions']! as Map<String, Object>)
@@ -316,6 +329,8 @@ class PigeonOptions {
       if (swiftOptions != null) 'swiftOptions': swiftOptions!.toMap(),
       if (kotlinOut != null) 'kotlinOut': kotlinOut!,
       if (kotlinOptions != null) 'kotlinOptions': kotlinOptions!.toMap(),
+      if (arkTSOut != null) 'arkTSOut': arkTSOut!,
+      if (arkTSOptions != null) 'arkTSOptions': arkTSOptions!.toMap(),
       if (cppHeaderOut != null) 'cppHeaderOut': cppHeaderOut!,
       if (cppSourceOut != null) 'cppSourceOut': cppSourceOut!,
       if (cppOptions != null) 'cppOptions': cppOptions!.toMap(),
@@ -613,6 +628,38 @@ class JavaGeneratorAdapter implements GeneratorAdapter {
   @override
   IOSink? shouldGenerate(PigeonOptions options, FileType _) =>
       _openSink(options.javaOut, basePath: options.basePath ?? '');
+
+  @override
+  List<Error> validate(PigeonOptions options, Root root) => <Error>[];
+}
+
+/// A [GeneratorAdapter] that generates ArkTS source code.
+class ArkTSGeneratorAdapter implements GeneratorAdapter {
+  @override
+  List<FileType> fileTypeList = const <FileType>[FileType.na];
+
+  @override
+  void generate(
+      StringSink sink, PigeonOptions options, Root root, FileType fileType) {
+    ArkTSOptions arkTSOptions = options.arkTSOptions ?? const ArkTSOptions();
+    arkTSOptions = arkTSOptions.merge(ArkTSOptions(
+      copyrightHeader: options.copyrightHeader != null
+          ? _lineReader(
+              path.posix.join(options.basePath ?? '', options.copyrightHeader))
+          : null,
+    ));
+    const ArkTSGenerator generator = ArkTSGenerator();
+    generator.generate(
+      arkTSOptions,
+      root,
+      sink,
+      dartPackageName: options.getPackageName(),
+    );
+  }
+
+  @override
+  IOSink? shouldGenerate(PigeonOptions options, FileType fileType) =>
+      _openSink(options.arkTSOut, basePath: options.basePath ?? '');
 
   @override
   List<Error> validate(PigeonOptions options, Root root) => <Error>[];
@@ -1375,6 +1422,7 @@ ${_argParser.usage}''';
         help: 'The package that generated Java code will be in.')
     ..addFlag('java_use_generated_annotation',
         help: 'Adds the java.annotation.Generated annotation to the output.')
+    ..addOption('arkts_out', help: 'Path to generated ArkTS file (.ets).')
     ..addOption(
       'swift_out',
       help: 'Path to generated Swift file (.swift).',
@@ -1446,6 +1494,8 @@ ${_argParser.usage}''';
         useGeneratedAnnotation:
             results['java_use_generated_annotation'] as bool?,
       ),
+      arkTSOut: results['arkts_out'] as String?,
+      arkTSOptions: const ArkTSOptions(),
       swiftOut: results['swift_out'] as String?,
       kotlinOut: results['kotlin_out'] as String?,
       kotlinOptions: KotlinOptions(
@@ -1509,6 +1559,7 @@ ${_argParser.usage}''';
         <GeneratorAdapter>[
           DartGeneratorAdapter(),
           JavaGeneratorAdapter(),
+          ArkTSGeneratorAdapter(),
           SwiftGeneratorAdapter(),
           KotlinGeneratorAdapter(),
           CppGeneratorAdapter(),

@@ -4,6 +4,7 @@
 
 export 'dart:typed_data' show Float64List, Int32List, Int64List, Uint8List;
 
+export 'arkts_generator.dart' show ArkTSOptions;
 export 'cpp_generator.dart' show CppOptions;
 export 'dart_generator.dart' show DartOptions;
 export 'java_generator.dart' show JavaOptions;

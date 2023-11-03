@@ -24,6 +24,8 @@ import 'package:pigeon/pigeon.dart';
   objcOptions: ObjcOptions(prefix: 'PGN'),
   copyrightHeader: 'pigeons/copyright.txt',
   dartPackageName: 'pigeon_example_package',
+  arkTSOut: 'ohos/entry/src/main/ets/plugins/Messages.ets',
+  arkTSOptions: ArkTSOptions(),
 ))
 // #enddocregion config
 
