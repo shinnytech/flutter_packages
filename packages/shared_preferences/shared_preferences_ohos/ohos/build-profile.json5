@@ -1,0 +1,56 @@
+/*
+ * Copyright (c) 2023 Hunan OpenValley Digital Industry Development Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+{
+  "app": {
+    "signingConfigs": [
+      {
+        "name": "default",
+        "type": "HarmonyOS",
+        "material": {
+          "certpath": "C:\\Users\\HUAWEI\\.ohos\\config\\auto_debug_MyApplication2_com.example.myapplication_220086000132838667.cer",
+          "storePassword": "0000001BAFDB775A3DF84D615DFD6EE326AB67D7C7C6A58F6ADB953FDC87E9CCCF99D82116318E530FD771",
+          "keyAlias": "debugKey",
+          "keyPassword": "0000001B579E57462C52E9F78187A5C15B0B7CDF96DC717839F80E73AC5EEBB114CBF8B08D613448F9B986",
+          "profile": "C:\\Users\\HUAWEI\\.ohos\\config\\auto_debug_MyApplication2_com.example.myapplication_220086000132838667.p7b",
+          "signAlg": "SHA256withECDSA",
+          "storeFile": "C:\\Users\\HUAWEI\\.ohos\\config\\auto_debug_MyApplication2_com.example.myapplication_220086000132838667.p12"
+        }
+      }
+    ],
+    "products": [
+      {
+        "name": "default",
+        "signingConfig": "default",
+        "compileSdkVersion": "4.0.0(10)",
+        "compatibleSdkVersion": "4.0.0(10)",
+        "runtimeOS": "HarmonyOS",
+      }
+    ],
+    "buildModeSet": [
+      {
+        "name": "debug",
+      },
+      {
+        "name": "release"
+      }
+    ]
+  },
+  "modules": [
+    {
+      "name": "ohos",
+      "srcPath": "./ohos"
+    }
+  ]
+}
