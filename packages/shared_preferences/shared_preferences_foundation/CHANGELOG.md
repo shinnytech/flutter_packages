@@ -1,6 +1,5 @@
-## 2.3.4
+## NEXT
 
-* Adds pub topics to package metadata.
 * Updates minimum supported SDK version to Flutter 3.7/Dart 2.19.
 
 ## 2.3.3
