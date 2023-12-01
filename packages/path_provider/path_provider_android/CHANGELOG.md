@@ -1,10 +1,5 @@
-## 2.2.0
+## NEXT
 
-* Adds implementation of `getDownloadsDirectory()`.
-
-## 2.1.1
-
-* Adds pub topics to package metadata.
 * Updates minimum supported SDK version to Flutter 3.7/Dart 2.19.
 
 ## 2.1.0
