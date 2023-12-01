@@ -1,10 +1,5 @@
-## 6.1.14
+## NEXT
 
-* Updates documentation to mention support for Android Custom Tabs.
-
-## 6.1.13
-
-* Adds pub topics to package metadata.
 * Updates minimum supported SDK version to Flutter 3.7/Dart 2.19.
 
 ## 6.1.12
