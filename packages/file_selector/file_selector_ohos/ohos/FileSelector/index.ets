@@ -13,4 +13,6 @@
 * limitations under the License.
 */
 
-export { MainPage } from './src/main/ets/components/mainpage/MainPage'
+import FileSelectorOhosPlugin from './src/main/ets/file_selector/FileSelectorOhosPlugin'
+
+export default FileSelectorOhosPlugin
