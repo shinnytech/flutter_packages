@@ -15,7 +15,7 @@ void main() {
 }
 
 class MyApp extends StatefulWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   State<MyApp> createState() => _MyAppState();
@@ -183,9 +183,11 @@ class _MyAppState extends State<MyApp> {
                 if (_isAuthenticating)
                   ElevatedButton(
                     onPressed: _cancelAuthentication,
-                    child: const Row(
+                    // TODO(goderbauer): Make this const when this package requires Flutter 3.8 or later.
+                    // ignore: prefer_const_constructors
+                    child: Row(
                       mainAxisSize: MainAxisSize.min,
-                      children: <Widget>[
+                      children: const <Widget>[
                         Text('Cancel Authentication'),
                         Icon(Icons.cancel),
                       ],
@@ -196,9 +198,11 @@ class _MyAppState extends State<MyApp> {
                     children: <Widget>[
                       ElevatedButton(
                         onPressed: _authenticate,
-                        child: const Row(
+                        // TODO(goderbauer): Make this const when this package requires Flutter 3.8 or later.
+                        // ignore: prefer_const_constructors
+                        child: Row(
                           mainAxisSize: MainAxisSize.min,
-                          children: <Widget>[
+                          children: const <Widget>[
                             Text('Authenticate'),
                             Icon(Icons.perm_device_information),
                           ],

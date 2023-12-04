@@ -207,6 +207,15 @@
                 <filteritem type='filepath' name="packages/animations/example/ohos/har/har_product/libflutter.so.debug.10" desc='二进制文件,不影响兼容性'/>
                 <filteritem type='filepath' name="packages/animations/example/ohos/har/har_product/libflutter.so.release.10" desc='二进制文件,不影响兼容性'/>
                 <filteritem type='filepath' name="packages/animations/example/ohos/har/har_product/libflutter.so.profile.10" desc='二进制文件,不影响兼容性'/>
+                <filteritem type='filepath' name="packages/local_auth/local_auth_ohos/example/ohos/har/har_product/flutter_embedding.har.debug.9" desc='二进制文件,不影响兼容性'/>
+                <filteritem type='filepath' name="packages/local_auth/local_auth_ohos/example/ohos/har/har_product/flutter_embedding.har.profile.10" desc='二进制文件,不影响兼容性'/>
+                <filteritem type='filepath' name="packages/local_auth/local_auth_ohos/example/ohos/har/har_product/flutter_embedding.har.release.9" desc='二进制文件,不影响兼容性'/>
+                <filteritem type='filepath' name="packages/local_auth/local_auth_ohos/example/ohos/har/har_product/flutter_embedding.har.debug.10" desc='二进制文件,不影响兼容性'/>
+                <filteritem type='filepath' name="packages/local_auth/local_auth_ohos/example/ohos/har/har_product/flutter_embedding.har.release.10" desc='二进制文件,不影响兼容性'/>
+                <filteritem type='filepath' name="packages/local_auth/local_auth_ohos/example/ohos/dta/icudtl.dat" desc='二进制文件,不影响兼容性'/>
+                <filteritem type='filepath' name="packages/local_auth/local_auth_ohos/example/ohos/har/har_product/libflutter.so.debug.10" desc='二进制文件,不影响兼容性'/>
+                <filteritem type='filepath' name="packages/local_auth/local_auth_ohos/example/ohos/har/har_product/libflutter.so.release.10" desc='二进制文件,不影响兼容性'/>
+                <filteritem type='filepath' name="packages/local_auth/local_auth_ohos/example/ohos/har/har_product/libflutter.so.profile.10" desc='二进制文件,不影响兼容性'/>
             </filefilter>
             <filefilter name="defaultPolicyFilter" desc="Filters for compatibility，license header policies">
                 <filteritem type='filepath' name="packages/pigeon/example/app/ohos/entry/src/main/ets/plugins/Messages.ets" desc='BSDStyleLicense,不影响兼容性'/>

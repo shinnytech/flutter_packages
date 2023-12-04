@@ -1,186 +1,94 @@
 // Copyright 2013 The Flutter Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
-#import "FLTLocalAuthPlugin.h"
-#import "FLTLocalAuthPlugin_Test.h"
-
 #import <LocalAuthentication/LocalAuthentication.h>
 
-typedef void (^FLAAuthCompletion)(FLAAuthResultDetails *_Nullable, FlutterError *_Nullable);
-
-/**
- * A default context factory that wraps standard LAContext allocation.
- */
-@interface FLADefaultAuthContextFactory : NSObject <FLAAuthContextFactory>
-@end
-
-@implementation FLADefaultAuthContextFactory
-- (LAContext *)createAuthContext {
-  return [[LAContext alloc] init];
-}
-@end
-
-#pragma mark -
-
-/**
- * A data container for sticky auth state.
- */
-@interface FLAStickyAuthState : NSObject
-@property(nonatomic, strong, nonnull) FLAAuthOptions *options;
-@property(nonatomic, strong, nonnull) FLAAuthStrings *strings;
-@property(nonatomic, copy, nonnull) FLAAuthCompletion resultHandler;
-- (instancetype)initWithOptions:(nonnull FLAAuthOptions *)options
-                        strings:(nonnull FLAAuthStrings *)strings
-                  resultHandler:(nonnull FLAAuthCompletion)resultHandler;
-@end
-
-@implementation FLAStickyAuthState
-- (instancetype)initWithOptions:(nonnull FLAAuthOptions *)options
-                        strings:(nonnull FLAAuthStrings *)strings
-                  resultHandler:(nonnull FLAAuthCompletion)resultHandler {
-  self = [super init];
-  if (self) {
-    _options = options;
-    _strings = strings;
-    _resultHandler = resultHandler;
-  }
-  return self;
-}
-@end
-
-#pragma mark -
+#import "FLTLocalAuthPlugin.h"
 
 @interface FLTLocalAuthPlugin ()
-@property(nonatomic, strong, nullable) FLAStickyAuthState *lastCallState;
-@property(nonatomic, strong) NSObject<FLAAuthContextFactory> *authContextFactory;
+@property(nonatomic, copy, nullable) NSDictionary<NSString *, NSNumber *> *lastCallArgs;
+@property(nonatomic, nullable) FlutterResult lastResult;
+// For unit tests to inject dummy LAContext instances that will be used when a new context would
+// normally be created. Each call to createAuthContext will remove the current first element from
+// the array.
+- (void)setAuthContextOverrides:(NSArray<LAContext *> *)authContexts;
 @end
 
-@implementation FLTLocalAuthPlugin
+@implementation FLTLocalAuthPlugin {
+  NSMutableArray<LAContext *> *_authContextOverrides;
+}
 
 + (void)registerWithRegistrar:(NSObject<FlutterPluginRegistrar> *)registrar {
+  FlutterMethodChannel *channel =
+      [FlutterMethodChannel methodChannelWithName:@"plugins.flutter.io/local_auth_ios"
+                                  binaryMessenger:[registrar messenger]];
   FLTLocalAuthPlugin *instance = [[FLTLocalAuthPlugin alloc] init];
+  [registrar addMethodCallDelegate:instance channel:channel];
   [registrar addApplicationDelegate:instance];
-  FLALocalAuthApiSetup([registrar messenger], instance);
 }
 
-- (instancetype)init {
-  return [self initWithContextFactory:[[FLADefaultAuthContextFactory alloc] init]];
-}
-
-- (instancetype)initWithContextFactory:(NSObject<FLAAuthContextFactory> *)factory {
-  self = [super init];
-  if (self) {
-    _authContextFactory = factory;
-  }
-  return self;
-}
-
-#pragma mark FLALocalAuthApi
-
-- (void)authenticateWithOptions:(nonnull FLAAuthOptions *)options
-                        strings:(nonnull FLAAuthStrings *)strings
-                     completion:(nonnull void (^)(FLAAuthResultDetails *_Nullable,
-                                                  FlutterError *_Nullable))completion {
-  LAContext *context = [self.authContextFactory createAuthContext];
-  NSError *authError = nil;
-  self.lastCallState = nil;
-  context.localizedFallbackTitle = strings.localizedFallbackTitle;
-
-  LAPolicy policy = options.biometricOnly.boolValue
-                        ? LAPolicyDeviceOwnerAuthenticationWithBiometrics
-                        : LAPolicyDeviceOwnerAuthentication;
-  if ([context canEvaluatePolicy:policy error:&authError]) {
-    [context evaluatePolicy:policy
-            localizedReason:strings.reason
-                      reply:^(BOOL success, NSError *error) {
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                          [self handleAuthReplyWithSuccess:success
-                                                     error:error
-                                                   options:options
-                                                   strings:strings
-                                                completion:completion];
-                        });
-                      }];
+- (void)handleMethodCall:(FlutterMethodCall *)call result:(FlutterResult)result {
+  if ([@"authenticate" isEqualToString:call.method]) {
+    bool isBiometricOnly = [call.arguments[@"biometricOnly"] boolValue];
+    if (isBiometricOnly) {
+      [self authenticateWithBiometrics:call.arguments withFlutterResult:result];
+    } else {
+      [self authenticate:call.arguments withFlutterResult:result];
+    }
+  } else if ([@"getEnrolledBiometrics" isEqualToString:call.method]) {
+    [self getEnrolledBiometrics:result];
+  } else if ([@"deviceSupportsBiometrics" isEqualToString:call.method]) {
+    [self deviceSupportsBiometrics:result];
+  } else if ([@"isDeviceSupported" isEqualToString:call.method]) {
+    result(@YES);
   } else {
-    [self handleError:authError withOptions:options strings:strings completion:completion];
+    result(FlutterMethodNotImplemented);
   }
-}
-
-- (nullable NSNumber *)deviceCanSupportBiometricsWithError:
-    (FlutterError *_Nullable __autoreleasing *_Nonnull)error {
-  LAContext *context = [self.authContextFactory createAuthContext];
-  NSError *authError = nil;
-  // Check if authentication with biometrics is possible.
-  if ([context canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics
-                           error:&authError]) {
-    if (authError == nil) {
-      return @YES;
-    }
-  }
-  // If not, check if it is because no biometrics are enrolled (but still present).
-  if (authError != nil) {
-    if (authError.code == LAErrorBiometryNotEnrolled) {
-      return @YES;
-    }
-  }
-
-  return @NO;
-}
-
-- (nullable NSArray<FLAAuthBiometricWrapper *> *)getEnrolledBiometricsWithError:
-    (FlutterError *_Nullable __autoreleasing *_Nonnull)error {
-  LAContext *context = [self.authContextFactory createAuthContext];
-  NSError *authError = nil;
-  NSMutableArray<FLAAuthBiometricWrapper *> *biometrics = [[NSMutableArray alloc] init];
-  if ([context canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics
-                           error:&authError]) {
-    if (authError == nil) {
-      if (context.biometryType == LABiometryTypeFaceID) {
-        [biometrics addObject:[FLAAuthBiometricWrapper makeWithValue:FLAAuthBiometricFace]];
-      } else if (context.biometryType == LABiometryTypeTouchID) {
-        [biometrics addObject:[FLAAuthBiometricWrapper makeWithValue:FLAAuthBiometricFingerprint]];
-      }
-    }
-  }
-  return biometrics;
-}
-
-- (nullable NSNumber *)isDeviceSupportedWithError:
-    (FlutterError *_Nullable __autoreleasing *_Nonnull)error {
-  // TODO(stuartmorgan): Fix this to check for biometrics or passcode; see
-  // https://github.com/flutter/flutter/issues/116179
-  return @YES;
 }
 
 #pragma mark Private Methods
 
-- (void)showAlertWithMessage:(NSString *)message
-          dismissButtonTitle:(NSString *)dismissButtonTitle
-     openSettingsButtonTitle:(NSString *)openSettingsButtonTitle
-                  completion:(FLAAuthCompletion)completion {
+- (void)setAuthContextOverrides:(NSArray<LAContext *> *)authContexts {
+  _authContextOverrides = [authContexts mutableCopy];
+}
+
+- (LAContext *)createAuthContext {
+  if ([_authContextOverrides count] > 0) {
+    LAContext *context = [_authContextOverrides firstObject];
+    [_authContextOverrides removeObjectAtIndex:0];
+    return context;
+  }
+  return [[LAContext alloc] init];
+}
+
+- (void)alertMessage:(NSString *)message
+         firstButton:(NSString *)firstButton
+       flutterResult:(FlutterResult)result
+    additionalButton:(NSString *)secondButton {
   UIAlertController *alert =
       [UIAlertController alertControllerWithTitle:@""
                                           message:message
                                    preferredStyle:UIAlertControllerStyleAlert];
 
-  UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:dismissButtonTitle
+  UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:firstButton
                                                           style:UIAlertActionStyleDefault
                                                         handler:^(UIAlertAction *action) {
-                                                          [self handleSucceeded:NO
-                                                                 withCompletion:completion];
+                                                          result(@NO);
                                                         }];
 
   [alert addAction:defaultAction];
-  if (openSettingsButtonTitle != nil) {
+  if (secondButton != nil) {
     UIAlertAction *additionalAction = [UIAlertAction
-        actionWithTitle:openSettingsButtonTitle
+        actionWithTitle:secondButton
                   style:UIAlertActionStyleDefault
                 handler:^(UIAlertAction *action) {
-                  NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
-                  [[UIApplication sharedApplication] openURL:url
-                                                     options:@{}
-                                           completionHandler:NULL];
-                  [self handleSucceeded:NO withCompletion:completion];
+                  if (UIApplicationOpenSettingsURLString != NULL) {
+                    NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+                    [[UIApplication sharedApplication] openURL:url
+                                                       options:@{}
+                                             completionHandler:NULL];
+                    result(@NO);
+                  }
                 }];
     [alert addAction:additionalAction];
   }
@@ -189,14 +97,104 @@ typedef void (^FLAAuthCompletion)(FLAAuthResultDetails *_Nullable, FlutterError 
                                                                                    completion:nil];
 }
 
+- (void)deviceSupportsBiometrics:(FlutterResult)result {
+  LAContext *context = self.createAuthContext;
+  NSError *authError = nil;
+  // Check if authentication with biometrics is possible.
+  if ([context canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics
+                           error:&authError]) {
+    if (authError == nil) {
+      result(@YES);
+      return;
+    }
+  }
+  // If not, check if it is because no biometrics are enrolled (but still present).
+  if (authError != nil) {
+    if (authError.code == LAErrorBiometryNotEnrolled) {
+      result(@YES);
+      return;
+    }
+  }
+
+  result(@NO);
+}
+
+- (void)getEnrolledBiometrics:(FlutterResult)result {
+  LAContext *context = self.createAuthContext;
+  NSError *authError = nil;
+  NSMutableArray<NSString *> *biometrics = [[NSMutableArray<NSString *> alloc] init];
+  if ([context canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics
+                           error:&authError]) {
+    if (authError == nil) {
+      if (context.biometryType == LABiometryTypeFaceID) {
+        [biometrics addObject:@"face"];
+      } else if (context.biometryType == LABiometryTypeTouchID) {
+        [biometrics addObject:@"fingerprint"];
+      }
+    }
+  }
+  result(biometrics);
+}
+
+- (void)authenticateWithBiometrics:(NSDictionary *)arguments
+                 withFlutterResult:(FlutterResult)result {
+  LAContext *context = self.createAuthContext;
+  NSError *authError = nil;
+  self.lastCallArgs = nil;
+  self.lastResult = nil;
+  context.localizedFallbackTitle = arguments[@"localizedFallbackTitle"] == [NSNull null]
+                                       ? nil
+                                       : arguments[@"localizedFallbackTitle"];
+
+  if ([context canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics
+                           error:&authError]) {
+    [context evaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics
+            localizedReason:arguments[@"localizedReason"]
+                      reply:^(BOOL success, NSError *error) {
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                          [self handleAuthReplyWithSuccess:success
+                                                     error:error
+                                          flutterArguments:arguments
+                                             flutterResult:result];
+                        });
+                      }];
+  } else {
+    [self handleErrors:authError flutterArguments:arguments withFlutterResult:result];
+  }
+}
+
+- (void)authenticate:(NSDictionary *)arguments withFlutterResult:(FlutterResult)result {
+  LAContext *context = self.createAuthContext;
+  NSError *authError = nil;
+  _lastCallArgs = nil;
+  _lastResult = nil;
+  context.localizedFallbackTitle = arguments[@"localizedFallbackTitle"] == [NSNull null]
+                                       ? nil
+                                       : arguments[@"localizedFallbackTitle"];
+
+  if ([context canEvaluatePolicy:LAPolicyDeviceOwnerAuthentication error:&authError]) {
+    [context evaluatePolicy:kLAPolicyDeviceOwnerAuthentication
+            localizedReason:arguments[@"localizedReason"]
+                      reply:^(BOOL success, NSError *error) {
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                          [self handleAuthReplyWithSuccess:success
+                                                     error:error
+                                          flutterArguments:arguments
+                                             flutterResult:result];
+                        });
+                      }];
+  } else {
+    [self handleErrors:authError flutterArguments:arguments withFlutterResult:result];
+  }
+}
+
 - (void)handleAuthReplyWithSuccess:(BOOL)success
                              error:(NSError *)error
-                           options:(FLAAuthOptions *)options
-                           strings:(FLAAuthStrings *)strings
-                        completion:(nonnull FLAAuthCompletion)completion {
+                  flutterArguments:(NSDictionary *)arguments
+                     flutterResult:(FlutterResult)result {
   NSAssert([NSThread isMainThread], @"Response handling must be done on the main thread.");
   if (success) {
-    [self handleSucceeded:YES withCompletion:completion];
+    result(@YES);
   } else {
     switch (error.code) {
       case LAErrorBiometryNotAvailable:
@@ -205,68 +203,54 @@ typedef void (^FLAAuthCompletion)(FLAAuthResultDetails *_Nullable, FlutterError 
       case LAErrorUserFallback:
       case LAErrorPasscodeNotSet:
       case LAErrorAuthenticationFailed:
-        [self handleError:error withOptions:options strings:strings completion:completion];
+        [self handleErrors:error flutterArguments:arguments withFlutterResult:result];
         return;
       case LAErrorSystemCancel:
-        if ([options.sticky boolValue]) {
-          _lastCallState = [[FLAStickyAuthState alloc] initWithOptions:options
-                                                               strings:strings
-                                                         resultHandler:completion];
+        if ([arguments[@"stickyAuth"] boolValue]) {
+          self->_lastCallArgs = arguments;
+          self->_lastResult = result;
         } else {
-          [self handleSucceeded:NO withCompletion:completion];
+          result(@NO);
         }
         return;
     }
-    [self handleError:error withOptions:options strings:strings completion:completion];
+    [self handleErrors:error flutterArguments:arguments withFlutterResult:result];
   }
 }
 
-- (void)handleSucceeded:(BOOL)succeeded withCompletion:(nonnull FLAAuthCompletion)completion {
-  completion(
-      [FLAAuthResultDetails makeWithResult:(succeeded ? FLAAuthResultSuccess : FLAAuthResultFailure)
-                              errorMessage:nil
-                              errorDetails:nil],
-      nil);
-}
-
-- (void)handleError:(NSError *)authError
-        withOptions:(FLAAuthOptions *)options
-            strings:(FLAAuthStrings *)strings
-         completion:(nonnull FLAAuthCompletion)completion {
-  FLAAuthResult result = FLAAuthResultErrorNotAvailable;
+- (void)handleErrors:(NSError *)authError
+     flutterArguments:(NSDictionary *)arguments
+    withFlutterResult:(FlutterResult)result {
+  NSString *errorCode = @"NotAvailable";
   switch (authError.code) {
     case LAErrorPasscodeNotSet:
     case LAErrorBiometryNotEnrolled:
-      if (options.useErrorDialogs.boolValue) {
-        [self showAlertWithMessage:strings.goToSettingsDescription
-                 dismissButtonTitle:strings.cancelButton
-            openSettingsButtonTitle:strings.goToSettingsButton
-                         completion:completion];
+      if ([arguments[@"useErrorDialogs"] boolValue]) {
+        [self alertMessage:arguments[@"goToSettingDescriptionIOS"]
+                 firstButton:arguments[@"okButton"]
+               flutterResult:result
+            additionalButton:arguments[@"goToSetting"]];
         return;
       }
-      result = authError.code == LAErrorPasscodeNotSet ? FLAAuthResultErrorPasscodeNotSet
-                                                       : FLAAuthResultErrorNotEnrolled;
+      errorCode = authError.code == LAErrorPasscodeNotSet ? @"PasscodeNotSet" : @"NotEnrolled";
       break;
     case LAErrorBiometryLockout:
-      [self showAlertWithMessage:strings.lockOut
-               dismissButtonTitle:strings.cancelButton
-          openSettingsButtonTitle:nil
-                       completion:completion];
+      [self alertMessage:arguments[@"lockOut"]
+               firstButton:arguments[@"okButton"]
+             flutterResult:result
+          additionalButton:nil];
       return;
   }
-  completion([FLAAuthResultDetails makeWithResult:result
-                                     errorMessage:authError.localizedDescription
-                                     errorDetails:authError.domain],
-             nil);
+  result([FlutterError errorWithCode:errorCode
+                             message:authError.localizedDescription
+                             details:authError.domain]);
 }
 
 #pragma mark - AppDelegate
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-  if (self.lastCallState != nil) {
-    [self authenticateWithOptions:_lastCallState.options
-                          strings:_lastCallState.strings
-                       completion:_lastCallState.resultHandler];
+  if (self.lastCallArgs != nil && self.lastResult != nil) {
+    [self authenticateWithBiometrics:_lastCallArgs withFlutterResult:self.lastResult];
   }
 }
 

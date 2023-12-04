@@ -8,6 +8,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Application;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.os.Bundle;
@@ -25,6 +26,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleOwner;
+import io.flutter.plugin.common.MethodCall;
 import java.util.concurrent.Executor;
 
 /**
@@ -33,20 +35,35 @@ import java.util.concurrent.Executor;
  * <p>One instance per call is generated to ensure readable separation of executable paths across
  * method calls.
  */
+@SuppressWarnings("deprecation")
 class AuthenticationHelper extends BiometricPrompt.AuthenticationCallback
     implements Application.ActivityLifecycleCallbacks, DefaultLifecycleObserver {
   /** The callback that handles the result of this authentication process. */
   interface AuthCompletionHandler {
-    /** Called when authentication attempt is complete. */
-    void complete(Messages.AuthResult authResult);
+    /** Called when authentication was successful. */
+    void onSuccess();
+
+    /**
+     * Called when authentication failed due to user. For instance, when user cancels the auth or
+     * quits the app.
+     */
+    void onFailure();
+
+    /**
+     * Called when authentication fails due to non-user related problems such as system errors,
+     * phone not having a FP reader etc.
+     *
+     * @param code The error code to be returned to Flutter app.
+     * @param error The description of the error.
+     */
+    void onError(String code, String error);
   }
 
   // This is null when not using v2 embedding;
   private final Lifecycle lifecycle;
   private final FragmentActivity activity;
   private final AuthCompletionHandler completionHandler;
-  private final boolean useErrorDialogs;
-  private final Messages.AuthStrings strings;
+  private final MethodCall call;
   private final BiometricPrompt.PromptInfo promptInfo;
   private final boolean isAuthSticky;
   private final UiThreadExecutor uiThreadExecutor;
@@ -56,24 +73,23 @@ class AuthenticationHelper extends BiometricPrompt.AuthenticationCallback
   AuthenticationHelper(
       Lifecycle lifecycle,
       FragmentActivity activity,
-      @NonNull Messages.AuthOptions options,
-      @NonNull Messages.AuthStrings strings,
-      @NonNull AuthCompletionHandler completionHandler,
+      MethodCall call,
+      AuthCompletionHandler completionHandler,
       boolean allowCredentials) {
     this.lifecycle = lifecycle;
     this.activity = activity;
     this.completionHandler = completionHandler;
-    this.strings = strings;
-    this.isAuthSticky = options.getSticky();
-    this.useErrorDialogs = options.getUseErrorDialgs();
+    this.call = call;
+    this.isAuthSticky = call.argument("stickyAuth");
     this.uiThreadExecutor = new UiThreadExecutor();
 
     BiometricPrompt.PromptInfo.Builder promptBuilder =
         new BiometricPrompt.PromptInfo.Builder()
-            .setDescription(strings.getReason())
-            .setTitle(strings.getSignInTitle())
-            .setSubtitle(strings.getBiometricHint())
-            .setConfirmationRequired(options.getSensitiveTransaction());
+            .setDescription((String) call.argument("localizedReason"))
+            .setTitle((String) call.argument("signInTitle"))
+            .setSubtitle((String) call.argument("biometricHint"))
+            .setConfirmationRequired((Boolean) call.argument("sensitiveTransaction"))
+            .setConfirmationRequired((Boolean) call.argument("sensitiveTransaction"));
 
     int allowedAuthenticators =
         BiometricManager.Authenticators.BIOMETRIC_WEAK
@@ -82,7 +98,7 @@ class AuthenticationHelper extends BiometricPrompt.AuthenticationCallback
     if (allowCredentials) {
       allowedAuthenticators |= BiometricManager.Authenticators.DEVICE_CREDENTIAL;
     } else {
-      promptBuilder.setNegativeButtonText(strings.getCancelButton());
+      promptBuilder.setNegativeButtonText((String) call.argument("cancelButton"));
     }
 
     promptBuilder.setAllowedAuthenticators(allowedAuthenticators);
@@ -119,35 +135,40 @@ class AuthenticationHelper extends BiometricPrompt.AuthenticationCallback
 
   @SuppressLint("SwitchIntDef")
   @Override
-  public void onAuthenticationError(int errorCode, @NonNull CharSequence errString) {
+  public void onAuthenticationError(int errorCode, CharSequence errString) {
     switch (errorCode) {
       case BiometricPrompt.ERROR_NO_DEVICE_CREDENTIAL:
-        if (useErrorDialogs) {
+        if (call.argument("useErrorDialogs")) {
           showGoToSettingsDialog(
-              strings.getDeviceCredentialsRequiredTitle(),
-              strings.getDeviceCredentialsSetupDescription());
+              (String) call.argument("deviceCredentialsRequired"),
+              (String) call.argument("deviceCredentialsSetupDescription"));
           return;
         }
-        completionHandler.complete(Messages.AuthResult.ERROR_NOT_AVAILABLE);
+        completionHandler.onError("NotAvailable", "Security credentials not available.");
         break;
       case BiometricPrompt.ERROR_NO_SPACE:
       case BiometricPrompt.ERROR_NO_BIOMETRICS:
-        if (useErrorDialogs) {
+        if (call.argument("useErrorDialogs")) {
           showGoToSettingsDialog(
-              strings.getBiometricRequiredTitle(), strings.getGoToSettingsDescription());
+              (String) call.argument("biometricRequired"),
+              (String) call.argument("goToSettingDescription"));
           return;
         }
-        completionHandler.complete(Messages.AuthResult.ERROR_NOT_ENROLLED);
+        completionHandler.onError("NotEnrolled", "No Biometrics enrolled on this device.");
         break;
       case BiometricPrompt.ERROR_HW_UNAVAILABLE:
       case BiometricPrompt.ERROR_HW_NOT_PRESENT:
-        completionHandler.complete(Messages.AuthResult.ERROR_NOT_AVAILABLE);
+        completionHandler.onError("NotAvailable", "Security credentials not available.");
         break;
       case BiometricPrompt.ERROR_LOCKOUT:
-        completionHandler.complete(Messages.AuthResult.ERROR_LOCKED_OUT_TEMPORARILY);
+        completionHandler.onError(
+            "LockedOut",
+            "The operation was canceled because the API is locked out due to too many attempts. This occurs after 5 failed attempts, and lasts for 30 seconds.");
         break;
       case BiometricPrompt.ERROR_LOCKOUT_PERMANENT:
-        completionHandler.complete(Messages.AuthResult.ERROR_LOCKED_OUT_PERMANENTLY);
+        completionHandler.onError(
+            "PermanentlyLockedOut",
+            "The operation was canceled because ERROR_LOCKOUT occurred too many times. Biometric authentication is disabled until the user unlocks with strong authentication (PIN/Pattern/Password)");
         break;
       case BiometricPrompt.ERROR_CANCELED:
         // If we are doing sticky auth and the activity has been paused,
@@ -155,18 +176,18 @@ class AuthenticationHelper extends BiometricPrompt.AuthenticationCallback
         if (activityPaused && isAuthSticky) {
           return;
         } else {
-          completionHandler.complete(Messages.AuthResult.FAILURE);
+          completionHandler.onFailure();
         }
         break;
       default:
-        completionHandler.complete(Messages.AuthResult.FAILURE);
+        completionHandler.onFailure();
     }
     stop();
   }
 
   @Override
-  public void onAuthenticationSucceeded(@NonNull BiometricPrompt.AuthenticationResult result) {
-    completionHandler.complete(Messages.AuthResult.SUCCESS);
+  public void onAuthenticationSucceeded(BiometricPrompt.AuthenticationResult result) {
+    completionHandler.onSuccess();
     stop();
   }
 
@@ -191,7 +212,13 @@ class AuthenticationHelper extends BiometricPrompt.AuthenticationCallback
       final BiometricPrompt prompt = new BiometricPrompt(activity, uiThreadExecutor, this);
       // When activity is resuming, we cannot show the prompt right away. We need to post it to the
       // UI queue.
-      uiThreadExecutor.handler.post(() -> prompt.authenticate(promptInfo));
+      uiThreadExecutor.handler.post(
+          new Runnable() {
+            @Override
+            public void run() {
+              prompt.authenticate(promptInfo);
+            }
+          });
     }
   }
 
@@ -209,26 +236,32 @@ class AuthenticationHelper extends BiometricPrompt.AuthenticationCallback
   @SuppressLint("InflateParams")
   private void showGoToSettingsDialog(String title, String descriptionText) {
     View view = LayoutInflater.from(activity).inflate(R.layout.go_to_setting, null, false);
-    TextView message = view.findViewById(R.id.fingerprint_required);
-    TextView description = view.findViewById(R.id.go_to_setting_description);
+    TextView message = (TextView) view.findViewById(R.id.fingerprint_required);
+    TextView description = (TextView) view.findViewById(R.id.go_to_setting_description);
     message.setText(title);
     description.setText(descriptionText);
     Context context = new ContextThemeWrapper(activity, R.style.AlertDialogCustom);
     OnClickListener goToSettingHandler =
-        (dialog, which) -> {
-          completionHandler.complete(Messages.AuthResult.FAILURE);
-          stop();
-          activity.startActivity(new Intent(Settings.ACTION_SECURITY_SETTINGS));
+        new OnClickListener() {
+          @Override
+          public void onClick(DialogInterface dialog, int which) {
+            completionHandler.onFailure();
+            stop();
+            activity.startActivity(new Intent(Settings.ACTION_SECURITY_SETTINGS));
+          }
         };
     OnClickListener cancelHandler =
-        (dialog, which) -> {
-          completionHandler.complete(Messages.AuthResult.FAILURE);
-          stop();
+        new OnClickListener() {
+          @Override
+          public void onClick(DialogInterface dialog, int which) {
+            completionHandler.onFailure();
+            stop();
+          }
         };
     new AlertDialog.Builder(context)
         .setView(view)
-        .setPositiveButton(strings.getGoToSettingsButton(), goToSettingHandler)
-        .setNegativeButton(strings.getCancelButton(), cancelHandler)
+        .setPositiveButton((String) call.argument("goToSetting"), goToSettingHandler)
+        .setNegativeButton((String) call.argument("cancelButton"), cancelHandler)
         .setCancelable(false)
         .show();
   }
@@ -262,7 +295,7 @@ class AuthenticationHelper extends BiometricPrompt.AuthenticationCallback
   @Override
   public void onCreate(@NonNull LifecycleOwner owner) {}
 
-  static class UiThreadExecutor implements Executor {
+  private static class UiThreadExecutor implements Executor {
     final Handler handler = new Handler(Looper.getMainLooper());
 
     @Override

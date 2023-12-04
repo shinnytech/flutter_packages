@@ -1,6 +1,6 @@
 # local_auth
 
-<?code-excerpt path-base="example/lib"?>
+<?code-excerpt path-base="excerpts/packages/local_auth_example"?>
 
 This Flutter plugin provides means to perform local, on-device authentication of
 the user.
