@@ -465,7 +465,6 @@ class _MyHomePageState extends State<MyHomePage> {
           return AlertDialog(
             title: const Text('Add optional parameters'),
             content: Column(
-              mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 TextField(
                   controller: maxWidthController,
