@@ -17,16 +17,6 @@
 #error File requires ARC to be enabled.
 #endif
 
-@implementation AnEnumBox
-- (instancetype)initWithValue:(AnEnum)value {
-  self = [super init];
-  if (self) {
-    _value = value;
-  }
-  return self;
-}
-@end
-
 static NSArray *wrapResult(id result, FlutterError *error) {
   if (error) {
     return @[
@@ -160,9 +150,9 @@ static id GetNullableObjectAtIndex(NSArray *array, NSInteger key) {
            nullableMapWithAnnotations:
                (nullable NSDictionary<NSString *, NSString *> *)nullableMapWithAnnotations
                 nullableMapWithObject:(nullable NSDictionary<NSString *, id> *)nullableMapWithObject
-                        aNullableEnum:(nullable AnEnumBox *)aNullableEnum
+                        aNullableEnum:(AnEnum)aNullableEnum
                       aNullableString:(nullable NSString *)aNullableString
-                      aNullableObject:(nullable id)aNullableObject {
+                      aNullableObject:(id)aNullableObject {
   AllNullableTypes *pigeonResult = [[AllNullableTypes alloc] init];
   pigeonResult.aNullableBool = aNullableBool;
   pigeonResult.aNullableInt = aNullableInt;
@@ -197,12 +187,7 @@ static id GetNullableObjectAtIndex(NSArray *array, NSInteger key) {
   pigeonResult.nullableNestedList = GetNullableObjectAtIndex(list, 10);
   pigeonResult.nullableMapWithAnnotations = GetNullableObjectAtIndex(list, 11);
   pigeonResult.nullableMapWithObject = GetNullableObjectAtIndex(list, 12);
-  NSNumber *aNullableEnumAsNumber = GetNullableObjectAtIndex(list, 13);
-  AnEnumBox *aNullableEnum =
-      aNullableEnumAsNumber == nil
-          ? nil
-          : [[AnEnumBox alloc] initWithValue:[aNullableEnumAsNumber integerValue]];
-  pigeonResult.aNullableEnum = aNullableEnum;
+  pigeonResult.aNullableEnum = [GetNullableObjectAtIndex(list, 13) integerValue];
   pigeonResult.aNullableString = GetNullableObjectAtIndex(list, 14);
   pigeonResult.aNullableObject = GetNullableObjectAtIndex(list, 15);
   return pigeonResult;
@@ -225,8 +210,7 @@ static id GetNullableObjectAtIndex(NSArray *array, NSInteger key) {
     (self.nullableNestedList ?: [NSNull null]),
     (self.nullableMapWithAnnotations ?: [NSNull null]),
     (self.nullableMapWithObject ?: [NSNull null]),
-    (self.aNullableEnum == nil ? [NSNull null]
-                               : [NSNumber numberWithInteger:self.aNullableEnum.value]),
+    @(self.aNullableEnum),
     (self.aNullableString ?: [NSNull null]),
     (self.aNullableObject ?: [NSNull null]),
   ];
@@ -652,29 +636,6 @@ void HostIntegrationCoreApiSetup(id<FlutterBinaryMessenger> binaryMessenger,
       [channel setMessageHandler:nil];
     }
   }
-  /// Returns the passed enum to test serialization and deserialization.
-  {
-    FlutterBasicMessageChannel *channel = [[FlutterBasicMessageChannel alloc]
-           initWithName:
-               @"dev.flutter.pigeon.pigeon_integration_tests.HostIntegrationCoreApi.echoEnum"
-        binaryMessenger:binaryMessenger
-                  codec:HostIntegrationCoreApiGetCodec()];
-    if (api) {
-      NSCAssert([api respondsToSelector:@selector(echoEnum:error:)],
-                @"HostIntegrationCoreApi api (%@) doesn't respond to @selector(echoEnum:error:)",
-                api);
-      [channel setMessageHandler:^(id _Nullable message, FlutterReply callback) {
-        NSArray *args = message;
-        AnEnum arg_anEnum = [GetNullableObjectAtIndex(args, 0) integerValue];
-        FlutterError *error;
-        AnEnum enumValue = [api echoEnum:arg_anEnum error:&error];
-        NSNumber *output = [NSNumber numberWithInteger:enumValue];
-        callback(wrapResult(output, error));
-      }];
-    } else {
-      [channel setMessageHandler:nil];
-    }
-  }
   /// Returns the passed object, to test serialization and deserialization.
   {
     FlutterBasicMessageChannel *channel = [[FlutterBasicMessageChannel alloc]
@@ -961,33 +922,6 @@ void HostIntegrationCoreApiSetup(id<FlutterBinaryMessenger> binaryMessenger,
       [channel setMessageHandler:nil];
     }
   }
-  {
-    FlutterBasicMessageChannel *channel = [[FlutterBasicMessageChannel alloc]
-           initWithName:@"dev.flutter.pigeon.pigeon_integration_tests.HostIntegrationCoreApi."
-                        @"echoNullableEnum"
-        binaryMessenger:binaryMessenger
-                  codec:HostIntegrationCoreApiGetCodec()];
-    if (api) {
-      NSCAssert(
-          [api respondsToSelector:@selector(echoNullableEnum:error:)],
-          @"HostIntegrationCoreApi api (%@) doesn't respond to @selector(echoNullableEnum:error:)",
-          api);
-      [channel setMessageHandler:^(id _Nullable message, FlutterReply callback) {
-        NSArray *args = message;
-        NSNumber *arg_anEnumAsNumber = GetNullableObjectAtIndex(args, 0);
-        AnEnumBox *arg_anEnum =
-            arg_anEnumAsNumber == nil
-                ? nil
-                : [[AnEnumBox alloc] initWithValue:[arg_anEnumAsNumber integerValue]];
-        FlutterError *error;
-        AnEnumBox *enumBox = [api echoNullableEnum:arg_anEnum error:&error];
-        NSNumber *output = enumBox == nil ? nil : [NSNumber numberWithInteger:enumBox.value];
-        callback(wrapResult(output, error));
-      }];
-    } else {
-      [channel setMessageHandler:nil];
-    }
-  }
   /// A no-op function taking no arguments and returning no value, to sanity
   /// test basic asynchronous calling.
   {
@@ -1155,7 +1089,7 @@ void HostIntegrationCoreApiSetup(id<FlutterBinaryMessenger> binaryMessenger,
       [channel setMessageHandler:nil];
     }
   }
-  /// Returns the passed list, to test asynchronous serialization and deserialization.
+  /// Returns the passed list, to test serialization and deserialization asynchronously.
   {
     FlutterBasicMessageChannel *channel = [[FlutterBasicMessageChannel alloc]
            initWithName:
@@ -1179,7 +1113,7 @@ void HostIntegrationCoreApiSetup(id<FlutterBinaryMessenger> binaryMessenger,
       [channel setMessageHandler:nil];
     }
   }
-  /// Returns the passed map, to test asynchronous serialization and deserialization.
+  /// Returns the passed map, to test serialization and deserialization asynchronously.
   {
     FlutterBasicMessageChannel *channel = [[FlutterBasicMessageChannel alloc]
            initWithName:
@@ -1199,31 +1133,6 @@ void HostIntegrationCoreApiSetup(id<FlutterBinaryMessenger> binaryMessenger,
                             FlutterError *_Nullable error) {
                  callback(wrapResult(output, error));
                }];
-      }];
-    } else {
-      [channel setMessageHandler:nil];
-    }
-  }
-  /// Returns the passed enum, to test asynchronous serialization and deserialization.
-  {
-    FlutterBasicMessageChannel *channel = [[FlutterBasicMessageChannel alloc]
-           initWithName:
-               @"dev.flutter.pigeon.pigeon_integration_tests.HostIntegrationCoreApi.echoAsyncEnum"
-        binaryMessenger:binaryMessenger
-                  codec:HostIntegrationCoreApiGetCodec()];
-    if (api) {
-      NSCAssert([api respondsToSelector:@selector(echoAsyncEnum:completion:)],
-                @"HostIntegrationCoreApi api (%@) doesn't respond to "
-                @"@selector(echoAsyncEnum:completion:)",
-                api);
-      [channel setMessageHandler:^(id _Nullable message, FlutterReply callback) {
-        NSArray *args = message;
-        AnEnum arg_anEnum = [GetNullableObjectAtIndex(args, 0) integerValue];
-        [api echoAsyncEnum:arg_anEnum
-                completion:^(AnEnum enumValue, FlutterError *_Nullable error) {
-                  NSNumber *output = [NSNumber numberWithInteger:enumValue];
-                  callback(wrapResult(output, error));
-                }];
       }];
     } else {
       [channel setMessageHandler:nil];
@@ -1487,7 +1396,7 @@ void HostIntegrationCoreApiSetup(id<FlutterBinaryMessenger> binaryMessenger,
       [channel setMessageHandler:nil];
     }
   }
-  /// Returns the passed list, to test asynchronous serialization and deserialization.
+  /// Returns the passed list, to test serialization and deserialization asynchronously.
   {
     FlutterBasicMessageChannel *channel = [[FlutterBasicMessageChannel alloc]
            initWithName:@"dev.flutter.pigeon.pigeon_integration_tests.HostIntegrationCoreApi."
@@ -1511,7 +1420,7 @@ void HostIntegrationCoreApiSetup(id<FlutterBinaryMessenger> binaryMessenger,
       [channel setMessageHandler:nil];
     }
   }
-  /// Returns the passed map, to test asynchronous serialization and deserialization.
+  /// Returns the passed map, to test serialization and deserialization asynchronously.
   {
     FlutterBasicMessageChannel *channel = [[FlutterBasicMessageChannel alloc]
            initWithName:@"dev.flutter.pigeon.pigeon_integration_tests.HostIntegrationCoreApi."
@@ -1529,37 +1438,6 @@ void HostIntegrationCoreApiSetup(id<FlutterBinaryMessenger> binaryMessenger,
         [api echoAsyncNullableMap:arg_aMap
                        completion:^(NSDictionary<NSString *, id> *_Nullable output,
                                     FlutterError *_Nullable error) {
-                         callback(wrapResult(output, error));
-                       }];
-      }];
-    } else {
-      [channel setMessageHandler:nil];
-    }
-  }
-  /// Returns the passed enum, to test asynchronous serialization and deserialization.
-  {
-    FlutterBasicMessageChannel *channel = [[FlutterBasicMessageChannel alloc]
-           initWithName:@"dev.flutter.pigeon.pigeon_integration_tests.HostIntegrationCoreApi."
-                        @"echoAsyncNullableEnum"
-        binaryMessenger:binaryMessenger
-                  codec:HostIntegrationCoreApiGetCodec()];
-    if (api) {
-      NSCAssert([api respondsToSelector:@selector(echoAsyncNullableEnum:completion:)],
-                @"HostIntegrationCoreApi api (%@) doesn't respond to "
-                @"@selector(echoAsyncNullableEnum:completion:)",
-                api);
-      [channel setMessageHandler:^(id _Nullable message, FlutterReply callback) {
-        NSArray *args = message;
-        NSNumber *arg_anEnumAsNumber = GetNullableObjectAtIndex(args, 0);
-        AnEnumBox *arg_anEnum =
-            arg_anEnumAsNumber == nil
-                ? nil
-                : [[AnEnumBox alloc] initWithValue:[arg_anEnumAsNumber integerValue]];
-        [api
-            echoAsyncNullableEnum:arg_anEnum
-                       completion:^(AnEnumBox *_Nullable enumValue, FlutterError *_Nullable error) {
-                         NSNumber *output =
-                             enumValue == nil ? nil : [NSNumber numberWithInteger:enumValue.value];
                          callback(wrapResult(output, error));
                        }];
       }];
@@ -1646,30 +1524,6 @@ void HostIntegrationCoreApiSetup(id<FlutterBinaryMessenger> binaryMessenger,
                           completion:^(AllTypes *_Nullable output, FlutterError *_Nullable error) {
                             callback(wrapResult(output, error));
                           }];
-      }];
-    } else {
-      [channel setMessageHandler:nil];
-    }
-  }
-  {
-    FlutterBasicMessageChannel *channel = [[FlutterBasicMessageChannel alloc]
-           initWithName:@"dev.flutter.pigeon.pigeon_integration_tests.HostIntegrationCoreApi."
-                        @"callFlutterEchoAllNullableTypes"
-        binaryMessenger:binaryMessenger
-                  codec:HostIntegrationCoreApiGetCodec()];
-    if (api) {
-      NSCAssert([api respondsToSelector:@selector(callFlutterEchoAllNullableTypes:completion:)],
-                @"HostIntegrationCoreApi api (%@) doesn't respond to "
-                @"@selector(callFlutterEchoAllNullableTypes:completion:)",
-                api);
-      [channel setMessageHandler:^(id _Nullable message, FlutterReply callback) {
-        NSArray *args = message;
-        AllNullableTypes *arg_everything = GetNullableObjectAtIndex(args, 0);
-        [api callFlutterEchoAllNullableTypes:arg_everything
-                                  completion:^(AllNullableTypes *_Nullable output,
-                                               FlutterError *_Nullable error) {
-                                    callback(wrapResult(output, error));
-                                  }];
       }];
     } else {
       [channel setMessageHandler:nil];
@@ -1870,30 +1724,6 @@ void HostIntegrationCoreApiSetup(id<FlutterBinaryMessenger> binaryMessenger,
   {
     FlutterBasicMessageChannel *channel = [[FlutterBasicMessageChannel alloc]
            initWithName:@"dev.flutter.pigeon.pigeon_integration_tests.HostIntegrationCoreApi."
-                        @"callFlutterEchoEnum"
-        binaryMessenger:binaryMessenger
-                  codec:HostIntegrationCoreApiGetCodec()];
-    if (api) {
-      NSCAssert([api respondsToSelector:@selector(callFlutterEchoEnum:completion:)],
-                @"HostIntegrationCoreApi api (%@) doesn't respond to "
-                @"@selector(callFlutterEchoEnum:completion:)",
-                api);
-      [channel setMessageHandler:^(id _Nullable message, FlutterReply callback) {
-        NSArray *args = message;
-        AnEnum arg_anEnum = [GetNullableObjectAtIndex(args, 0) integerValue];
-        [api callFlutterEchoEnum:arg_anEnum
-                      completion:^(AnEnum enumValue, FlutterError *_Nullable error) {
-                        NSNumber *output = [NSNumber numberWithInteger:enumValue];
-                        callback(wrapResult(output, error));
-                      }];
-      }];
-    } else {
-      [channel setMessageHandler:nil];
-    }
-  }
-  {
-    FlutterBasicMessageChannel *channel = [[FlutterBasicMessageChannel alloc]
-           initWithName:@"dev.flutter.pigeon.pigeon_integration_tests.HostIntegrationCoreApi."
                         @"callFlutterEchoNullableBool"
         binaryMessenger:binaryMessenger
                   codec:HostIntegrationCoreApiGetCodec()];
@@ -2059,37 +1889,6 @@ void HostIntegrationCoreApiSetup(id<FlutterBinaryMessenger> binaryMessenger,
       [channel setMessageHandler:nil];
     }
   }
-  {
-    FlutterBasicMessageChannel *channel = [[FlutterBasicMessageChannel alloc]
-           initWithName:@"dev.flutter.pigeon.pigeon_integration_tests.HostIntegrationCoreApi."
-                        @"callFlutterEchoNullableEnum"
-        binaryMessenger:binaryMessenger
-                  codec:HostIntegrationCoreApiGetCodec()];
-    if (api) {
-      NSCAssert([api respondsToSelector:@selector(callFlutterEchoNullableEnum:completion:)],
-                @"HostIntegrationCoreApi api (%@) doesn't respond to "
-                @"@selector(callFlutterEchoNullableEnum:completion:)",
-                api);
-      [channel setMessageHandler:^(id _Nullable message, FlutterReply callback) {
-        NSArray *args = message;
-        NSNumber *arg_anEnumAsNumber = GetNullableObjectAtIndex(args, 0);
-        AnEnumBox *arg_anEnum =
-            arg_anEnumAsNumber == nil
-                ? nil
-                : [[AnEnumBox alloc] initWithValue:[arg_anEnumAsNumber integerValue]];
-        [api callFlutterEchoNullableEnum:arg_anEnum
-                              completion:^(AnEnumBox *_Nullable enumValue,
-                                           FlutterError *_Nullable error) {
-                                NSNumber *output =
-                                    enumValue == nil ? nil
-                                                     : [NSNumber numberWithInteger:enumValue.value];
-                                callback(wrapResult(output, error));
-                              }];
-      }];
-    } else {
-      [channel setMessageHandler:nil];
-    }
-  }
 }
 @interface FlutterIntegrationCoreApiCodecReader : FlutterStandardReader
 @end
@@ -2214,7 +2013,7 @@ NSObject<FlutterMessageCodec> *FlutterIntegrationCoreApiGetCodec(void) {
                    completion(output, nil);
                  }];
 }
-- (void)echoAllNullableTypes:(nullable AllNullableTypes *)arg_everything
+- (void)echoAllNullableTypes:(AllNullableTypes *)arg_everything
                   completion:
                       (void (^)(AllNullableTypes *_Nullable, FlutterError *_Nullable))completion {
   FlutterBasicMessageChannel *channel = [FlutterBasicMessageChannel
@@ -2340,19 +2139,6 @@ NSObject<FlutterMessageCodec> *FlutterIntegrationCoreApiGetCodec(void) {
                    completion(output, nil);
                  }];
 }
-- (void)echoEnum:(AnEnum)arg_anEnum
-      completion:(void (^)(AnEnum, FlutterError *_Nullable))completion {
-  FlutterBasicMessageChannel *channel = [FlutterBasicMessageChannel
-      messageChannelWithName:
-          @"dev.flutter.pigeon.pigeon_integration_tests.FlutterIntegrationCoreApi.echoEnum"
-             binaryMessenger:self.binaryMessenger
-                       codec:FlutterIntegrationCoreApiGetCodec()];
-  [channel sendMessage:@[ [NSNumber numberWithInteger:arg_anEnum] ]
-                 reply:^(id reply) {
-                   AnEnum output = [reply integerValue];
-                   completion(output, nil);
-                 }];
-}
 - (void)echoNullableBool:(nullable NSNumber *)arg_aBool
               completion:(void (^)(NSNumber *_Nullable, FlutterError *_Nullable))completion {
   FlutterBasicMessageChannel *channel = [FlutterBasicMessageChannel
@@ -2443,24 +2229,6 @@ NSObject<FlutterMessageCodec> *FlutterIntegrationCoreApiGetCodec(void) {
   [channel sendMessage:@[ arg_aMap ?: [NSNull null] ]
                  reply:^(id reply) {
                    NSDictionary<NSString *, id> *output = reply;
-                   completion(output, nil);
-                 }];
-}
-- (void)echoNullableEnum:(nullable AnEnumBox *)arg_anEnum
-              completion:(void (^)(AnEnumBox *_Nullable, FlutterError *_Nullable))completion {
-  FlutterBasicMessageChannel *channel = [FlutterBasicMessageChannel
-      messageChannelWithName:
-          @"dev.flutter.pigeon.pigeon_integration_tests.FlutterIntegrationCoreApi.echoNullableEnum"
-             binaryMessenger:self.binaryMessenger
-                       codec:FlutterIntegrationCoreApiGetCodec()];
-  [channel sendMessage:@[ arg_anEnum == nil ? [NSNull null]
-                                            : [NSNumber numberWithInteger:arg_anEnum.value] ]
-                 reply:^(id reply) {
-                   NSNumber *outputAsNumber = reply == [NSNull null] ? nil : reply;
-                   AnEnumBox *output =
-                       outputAsNumber == nil
-                           ? nil
-                           : [[AnEnumBox alloc] initWithValue:[outputAsNumber integerValue]];
                    completion(output, nil);
                  }];
 }

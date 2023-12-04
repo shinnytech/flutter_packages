@@ -12,3 +12,4 @@
 entry/src/main/resources/rawfile/
 har/flutter_embedding.har
 entry/libs/arm64-v8a/
+entry/src/main/resources/rawfile/flutter_assets

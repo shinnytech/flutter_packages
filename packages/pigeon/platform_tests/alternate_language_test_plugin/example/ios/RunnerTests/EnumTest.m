@@ -17,16 +17,15 @@
 @implementation EnumTest
 
 - (void)testEcho {
-  PGNDataWithEnum *data = [[PGNDataWithEnum alloc] init];
-  PGNEnumStateBox *stateBox = [[PGNEnumStateBox alloc] initWithValue:PGNEnumStateError];
-  data.state = stateBox;
+  DataWithEnum *data = [[DataWithEnum alloc] init];
+  data.state = EnumStateError;
   EchoBinaryMessenger *binaryMessenger =
-      [[EchoBinaryMessenger alloc] initWithCodec:PGNEnumApi2HostGetCodec()];
-  PGNEnumApi2Flutter *api = [[PGNEnumApi2Flutter alloc] initWithBinaryMessenger:binaryMessenger];
+      [[EchoBinaryMessenger alloc] initWithCodec:EnumApi2HostGetCodec()];
+  EnumApi2Flutter *api = [[EnumApi2Flutter alloc] initWithBinaryMessenger:binaryMessenger];
   XCTestExpectation *expectation = [self expectationWithDescription:@"callback"];
   [api echoData:data
-      completion:^(PGNDataWithEnum *_Nonnull result, FlutterError *_Nullable error) {
-        XCTAssertEqual(data.state.value, result.state.value);
+      completion:^(DataWithEnum *_Nonnull result, FlutterError *_Nullable error) {
+        XCTAssertEqual(data.state, result.state);
         [expectation fulfill];
       }];
   [self waitForExpectations:@[ expectation ] timeout:1.0];

@@ -13,10 +13,6 @@ import FlutterMacOS
 #error("Unsupported platform.")
 #endif
 
-private func isNullish(_ value: Any?) -> Bool {
-  return value is NSNull || value == nil
-}
-
 private func wrapResult(_ result: Any?) -> [Any?] {
   return [result]
 }

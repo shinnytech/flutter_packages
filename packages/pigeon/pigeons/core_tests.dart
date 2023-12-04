@@ -166,11 +166,6 @@ abstract class HostIntegrationCoreApi {
   @SwiftFunction('echo(_:)')
   AllClassesWrapper echoClassWrapper(AllClassesWrapper wrapper);
 
-  /// Returns the passed enum to test serialization and deserialization.
-  @ObjCSelector('echoEnum:')
-  @SwiftFunction('echo(_:)')
-  AnEnum echoEnum(AnEnum anEnum);
-
   // ========== Synchronous nullable method tests ==========
 
   /// Returns the passed object, to test serialization and deserialization.
@@ -236,10 +231,6 @@ abstract class HostIntegrationCoreApi {
   @SwiftFunction('echoNullable(_:)')
   Map<String?, Object?>? echoNullableMap(Map<String?, Object?>? aNullableMap);
 
-  @ObjCSelector('echoNullableEnum:')
-  @SwiftFunction('echoNullable(_:)')
-  AnEnum? echoNullableEnum(AnEnum? anEnum);
-
   // ========== Asynchronous method tests ==========
 
   /// A no-op function taking no arguments and returning no value, to sanity
@@ -283,23 +274,17 @@ abstract class HostIntegrationCoreApi {
   @SwiftFunction('echoAsync(_:)')
   Object echoAsyncObject(Object anObject);
 
-  /// Returns the passed list, to test asynchronous serialization and deserialization.
+  /// Returns the passed list, to test serialization and deserialization asynchronously.
   @async
   @ObjCSelector('echoAsyncList:')
   @SwiftFunction('echoAsync(_:)')
   List<Object?> echoAsyncList(List<Object?> aList);
 
-  /// Returns the passed map, to test asynchronous serialization and deserialization.
+  /// Returns the passed map, to test serialization and deserialization asynchronously.
   @async
   @ObjCSelector('echoAsyncMap:')
   @SwiftFunction('echoAsync(_:)')
   Map<String?, Object?> echoAsyncMap(Map<String?, Object?> aMap);
-
-  /// Returns the passed enum, to test asynchronous serialization and deserialization.
-  @async
-  @ObjCSelector('echoAsyncEnum:')
-  @SwiftFunction('echoAsync(_:)')
-  AnEnum echoAsyncEnum(AnEnum anEnum);
 
   /// Responds with an error from an async function returning a value.
   @async
@@ -362,23 +347,17 @@ abstract class HostIntegrationCoreApi {
   @SwiftFunction('echoAsyncNullable(_:)')
   Object? echoAsyncNullableObject(Object? anObject);
 
-  /// Returns the passed list, to test asynchronous serialization and deserialization.
+  /// Returns the passed list, to test serialization and deserialization asynchronously.
   @async
   @ObjCSelector('echoAsyncNullableList:')
   @SwiftFunction('echoAsyncNullable(_:)')
   List<Object?>? echoAsyncNullableList(List<Object?>? aList);
 
-  /// Returns the passed map, to test asynchronous serialization and deserialization.
+  /// Returns the passed map, to test serialization and deserialization asynchronously.
   @async
   @ObjCSelector('echoAsyncNullableMap:')
   @SwiftFunction('echoAsyncNullable(_:)')
   Map<String?, Object?>? echoAsyncNullableMap(Map<String?, Object?>? aMap);
-
-  /// Returns the passed enum, to test asynchronous serialization and deserialization.
-  @async
-  @ObjCSelector('echoAsyncNullableEnum:')
-  @SwiftFunction('echoAsyncNullable(_:)')
-  AnEnum? echoAsyncNullableEnum(AnEnum? anEnum);
 
   // ========== Flutter API test wrappers ==========
 
@@ -396,11 +375,10 @@ abstract class HostIntegrationCoreApi {
   @SwiftFunction('callFlutterEcho(_:)')
   AllTypes callFlutterEchoAllTypes(AllTypes everything);
 
-  @async
-  @ObjCSelector('callFlutterEchoAllNullableTypes:')
-  @SwiftFunction('callFlutterEcho(_:)')
-  AllNullableTypes? callFlutterEchoAllNullableTypes(
-      AllNullableTypes? everything);
+  // TODO(stuartmorgan): Add callFlutterEchoAllNullableTypes and the associated
+  // test once either https://github.com/flutter/flutter/issues/116117 is fixed,
+  // or the problematic type is moved out of AllNullableTypes and into its own
+  // test, since the type mismatch breaks the second `encode` round.
 
   @async
   @ObjCSelector('callFlutterSendMultipleNullableTypesABool:anInt:aString:')
@@ -444,11 +422,6 @@ abstract class HostIntegrationCoreApi {
   Map<String?, Object?> callFlutterEchoMap(Map<String?, Object?> aMap);
 
   @async
-  @ObjCSelector('callFlutterEchoEnum:')
-  @SwiftFunction('callFlutterEcho(_:)')
-  AnEnum callFlutterEchoEnum(AnEnum anEnum);
-
-  @async
   @ObjCSelector('callFlutterEchoNullableBool:')
   @SwiftFunction('callFlutterEchoNullable(_:)')
   bool? callFlutterEchoNullableBool(bool? aBool);
@@ -483,11 +456,6 @@ abstract class HostIntegrationCoreApi {
   @SwiftFunction('callFlutterEchoNullable(_:)')
   Map<String?, Object?>? callFlutterEchoNullableMap(
       Map<String?, Object?>? aMap);
-
-  @async
-  @ObjCSelector('callFlutterEchoNullableEnum:')
-  @SwiftFunction('callFlutterNullableEcho(_:)')
-  AnEnum? callFlutterEchoNullableEnum(AnEnum? anEnum);
 }
 
 /// The core interface that the Dart platform_test code implements for host
@@ -512,7 +480,7 @@ abstract class FlutterIntegrationCoreApi {
   /// Returns the passed object, to test serialization and deserialization.
   @ObjCSelector('echoAllNullableTypes:')
   @SwiftFunction('echoNullable(_:)')
-  AllNullableTypes? echoAllNullableTypes(AllNullableTypes? everything);
+  AllNullableTypes echoAllNullableTypes(AllNullableTypes everything);
 
   /// Returns passed in arguments of multiple types.
   ///
@@ -559,11 +527,6 @@ abstract class FlutterIntegrationCoreApi {
   @SwiftFunction('echo(_:)')
   Map<String?, Object?> echoMap(Map<String?, Object?> aMap);
 
-  /// Returns the passed enum to test serialization and deserialization.
-  @ObjCSelector('echoEnum:')
-  @SwiftFunction('echo(_:)')
-  AnEnum echoEnum(AnEnum anEnum);
-
   // ========== Nullable argument/return type tests ==========
 
   /// Returns the passed boolean, to test serialization and deserialization.
@@ -600,11 +563,6 @@ abstract class FlutterIntegrationCoreApi {
   @ObjCSelector('echoNullableMap:')
   @SwiftFunction('echoNullable(_:)')
   Map<String?, Object?>? echoNullableMap(Map<String?, Object?>? aMap);
-
-  /// Returns the passed enum to test serialization and deserialization.
-  @ObjCSelector('echoNullableEnum:')
-  @SwiftFunction('echoNullable(_:)')
-  AnEnum? echoNullableEnum(AnEnum? anEnum);
 
   // ========== Async tests ==========
   // These are minimal since async FlutterApi only changes Dart generation.
