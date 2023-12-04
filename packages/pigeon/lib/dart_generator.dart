@@ -411,7 +411,7 @@ $resultAt != null
                     final String leftHandSide = 'final $argType? $argName';
                     if (customEnumNames.contains(arg.type.baseName)) {
                       indent.writeln(
-                          '$leftHandSide = $argsArray[$count] == null ? null : $argType.values[$argsArray[$count]! as int];');
+                          '$leftHandSide = $argsArray[$count] == null ? null : $argType.values[$argsArray[$count] as int];');
                     } else {
                       indent.writeln(
                           '$leftHandSide = ($argsArray[$count] as $genericArgType?)${castCall.isEmpty ? '' : '?$castCall'};');
@@ -442,15 +442,10 @@ $resultAt != null
                   } else {
                     indent.writeln('final $returnType output = $call;');
                   }
-
                   const String returnExpression = 'output';
-                  final String nullability =
-                      func.returnType.isNullable ? '?' : '';
-                  final String valueExtraction =
-                      isEnum(root, func.returnType) ? '$nullability.index' : '';
                   final String returnStatement = isMockHandler
-                      ? 'return <Object?>[$returnExpression$valueExtraction];'
-                      : 'return $returnExpression$valueExtraction;';
+                      ? 'return <Object?>[$returnExpression];'
+                      : 'return $returnExpression;';
                   indent.writeln(returnStatement);
                 }
               });

@@ -765,6 +765,7 @@ abstract class Api {
   });
 
   test('enums argument flutter', () {
+    // TODO(gaaclarke): Make this not an error: https://github.com/flutter/flutter/issues/87307
     const String code = '''
 
 enum Foo {
@@ -778,10 +779,12 @@ abstract class Api {
 }
 ''';
     final ParseResults parseResult = parseSource(code);
-    expect(parseResult.errors.length, equals(0));
+    expect(parseResult.errors.length, equals(1));
+    expect(parseResult.errors[0].message, contains('Enums'));
   });
 
   test('enums list argument', () {
+    // TODO(tarrinneal): Make this not an error: https://github.com/flutter/flutter/issues/87307
     const String code = '''
 enum Foo { one, two }
 
@@ -791,10 +794,12 @@ abstract class Api {
 }
 ''';
     final ParseResults parseResult = parseSource(code);
-    expect(parseResult.errors.length, equals(0));
+    expect(parseResult.errors.length, equals(1));
+    expect(parseResult.errors[0].message, contains('Enums'));
   });
 
   test('enums map argument key', () {
+    // TODO(tarrinneal): Make this not an error: https://github.com/flutter/flutter/issues/87307
     const String code = '''
 enum Foo { one, two }
 
@@ -804,10 +809,12 @@ abstract class Api {
 }
 ''';
     final ParseResults parseResult = parseSource(code);
-    expect(parseResult.errors.length, equals(0));
+    expect(parseResult.errors.length, equals(1));
+    expect(parseResult.errors[0].message, contains('Enums'));
   });
 
   test('enums map argument value', () {
+    // TODO(tarrinneal): Make this not an error: https://github.com/flutter/flutter/issues/87307
     const String code = '''
 enum Foo { one, two }
 
@@ -817,10 +824,12 @@ abstract class Api {
 }
 ''';
     final ParseResults parseResult = parseSource(code);
-    expect(parseResult.errors.length, equals(0));
+    expect(parseResult.errors.length, equals(1));
+    expect(parseResult.errors[0].message, contains('Enums'));
   });
 
   test('enums return value', () {
+    // TODO(gaaclarke): Make this not an error: https://github.com/flutter/flutter/issues/87307
     const String code = '''
 
 enum Foo {
@@ -834,7 +843,8 @@ abstract class Api {
 }
 ''';
     final ParseResults parseResult = parseSource(code);
-    expect(parseResult.errors.length, equals(0));
+    expect(parseResult.errors.length, equals(1));
+    expect(parseResult.errors[0].message, contains('Enums'));
   });
 
   test('return type generics', () {
