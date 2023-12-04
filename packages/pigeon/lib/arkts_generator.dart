@@ -93,7 +93,7 @@ class ArkTSGenerator extends StructuredGenerator<ArkTSOptions> {
     indent.writeln(
         "import BasicMessageChannel from '@ohos/flutter_ohos/src/main/ets/plugin/common/BasicMessageChannel';");
     indent.writeln(
-        "import { BinaryMessenger } from '@ohos/flutter_ohos/src/main/ets/plugin/common/BinaryMessenger';");
+        "import { BinaryMessenger,TaskQueue } from '@ohos/flutter_ohos/src/main/ets/plugin/common/BinaryMessenger';");
     indent.writeln(
         "import MessageCodec from '@ohos/flutter_ohos/src/main/ets/plugin/common/MessageCodec';");
     indent.writeln(
@@ -121,7 +121,7 @@ class ArkTSGenerator extends StructuredGenerator<ArkTSOptions> {
     addDocumentationComments(
         indent, anEnum.documentationComments, _docCommentSpec);
 
-    indent.write('enum ${anEnum.name} ');
+    indent.write('export enum ${anEnum.name} ');
     indent.addScoped('{', '}', () {
       enumerate(anEnum.members, (int index, final EnumMember member) {
         addDocumentationComments(
@@ -264,10 +264,12 @@ class ArkTSGenerator extends StructuredGenerator<ArkTSOptions> {
       indent.write('let instance: ${klass.name} = new ${klass.name}(');
       for (int i = 0; i < klass.fields.length; i++) {
         final NamedType field = klass.fields[i];
-        final String type = customEnumNames.contains(field.type.baseName)
-            ? field.type.baseName
-            : _arkTSTypeForDartType(field.type);
-        indent.add('arr[$i] as $type');
+        if (customEnumNames.contains(field.type.baseName)) {
+          indent.add('${field.type.baseName}[${field.type.baseName}[arr[$i] as number]]');
+        } else {
+          final String type = _arkTSTypeForDartType(field.type);
+          indent.add('arr[$i] as $type');
+        }
         if (i != klass.fields.length - 1) {
           indent.add(', ');
         }
@@ -304,7 +306,7 @@ class ArkTSGenerator extends StructuredGenerator<ArkTSOptions> {
     addDocumentationComments(indent, api.documentationComments, _docCommentSpec,
         generatorComments: generatedMessages);
 
-    indent.write('abstract class ${api.name} ');
+    indent.write('export class ${api.name} ');
     indent.addScoped('{', '}', () {
       indent.writeln('binaryMessenger: BinaryMessenger;');
       indent.newln();
@@ -479,7 +481,7 @@ class ArkTSGenerator extends StructuredGenerator<ArkTSOptions> {
       indent.writeln(
           '${_docCommentPrefix}Sets up an instance of `${api.name}` to handle messages through the `binaryMessenger`.$_docCommentSuffix');
       indent.write(
-          'static setup(binaryMessenger: BinaryMessenger, api: ${api.name}): void ');
+          'static setup(binaryMessenger: BinaryMessenger, api: ${api.name} | null): void ');
       indent.addScoped('{', '}', () {
         for (final Method method in api.methods) {
           _writeMethodSetup(
@@ -513,7 +515,7 @@ class ArkTSGenerator extends StructuredGenerator<ArkTSOptions> {
       if (method.taskQueueType != TaskQueueType.serial) {
         taskQueue = 'taskQueue';
         indent.writeln(
-            'let taskQueue: BinaryMessenger.TaskQueue = binaryMessenger.makeBackgroundTaskQueue();');
+            'let taskQueue: TaskQueue = binaryMessenger.makeBackgroundTaskQueue();');
       }
       indent.writeln('let channel: BasicMessageChannel<Object> =');
       indent.nest(2, () {
@@ -560,11 +562,14 @@ class ArkTSGenerator extends StructuredGenerator<ArkTSOptions> {
               indent.format('''
 class ResultImp implements Result<$returnType>{
 \t\t\tsuccess(result: $returnType): void {
-\t\t\t\treply.reply(result);
+\t\t\t\tlet res: Array<Object> = [];
+\t\t\t\tres.push(result);
+\t\t\t\treply.reply(res);
 \t\t\t}
 
 \t\t\terror(error: Error): void {
-\t\t\t\treply.reply(error);
+\t\t\t\tlet wrappedError: Array<Object> = wrapError(error);
+\t\t\t\treply.reply(wrappedError);
 \t\t\t}
 }
 let $resultName: Result<$returnType> = new ResultImp();
@@ -572,14 +577,37 @@ let $resultName: Result<$returnType> = new ResultImp();
               methodArgument.add(resultName);
             }
             final String call =
-                'api.${method.name}(${methodArgument.join(', ')})';
+                'api!.${method.name}(${methodArgument.join(', ')})';
             // indent.writeln('$call;');
             if (method.isAsynchronous) {
               indent.writeln('$call;');
             } else {
+              // indent.writeln('let res: Array<Object> = [];');
+              // indent.writeln('let output: $returnType = $call;');
+              // indent.writeln('res[0] = output;');
+              // indent.writeln('reply.reply(res);');
+
               indent.writeln('let res: Array<Object> = [];');
-              indent.writeln('let output: $returnType = $call;');
-              indent.writeln('res[0] = output;');
+              indent.write('try ');
+              indent.addScoped('{', '}', () {
+                if (method.returnType.isVoid) {
+                  indent.writeln('$call;');
+                  indent.writeln('res.push(null);');
+                } else {
+                  indent.writeln('let output: $returnType = $call;');
+                  indent.writeln('res.push(output);');
+                }
+              });
+              indent.add(' catch (error) ');
+              indent.addScoped('{', '}', () {
+                indent.writeln(
+                    'let wrappedError: Array<Object> = wrapError(error);');
+                if (method.isAsynchronous) {
+                  indent.writeln('reply.reply(wrappedError);');
+                } else {
+                  indent.writeln('res = wrappedError;');
+                }
+              });
               indent.writeln('reply.reply(res);');
             }
           });
@@ -603,13 +631,15 @@ let $resultName: Result<$returnType> = new ResultImp();
     indent.addScoped('{', '}', () {
       indent.writeln('static INSTANCE: $codecName = new $codecName();');
       indent.newln();
+      _writeGetByteMethoe(indent);
+      indent.newln();
       indent.write(
           'readValueOfType(type: number, buffer: ByteBuffer): ESObject ');
       indent.addScoped('{', '}', () {
         indent.write('switch (type) ');
         indent.addScoped('{', '}', () {
           for (final EnumeratedClass customClass in codecClasses) {
-            indent.writeln('case ${customClass.enumeration}:');
+            indent.writeln('case this.getByte(${customClass.enumeration}):');
             indent.nest(1, () {
               indent.writeln(
                   'return ${customClass.name}.fromList(super.readValue(buffer));');
@@ -633,14 +663,12 @@ let $resultName: Result<$returnType> = new ResultImp();
             firstClass = false;
           }
           indent.add('if (value instanceof ${customClass.name}) ');
-          indent.addScoped('{', '} ', () {
-            indent.writeln('stream.writeInt8(${customClass.enumeration});');
-            indent.writeln(
-                'this.writeSize(stream, this.encodeMessage(value).byteLength);');
-            indent.writeln('this.writeValue(stream, value);');
+          indent.addScoped('{', '} else ', () {
+            indent.writeln('stream.writeInt8(this.getByte(${customClass.enumeration}));');
+            indent.writeln('this.writeValue(stream, (value as ${customClass.name}).toList());');
           }, addTrailingNewline: false);
         }
-        indent.addScoped('else {', '}', () {
+        indent.addScoped('{', '}', () {
           indent.writeln('super.writeValue(stream, value);');
         });
       });
@@ -693,6 +721,74 @@ let $resultName: Result<$returnType> = new ResultImp();
     });
   }
 
+  void _writeErrorClass(Indent indent) {
+    indent.writeln(
+        '/** Error class for passing custom error details to Flutter via a thrown PlatformException. */');
+    indent.write('export class FlutterError implements Error ');
+    indent.addScoped('{', '}', () {
+      indent.newln();
+      indent.writeln('/** The error code. */');
+      indent.writeln('public code: string;');
+      indent.newln();
+      indent.writeln('/** The error name. */');
+      indent.writeln('public name: string;');
+      indent.newln();
+      indent.writeln('/** The error message. */');
+      indent.writeln('public message: string;');
+      indent.writeln('/** The error stack. */');
+      indent.writeln('public stack?: string;');
+      indent.newln();
+      indent.writeln(
+          'constructor(code: string, name: string,  message: string, stack: string) ');
+      indent.writeScoped('{', '}', () {
+        indent.writeln('this.code = code;');
+        indent.writeln('this.name = name;');
+        indent.writeln('this.message = message;');
+        indent.writeln('this.stack = stack;');
+      });
+    });
+  }
+
+  void _writeWrapError(Indent indent) {
+    indent.format('''
+function wrapError(error: Error): Array<Object> {
+\tlet errorList: Array<Object> = new Array<Object>(3);
+\tif (error instanceof FlutterError) {
+\t\tlet err: FlutterError = error as FlutterError;
+\t\terrorList[0] = err.code;
+\t\terrorList[1] = err.name;
+\t\terrorList[2] = err.message;
+\t} else {
+\t\terrorList[0] = error.toString();
+\t\terrorList[1] = error.name;
+\t\terrorList[2] = "Cause: " + error.message + ", Stacktrace: " + error.stack;
+\t}
+\treturn errorList;
+}''');
+  }
+
+  void _writeGetByteMethoe(Indent indent){
+    indent.format('''
+getByte(n: number): number {
+\tlet byteArray = new Int8Array(1);
+\tbyteArray[0] = n;
+\treturn byteArray[0] as number;
+}''');
+  }
+
+  @override
+  void writeGeneralUtilities(
+    ArkTSOptions generatorOptions,
+    Root root,
+    Indent indent, {
+    required String dartPackageName,
+  }) {
+    indent.newln();
+    _writeErrorClass(indent);
+    indent.newln();
+    _writeWrapError(indent);
+  }
+
   /// Calculates the name of the codec that will be generated for [api].
   String _getCodecName(Api api) => '${api.name}Codec';
 
@@ -738,10 +834,11 @@ let $resultName: Result<$returnType> = new ResultImp();
     TypeDeclaration type,
     int numberTypeArguments,
   ) {
+    final String typeName = type.baseName == 'List' ? 'Array' : type.baseName;
     if (type.typeArguments.isEmpty) {
-      return '${type.baseName}<${repeat('Object', numberTypeArguments).join(', ')}>';
+      return '$typeName<${repeat('Object', numberTypeArguments).join(', ')}>';
     } else {
-      return '${type.baseName}<${_flattenTypeArguments(type.typeArguments)}>';
+      return '$typeName<${_flattenTypeArguments(type.typeArguments)}>';
     }
   }
 

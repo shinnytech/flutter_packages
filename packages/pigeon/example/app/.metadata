@@ -33,10 +33,7 @@ migration:
     - platform: windows
       create_revision: 4d9e56e694b656610ab87fcf2efbcd226e0ed8cf
       base_revision: 4d9e56e694b656610ab87fcf2efbcd226e0ed8cf
-    - platform: ohos
-      create_revision: 14b5de75a41b3218544a605be5aa5c3ce977fd9c
-      base_revision: 14b5de75a41b3218544a605be5aa5c3ce977fd9c
-      
+
   # User provided section
 
   # List of Local paths (relative to this file) that should be

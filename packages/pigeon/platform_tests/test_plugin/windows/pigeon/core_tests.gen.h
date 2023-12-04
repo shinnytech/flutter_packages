@@ -412,8 +412,6 @@ class HostIntegrationCoreApi {
   // deserialization.
   virtual ErrorOr<AllClassesWrapper> EchoClassWrapper(
       const AllClassesWrapper& wrapper) = 0;
-  // Returns the passed enum to test serialization and deserialization.
-  virtual ErrorOr<AnEnum> EchoEnum(const AnEnum& an_enum) = 0;
   // Returns the passed object, to test serialization and deserialization.
   virtual ErrorOr<std::optional<AllNullableTypes>> EchoAllNullableTypes(
       const AllNullableTypes* everything) = 0;
@@ -453,8 +451,6 @@ class HostIntegrationCoreApi {
   // Returns the passed map, to test serialization and deserialization.
   virtual ErrorOr<std::optional<flutter::EncodableMap>> EchoNullableMap(
       const flutter::EncodableMap* a_nullable_map) = 0;
-  virtual ErrorOr<std::optional<AnEnum>> EchoNullableEnum(
-      const AnEnum* an_enum) = 0;
   // A no-op function taking no arguments and returning no value, to sanity
   // test basic asynchronous calling.
   virtual void NoopAsync(
@@ -480,21 +476,16 @@ class HostIntegrationCoreApi {
   virtual void EchoAsyncObject(
       const flutter::EncodableValue& an_object,
       std::function<void(ErrorOr<flutter::EncodableValue> reply)> result) = 0;
-  // Returns the passed list, to test asynchronous serialization and
-  // deserialization.
+  // Returns the passed list, to test serialization and deserialization
+  // asynchronously.
   virtual void EchoAsyncList(
       const flutter::EncodableList& a_list,
       std::function<void(ErrorOr<flutter::EncodableList> reply)> result) = 0;
-  // Returns the passed map, to test asynchronous serialization and
-  // deserialization.
+  // Returns the passed map, to test serialization and deserialization
+  // asynchronously.
   virtual void EchoAsyncMap(
       const flutter::EncodableMap& a_map,
       std::function<void(ErrorOr<flutter::EncodableMap> reply)> result) = 0;
-  // Returns the passed enum, to test asynchronous serialization and
-  // deserialization.
-  virtual void EchoAsyncEnum(
-      const AnEnum& an_enum,
-      std::function<void(ErrorOr<AnEnum> reply)> result) = 0;
   // Responds with an error from an async function returning a value.
   virtual void ThrowAsyncError(
       std::function<void(ErrorOr<std::optional<flutter::EncodableValue>> reply)>
@@ -542,23 +533,18 @@ class HostIntegrationCoreApi {
       const flutter::EncodableValue* an_object,
       std::function<void(ErrorOr<std::optional<flutter::EncodableValue>> reply)>
           result) = 0;
-  // Returns the passed list, to test asynchronous serialization and
-  // deserialization.
+  // Returns the passed list, to test serialization and deserialization
+  // asynchronously.
   virtual void EchoAsyncNullableList(
       const flutter::EncodableList* a_list,
       std::function<void(ErrorOr<std::optional<flutter::EncodableList>> reply)>
           result) = 0;
-  // Returns the passed map, to test asynchronous serialization and
-  // deserialization.
+  // Returns the passed map, to test serialization and deserialization
+  // asynchronously.
   virtual void EchoAsyncNullableMap(
       const flutter::EncodableMap* a_map,
       std::function<void(ErrorOr<std::optional<flutter::EncodableMap>> reply)>
           result) = 0;
-  // Returns the passed enum, to test asynchronous serialization and
-  // deserialization.
-  virtual void EchoAsyncNullableEnum(
-      const AnEnum* an_enum,
-      std::function<void(ErrorOr<std::optional<AnEnum>> reply)> result) = 0;
   virtual void CallFlutterNoop(
       std::function<void(std::optional<FlutterError> reply)> result) = 0;
   virtual void CallFlutterThrowError(
@@ -569,10 +555,6 @@ class HostIntegrationCoreApi {
   virtual void CallFlutterEchoAllTypes(
       const AllTypes& everything,
       std::function<void(ErrorOr<AllTypes> reply)> result) = 0;
-  virtual void CallFlutterEchoAllNullableTypes(
-      const AllNullableTypes* everything,
-      std::function<void(ErrorOr<std::optional<AllNullableTypes>> reply)>
-          result) = 0;
   virtual void CallFlutterSendMultipleNullableTypes(
       const bool* a_nullable_bool, const int64_t* a_nullable_int,
       const std::string* a_nullable_string,
@@ -595,9 +577,6 @@ class HostIntegrationCoreApi {
   virtual void CallFlutterEchoMap(
       const flutter::EncodableMap& a_map,
       std::function<void(ErrorOr<flutter::EncodableMap> reply)> result) = 0;
-  virtual void CallFlutterEchoEnum(
-      const AnEnum& an_enum,
-      std::function<void(ErrorOr<AnEnum> reply)> result) = 0;
   virtual void CallFlutterEchoNullableBool(
       const bool* a_bool,
       std::function<void(ErrorOr<std::optional<bool>> reply)> result) = 0;
@@ -623,9 +602,6 @@ class HostIntegrationCoreApi {
       const flutter::EncodableMap* a_map,
       std::function<void(ErrorOr<std::optional<flutter::EncodableMap>> reply)>
           result) = 0;
-  virtual void CallFlutterEchoNullableEnum(
-      const AnEnum* an_enum,
-      std::function<void(ErrorOr<std::optional<AnEnum>> reply)> result) = 0;
 
   // The codec used by HostIntegrationCoreApi.
   static const flutter::StandardMessageCodec& GetCodec();
@@ -682,8 +658,8 @@ class FlutterIntegrationCoreApi {
                     std::function<void(const FlutterError&)>&& on_error);
   // Returns the passed object, to test serialization and deserialization.
   void EchoAllNullableTypes(
-      const AllNullableTypes* everything,
-      std::function<void(const AllNullableTypes*)>&& on_success,
+      const AllNullableTypes& everything,
+      std::function<void(const AllNullableTypes&)>&& on_success,
       std::function<void(const FlutterError&)>&& on_error);
   // Returns passed in arguments of multiple types.
   //
@@ -719,10 +695,6 @@ class FlutterIntegrationCoreApi {
   void EchoMap(const flutter::EncodableMap& a_map,
                std::function<void(const flutter::EncodableMap&)>&& on_success,
                std::function<void(const FlutterError&)>&& on_error);
-  // Returns the passed enum to test serialization and deserialization.
-  void EchoEnum(const AnEnum& an_enum,
-                std::function<void(const AnEnum&)>&& on_success,
-                std::function<void(const FlutterError&)>&& on_error);
   // Returns the passed boolean, to test serialization and deserialization.
   void EchoNullableBool(const bool* a_bool,
                         std::function<void(const bool*)>&& on_success,
@@ -754,10 +726,6 @@ class FlutterIntegrationCoreApi {
       const flutter::EncodableMap* a_map,
       std::function<void(const flutter::EncodableMap*)>&& on_success,
       std::function<void(const FlutterError&)>&& on_error);
-  // Returns the passed enum to test serialization and deserialization.
-  void EchoNullableEnum(const AnEnum* an_enum,
-                        std::function<void(const AnEnum*)>&& on_success,
-                        std::function<void(const FlutterError&)>&& on_error);
   // A no-op function taking no arguments and returning no value, to sanity
   // test basic asynchronous calling.
   void NoopAsync(std::function<void(void)>&& on_success,
