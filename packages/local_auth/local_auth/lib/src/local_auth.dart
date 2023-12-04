@@ -15,6 +15,7 @@ import 'package:local_auth_android/local_auth_android.dart';
 import 'package:local_auth_ios/local_auth_ios.dart';
 import 'package:local_auth_platform_interface/local_auth_platform_interface.dart';
 import 'package:local_auth_windows/local_auth_windows.dart';
+import 'package:local_auth_ohos/local_auth_ohos.dart';
 
 /// A Flutter plugin for authenticating the user identity locally.
 class LocalAuthentication {
@@ -41,7 +42,8 @@ class LocalAuthentication {
       Iterable<AuthMessages> authMessages = const <AuthMessages>[
         IOSAuthMessages(),
         AndroidAuthMessages(),
-        WindowsAuthMessages()
+        WindowsAuthMessages(),
+        OhosAuthMessages()
       ],
       AuthenticationOptions options = const AuthenticationOptions()}) {
     return LocalAuthPlatform.instance.authenticate(
