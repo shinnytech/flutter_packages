@@ -13,3 +13,7 @@ should add it to your `pubspec.yaml` as usual.
 
 [1]: https://pub.dev/packages/url_launcher
 [2]: https://flutter.dev/docs/development/packages-and-plugins/developing-packages#endorsed-federated-plugin
+
+
+## FAQ
+The 'Launch in app' feature is not supported. Please use the modified feature through native application configuration.
