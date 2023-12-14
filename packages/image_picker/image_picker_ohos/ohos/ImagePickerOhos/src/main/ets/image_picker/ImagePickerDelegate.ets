@@ -352,11 +352,11 @@ export default class ImagePickerDelegate {
   setPendingOptionsAndResult(imageOptions: ImageSelectionOptions, videoOptions: VideoSelectionOptions,
                              result: Result<ArrayList<string>>): boolean {
     if (this.pendingCallState != null && this.pendingCallState != undefined) {
-      Log.i(ImagePickerDelegate.TAG, "setPendingOptionsAndResult return false");
-      return false;
+      Log.i(ImagePickerDelegate.TAG, "There is already an open gallery, use it directly to select images");
+    }else{
+      Log.i(ImagePickerDelegate.TAG, "Prepare to awaken a new one");
+      this.pendingCallState = new PendingCallState(imageOptions, videoOptions, result);
     }
-
-    this.pendingCallState = new PendingCallState(imageOptions, videoOptions, result);
     this.cache.clear();
     return true;
   }
