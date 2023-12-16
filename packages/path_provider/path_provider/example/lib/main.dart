@@ -198,10 +198,11 @@ class _MyHomePageState extends State<MyHomePage> {
                 Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: ElevatedButton(
-                    onPressed:
-                        Platform.isAndroid ? null : _requestAppLibraryDirectory,
+                    onPressed: (Platform.isAndroid || Platform.isOhos)
+                        ? null
+                        : _requestAppLibraryDirectory,
                     child: Text(
-                      Platform.isAndroid
+                      (Platform.isAndroid || Platform.isOhos)
                           ? 'Application Library Directory unavailable'
                           : 'Get Application Library Directory',
                     ),
@@ -235,11 +236,11 @@ class _MyHomePageState extends State<MyHomePage> {
                 Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: ElevatedButton(
-                    onPressed: !Platform.isAndroid
+                    onPressed: !(Platform.isAndroid || Platform.isOhos)
                         ? null
                         : _requestExternalStorageDirectory,
                     child: Text(
-                      !Platform.isAndroid
+                      !(Platform.isAndroid || Platform.isOhos)
                           ? 'External storage is unavailable'
                           : 'Get External Storage Directory',
                     ),
@@ -256,7 +257,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: ElevatedButton(
-                    onPressed: !Platform.isAndroid
+                    onPressed: !(Platform.isAndroid || Platform.isOhos)
                         ? null
                         : () {
                             _requestExternalStorageDirectories(
@@ -264,7 +265,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             );
                           },
                     child: Text(
-                      !Platform.isAndroid
+                      !(Platform.isAndroid || Platform.isOhos)
                           ? 'External directories are unavailable'
                           : 'Get External Storage Directories',
                     ),
@@ -281,11 +282,11 @@ class _MyHomePageState extends State<MyHomePage> {
                 Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: ElevatedButton(
-                    onPressed: !Platform.isAndroid
+                    onPressed: !(Platform.isAndroid || Platform.isOhos)
                         ? null
                         : _requestExternalCacheDirectories,
                     child: Text(
-                      !Platform.isAndroid
+                      !(Platform.isAndroid || Platform.isOhos)
                           ? 'External directories are unavailable'
                           : 'Get External Cache Directories',
                     ),
