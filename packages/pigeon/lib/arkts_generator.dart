@@ -91,7 +91,9 @@ class ArkTSGenerator extends StructuredGenerator<ArkTSOptions> {
     indent.writeln(
         "import StandardMessageCodec from '@ohos/flutter_ohos/src/main/ets/plugin/common/StandardMessageCodec';");
     indent.writeln(
-        "import { BasicMessageChannel,BinaryMessenger,TaskQueue,Reply} from '@ohos/flutter_ohos/src/main/ets/plugin/common/BinaryMessenger';");
+        "import BasicMessageChannel, { Reply } from '@ohos/flutter_ohos/src/main/ets/plugin/common/BasicMessageChannel';");        
+    indent.writeln(
+        "import { BinaryMessenger,TaskQueue } from '@ohos/flutter_ohos/src/main/ets/plugin/common/BinaryMessenger';");
     indent.writeln(
         "import MessageCodec from '@ohos/flutter_ohos/src/main/ets/plugin/common/MessageCodec';");
     indent.writeln(
