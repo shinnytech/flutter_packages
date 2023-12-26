@@ -56,7 +56,7 @@ export default class ImagePickerCache {
   private static SHARED_PREFERENCES_NAME = "flutter_image_picker_shared_preference";
 
   private context: common.Context;
-  private preferences: data_preferences.Preferences;
+  private preferences: data_preferences.Preferences = {} as data_preferences.Preferences;
 
   constructor(context: common.Context) {
     this.context = context;
@@ -105,7 +105,7 @@ export default class ImagePickerCache {
       });
   }
 
-  private async getPreferenceData(key: string, defValue: data_preferences.ValueType): Promise<data_preferences.ValueType> {
+  private async getPreferenceData(key: string, defValue: data_preferences.ValueType|null): Promise<data_preferences.ValueType | null> {
     if (this.preferences == null) {
       return defValue;
     }
@@ -158,8 +158,8 @@ export default class ImagePickerCache {
     }
   }
 
-  async retrievePendingCameraMediaUriPath(): Promise<string> {
-    let result:data_preferences.ValueType;
+  async retrievePendingCameraMediaUriPath(): Promise<string | null> {
+    let result:data_preferences.ValueType | null = null ;
     try {
       result = await this.getPreferenceData(ImagePickerCache.SHARED_PREFERENCE_PENDING_IMAGE_URI_PATH_KEY, "")
         .then((data) => {
@@ -174,7 +174,7 @@ export default class ImagePickerCache {
     return result;
   }
 
-  saveResult(path: ArrayList<string>, errorCode: string, errorMessage: string): void {
+  saveResult(path: ArrayList<string>, errorCode: string | null , errorMessage: string| null): void {
     if (path != null) {
       let pathArray = path.convertToArray();
       this.setPreferenceData(ImagePickerCache.FLUTTER_IMAGE_PICKER_IMAGE_PATH_KEY, pathArray);
@@ -230,7 +230,11 @@ export default class ImagePickerCache {
           return data;
         });
       let error = new CacheRetrievalErrorBuilder(null,null,null);
-      error.setCode(errorCode as string);
+      if(error.setCode)
+      {
+        error.setCode(errorCode as string);
+      }
+
       hasData = true;
       hasKey = await this.hasKey(ImagePickerCache.SHARED_PREFERENCE_ERROR_MESSAGE_KEY).then((result) => {
         return result;
@@ -240,9 +244,16 @@ export default class ImagePickerCache {
           .then((data) => {
             return data;
           });
-        error.setMessage(errorMessage as string);
+        if(error.setMessage)
+        {
+          error.setMessage(errorMessage as string);
+        }
+
       }
-      resultMap.set(ImagePickerCache.MAP_KEY_ERROR, error.build());
+      if(resultMap.set && error.build)
+      {
+        resultMap.set(ImagePickerCache.MAP_KEY_ERROR, error.build());
+      }
     }
 
     if (hasData) {
@@ -277,7 +288,7 @@ export default class ImagePickerCache {
           });
         resultMap.set(ImagePickerCache.MAP_KEY_MAX_HEIGHT, maxHeightValue);
       }
-      let imageQuality = await this.getPreferenceData(ImagePickerCache.SHARED_PREFERENCE_IMAGE_QUALITY_KEY, 100)
+      await this.getPreferenceData(ImagePickerCache.SHARED_PREFERENCE_IMAGE_QUALITY_KEY, 100)
         .then((data) => {
           return data;
         });

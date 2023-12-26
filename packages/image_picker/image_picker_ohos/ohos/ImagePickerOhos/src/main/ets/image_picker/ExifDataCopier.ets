@@ -32,10 +32,10 @@ export default class ExifDataCopier {
       "GPSLongitude",
       "GPSLongitudeRef"];
 
-    let oldImageFile: fs.File = null;
-    let newImageFile: fs.File = null;
-    let oldImage: image.ImageSource = null;
-    let newImage: image.ImageSource = null;
+    let oldImageFile: fs.File|null = null;
+    let newImageFile: fs.File| null = null;
+    let oldImage: image.ImageSource|null = null;
+    let newImage: image.ImageSource |null = null;
     try {
       oldImageFile = fs.openSync(filePathOri);
       newImageFile = fs.openSync(filePathDest);
@@ -44,7 +44,7 @@ export default class ExifDataCopier {
       for (let copyAttribute of attributes) {
         try {
           await oldImage.getImageProperty(copyAttribute).then(async (data) => {
-            if (data != null) {
+            if (data != null && newImage) {
               await newImage.modifyImageProperty(copyAttribute, data.toString());
             }
           });
@@ -64,7 +64,7 @@ export default class ExifDataCopier {
     }
   }
 
-  private closFile(file: fs.File): void {
+  private closFile(file: fs.File | null): void {
     if (file == null) {
       return;
     }

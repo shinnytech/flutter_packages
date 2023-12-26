@@ -36,6 +36,7 @@ import ImageResizer from './ImageResizer';
 import HashMap from '@ohos.util.HashMap';
 import UIAbility from '@ohos.app.ability.UIAbility';
 import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
+import { BusinessError } from '@ohos.base';
 
 export default class ImagePickerDelegate {
   readonly REQUEST_CODE_CHOOSE_IMAGE_FROM_GALLERY = 2342;
@@ -52,18 +53,16 @@ export default class ImagePickerDelegate {
   private imageResizer: ImageResizer;
   private cache: ImagePickerCache;
 
-  private pendingCameraMediaUri: string;
-  private pendingCallState: PendingCallState;
-  private context: common.UIAbilityContext;
+  private pendingCameraMediaUri: string|null = null;
+  private pendingCallState: PendingCallState|null = null;
+  private context: common.UIAbilityContext|null = null;
 
   constructor(ability: UIAbility, imageResizer: ImageResizer, cache: ImagePickerCache, context?: common.UIAbilityContext,
               pendingImageOptions?: ImageSelectionOptions, pendingVideoOptions?: VideoSelectionOptions,
               result?: Result<ArrayList<string>>, fileUtils?: FileUtils) {
-    let bundleFlags = bundleManager.BundleFlag.GET_BUNDLE_INFO_DEFAULT;
     this.imageResizer = imageResizer;
-
     if (result != null) {
-      this.pendingCallState = new PendingCallState(pendingImageOptions, pendingVideoOptions, result);
+      this.pendingCallState = new PendingCallState(pendingImageOptions as ESObject, pendingVideoOptions , result);
     }
     this.cache = cache;
     this.context = ability.context;
@@ -92,7 +91,7 @@ export default class ImagePickerDelegate {
     }
   }
 
-  async retrieveLostImage(): Promise<CacheRetrievalResult> {
+  async retrieveLostImage(): Promise<CacheRetrievalResult | null>{
     // let cacheMap: HashMap<string, ESObject|null> = await this.cache.getCacheMap().then(map=> {
     //   return map;
     // });
@@ -102,11 +101,13 @@ export default class ImagePickerDelegate {
     }
     let result = new CacheRetrievalResultBuilder(null,null,null,null);
     let type:ESObject= cacheMap.get(ImagePickerCache.MAP_KEY_TYPE);
-    if (type != null) {
+    if (type != null && result.setType){
       result.setType(type);
     }
+    if (result.setError){
+      result.setError(cacheMap.get(ImagePickerCache.MAP_KEY_ERROR));
+    }
 
-    result.setError(cacheMap.get(ImagePickerCache.MAP_KEY_ERROR));
     let pathList: ArrayList<string> = cacheMap.get(ImagePickerCache.MAP_KEY_PATH_LIST) as ArrayList<string>;
     if (pathList != null) {
       let newPathList: ArrayList<string> = new ArrayList();
@@ -122,10 +123,14 @@ export default class ImagePickerDelegate {
           })
         );
       }
-      result.setPaths(newPathList);
+      if(result.setPaths)
+      {
+        result.setPaths(newPathList);
+      }
+
     }
     this.cache.clear();
-    return result.build();
+    return result.build ? result.build() : null ;
   }
 
   chooseMediaFromGallery(options: MediaSelectionOptions, generalOptions: GeneralOptions,
@@ -150,11 +155,19 @@ export default class ImagePickerDelegate {
     let options:StartOptions = {
       displayId: 0,
     };
-    this.context.startAbilityForResult(config, options).then((result) => {
-      let uris: Array<string> = result.want.parameters['select-item-list'] as Array<string>;
-      let code = result["resultCode"];
-      Log.i(ImagePickerDelegate.TAG, "startAbilityForResult : " + JSON.stringify(result.want.parameters));
-      this.handleChooseMediaResult(code, uris);
+    if(!this.context)
+    {
+      return
+    }
+    this.context.startAbilityForResult(config, options).then(result => {
+      if(result && result.want && result.want.parameters)
+      {
+        let uris: Array<string> = result.want.parameters['select-item-list'] as Array<string>;
+        let code = result["resultCode"] as number;
+        Log.i(ImagePickerDelegate.TAG, "startAbilityForResult : " + JSON.stringify(result.want.parameters));
+        this.handleChooseMediaResult(code, uris);
+      }
+
     });
   }
 
@@ -167,14 +180,14 @@ export default class ImagePickerDelegate {
   }
 
   async handleMediaResultTwo(uris: Array<string>): Promise<void> {
-    let localImageOptions: ImageSelectionOptions;
+    let localImageOptions: ImageSelectionOptions | null = null;
     if (this.pendingCallState != null) {
       localImageOptions = this.pendingCallState.imageOptions;
     }
     let pathList: ArrayList<string> = new ArrayList();
     if (localImageOptions != null && localImageOptions != undefined) {
       for (let path of uris) {
-        if (path.search("video") < 0) {
+        if (path.search("video") < 0 && this.pendingCallState) {
           path = await this.getResizedImagePath(path, this.pendingCallState.imageOptions);
         }
         let realPath = FileUtils.getPathFromUri(this.context, path);
@@ -214,16 +227,25 @@ export default class ImagePickerDelegate {
     let options:StartOptions = {
       displayId: 0,
     };
-    let result = await this.context.startAbilityForResult(config, options);
-    let uris = result.want.parameters['select-item-list'] as Array<string>;
-    let code = result.resultCode;
-    this.handleChooseVideoResult(code, uris);
+    let result : ESObject = null
+    if(this.context)
+    {
+      result = await this.context.startAbilityForResult(config, options);
+    }
+
+    if(result && result.want && result.want.parameters)
+    {
+      let uris = result.want.parameters['select-item-list'] as Array<string>;
+      let code = result.resultCode as number;
+      this.handleChooseVideoResult(code, uris);
+    }
+
   }
 
   handleChooseVideoResult(code: number, uris: Array<string>): void {
     if (code == 0) {
       let realPath = FileUtils.getPathFromUri(this.context, uris[0]);
-      this.handleVideoResult(realPath, false);
+      this.handleVideoResult(realPath as string, false);
     } else {
       this.finishWithSuccess(null);
     }
@@ -250,10 +272,18 @@ export default class ImagePickerDelegate {
     }
     abilityAccessCtrl.createAtManager().
     requestPermissionsFromUser(this.context, ['ohos.permission.READ_MEDIA']).then(async (permission) => {
-      let result = await this.context.startAbilityForResult(want);
-      let uri = result["want"]["parameters"].resourceUri as string;
-      let code = result["resultCode"];
-      this.handlerCaptureImageResult(code, uri);
+      let result:ESObject = null;
+      if(this.context)
+      {
+        result = await this.context.startAbilityForResult(want);
+      }
+      if(result && result.want && result.want.parameters)
+      {
+        let uri = result["want"]["parameters"].resourceUri as string;
+        let code = result["resultCode"] as number;
+        this.handlerCaptureImageResult(code, uri);
+      }
+
     });
   }
 
@@ -282,16 +312,22 @@ export default class ImagePickerDelegate {
     let options:StartOptions = {
       displayId: 0,
     };
-    let result = await this.context.startAbilityForResult(config, options);
-    let uris = result.want.parameters['select-item-list'] as Array<string>;
-    let code = result.resultCode;
-    this.handleChooseImageResult(code, uris);
+    let result : ESObject = null;
+    if(this.context) {
+      result = await this.context.startAbilityForResult(config, options);
+    }
+    if(result && result.want && result.want.parameters)
+    {
+      let uris = result?.want?.parameters['select-item-list'] as Array<string>;
+      let code = result.resultCode as number;
+      this.handleChooseImageResult(code, uris);
+    }
   }
 
   handleChooseImageResult(code: number, uris: Array<string>): void {
     if (code == 0) {
       let realPath = FileUtils.getPathFromUri(this.context, uris[0]);
-      this.handleImageResult(realPath, false);
+      this.handleImageResult(realPath as string, false);
     } else {
       this.finishWithSuccess(null);
     }
@@ -320,10 +356,18 @@ export default class ImagePickerDelegate {
     let options:StartOptions = {
       displayId: 0,
     };
-    let result = await this.context.startAbilityForResult(config, options);
-    let uris = result.want.parameters['select-item-list'] as Array<string>;
-    let resultCode = result.resultCode;
-    this.handleChooseMediaResult(resultCode, uris);
+    let result:ESObject = null;
+    if(this.context)
+    {
+      result = await this.context.startAbilityForResult(config, options);
+    }
+    if(result && result.want && result.want.parameters)
+    {
+      let uris = result?.want?.parameters['select-item-list'] as Array<string>;
+      let resultCode = result.resultCode as number;
+      this.handleChooseMediaResult(resultCode, uris);
+    }
+
   }
 
   takeImageWithCamera(options: ImageSelectionOptions, result: Result<ArrayList<string>>): void {
@@ -335,21 +379,40 @@ export default class ImagePickerDelegate {
   }
 
   async launchTakeImageWithCameraWant(): Promise<void> {
+    let bundleFlags = bundleManager.BundleFlag.GET_BUNDLE_INFO_DEFAULT;
+    let bundleName = ""
+    try {
+      let t = await bundleManager.getBundleInfoForSelf(bundleFlags)
+      bundleName = t.name
+    } catch (err) {
+      let message = (err as BusinessError).message;
+      Log.e('getBundleInfoForSelf failed: %{public}s', message);
+    }
+
     let want: Want = {
       "action": wantConstant.Action.ACTION_IMAGE_CAPTURE,
       parameters: {
-        callBundleName: "flutter_embedding",
+        callBundleName: bundleName || "flutter_embedding",
         "supportMultiMode": false
       }
     }
-    let result = await this.context.startAbilityForResult(want);
+    let result:ESObject = null
+    if(this.context)
+    {
+      result = await this.context.startAbilityForResult(want);
+    }
+
+    if(!result)
+      {
+        return
+      }
     let uri = result["want"]["parameters"].resourceUri as string;
-    let code = result["resultCode"];
+    let code = result["resultCode"] as number;
     this.pendingCameraMediaUri = uri;
     this.handlerCaptureImageResult(code, uri);
   }
 
-  setPendingOptionsAndResult(imageOptions: ImageSelectionOptions, videoOptions: VideoSelectionOptions,
+  setPendingOptionsAndResult(imageOptions: ImageSelectionOptions|null, videoOptions: VideoSelectionOptions | null,
                              result: Result<ArrayList<string>>): boolean {
     if (this.pendingCallState != null && this.pendingCallState != undefined) {
       Log.i(ImagePickerDelegate.TAG, "There is already an open gallery, use it directly to select images");
@@ -366,24 +429,27 @@ export default class ImagePickerDelegate {
   }
 
   handlerCaptureImageResult(code: number, path: string): void {
-    if (code == 0) {
+    if (code == 0 || code == -1) {
       Log.e(ImagePickerDelegate.TAG, "startAbilityForResult for taking image success");
       this.handleImageResult(path, true);
+    }else{
+      this.finishWithSuccess(null);
     }
-    this.finishWithSuccess(null);
   }
 
   handlerCaptureVideoResult(code: number, path: string): void {
-    if (code == 0) {
+    if (code == 0 || code == -1) {
       Log.e(ImagePickerDelegate.TAG, "startAbilityForResult for taking video success");
       this.handleVideoResult(path, false);
     }
-    this.finishWithSuccess(null);
+    else{
+      this.finishWithSuccess(null);
+    }
   }
 
   async handleImageResult(path: string, shouldDeleteOriginalIfScaled: boolean): Promise<void> {
     Log.i(ImagePickerDelegate.TAG, 'handleImageResult enter');
-    let localImageOptions: ImageSelectionOptions = null;
+    let localImageOptions: ImageSelectionOptions | null = null;
     if (this.pendingCallState != null) {
       localImageOptions = this.pendingCallState.imageOptions;
     }
@@ -400,7 +466,7 @@ export default class ImagePickerDelegate {
   }
 
   async handleMediaResult(paths: Array<string>) {
-    let localImageOptions: ImageSelectionOptions;
+    let localImageOptions: ImageSelectionOptions | null = null;
     if (this.pendingCallState != null) {
       localImageOptions = this.pendingCallState.imageOptions;
     }
@@ -420,15 +486,16 @@ export default class ImagePickerDelegate {
     }
   }
 
-  handleVideoResult(path: string, shouldDeleteOriginalIfScaled: boolean): void {
+  handleVideoResult(path: string | null, shouldDeleteOriginalIfScaled: boolean): void {
     this.finishWithSuccess(path);
   }
 
-  finishWithSuccess(path: string): void {
+  finishWithSuccess(path: string | null): void {
+
     Log.i(ImagePickerDelegate.TAG, path);
     let pathList: ArrayList<string> = new ArrayList();
     if (path != null) {
-      let realPath = FileUtils.getPathFromUri(this.context, path);
+      let realPath = FileUtils.getPathFromUri(this.context as Context, path);
       Log.i(ImagePickerDelegate.TAG, "realPath :" + realPath);
       if (realPath != null) {
         path = realPath;
@@ -436,8 +503,9 @@ export default class ImagePickerDelegate {
       pathList.add(path);
     }
 
-    let localResult: Result<ArrayList<string>> = null;
-    if (this.pendingCallState != null) {
+    let localResult: Result<ArrayList<string>>|null = null;
+
+    if (this.pendingCallState !== null) {
       localResult = this.pendingCallState.result;
     }
     this.pendingCallState = null;
@@ -452,18 +520,19 @@ export default class ImagePickerDelegate {
     }
   }
 
-  finishWithListSuccess(path: ArrayList<string>): void {
-    let localResult: Result<ArrayList<string>> = null;
+  finishWithListSuccess(path: ArrayList<string> | null): void {
+    let localResult: Result<ArrayList<string>> | null  = null;
     if (this.pendingCallState != null) {
       localResult = this.pendingCallState.result;
     }
     this.pendingCallState = null;
 
     if (localResult == null) {
-      this.cache.saveResult(path, null, null);
-    } else {
+      this.cache.saveResult(path as ArrayList<string>, null, null);
+    } else if(path){
+
       Log.i(ImagePickerDelegate.TAG, path[0]);
-      localResult.success(path);
+      localResult.success(path as ArrayList<string>);
     }
   }
 
@@ -482,7 +551,7 @@ class PendingCallState {
   videoOptions: VideoSelectionOptions;
   result: Result<ArrayList<string>>;
 
-  constructor(imageOptions: ImageSelectionOptions, videoOptions: VideoSelectionOptions,
+  constructor(imageOptions: ImageSelectionOptions, videoOptions: VideoSelectionOptions | ESObject,
               result: Result<ArrayList<string>>) {
     this.imageOptions = imageOptions;
     this.videoOptions = videoOptions;

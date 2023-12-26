@@ -77,35 +77,35 @@ class GeneralOptionsBuilder{
   }
 }
 export class GeneralOptions {
-  private static allowMultiple: boolean;
-  private static usePhotoPicker: boolean;
+  private allowMultiple: boolean =false ;
+  private usePhotoPicker: boolean =false ;
 
   private constructor() {
   }
 
   getAllowMultiple(): boolean {
-    return GeneralOptions.allowMultiple;
+    return this.allowMultiple;
   }
 
   setAllowMultiple(setterArg: boolean): void {
     if (setterArg == null) {
       throw new Error("Nonnull field \"allowMultiple\" is null.");
     }
-    GeneralOptions.allowMultiple = setterArg;
+    this.allowMultiple = setterArg;
   }
 
   getUsePhotoPicker(): boolean {
-    return GeneralOptions.usePhotoPicker;
+    return this.usePhotoPicker;
   }
 
   setUsePhotoPicker(setterArg: boolean): void {
     if (setterArg == null) {
       throw new Error("Nonnull field \"usePhotoPicker\" is null.");
     }
-    GeneralOptions.usePhotoPicker = setterArg;
+    this.usePhotoPicker = setterArg;
   }
 
-  public static Builder:ESObject =new GeneralOptionsBuilder((setterArg: boolean)=>{
+  public  Builder:ESObject =new GeneralOptionsBuilder((setterArg: boolean)=>{
     this.allowMultiple = setterArg;
     return this;
   },(setterArg: boolean)=>{
@@ -121,8 +121,8 @@ export class GeneralOptions {
 
   toList(): ArrayList<ESObject> {
     const toListResult:ArrayList<ESObject> = new ArrayList<ESObject>();
-    toListResult.add(GeneralOptions.allowMultiple);
-    toListResult.add(GeneralOptions.usePhotoPicker);
+    toListResult.add(this.allowMultiple);
+    toListResult.add(this.usePhotoPicker);
     return toListResult;
   }
 
@@ -150,41 +150,41 @@ class ImageSelectionOptionsBuilder{
   }
 }
 export class ImageSelectionOptions {
-  private static maxWidth: number;
-  private static maxHeight: number;
-  private static quality: number;
+  private  maxWidth: number = -1;
+  private  maxHeight: number= -1;
+  private  quality: number = -1;
 
   private constructor() {
   }
 
   getMaxWidth(): number {
-    return ImageSelectionOptions.maxWidth;
+    return this.maxWidth;
   }
 
   setMaxWidth(setterArg: number): void {
-    ImageSelectionOptions.maxWidth = setterArg;
+    this.maxWidth = setterArg;
   }
 
   getMaxHeight(): number {
-    return ImageSelectionOptions.maxHeight;
+    return this.maxHeight;
   }
 
   setMaxHeight(setterArg: number): void {
-    ImageSelectionOptions.maxHeight = setterArg;
+    this.maxHeight = setterArg;
   }
 
   getQuality(): number {
-    return ImageSelectionOptions.quality;
+    return this.quality;
   }
 
   setQuality(setterArg: number): void {
     if (setterArg == null) {
       throw new Error("Nonnull field \"quality\" is null.")
     }
-    ImageSelectionOptions.quality = setterArg;
+    this.quality = setterArg;
   }
 
-  public static Builder = new ImageSelectionOptionsBuilder((setterArg: number)=>{
+  public Builder = new ImageSelectionOptionsBuilder((setterArg: number)=>{
     this.maxWidth = setterArg;
     return this;
   },
@@ -209,9 +209,9 @@ export class ImageSelectionOptions {
   )
   toList(): ArrayList<ESObject> {
     const toListResult:ArrayList<ESObject> = new ArrayList<ESObject>();
-    toListResult.add(ImageSelectionOptions.maxWidth);
-    toListResult.add(ImageSelectionOptions.maxHeight);
-    toListResult.add(ImageSelectionOptions.quality);
+    toListResult.add(this.maxWidth);
+    toListResult.add(this.maxHeight);
+    toListResult.add(this.quality);
     return toListResult;
   }
 
@@ -236,24 +236,24 @@ class MediaSelectionOptionsBuilder{
   }
 }
 export class MediaSelectionOptions {
-  private imageSelectionOptions: ImageSelectionOptions;
-  static imageSelectionOptions: ImageSelectionOptions;
+  private imageSelectionOptions: ImageSelectionOptions | null = null;
+  static imageSelectionOptions: ImageSelectionOptions | null = null;
 
-  private constructor() {
+  constructor() {
   }
 
-  getImageSelectionOptions(): ImageSelectionOptions {
+  getImageSelectionOptions(): ImageSelectionOptions |null {
     return this.imageSelectionOptions;
   }
 
-  setImageSelectionOptions(setterArg: ImageSelectionOptions): void {
+  setImageSelectionOptions(setterArg: ImageSelectionOptions| null ): void {
     if (setterArg == null) {
       throw new Error("Nonnull field \"imageSelectionOptions\" is null.")
     }
     this.imageSelectionOptions = setterArg;
   }
 
-  public static Builder = new MediaSelectionOptionsBuilder(
+  public  Builder = new MediaSelectionOptionsBuilder(
     (setterArg: ImageSelectionOptions)=>{
       this.imageSelectionOptions = setterArg;
       return this;
@@ -270,7 +270,7 @@ export class MediaSelectionOptions {
     return toListResult;
   }
 
-  static fromList(list: ArrayList<ESObject>): MediaSelectionOptions {
+   fromList(list: ArrayList<ESObject>): MediaSelectionOptions {
     const pigeonResult = new MediaSelectionOptions();
     const imageSelectionOptions:ESObject = list[0];
     pigeonResult.setImageSelectionOptions(imageSelectionOptions == null ?
@@ -289,8 +289,8 @@ class VideoSelectionOptionsBuilder{
 }
 
 export class VideoSelectionOptions {
-  private maxDurationSeconds: number;
-  static maxDurationSeconds: number;
+  private maxDurationSeconds: number = 0;
+  static maxDurationSeconds: number = 0;
 
   private constructor() {
   }
@@ -303,7 +303,7 @@ export class VideoSelectionOptions {
     this.maxDurationSeconds = setterArg;
   }
 
-  public static Builder = new VideoSelectionOptionsBuilder((setterArg: number)=>{
+  public  Builder = new VideoSelectionOptionsBuilder((setterArg: number)=>{
       this.maxDurationSeconds = setterArg;
       return this;
     },
@@ -338,32 +338,32 @@ class SourceSpecificationBuilder{
   }
 }
 export class SourceSpecification {
-  private static type: SourceType;
-  private static camera: SourceCamera;
+  private  type: SourceType | null = null ;
+  private  camera: SourceCamera | null = null ;
 
   private constructor() {
   }
 
-  getType(): SourceType {
-    return SourceSpecification.type;
+  getType(): SourceType{
+    return this.type as SourceType;
   }
 
   setType(setterArg: SourceType): void {
     if (setterArg == null) {
       throw new Error("Nonnull field \"type\" is null.")
     }
-    SourceSpecification.type = setterArg;
+    this.type = setterArg;
   }
 
   getCamera(): SourceCamera {
-    return SourceSpecification.camera;
+    return this.camera as SourceCamera;
   }
 
   setCamera(setterArg: SourceCamera): void {
-    SourceSpecification.camera = setterArg;
+    this.camera = setterArg;
   }
 
-  public static Builder =new SourceSpecificationBuilder(
+  public  Builder =new SourceSpecificationBuilder(
     (setterArg: SourceType)=>{
         this.type = setterArg;
         return this;
@@ -374,16 +374,16 @@ export class SourceSpecification {
     },
     ()=>{
       const pigeonReturn = new SourceSpecification();
-      pigeonReturn.setType(this.type);
-      pigeonReturn.setCamera(this.camera);
+      pigeonReturn.setType(this.type as SourceType);
+      pigeonReturn.setCamera(this.camera as SourceCamera);
       return pigeonReturn;
     }
   )
 
   toList(): ArrayList<ESObject> {
     const toListResult:ArrayList<ESObject> = new ArrayList<ESObject>();
-    toListResult.add(SourceSpecification.type);
-    toListResult.add(SourceSpecification.camera);
+    toListResult.add(this.type);
+    toListResult.add(this.camera);
     return toListResult;
   }
 
@@ -398,44 +398,44 @@ export class SourceSpecification {
 }
 
 export class CacheRetrievalErrorBuilder{
-    setCode:(setterArg: string)=>ESObject
-    setMessage:(setterArg: string)=>ESObject
-    build:()=>ESObject
-    constructor(setCode:(setterArg: string)=>ESObject, setMessage:(setterArg: string)=>ESObject, build:()=>ESObject) {
+    setCode: null |((setterArg: string)=>ESObject)
+    setMessage:((setterArg: string)=>ESObject )|null
+    build:(()=>ESObject)|null
+    constructor(setCode: null |((setterArg: string)=>ESObject) , setMessage:((setterArg: string)=>ESObject )|null, build:(()=>ESObject)|null) {
       this.setCode = setCode
       this.setMessage = setMessage
       this.build = build
     }
 }
 export class CacheRetrievalError {
-  private static code: string;
-  private static message: string;
+  private  code: string = "";
+  private  message: string = "";
 
-  private constructor() {
+  constructor() {
   }
 
   getCode(): string {
-    return CacheRetrievalError.code;
+    return this.code;
   }
 
   setCode(setterArg: string): void {
     if (setterArg == null) {
       throw new Error("Nonnull field \"code\" is null.")
     }
-    CacheRetrievalError.code = setterArg;
+    this.code = setterArg;
   }
 
   getMessage(): string {
-    return CacheRetrievalError.message;
+    return this.message;
   }
 
   setMessage(setterArg: string): void {
-    CacheRetrievalError.message = setterArg;
+    this.message = setterArg;
   }
 
-  static Builder =new CacheRetrievalErrorBuilder(
+   Builder =new CacheRetrievalErrorBuilder(
     (setterArg: string)=>{
-      CacheRetrievalError.code = setterArg;
+      this.code = setterArg;
       return this;
     },
     (setterArg: string)=>{
@@ -452,12 +452,12 @@ export class CacheRetrievalError {
 
   toList(): ArrayList<ESObject> {
     const toListResult:ArrayList<ESObject> = new ArrayList<ESObject>();
-    toListResult.add(CacheRetrievalError.code);
-    toListResult.add(CacheRetrievalError.message);
+    toListResult.add(this.code);
+    toListResult.add(this.message);
     return toListResult;
   }
 
-  static fromList(list: ArrayList<ESObject>): CacheRetrievalError {
+   fromList(list: ArrayList<ESObject>): CacheRetrievalError {
     const pigeonResult = new CacheRetrievalError();
     const code:ESObject = list[0];
     pigeonResult.setCode(code);
@@ -469,16 +469,16 @@ export class CacheRetrievalError {
 
 export class CacheRetrievalResultBuilder{
 
-  private type: CacheRetrievalType
-  private error: CacheRetrievalError
-  private paths: ArrayList<string>
+  private type: CacheRetrievalType | null = null;
+  private error: CacheRetrievalError | null = null;
+  private paths: ArrayList<string> | null = null;
 
-  setType:(setterArg: CacheRetrievalType)=>ESObject
-  setError:(setterArg: CacheRetrievalError)=>ESObject
-  setPaths:(setterArg: ArrayList<string>)=>ESObject
-  build:()=>ESObject
+  setType:((setterArg: CacheRetrievalType)=>ESObject) | null
+  setError:((setterArg: CacheRetrievalError)=>ESObject) | null
+  setPaths:((setterArg: ArrayList<string>)=>ESObject) | null
+  build:(()=>ESObject )| null
 
-  constructor(setType:(setterArg: CacheRetrievalType)=>ESObject,setError:(setterArg: CacheRetrievalError)=>ESObject,setPaths:(setterArg: ArrayList<string>)=>ESObject,build:()=>ESObject) {
+  constructor(setType:((setterArg: CacheRetrievalType)=>ESObject) | null,setError:((setterArg: CacheRetrievalError)=>ESObject) | null,setPaths:((setterArg: ArrayList<string>)=>ESObject) | null,build:(()=>ESObject )| null) {
     this.setType = setType
     this.setError = setError
     this.setPaths = setPaths
@@ -487,44 +487,44 @@ export class CacheRetrievalResultBuilder{
 }
 
 export class CacheRetrievalResult {
-  private static type: CacheRetrievalType;
-  private static error: CacheRetrievalError;
-  private static paths: ArrayList<string>;
+  private  type: CacheRetrievalType|null= null ;
+  private  error: CacheRetrievalError|null= null;
+  private  paths: ArrayList<string> |null= null;
 
-  private constructor() {
+  constructor() {
   }
 
   getType(): CacheRetrievalType {
-    return CacheRetrievalResult.type;
+    return this.type as CacheRetrievalType;
   }
 
   setType(setterArg: CacheRetrievalType): void {
     if (setterArg == null) {
       throw new Error("Nonnull field \"type\" is null.")
     }
-    CacheRetrievalResult.type = setterArg;
+    this.type = setterArg;
   }
 
-  getError(): CacheRetrievalError {
-    return CacheRetrievalResult.error;
+  getError(): CacheRetrievalError | null  {
+    return this.error;
   }
 
-  setError(setterArg: CacheRetrievalError): void {
-    CacheRetrievalResult.error = setterArg;
+  setError(setterArg: CacheRetrievalError | null): void {
+    this.error = setterArg;
   }
 
   getPaths(): ArrayList<string> {
-    return CacheRetrievalResult.paths;
+    return this.paths as ArrayList<string>;
   }
 
   setPaths(setterArg: ArrayList<string>): void {
     if (setterArg == null) {
       throw new Error("Nonnull field \"paths\" is null.")
     }
-    CacheRetrievalResult.paths = setterArg;
+    this.paths = setterArg;
   }
 
-  public static Builder = new CacheRetrievalResultBuilder(
+  public  Builder = new CacheRetrievalResultBuilder(
     (setterArg: CacheRetrievalType)=>{
     this.type = setterArg;
     return this;
@@ -539,27 +539,29 @@ export class CacheRetrievalResult {
     },
     ()=>{
       const pigeonReturn = new CacheRetrievalResult();
-      pigeonReturn.setType(this.type);
-      pigeonReturn.setError(this.error);
-      pigeonReturn.setPaths(this.paths);
+      pigeonReturn.setType(this.type as CacheRetrievalType);
+      pigeonReturn.setError(this.error as CacheRetrievalError);
+      pigeonReturn.setPaths(this.paths as ArrayList<string>);
       return pigeonReturn;
     })
 
 
   toList(): ArrayList<ESObject> {
     const toListResult:ArrayList<ESObject> = new ArrayList<ESObject>();
-    toListResult.add(CacheRetrievalResult.type);
-    toListResult.add(CacheRetrievalResult.error == null ? null : CacheRetrievalResult.error.toList());
-    toListResult.add(CacheRetrievalResult.paths);
+    toListResult.add(this.type);
+    let t = new CacheRetrievalResult()
+    toListResult.add(this.error == null ? null : t.error? t.error.toList() : "");
+    toListResult.add(this.paths);
     return toListResult;
   }
 
-  static fromList(list: ArrayList<ESObject>): CacheRetrievalResult {
+   fromList(list: ArrayList<ESObject>): CacheRetrievalResult {
     const pigeonResult = new CacheRetrievalResult();
     const type:ESObject = list[0];
     pigeonResult.setType(type);
     const error:ESObject = list[1];
-    pigeonResult.setError(error == null ? null : CacheRetrievalError.fromList(error));
+     let t = new CacheRetrievalResult()
+    pigeonResult.setError(error == null ? null : t.fromList(error) as ESObject);
     const paths:ESObject = list[2];
     pigeonResult.setPaths(paths);
     return pigeonResult;
@@ -580,17 +582,21 @@ export class ImagePickerApiCodec extends StandardMessageCodec {
   }
 
   readValueOfType(type: number, buffer: ByteBuffer): ESObject {
+    let t:ESObject = {} ;
     switch (type) {
       case 128:
-        return CacheRetrievalError.fromList(this.readValue(buffer));
+        t = new CacheRetrievalError()
+        return t.fromList(this.readValue(buffer));
       case -127:
-        return CacheRetrievalResult.fromList(this.readValue(buffer));
+        t=  new CacheRetrievalResult()
+        return t.fromList(this.readValue(buffer));
       case -126:
         return GeneralOptions.fromList(this.readValue(buffer));
       case -125:
         return ImageSelectionOptions.fromList(this.readValue(buffer));
       case -124:
-        return MediaSelectionOptions.fromList(this.readValue(buffer));
+        t=  new MediaSelectionOptions()
+        return t.fromList(this.readValue(buffer));
       case -123:
         return SourceSpecification.fromList(this.readValue(buffer));
       case -122:
@@ -652,8 +658,13 @@ export abstract class ImagePickerApi {
     return ImagePickerApiCodec.INSTANCE;
   }
 
-  static setup(binaryMessenger: BinaryMessenger, api: ImagePickerApi) {
+  static setup(binaryMessenger: BinaryMessenger| null, api?: ImagePickerApi|null) {
+    if(!binaryMessenger)
+    {
+      return
+    }
     Log.i(TAG, "setup");
+
     {
       const channel: BasicMessageChannel<ESObject> =
         new BasicMessageChannel<ESObject>(

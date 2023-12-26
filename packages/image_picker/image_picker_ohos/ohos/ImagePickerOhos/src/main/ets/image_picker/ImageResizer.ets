@@ -42,9 +42,9 @@ export default class ImageResizer {
       return imagePath;
     }
 
-    let imageFile: fs.File;
-    let imageSource: image.ImageSource;
-    let imagePixelMap: image.PixelMap;
+    let imageFile: fs.File | null = null;
+    let imageSource: image.ImageSource | null = null;
+    let imagePixelMap: image.PixelMap | null = null;
     try {
       imageFile = fs.openSync(imagePath);
       imageSource = image.createImageSource(imageFile.fd);
@@ -131,8 +131,8 @@ export default class ImageResizer {
 
   private async createImageOnExternalDirectory(imagePixelMap: image.PixelMap, imageName: string, imageQuality: number):
     Promise<string> {
-    let imagePackerApi: image.ImagePacker;
-    let outFile: fs.File;
+    let imagePackerApi: image.ImagePacker | null = null;
+    let outFile: fs.File | null = null;
     let outFileName: string = this.context.cacheDir + "scaled_" + imageName;
 
     try {

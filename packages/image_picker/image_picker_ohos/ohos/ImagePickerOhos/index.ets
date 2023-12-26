@@ -13,4 +13,5 @@
 * limitations under the License.
 */
 
-export { MainPage } from './src/main/ets/components/mainpage/MainPage'
+import ImagePickerPulgin from './src/main/ets/image_picker/ImagePickerPlugin'
+export default ImagePickerPulgin
