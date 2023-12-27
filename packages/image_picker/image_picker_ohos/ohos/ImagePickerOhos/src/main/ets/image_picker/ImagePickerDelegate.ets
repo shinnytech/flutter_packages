@@ -44,25 +44,22 @@ export default class ImagePickerDelegate {
   readonly REQUEST_CAMERA_IMAGE_PERMISSION = 2345;
   readonly REQUEST_CODE_CHOOSE_MULTI_IMAGE_FROM_GALLERY = 2346;
   readonly REQUEST_CODE_CHOOSE_MEDIA_FROM_GALLERY = 2347;
-
   readonly REQUEST_CODE_CHOOSE_VIDEO_FROM_GALLERY = 2352;
   readonly REQUEST_CODE_TAKE_VIDEO_WITH_CAMERA = 2353;
   readonly REQUEST_CAMERA_VIDEO_PERMISSION = 2355;
-
   private static TAG = "ImagePickerDelegate";
   private imageResizer: ImageResizer;
   private cache: ImagePickerCache;
-
-  private pendingCameraMediaUri: string|null = null;
-  private pendingCallState: PendingCallState|null = null;
-  private context: common.UIAbilityContext|null = null;
+  private pendingCameraMediaUri: string | null = null;
+  private pendingCallState: PendingCallState | null = null;
+  private context: common.UIAbilityContext | null = null;
 
   constructor(ability: UIAbility, imageResizer: ImageResizer, cache: ImagePickerCache, context?: common.UIAbilityContext,
               pendingImageOptions?: ImageSelectionOptions, pendingVideoOptions?: VideoSelectionOptions,
               result?: Result<ArrayList<string>>, fileUtils?: FileUtils) {
     this.imageResizer = imageResizer;
     if (result != null) {
-      this.pendingCallState = new PendingCallState(pendingImageOptions as ESObject, pendingVideoOptions , result);
+      this.pendingCallState = new PendingCallState(pendingImageOptions as ESObject, pendingVideoOptions, result);
     }
     this.cache = cache;
     this.context = ability.context;
@@ -91,20 +88,20 @@ export default class ImagePickerDelegate {
     }
   }
 
-  async retrieveLostImage(): Promise<CacheRetrievalResult | null>{
+  async retrieveLostImage(): Promise<CacheRetrievalResult | null> {
     // let cacheMap: HashMap<string, ESObject|null> = await this.cache.getCacheMap().then(map=> {
     //   return map;
     // });
-    let cacheMap: HashMap<string, ESObject|null> = await this.cache.getCacheMap()
+    let cacheMap: HashMap<string, ESObject | null> = await this.cache.getCacheMap()
     if (cacheMap.isEmpty()) {
       return null;
     }
-    let result = new CacheRetrievalResultBuilder(null,null,null,null);
-    let type:ESObject= cacheMap.get(ImagePickerCache.MAP_KEY_TYPE);
-    if (type != null && result.setType){
+    let result = new CacheRetrievalResultBuilder(null, null, null, null);
+    let type: ESObject = cacheMap.get(ImagePickerCache.MAP_KEY_TYPE);
+    if (type != null && result.setType) {
       result.setType(type);
     }
-    if (result.setError){
+    if (result.setError) {
       result.setError(cacheMap.get(ImagePickerCache.MAP_KEY_ERROR));
     }
 
@@ -123,14 +120,13 @@ export default class ImagePickerDelegate {
           })
         );
       }
-      if(result.setPaths)
-      {
+      if (result.setPaths) {
         result.setPaths(newPathList);
       }
 
     }
     this.cache.clear();
-    return result.build ? result.build() : null ;
+    return result.build ? result.build() : null;
   }
 
   chooseMediaFromGallery(options: MediaSelectionOptions, generalOptions: GeneralOptions,
@@ -143,25 +139,23 @@ export default class ImagePickerDelegate {
   }
 
   launchPickMediaFromGalleryWant(generalOptions: GeneralOptions): void {
-    let config:Want = {
+    let config: Want = {
       action: 'ohos.want.action.photoPicker',
-      type: generalOptions.getAllowMultiple() ? 'multipleselect':'singleselect',
-    parameters: {
-        uri: generalOptions.getAllowMultiple() ? 'multipleselect':'singleselect',
-        maxSelectCount: generalOptions.getAllowMultiple() ? 9 :1 ,
+      type: generalOptions.getAllowMultiple() ? 'multipleselect' : 'singleselect',
+      parameters: {
+        uri: generalOptions.getAllowMultiple() ? 'multipleselect' : 'singleselect',
+        maxSelectCount: generalOptions.getAllowMultiple() ? 9 : 1,
         filterMediaType: 'FILTER_MEDIA_TYPE_ALL'
       }
     };
-    let options:StartOptions = {
+    let options: StartOptions = {
       displayId: 0,
     };
-    if(!this.context)
-    {
+    if (!this.context) {
       return
     }
     this.context.startAbilityForResult(config, options).then(result => {
-      if(result && result.want && result.want.parameters)
-      {
+      if (result && result.want && result.want.parameters) {
         let uris: Array<string> = result.want.parameters['select-item-list'] as Array<string>;
         let code = result["resultCode"] as number;
         Log.i(ImagePickerDelegate.TAG, "startAbilityForResult : " + JSON.stringify(result.want.parameters));
@@ -214,7 +208,7 @@ export default class ImagePickerDelegate {
 
   async launchPickVideoFromGalleryWant(usePhotoPicker: boolean): Promise<void> {
     Log.i(ImagePickerDelegate.TAG, "launchPickVideoFromGalleryWant enter");
-    let config:Want = {
+    let config: Want = {
       action: 'ohos.want.action.photoPicker',
       type: 'singleselect',
       parameters: {
@@ -224,17 +218,15 @@ export default class ImagePickerDelegate {
       }
     };
 
-    let options:StartOptions = {
+    let options: StartOptions = {
       displayId: 0,
     };
-    let result : ESObject = null
-    if(this.context)
-    {
+    let result: ESObject = null
+    if (this.context) {
       result = await this.context.startAbilityForResult(config, options);
     }
 
-    if(result && result.want && result.want.parameters)
-    {
+    if (result && result.want && result.want.parameters) {
       let uris = result.want.parameters['select-item-list'] as Array<string>;
       let code = result.resultCode as number;
       this.handleChooseVideoResult(code, uris);
@@ -262,7 +254,7 @@ export default class ImagePickerDelegate {
   }
 
   async launchTakeVideoWithCameraWant(duration: number): Promise<void> {
-     let want: Want = {
+    let want: Want = {
       "action": wantConstant.Action.ACTION_VIDEO_CAPTURE,
       parameters: {
         callBundleName: "flutter_embedding",
@@ -270,21 +262,20 @@ export default class ImagePickerDelegate {
         durationLimit: duration
       }
     }
-    abilityAccessCtrl.createAtManager().
-    requestPermissionsFromUser(this.context, ['ohos.permission.READ_MEDIA']).then(async (permission) => {
-      let result:ESObject = null;
-      if(this.context)
-      {
-        result = await this.context.startAbilityForResult(want);
-      }
-      if(result && result.want && result.want.parameters)
-      {
-        let uri = result["want"]["parameters"].resourceUri as string;
-        let code = result["resultCode"] as number;
-        this.handlerCaptureImageResult(code, uri);
-      }
+    abilityAccessCtrl.createAtManager()
+      .requestPermissionsFromUser(this.context, ['ohos.permission.READ_MEDIA'])
+      .then(async (permission) => {
+        let result: ESObject = null;
+        if (this.context) {
+          result = await this.context.startAbilityForResult(want);
+        }
+        if (result && result.want && result.want.parameters) {
+          let uri = result["want"]["parameters"].resourceUri as string;
+          let code = result["resultCode"] as number;
+          this.handlerCaptureImageResult(code, uri);
+        }
 
-    });
+      });
   }
 
   async chooseImageFromGallery(options: ImageSelectionOptions, usePhotoPicker: boolean, result: Result<ArrayList<string>>): Promise<void> {
@@ -299,7 +290,7 @@ export default class ImagePickerDelegate {
 
   async launchPickImageFromGalleryWant(usePhotoPicker: boolean): Promise<void> {
     Log.i(ImagePickerDelegate.TAG, "launchPickImageFromGalleryWant enter");
-    let config:Want = {
+    let config: Want = {
       action: 'ohos.want.action.photoPicker',
       type: 'singleselect',
       parameters: {
@@ -309,15 +300,14 @@ export default class ImagePickerDelegate {
       }
     };
 
-    let options:StartOptions = {
+    let options: StartOptions = {
       displayId: 0,
     };
-    let result : ESObject = null;
-    if(this.context) {
+    let result: ESObject = null;
+    if (this.context) {
       result = await this.context.startAbilityForResult(config, options);
     }
-    if(result && result.want && result.want.parameters)
-    {
+    if (result && result.want && result.want.parameters) {
       let uris = result?.want?.parameters['select-item-list'] as Array<string>;
       let code = result.resultCode as number;
       this.handleChooseImageResult(code, uris);
@@ -343,7 +333,7 @@ export default class ImagePickerDelegate {
   }
 
   async launchMultiPickImageFromGalleryWant(usePhotoPicker: boolean): Promise<void> {
-    let config:Want = {
+    let config: Want = {
       action: 'ohos.want.action.photoPicker',
       type: 'multipleselect',
       parameters: {
@@ -353,16 +343,14 @@ export default class ImagePickerDelegate {
       }
     };
 
-    let options:StartOptions = {
+    let options: StartOptions = {
       displayId: 0,
     };
-    let result:ESObject = null;
-    if(this.context)
-    {
+    let result: ESObject = null;
+    if (this.context) {
       result = await this.context.startAbilityForResult(config, options);
     }
-    if(result && result.want && result.want.parameters)
-    {
+    if (result && result.want && result.want.parameters) {
       let uris = result?.want?.parameters['select-item-list'] as Array<string>;
       let resultCode = result.resultCode as number;
       this.handleChooseMediaResult(resultCode, uris);
@@ -396,27 +384,25 @@ export default class ImagePickerDelegate {
         "supportMultiMode": false
       }
     }
-    let result:ESObject = null
-    if(this.context)
-    {
+    let result: ESObject = null
+    if (this.context) {
       result = await this.context.startAbilityForResult(want);
     }
 
-    if(!result)
-      {
-        return
-      }
+    if (!result) {
+      return
+    }
     let uri = result["want"]["parameters"].resourceUri as string;
     let code = result["resultCode"] as number;
     this.pendingCameraMediaUri = uri;
     this.handlerCaptureImageResult(code, uri);
   }
 
-  setPendingOptionsAndResult(imageOptions: ImageSelectionOptions|null, videoOptions: VideoSelectionOptions | null,
+  setPendingOptionsAndResult(imageOptions: ImageSelectionOptions | null, videoOptions: VideoSelectionOptions | null,
                              result: Result<ArrayList<string>>): boolean {
     if (this.pendingCallState != null && this.pendingCallState != undefined) {
       Log.i(ImagePickerDelegate.TAG, "There is already an open gallery, use it directly to select images");
-    }else{
+    } else {
       Log.i(ImagePickerDelegate.TAG, "Prepare to awaken a new one");
       this.pendingCallState = new PendingCallState(imageOptions, videoOptions, result);
     }
@@ -432,7 +418,7 @@ export default class ImagePickerDelegate {
     if (code == 0 || code == -1) {
       Log.e(ImagePickerDelegate.TAG, "startAbilityForResult for taking image success");
       this.handleImageResult(path, true);
-    }else{
+    } else {
       this.finishWithSuccess(null);
     }
   }
@@ -442,7 +428,7 @@ export default class ImagePickerDelegate {
       Log.e(ImagePickerDelegate.TAG, "startAbilityForResult for taking video success");
       this.handleVideoResult(path, false);
     }
-    else{
+    else {
       this.finishWithSuccess(null);
     }
   }
@@ -503,7 +489,7 @@ export default class ImagePickerDelegate {
       pathList.add(path);
     }
 
-    let localResult: Result<ArrayList<string>>|null = null;
+    let localResult: Result<ArrayList<string>> | null = null;
 
     if (this.pendingCallState !== null) {
       localResult = this.pendingCallState.result;
@@ -521,7 +507,7 @@ export default class ImagePickerDelegate {
   }
 
   finishWithListSuccess(path: ArrayList<string> | null): void {
-    let localResult: Result<ArrayList<string>> | null  = null;
+    let localResult: Result<ArrayList<string>> | null = null;
     if (this.pendingCallState != null) {
       localResult = this.pendingCallState.result;
     }
@@ -529,7 +515,7 @@ export default class ImagePickerDelegate {
 
     if (localResult == null) {
       this.cache.saveResult(path as ArrayList<string>, null, null);
-    } else if(path){
+    } else if (path) {
 
       Log.i(ImagePickerDelegate.TAG, path[0]);
       localResult.success(path as ArrayList<string>);

@@ -17,6 +17,7 @@ import fs from '@ohos.file.fs';
 import Log from '@ohos/flutter_ohos/src/main/ets/util/Log';
 
 const TAG = "ExifDataCopier";
+
 export default class ExifDataCopier {
   async copyExif(filePathOri: string, filePathDest: string): Promise<void> {
     const attributes = [
@@ -32,10 +33,10 @@ export default class ExifDataCopier {
       "GPSLongitude",
       "GPSLongitudeRef"];
 
-    let oldImageFile: fs.File|null = null;
-    let newImageFile: fs.File| null = null;
-    let oldImage: image.ImageSource|null = null;
-    let newImage: image.ImageSource |null = null;
+    let oldImageFile: fs.File | null = null;
+    let newImageFile: fs.File | null = null;
+    let oldImage: image.ImageSource | null = null;
+    let newImage: image.ImageSource | null = null;
     try {
       oldImageFile = fs.openSync(filePathOri);
       newImageFile = fs.openSync(filePathDest);

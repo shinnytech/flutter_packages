@@ -18,6 +18,7 @@ import util from '@ohos.util';
 import Log from '@ohos/flutter_ohos/src/main/ets/util/Log';
 
 const TAG = "FileUtils";
+
 export default class FileUtils {
   static getPathFromUri(context: common.Context | null, uri: string, defExtension?: string) {
     Log.i(TAG, "getPathFromUri : " + uri);

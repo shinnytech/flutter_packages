@@ -19,6 +19,7 @@ import Log from '@ohos/flutter_ohos/src/main/ets/util/Log';
 const TAG: string = "ImagePickerUtils";
 const CAMERA_PERMISSION: string = "ohos.permission.CAMERA";
 let bundleFlag: number = bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_REQUESTED_PERMISSION;
+
 export default class ImagePickerUtils {
   private static isPermissionPresentInManifest(permissionName: string, callback: AsyncCallback<boolean>): void {
     try {
