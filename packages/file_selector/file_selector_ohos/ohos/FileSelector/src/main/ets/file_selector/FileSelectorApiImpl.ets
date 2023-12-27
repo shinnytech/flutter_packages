@@ -28,6 +28,7 @@ import ArrayList from '@ohos.util.ArrayList';
 const TAG = "FileSelectorApiImpl";
 const DOCUMENT = "Document";
 const TEXT_MIME_TYPE = "text/*";
+const MIME_TYPE = "*/*";
 const PICTURE = "Picture";
 const TEXT = "Text";
 export class FileSelectorApiImpl {
@@ -36,6 +37,65 @@ export class FileSelectorApiImpl {
 
   constructor(binding: AbilityPluginBinding) {
     this.binding = binding;
+  }
+
+    openFileWithExtensions(initialDirectory: string, allowedTypes: FileTypes, result: Result<FileResponse>): void {
+    Log.d(TAG, 'openFile types:' + allowedTypes.extensions + ' dir:' + initialDirectory)
+    try {
+      let documentSelectOptions = new picker.DocumentSelectOptions();
+      documentSelectOptions.maxSelectNumber = 1;
+      documentSelectOptions.defaultFilePathUri = initialDirectory;
+      documentSelectOptions.fileSuffixFilters = allowedTypes.extensions;
+      documentPickerSelect(documentSelectOptions, this.getContext()).then((documentPickerResult: ESObject) => {
+        if (Number.isNaN(Number(documentPickerResult))) {
+          let uri: string = documentPickerResult[0];
+          Log.i(TAG,'documentPickerSelect select successfully, documentPicker uri: ' + uri);
+          Log.i(TAG,'documentPickerSelect select successfully, documentPicker fileName: ' + uri.substring(uri.lastIndexOf("/")));
+          FileSelectorApiImpl.toFileResponse(uri, MIME_TYPE, uri.substring(uri.lastIndexOf("/") + 1))
+            .then((file) => {
+              result.success(file);
+            }).catch((err: ESObject) => {
+            Log.e(TAG, 'documentPickerSelect select failed with err: ' + err);
+            result.error(err);
+          });
+        } else {
+          Log.e(TAG, 'documentPickerSelect select failed with errCode: ' + documentPickerResult);
+          result.error(new Error("Failed to select file with errCode: " + documentPickerResult))
+        }
+      });
+    } catch (err) {
+      Log.e(TAG, 'documentPickerSelect select failed with err: ' + err);
+      result.error(new Error("Failed to read file: " + initialDirectory));
+    }
+  }
+
+  openFilesWithExtensions(initialDirectory: string, allowedTypes: FileTypes, result: Result<Array<FileResponse>>): void {
+    Log.d(TAG, 'openFiles types:' + allowedTypes.extensions + ' dir:' + initialDirectory)
+    try {
+      let documentSelectOptions = new picker.DocumentSelectOptions();
+      documentSelectOptions.maxSelectNumber = 5;
+      documentSelectOptions.defaultFilePathUri = initialDirectory;
+      documentSelectOptions.fileSuffixFilters = allowedTypes.extensions;
+      documentPickerSelect(documentSelectOptions, this.getContext()).then((documentPickerResult: ESObject) => {
+        if (Number.isNaN(Number(documentPickerResult))) {
+          let pickerResult = documentPickerResult as Array<string>;
+          Log.i(TAG,'documentPickerSelect select successfully, documentPicker uris: ' + pickerResult.toString());
+          FileSelectorApiImpl.toFileListResponse(pickerResult, MIME_TYPE)
+            .then((files) => {
+              result.success(files);
+            }).catch((err: ESObject) => {
+            Log.e(TAG, 'documentPickerSelect select failed with err: ' + err);
+            result.error(err);
+          });
+        } else {
+          Log.e(TAG, 'documentPickerSelect select failed with errCode: ' + documentPickerResult);
+          result.error(new Error("Failed to select file with errCode: " + documentPickerResult))
+        }
+      });
+    } catch (err) {
+      Log.e(TAG, 'documentPickerSelect select failed with err: ' + err);
+      result.error(new Error("Failed to read file: " + initialDirectory));
+    }
   }
 
   openFile(initialDirectory: string, allowedTypes: FileTypes, result: Result<FileResponse>): void {
@@ -124,7 +184,7 @@ export class FileSelectorApiImpl {
             photoPickerSelect(PhotoSelectOptions, this.getContext()).then((PhotoSelectResult: picker.PhotoSelectResult) => {
               Log.i(TAG, 'PhotoViewPicker.select successfully, PhotoSelectResult uri: ' + JSON.stringify(PhotoSelectResult));
               const res: picker.PhotoSelectResult = PhotoSelectResult; //<picker.PhotoSelectResult>(PhotoSelectResult);
-              FileSelectorApiImpl.toFileListResponse(res.photoUris , type, PICTURE)
+              FileSelectorApiImpl.toFileListResponse(res.photoUris, type)
                 .then((files) => {
                   Log.i(TAG, 'PhotoViewPicker.select successfully, uri: ' + JSON.stringify(PhotoSelectResult));
                   result.success(files);
@@ -149,7 +209,7 @@ export class FileSelectorApiImpl {
               if (Number.isNaN(Number(documentPickerResult))) {
                 let pickerResult = documentPickerResult as Array<string>;
                 Log.i(TAG,'documentPickerSelect select successfully, documentPicker uris: ' + pickerResult.toString());
-                FileSelectorApiImpl.toFileListResponse(pickerResult, TEXT_MIME_TYPE, TEXT)
+                FileSelectorApiImpl.toFileListResponse(pickerResult, TEXT_MIME_TYPE)
                   .then((files) => {
                     result.success(files);
                   }).catch((err: ESObject) => {
@@ -200,7 +260,7 @@ export class FileSelectorApiImpl {
             const wrappedError: ArrayList<ESObject> = msg.wrapError(error);
             reply.reply(wrappedError);
           })
-          api.openFile(initialDirectoryArg, allowedTypesArg, resultCallback);
+          api.openFileWithExtensions(initialDirectoryArg, allowedTypesArg, resultCallback);
         }
       });
     }
@@ -222,7 +282,7 @@ export class FileSelectorApiImpl {
             const wrappedError: ArrayList<ESObject> = msg.wrapError(error);
             reply.reply(wrappedError);
           })
-          api.openFiles(initialDirectoryArg, allowedTypesArg, resultCallback);
+          api.openFilesWithExtensions(initialDirectoryArg, allowedTypesArg, resultCallback);
         }
       });
     }
@@ -243,7 +303,7 @@ export class FileSelectorApiImpl {
     })
   }
 
-  static async toFileListResponse(uris: string[], type: string, name: string): Promise<Array<FileResponse>> {
+  static async toFileListResponse(uris: string[], type: string): Promise<Array<FileResponse>> {
     let files = new Array<FileResponse>();
     for (let i = 0; i < uris.length; i++) {
       let file = fs.openSync(uris[i]);
@@ -253,7 +313,7 @@ export class FileSelectorApiImpl {
       let buffer = new ArrayBuffer(size);
       stream.readSync(buffer, {offset: 0, length: size});
       let byteArray = new Uint8Array(buffer);
-      let response = new FileResponse(uris[i], type, name, size, byteArray);
+      let response = new FileResponse(uris[i], type, uris[i].substring(uris[i].lastIndexOf("/") + 1), size, byteArray);
       fs.closeSync(file.fd);
       files.push(response)
     }
