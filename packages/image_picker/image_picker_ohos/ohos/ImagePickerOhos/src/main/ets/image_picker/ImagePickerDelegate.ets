@@ -537,7 +537,7 @@ class PendingCallState {
   videoOptions: VideoSelectionOptions;
   result: Result<ArrayList<string>>;
 
-  constructor(imageOptions: ImageSelectionOptions, videoOptions: VideoSelectionOptions | ESObject,
+  constructor(imageOptions: ImageSelectionOptions | ESObject, videoOptions: VideoSelectionOptions | ESObject,
               result: Result<ArrayList<string>>) {
     this.imageOptions = imageOptions;
     this.videoOptions = videoOptions;
