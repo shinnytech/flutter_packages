@@ -105,7 +105,10 @@ export async function documentPickerSelect(option: picker.DocumentSelectOptions,
     action: 'ohos.want.action.OPEN_FILE',
     parameters: {
       startMode: 'choose',
-      key_pick_num: 5
+      key_pick_num: 5,
+      key_file_suffix_filter: [".txt", ".json"],
+      key_pick_dir_path: ''
+
     }
   }
 
@@ -113,6 +116,18 @@ export async function documentPickerSelect(option: picker.DocumentSelectOptions,
   if (option.maxSelectNumber != null && option.maxSelectNumber > 0) {
     config.parameters.key_pick_num = option.maxSelectNumber;
   }
+
+  if (option.defaultFilePathUri != null) {
+      config.parameters.key_pick_dir_path = option.defaultFilePathUri;
+    }
+
+    let file_suffix: string[] = [];
+    if (option.fileSuffixFilters != null) {
+      for (let extensionType of option.fileSuffixFilters) {
+        file_suffix.push("." + extensionType);
+      }
+      config.parameters.key_file_suffix_filter = file_suffix;
+    }
 
   try {
     let result = await context.startAbilityForResult(config, {displayId: 1});

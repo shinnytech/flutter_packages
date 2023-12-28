@@ -36,6 +36,7 @@ export enum CacheRetrievalType {
 }
 
 const TAG: string = "Message";
+
 export default class Messages {
   static wrapError(exception: Error): ArrayList<ESObject> {
     const errorList: ArrayList<ESObject> = new ArrayList<ESObject>();
@@ -63,142 +64,143 @@ export class FlutterError extends Error {
     this.details = details;
   }
 }
-class GeneralOptionsBuilder{
-  setAllowMultiple:(setterArg: boolean)=>ESObject
 
-  setUsePhotoPicker:(setterArg: boolean)=>ESObject
+class GeneralOptionsBuilder {
+  setAllowMultiple: (setterArg: boolean) => ESObject
+  setUsePhotoPicker: (setterArg: boolean) => ESObject
+  build: () => ESObject
 
-  build:()=>ESObject
-
-  constructor(setAllowMultiple:(setterArg: boolean)=>ESObject, setUsePhotoPicker:(setterArg: boolean)=>ESObject ,build:()=>ESObject) {
+  constructor(setAllowMultiple: (setterArg: boolean) => ESObject, setUsePhotoPicker: (setterArg: boolean) => ESObject, build: () => ESObject) {
     this.setAllowMultiple = setAllowMultiple
     this.setUsePhotoPicker = setUsePhotoPicker
     this.build = build
   }
 }
+
 export class GeneralOptions {
-  private static allowMultiple: boolean;
-  private static usePhotoPicker: boolean;
+  private allowMultiple: boolean = false;
+  private usePhotoPicker: boolean = false;
 
   private constructor() {
   }
 
   getAllowMultiple(): boolean {
-    return GeneralOptions.allowMultiple;
+    return this.allowMultiple;
   }
 
   setAllowMultiple(setterArg: boolean): void {
     if (setterArg == null) {
       throw new Error("Nonnull field \"allowMultiple\" is null.");
     }
-    GeneralOptions.allowMultiple = setterArg;
+    this.allowMultiple = setterArg;
   }
 
   getUsePhotoPicker(): boolean {
-    return GeneralOptions.usePhotoPicker;
+    return this.usePhotoPicker;
   }
 
   setUsePhotoPicker(setterArg: boolean): void {
     if (setterArg == null) {
       throw new Error("Nonnull field \"usePhotoPicker\" is null.");
     }
-    GeneralOptions.usePhotoPicker = setterArg;
+    this.usePhotoPicker = setterArg;
   }
 
-  public static Builder:ESObject =new GeneralOptionsBuilder((setterArg: boolean)=>{
+  public Builder: ESObject = new GeneralOptionsBuilder((setterArg: boolean) => {
     this.allowMultiple = setterArg;
     return this;
-  },(setterArg: boolean)=>{
+  }, (setterArg: boolean) => {
     this.usePhotoPicker = setterArg;
     return this;
-    },():ESObject=>{
-      const pigeonReturn:ESObject = new GeneralOptions();
-      pigeonReturn.setAllowMultiple(this.allowMultiple);
-      pigeonReturn.setUsePhotoPicker(this.usePhotoPicker);
-      return pigeonReturn;
-    }
+  }, (): ESObject => {
+    const pigeonReturn: ESObject = new GeneralOptions();
+    pigeonReturn.setAllowMultiple(this.allowMultiple);
+    pigeonReturn.setUsePhotoPicker(this.usePhotoPicker);
+    return pigeonReturn;
+  }
   )
 
   toList(): ArrayList<ESObject> {
-    const toListResult:ArrayList<ESObject> = new ArrayList<ESObject>();
-    toListResult.add(GeneralOptions.allowMultiple);
-    toListResult.add(GeneralOptions.usePhotoPicker);
+    const toListResult: ArrayList<ESObject> = new ArrayList<ESObject>();
+    toListResult.add(this.allowMultiple);
+    toListResult.add(this.usePhotoPicker);
     return toListResult;
   }
 
   static fromList(list: ArrayList<ESObject>): GeneralOptions {
     const pigeonResult = new GeneralOptions();
-    const allowMultiple:ESObject = list[0];
+    const allowMultiple: ESObject = list[0];
     pigeonResult.setAllowMultiple(allowMultiple);
-    const usePhotoPicker:ESObject = list[1];
+    const usePhotoPicker: ESObject = list[1];
     pigeonResult.setUsePhotoPicker(usePhotoPicker);
     return pigeonResult;
   }
 }
 
-class ImageSelectionOptionsBuilder{
-  setMaxWidth :(setterArg: number)=>ESObject
-  setMaxHeight:(setterArg: number)=>ESObject
-  setQuality:(setterArg: number)=>ESObject
-  build:()=>ESObject
+class ImageSelectionOptionsBuilder {
+  setMaxWidth: (setterArg: number) => ESObject
+  setMaxHeight: (setterArg: number) => ESObject
+  setQuality: (setterArg: number) => ESObject
+  build: () => ESObject
 
-  constructor(setMaxWidth :(setterArg: number)=>ESObject, setMaxHeight:(setterArg: number)=>ESObject, setQuality:(setterArg: number)=>ESObject, build:()=>ESObject) {
+  constructor(setMaxWidth: (setterArg: number) => ESObject, setMaxHeight: (setterArg: number) => ESObject, setQuality: (setterArg: number) => ESObject, build: () => ESObject) {
     this.setMaxWidth = setMaxWidth
     this.setMaxHeight = setMaxHeight
     this.setQuality = setQuality
     this.build = build
   }
 }
+
 export class ImageSelectionOptions {
-  private static maxWidth: number;
-  private static maxHeight: number;
-  private static quality: number;
+  private maxWidth: number = -1;
+  private maxHeight: number = -1;
+  private quality: number = -1;
 
   private constructor() {
   }
 
   getMaxWidth(): number {
-    return ImageSelectionOptions.maxWidth;
+    return this.maxWidth;
   }
 
   setMaxWidth(setterArg: number): void {
-    ImageSelectionOptions.maxWidth = setterArg;
+    this.maxWidth = setterArg;
   }
 
   getMaxHeight(): number {
-    return ImageSelectionOptions.maxHeight;
+    return this.maxHeight;
   }
 
   setMaxHeight(setterArg: number): void {
-    ImageSelectionOptions.maxHeight = setterArg;
+    this.maxHeight = setterArg;
   }
 
   getQuality(): number {
-    return ImageSelectionOptions.quality;
+    return this.quality;
   }
 
   setQuality(setterArg: number): void {
     if (setterArg == null) {
       throw new Error("Nonnull field \"quality\" is null.")
     }
-    ImageSelectionOptions.quality = setterArg;
+    this.quality = setterArg;
   }
 
-  public static Builder = new ImageSelectionOptionsBuilder((setterArg: number)=>{
+  public Builder = new ImageSelectionOptionsBuilder((setterArg: number) => {
     this.maxWidth = setterArg;
     return this;
   },
 
-    (setterArg: number)=>{
+    (setterArg: number) => {
       this.maxHeight = setterArg;
-      return this ;
+      return this;
     },
 
-    (setterArg: number)=>{
+    (setterArg: number) => {
       this.quality = setterArg;
       return this;
     },
-    ()=>{
+    () => {
       const pigeonReturn = new ImageSelectionOptions();
       pigeonReturn.setMaxWidth(this.maxWidth);
       pigeonReturn.setMaxHeight(this.maxHeight);
@@ -207,90 +209,94 @@ export class ImageSelectionOptions {
     }
 
   )
+
   toList(): ArrayList<ESObject> {
-    const toListResult:ArrayList<ESObject> = new ArrayList<ESObject>();
-    toListResult.add(ImageSelectionOptions.maxWidth);
-    toListResult.add(ImageSelectionOptions.maxHeight);
-    toListResult.add(ImageSelectionOptions.quality);
+    const toListResult: ArrayList<ESObject> = new ArrayList<ESObject>();
+    toListResult.add(this.maxWidth);
+    toListResult.add(this.maxHeight);
+    toListResult.add(this.quality);
     return toListResult;
   }
 
   static fromList(list: ArrayList<ESObject>): ImageSelectionOptions {
     const pigeonResult = new ImageSelectionOptions();
-    const maxWidth:ESObject = list[0];
+    const maxWidth: ESObject = list[0];
     pigeonResult.setMaxWidth(maxWidth);
-    const maxHeight:ESObject = list[1];
+    const maxHeight: ESObject = list[1];
     pigeonResult.setMaxHeight(maxHeight);
-    const quality:ESObject = list[2];
+    const quality: ESObject = list[2];
     pigeonResult.setQuality(quality);
     return pigeonResult;
   }
 }
 
-class MediaSelectionOptionsBuilder{
-  setImageSelectionOptions:(setterArg: ImageSelectionOptions)=>ESObject
-  build:()=>ESObject
-  constructor(setImageSelectionOptions :(setterArg: ImageSelectionOptions)=>ESObject ,  build:()=>ESObject) {
+class MediaSelectionOptionsBuilder {
+  setImageSelectionOptions: (setterArg: ImageSelectionOptions) => ESObject
+  build: () => ESObject
+
+  constructor(setImageSelectionOptions: (setterArg: ImageSelectionOptions) => ESObject, build: () => ESObject) {
     this.setImageSelectionOptions = setImageSelectionOptions
     this.build = build
   }
 }
-export class MediaSelectionOptions {
-  private imageSelectionOptions: ImageSelectionOptions;
-  static imageSelectionOptions: ImageSelectionOptions;
 
-  private constructor() {
+export class MediaSelectionOptions {
+  private imageSelectionOptions: ImageSelectionOptions | null = null;
+  static imageSelectionOptions: ImageSelectionOptions | null = null;
+
+  constructor() {
   }
 
-  getImageSelectionOptions(): ImageSelectionOptions {
+  getImageSelectionOptions(): ImageSelectionOptions | null {
     return this.imageSelectionOptions;
   }
 
-  setImageSelectionOptions(setterArg: ImageSelectionOptions): void {
+  setImageSelectionOptions(setterArg: ImageSelectionOptions | null): void {
     if (setterArg == null) {
       throw new Error("Nonnull field \"imageSelectionOptions\" is null.")
     }
     this.imageSelectionOptions = setterArg;
   }
 
-  public static Builder = new MediaSelectionOptionsBuilder(
-    (setterArg: ImageSelectionOptions)=>{
+  public Builder = new MediaSelectionOptionsBuilder(
+    (setterArg: ImageSelectionOptions) => {
       this.imageSelectionOptions = setterArg;
       return this;
-  }, ()=>{
-      const pigeonReturn = new MediaSelectionOptions();
-      pigeonReturn.setImageSelectionOptions(this.imageSelectionOptions);
-      return pigeonReturn;
+    }, () => {
+    const pigeonReturn = new MediaSelectionOptions();
+    pigeonReturn.setImageSelectionOptions(this.imageSelectionOptions);
+    return pigeonReturn;
   }
   )
 
   toList(): ArrayList<ESObject> {
-    const toListResult:ArrayList<ESObject> = new ArrayList<ESObject>();
+    const toListResult: ArrayList<ESObject> = new ArrayList<ESObject>();
     toListResult.add(this.imageSelectionOptions == null ? null : this.imageSelectionOptions.toList());
     return toListResult;
   }
 
-  static fromList(list: ArrayList<ESObject>): MediaSelectionOptions {
+  fromList(list: ArrayList<ESObject>): MediaSelectionOptions {
     const pigeonResult = new MediaSelectionOptions();
-    const imageSelectionOptions:ESObject = list[0];
+    const imageSelectionOptions: ESObject = list[0];
     pigeonResult.setImageSelectionOptions(imageSelectionOptions == null ?
       null : ImageSelectionOptions.fromList(imageSelectionOptions));
     return pigeonResult;
   }
 }
 
-class VideoSelectionOptionsBuilder{
-  setMaxDurationSeconds:(setterArg: number)=>ESObject
-  build:()=>ESObject
-  constructor(setMaxDurationSeconds:(setterArg: number)=>ESObject ,  build:()=>ESObject) {
+class VideoSelectionOptionsBuilder {
+  setMaxDurationSeconds: (setterArg: number) => ESObject
+  build: () => ESObject
+
+  constructor(setMaxDurationSeconds: (setterArg: number) => ESObject, build: () => ESObject) {
     this.setMaxDurationSeconds = setMaxDurationSeconds
     this.build = build
   }
 }
 
 export class VideoSelectionOptions {
-  private maxDurationSeconds: number;
-  static maxDurationSeconds: number;
+  private maxDurationSeconds: number = 0;
+  static maxDurationSeconds: number = 0;
 
   private constructor() {
   }
@@ -303,146 +309,150 @@ export class VideoSelectionOptions {
     this.maxDurationSeconds = setterArg;
   }
 
-  public static Builder = new VideoSelectionOptionsBuilder((setterArg: number)=>{
-      this.maxDurationSeconds = setterArg;
-      return this;
-    },
-    ()=>{
+  public Builder = new VideoSelectionOptionsBuilder((setterArg: number) => {
+    this.maxDurationSeconds = setterArg;
+    return this;
+  },
+    () => {
       const pigeonReturn = new VideoSelectionOptions();
       pigeonReturn.setMaxDurationSeconds(this.maxDurationSeconds);
       return pigeonReturn;
     })
 
   toList(): ArrayList<ESObject> {
-    const toListResult:ArrayList<ESObject> = new ArrayList<ESObject>();
+    const toListResult: ArrayList<ESObject> = new ArrayList<ESObject>();
     toListResult.add(this.maxDurationSeconds);
     return toListResult;
   }
 
   static fromList(list: ArrayList<ESObject>): VideoSelectionOptions {
     const pigeonResult = new VideoSelectionOptions();
-    const maxDurationSeconds:ESObject = list[0];
+    const maxDurationSeconds: ESObject = list[0];
     pigeonResult.setMaxDurationSeconds(maxDurationSeconds);
     return pigeonResult;
   }
 }
-class SourceSpecificationBuilder{
-  setType : (setterArg: SourceType)=>ESObject
-  setCamera : (setterArg: SourceCamera)=>ESObject
-  build:()=>ESObject
 
-  constructor(setType : (setterArg: SourceType)=>ESObject, setCamera : (setterArg: SourceCamera)=>ESObject, build:()=>ESObject) {
+class SourceSpecificationBuilder {
+  setType: (setterArg: SourceType) => ESObject
+  setCamera: (setterArg: SourceCamera) => ESObject
+  build: () => ESObject
+
+  constructor(setType: (setterArg: SourceType) => ESObject, setCamera: (setterArg: SourceCamera) => ESObject, build: () => ESObject) {
     this.setType = setType
     this.setCamera = setCamera
     this.build = build
   }
 }
+
 export class SourceSpecification {
-  private static type: SourceType;
-  private static camera: SourceCamera;
+  private type: SourceType | null = null;
+  private camera: SourceCamera | null = null;
 
   private constructor() {
   }
 
   getType(): SourceType {
-    return SourceSpecification.type;
+    return this.type as SourceType;
   }
 
   setType(setterArg: SourceType): void {
     if (setterArg == null) {
       throw new Error("Nonnull field \"type\" is null.")
     }
-    SourceSpecification.type = setterArg;
+    this.type = setterArg;
   }
 
   getCamera(): SourceCamera {
-    return SourceSpecification.camera;
+    return this.camera as SourceCamera;
   }
 
   setCamera(setterArg: SourceCamera): void {
-    SourceSpecification.camera = setterArg;
+    this.camera = setterArg;
   }
 
-  public static Builder =new SourceSpecificationBuilder(
-    (setterArg: SourceType)=>{
-        this.type = setterArg;
-        return this;
+  public Builder = new SourceSpecificationBuilder(
+    (setterArg: SourceType) => {
+      this.type = setterArg;
+      return this;
     },
-    (setterArg: SourceCamera)=>{
+    (setterArg: SourceCamera) => {
       this.camera = setterArg;
       return this;
     },
-    ()=>{
+    () => {
       const pigeonReturn = new SourceSpecification();
-      pigeonReturn.setType(this.type);
-      pigeonReturn.setCamera(this.camera);
+      pigeonReturn.setType(this.type as SourceType);
+      pigeonReturn.setCamera(this.camera as SourceCamera);
       return pigeonReturn;
     }
   )
 
   toList(): ArrayList<ESObject> {
-    const toListResult:ArrayList<ESObject> = new ArrayList<ESObject>();
-    toListResult.add(SourceSpecification.type);
-    toListResult.add(SourceSpecification.camera);
+    const toListResult: ArrayList<ESObject> = new ArrayList<ESObject>();
+    toListResult.add(this.type);
+    toListResult.add(this.camera);
     return toListResult;
   }
 
   static fromList(list: ArrayList<ESObject>): SourceSpecification {
     const pigeonResult = new SourceSpecification();
-    const type:ESObject = list[0];
+    const type: ESObject = list[0];
     pigeonResult.setType(type);
-    const camera:ESObject = list[1];
+    const camera: ESObject = list[1];
     pigeonResult.setCamera(camera);
     return pigeonResult;
   }
 }
 
-export class CacheRetrievalErrorBuilder{
-    setCode:(setterArg: string)=>ESObject
-    setMessage:(setterArg: string)=>ESObject
-    build:()=>ESObject
-    constructor(setCode:(setterArg: string)=>ESObject, setMessage:(setterArg: string)=>ESObject, build:()=>ESObject) {
-      this.setCode = setCode
-      this.setMessage = setMessage
-      this.build = build
-    }
-}
-export class CacheRetrievalError {
-  private static code: string;
-  private static message: string;
+export class CacheRetrievalErrorBuilder {
+  setCode: null | ((setterArg: string) => ESObject)
+  setMessage: ((setterArg: string) => ESObject) | null
+  build: (() => ESObject) | null
 
-  private constructor() {
+  constructor(setCode: null | ((setterArg: string) => ESObject), setMessage: ((setterArg: string) => ESObject) | null, build: (() => ESObject) | null) {
+    this.setCode = setCode
+    this.setMessage = setMessage
+    this.build = build
+  }
+}
+
+export class CacheRetrievalError {
+  private code: string = "";
+  private message: string = "";
+
+  constructor() {
   }
 
   getCode(): string {
-    return CacheRetrievalError.code;
+    return this.code;
   }
 
   setCode(setterArg: string): void {
     if (setterArg == null) {
       throw new Error("Nonnull field \"code\" is null.")
     }
-    CacheRetrievalError.code = setterArg;
+    this.code = setterArg;
   }
 
   getMessage(): string {
-    return CacheRetrievalError.message;
+    return this.message;
   }
 
   setMessage(setterArg: string): void {
-    CacheRetrievalError.message = setterArg;
+    this.message = setterArg;
   }
 
-  static Builder =new CacheRetrievalErrorBuilder(
-    (setterArg: string)=>{
-      CacheRetrievalError.code = setterArg;
+  Builder = new CacheRetrievalErrorBuilder(
+    (setterArg: string) => {
+      this.code = setterArg;
       return this;
     },
-    (setterArg: string)=>{
+    (setterArg: string) => {
       this.message = setterArg;
-      return this ;
+      return this;
     },
-    ()=>{
+    () => {
       const pigeonReturn = new CacheRetrievalError();
       pigeonReturn.setCode(this.code);
       pigeonReturn.setMessage(this.message);
@@ -451,34 +461,32 @@ export class CacheRetrievalError {
   )
 
   toList(): ArrayList<ESObject> {
-    const toListResult:ArrayList<ESObject> = new ArrayList<ESObject>();
-    toListResult.add(CacheRetrievalError.code);
-    toListResult.add(CacheRetrievalError.message);
+    const toListResult: ArrayList<ESObject> = new ArrayList<ESObject>();
+    toListResult.add(this.code);
+    toListResult.add(this.message);
     return toListResult;
   }
 
-  static fromList(list: ArrayList<ESObject>): CacheRetrievalError {
+  fromList(list: ArrayList<ESObject>): CacheRetrievalError {
     const pigeonResult = new CacheRetrievalError();
-    const code:ESObject = list[0];
+    const code: ESObject = list[0];
     pigeonResult.setCode(code);
-    const message:ESObject = list[1];
+    const message: ESObject = list[1];
     pigeonResult.setMessage(message);
     return pigeonResult;
   }
 }
 
-export class CacheRetrievalResultBuilder{
+export class CacheRetrievalResultBuilder {
+  private type: CacheRetrievalType | null = null;
+  private error: CacheRetrievalError | null = null;
+  private paths: ArrayList<string> | null = null;
+  setType: ((setterArg: CacheRetrievalType) => ESObject) | null
+  setError: ((setterArg: CacheRetrievalError) => ESObject) | null
+  setPaths: ((setterArg: ArrayList<string>) => ESObject) | null
+  build: (() => ESObject) | null
 
-  private type: CacheRetrievalType
-  private error: CacheRetrievalError
-  private paths: ArrayList<string>
-
-  setType:(setterArg: CacheRetrievalType)=>ESObject
-  setError:(setterArg: CacheRetrievalError)=>ESObject
-  setPaths:(setterArg: ArrayList<string>)=>ESObject
-  build:()=>ESObject
-
-  constructor(setType:(setterArg: CacheRetrievalType)=>ESObject,setError:(setterArg: CacheRetrievalError)=>ESObject,setPaths:(setterArg: ArrayList<string>)=>ESObject,build:()=>ESObject) {
+  constructor(setType: ((setterArg: CacheRetrievalType) => ESObject) | null, setError: ((setterArg: CacheRetrievalError) => ESObject) | null, setPaths: ((setterArg: ArrayList<string>) => ESObject) | null, build: (() => ESObject) | null) {
     this.setType = setType
     this.setError = setError
     this.setPaths = setPaths
@@ -487,80 +495,81 @@ export class CacheRetrievalResultBuilder{
 }
 
 export class CacheRetrievalResult {
-  private static type: CacheRetrievalType;
-  private static error: CacheRetrievalError;
-  private static paths: ArrayList<string>;
+  private type: CacheRetrievalType | null = null;
+  private error: CacheRetrievalError | null = null;
+  private paths: ArrayList<string> | null = null;
 
-  private constructor() {
+  constructor() {
   }
 
   getType(): CacheRetrievalType {
-    return CacheRetrievalResult.type;
+    return this.type as CacheRetrievalType;
   }
 
   setType(setterArg: CacheRetrievalType): void {
     if (setterArg == null) {
       throw new Error("Nonnull field \"type\" is null.")
     }
-    CacheRetrievalResult.type = setterArg;
+    this.type = setterArg;
   }
 
-  getError(): CacheRetrievalError {
-    return CacheRetrievalResult.error;
+  getError(): CacheRetrievalError | null {
+    return this.error;
   }
 
-  setError(setterArg: CacheRetrievalError): void {
-    CacheRetrievalResult.error = setterArg;
+  setError(setterArg: CacheRetrievalError | null): void {
+    this.error = setterArg;
   }
 
   getPaths(): ArrayList<string> {
-    return CacheRetrievalResult.paths;
+    return this.paths as ArrayList<string>;
   }
 
   setPaths(setterArg: ArrayList<string>): void {
     if (setterArg == null) {
       throw new Error("Nonnull field \"paths\" is null.")
     }
-    CacheRetrievalResult.paths = setterArg;
+    this.paths = setterArg;
   }
 
-  public static Builder = new CacheRetrievalResultBuilder(
-    (setterArg: CacheRetrievalType)=>{
-    this.type = setterArg;
-    return this;
-  },
-    (setterArg: CacheRetrievalError)=>{
+  public Builder = new CacheRetrievalResultBuilder(
+    (setterArg: CacheRetrievalType) => {
+      this.type = setterArg;
+      return this;
+    },
+    (setterArg: CacheRetrievalError) => {
       this.error = setterArg;
       return this;
     },
-    (setterArg: ArrayList<string>)=>{
+    (setterArg: ArrayList<string>) => {
       this.paths = setterArg;
       return this;
     },
-    ()=>{
+    () => {
       const pigeonReturn = new CacheRetrievalResult();
-      pigeonReturn.setType(this.type);
-      pigeonReturn.setError(this.error);
-      pigeonReturn.setPaths(this.paths);
+      pigeonReturn.setType(this.type as CacheRetrievalType);
+      pigeonReturn.setError(this.error as CacheRetrievalError);
+      pigeonReturn.setPaths(this.paths as ArrayList<string>);
       return pigeonReturn;
     })
 
-
   toList(): ArrayList<ESObject> {
-    const toListResult:ArrayList<ESObject> = new ArrayList<ESObject>();
-    toListResult.add(CacheRetrievalResult.type);
-    toListResult.add(CacheRetrievalResult.error == null ? null : CacheRetrievalResult.error.toList());
-    toListResult.add(CacheRetrievalResult.paths);
+    const toListResult: ArrayList<ESObject> = new ArrayList<ESObject>();
+    toListResult.add(this.type);
+    let t = new CacheRetrievalResult()
+    toListResult.add(this.error == null ? null : t.error ? t.error.toList() : "");
+    toListResult.add(this.paths);
     return toListResult;
   }
 
-  static fromList(list: ArrayList<ESObject>): CacheRetrievalResult {
+  fromList(list: ArrayList<ESObject>): CacheRetrievalResult {
     const pigeonResult = new CacheRetrievalResult();
-    const type:ESObject = list[0];
+    const type: ESObject = list[0];
     pigeonResult.setType(type);
-    const error:ESObject = list[1];
-    pigeonResult.setError(error == null ? null : CacheRetrievalError.fromList(error));
-    const paths:ESObject = list[2];
+    const error: ESObject = list[1];
+    let t = new CacheRetrievalResult()
+    pigeonResult.setError(error == null ? null : t.fromList(error) as ESObject);
+    const paths: ESObject = list[2];
     pigeonResult.setPaths(paths);
     return pigeonResult;
   }
@@ -569,7 +578,7 @@ export class CacheRetrievalResult {
 export interface Result<T> {
   success(result: T): void;
 
-  error(error: Error|ESObject);
+  error(error: Error | ESObject);
 }
 
 export class ImagePickerApiCodec extends StandardMessageCodec {
@@ -580,17 +589,21 @@ export class ImagePickerApiCodec extends StandardMessageCodec {
   }
 
   readValueOfType(type: number, buffer: ByteBuffer): ESObject {
+    let t: ESObject = {};
     switch (type) {
       case 128:
-        return CacheRetrievalError.fromList(this.readValue(buffer));
+        t = new CacheRetrievalError()
+        return t.fromList(this.readValue(buffer));
       case -127:
-        return CacheRetrievalResult.fromList(this.readValue(buffer));
+        t = new CacheRetrievalResult()
+        return t.fromList(this.readValue(buffer));
       case -126:
         return GeneralOptions.fromList(this.readValue(buffer));
       case -125:
         return ImageSelectionOptions.fromList(this.readValue(buffer));
       case -124:
-        return MediaSelectionOptions.fromList(this.readValue(buffer));
+        t = new MediaSelectionOptions()
+        return t.fromList(this.readValue(buffer));
       case -123:
         return SourceSpecification.fromList(this.readValue(buffer));
       case -122:
@@ -652,30 +665,34 @@ export abstract class ImagePickerApi {
     return ImagePickerApiCodec.INSTANCE;
   }
 
-  static setup(binaryMessenger: BinaryMessenger, api: ImagePickerApi) {
+  static setup(binaryMessenger: BinaryMessenger | null, api?: ImagePickerApi | null) {
+    if (!binaryMessenger) {
+      return
+    }
     Log.i(TAG, "setup");
+
     {
       const channel: BasicMessageChannel<ESObject> =
-        new BasicMessageChannel<ESObject>(
-          binaryMessenger,
-          "dev.flutter.pigeon.ImagePickerApi.pickImages",
-          ImagePickerApi.getCodec());
+      new BasicMessageChannel<ESObject>(
+        binaryMessenger,
+        "dev.flutter.pigeon.ImagePickerApi.pickImages",
+        ImagePickerApi.getCodec());
       if (api != null) {
         channel.setMessageHandler({
-          onMessage: (message:ESObject, reply:ESObject) => {
+          onMessage: (message: ESObject, reply: ESObject) => {
             Log.i(TAG, "setup on message : " + message);
-            const wrapped:ArrayList<ESObject> = new ArrayList<ESObject>();
+            const wrapped: ArrayList<ESObject> = new ArrayList<ESObject>();
             const args: Array<ESObject> = message;
             const sourceArg: SourceSpecification = args[0];
             const optionsArg: ImageSelectionOptions = args[1];
             const generalOptionsArg: GeneralOptions = args[2];
-            const resultCallback: Result<ArrayList<string>> =new ResultBuilder((result: ArrayList<string>): void => {
-                  wrapped.insert(result.convertToArray(), 0);
-                  reply.reply(wrapped.convertToArray());
-                },(error: Error): void => {
-                  const wrappedError: ArrayList<ESObject> = Messages.wrapError(error);
-                  reply.reply(wrappedError.convertToArray());
-                })
+            const resultCallback: Result<ArrayList<string>> = new ResultBuilder((result: ArrayList<string>): void => {
+              wrapped.insert(result.convertToArray(), 0);
+              reply.reply(wrapped.convertToArray());
+            }, (error: Error): void => {
+              const wrappedError: ArrayList<ESObject> = Messages.wrapError(error);
+              reply.reply(wrappedError.convertToArray());
+            })
 
             api.pickImages(sourceArg, optionsArg, generalOptionsArg, resultCallback);
           }
@@ -686,25 +703,25 @@ export abstract class ImagePickerApi {
     }
     {
       const channel: BasicMessageChannel<ESObject> =
-        new BasicMessageChannel<ESObject>(
-          binaryMessenger,
-          "dev.flutter.pigeon.ImagePickerApi.pickVideos",
-          ImagePickerApi.getCodec());
+      new BasicMessageChannel<ESObject>(
+        binaryMessenger,
+        "dev.flutter.pigeon.ImagePickerApi.pickVideos",
+        ImagePickerApi.getCodec());
       if (api != null) {
         channel.setMessageHandler({
-          onMessage: (message:ESObject, reply:ESObject) => {
-            const wrapped:ArrayList<ESObject> = new ArrayList<ESObject>();
+          onMessage: (message: ESObject, reply: ESObject) => {
+            const wrapped: ArrayList<ESObject> = new ArrayList<ESObject>();
             const args: Array<ESObject> = message;
             const sourceArg: SourceSpecification = args[0];
             const optionsArg: VideoSelectionOptions = args[1];
             const generalOptionsArg: GeneralOptions = args[2];
-            const resultCallback: Result<ArrayList<string>> =new ResultBuilder((result: ArrayList<string>): void => {
-                  wrapped.insert(result.convertToArray(), 0);
-                  reply.reply(wrapped.convertToArray());
-                },(error: Error): void => {
-                  const wrappedError: ArrayList<ESObject> = Messages.wrapError(error);
-                  reply.reply(wrappedError.convertToArray());
-                })
+            const resultCallback: Result<ArrayList<string>> = new ResultBuilder((result: ArrayList<string>): void => {
+              wrapped.insert(result.convertToArray(), 0);
+              reply.reply(wrapped.convertToArray());
+            }, (error: Error): void => {
+              const wrappedError: ArrayList<ESObject> = Messages.wrapError(error);
+              reply.reply(wrappedError.convertToArray());
+            })
             api.pickVideos(sourceArg, optionsArg, generalOptionsArg, resultCallback);
           }
         })
@@ -714,24 +731,24 @@ export abstract class ImagePickerApi {
     }
     {
       const channel: BasicMessageChannel<ESObject> =
-        new BasicMessageChannel<ESObject>(
-          binaryMessenger,
-          "dev.flutter.pigeon.ImagePickerApi.pickMedia",
-          ImagePickerApi.getCodec());
+      new BasicMessageChannel<ESObject>(
+        binaryMessenger,
+        "dev.flutter.pigeon.ImagePickerApi.pickMedia",
+        ImagePickerApi.getCodec());
       if (api != null) {
         channel.setMessageHandler({
-          onMessage: (message:ESObject, reply:ESObject) => {
-            const wrapped:ArrayList<ESObject> = new ArrayList<ESObject>();
+          onMessage: (message: ESObject, reply: ESObject) => {
+            const wrapped: ArrayList<ESObject> = new ArrayList<ESObject>();
             const args: Array<ESObject> = message;
             const optionsArg: MediaSelectionOptions = args[0];
             const generalOptionsArg: GeneralOptions = args[1];
-            const resultCallback: Result<ArrayList<string>> = new ResultBuilder( (result: ArrayList<string>): void => {
-                  wrapped.insert(result.convertToArray(), 0);
-                  reply.reply(wrapped.convertToArray());
-                },(error: Error): void => {
-                  const wrappedError: ArrayList<ESObject> = Messages.wrapError(error);
-                  reply.reply(wrappedError.convertToArray());
-                })
+            const resultCallback: Result<ArrayList<string>> = new ResultBuilder((result: ArrayList<string>): void => {
+              wrapped.insert(result.convertToArray(), 0);
+              reply.reply(wrapped.convertToArray());
+            }, (error: Error): void => {
+              const wrappedError: ArrayList<ESObject> = Messages.wrapError(error);
+              reply.reply(wrappedError.convertToArray());
+            })
             api.pickMedia(optionsArg, generalOptionsArg, resultCallback);
           }
         })
@@ -741,14 +758,14 @@ export abstract class ImagePickerApi {
     }
     {
       const channel: BasicMessageChannel<ESObject> =
-        new BasicMessageChannel<ESObject>(
-          binaryMessenger,
-          "dev.flutter.pigeon.ImagePickerApi.retrieveLostResults",
-          ImagePickerApi.getCodec());
+      new BasicMessageChannel<ESObject>(
+        binaryMessenger,
+        "dev.flutter.pigeon.ImagePickerApi.retrieveLostResults",
+        ImagePickerApi.getCodec());
       if (api != null) {
         channel.setMessageHandler({
-          onMessage: async (message:ESObject, reply:ESObject) => {
-            let wrapped:ArrayList<ESObject> = new ArrayList<ESObject>();
+          onMessage: async (message: ESObject, reply: ESObject) => {
+            let wrapped: ArrayList<ESObject> = new ArrayList<ESObject>();
             try {
               const output: CacheRetrievalResult = await api.retrieveLostResults().then((result) => {
                 return result;
@@ -767,11 +784,12 @@ export abstract class ImagePickerApi {
     }
   }
 }
-class ResultBuilder{
-  success : (result: ArrayList<string>)=>void
-  error: (error: Error) =>void
 
-  constructor(success:ESObject , error:ESObject) {
+class ResultBuilder {
+  success: (result: ArrayList<string>) => void
+  error: (error: Error) => void
+
+  constructor(success: ESObject, error: ESObject) {
     this.success = success
     this.error = error
   }

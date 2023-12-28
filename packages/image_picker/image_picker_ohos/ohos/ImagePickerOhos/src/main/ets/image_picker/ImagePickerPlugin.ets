@@ -26,7 +26,6 @@ import {
 import common from '@ohos.app.ability.common';
 import Ability from '@ohos.app.ability.Ability';
 import { BinaryMessenger } from '@ohos/flutter_ohos/src/main/ets/plugin/common/BinaryMessenger';
-import { PluginRegistry } from '@ohos/flutter_ohos/src/main/ets/plugin/common/PluginRegistry';
 import ImagePickerDelegate, { CameraDevice } from './ImagePickerDelegate';
 import {
   GeneralOptions,
@@ -48,12 +47,13 @@ import UIAbility from '@ohos.app.ability.UIAbility';
 import ArrayList from '@ohos.util.ArrayList';
 import Log from '@ohos/flutter_ohos/src/main/ets/util/Log';
 
-const TAG:string = "ImagePickerPlugin";
+const TAG: string = "ImagePickerPlugin";
+
 //export default class ImagePickerPlugin implements FlutterPlugin, AbilityAware, ImagePickerApi {
-export default class ImagePickerPlugin implements FlutterPlugin, AbilityAware{
+export default class ImagePickerPlugin implements FlutterPlugin, AbilityAware {
   private static TAG = "ImagePickerPlugin";
-  private pluginBinding: FlutterPluginBinding;
-  private state: AbilityState;
+  private pluginBinding: FlutterPluginBinding | null = null;
+  private state: AbilityState | null = null;
 
   getUniqueClassName(): string {
     return ImagePickerPlugin.TAG;
@@ -69,8 +69,11 @@ export default class ImagePickerPlugin implements FlutterPlugin, AbilityAware{
 
   onAttachedToAbility(binding: AbilityPluginBinding): void {
     Log.i(TAG, "onAttachedToAbility");
+    if (!this.pluginBinding) {
+      return
+    }
     this.setup(this.pluginBinding.getBinaryMessenger(), this.pluginBinding.getApplicationContext(),
-      binding.getAbility(), null, binding);
+      binding.getAbility(), binding);
   }
 
   onDetachedFromAbility(): void {
@@ -80,9 +83,8 @@ export default class ImagePickerPlugin implements FlutterPlugin, AbilityAware{
     }
   }
 
-  setup(messenger: BinaryMessenger, context: common.Context, ability: UIAbility,
-        registrar: PluginRegistry, binding: AbilityPluginBinding): void {
-    this.state = new AbilityState(ability, null, messenger, this, registrar, binding, context);
+  setup(messenger: BinaryMessenger, context: common.Context, ability: UIAbility, binding: AbilityPluginBinding): void {
+    this.state = new AbilityState(ability, null, messenger, this as ESObject, binding, context);
   }
 
   constructor(delegate?: ImagePickerDelegate, ability?: UIAbility) {
@@ -92,9 +94,9 @@ export default class ImagePickerPlugin implements FlutterPlugin, AbilityAware{
   }
 
   async pickImages(source: SourceSpecification, options: ImageSelectionOptions, generalOptions: GeneralOptions, result: Result<ArrayList<string>>): Promise<void> {
-    let delegate: ImagePickerDelegate = this.getImagePickerDelegate();
+    let delegate: ImagePickerDelegate | null = this.getImagePickerDelegate();
     if (delegate == null) {
-      let temp:Error =
+      let temp: Error =
       result.error(new FlutterError("no_ability", "image_picker plugin requires a foreground ability", null));
       return;
     }
@@ -116,7 +118,7 @@ export default class ImagePickerPlugin implements FlutterPlugin, AbilityAware{
   }
 
   pickVideos(source: SourceSpecification, options: VideoSelectionOptions, generalOptions: GeneralOptions, result: Result<ArrayList<string>>): void {
-    let delegate: ImagePickerDelegate = this.getImagePickerDelegate();
+    let delegate: ImagePickerDelegate | null = this.getImagePickerDelegate();
     if (delegate == null) {
       result.error(new FlutterError("no_ability", "image_pickerplugin requires a foreground ability", null));
       return;
@@ -139,7 +141,7 @@ export default class ImagePickerPlugin implements FlutterPlugin, AbilityAware{
   }
 
   pickMedia(mediaSelectionOptions: MediaSelectionOptions, generalOptions: GeneralOptions, result: Result<ArrayList<string>>): void {
-    let delegate: ImagePickerDelegate = this.getImagePickerDelegate();
+    let delegate: ImagePickerDelegate | null = this.getImagePickerDelegate();
     if (delegate == null) {
       result.error(new FlutterError("no_ability", "image_pickerplugin requires a foreground ability", null));
       return;
@@ -147,7 +149,7 @@ export default class ImagePickerPlugin implements FlutterPlugin, AbilityAware{
     delegate.chooseMediaFromGallery(mediaSelectionOptions, generalOptions, result);
   }
 
-  async retrieveLostResults(): Promise<CacheRetrievalResult> {
+  async retrieveLostResults(): Promise<CacheRetrievalResult | null> {
     let delegate = this.getImagePickerDelegate();
     if (delegate == null) {
       throw new FlutterError("no_ability", "image_picker plugin requires a foreground ability", null);
@@ -157,7 +159,7 @@ export default class ImagePickerPlugin implements FlutterPlugin, AbilityAware{
     });
   }
 
-  getAbilityState(): AbilityState {
+  getAbilityState(): AbilityState | null {
     return this.state;
   }
 
@@ -168,7 +170,7 @@ export default class ImagePickerPlugin implements FlutterPlugin, AbilityAware{
     return new ImagePickerDelegate(setupAbility, imageResizer, cache);
   }
 
-  getImagePickerDelegate(): ImagePickerDelegate {
+  getImagePickerDelegate(): ImagePickerDelegate | null {
     if (this.state == null || this.state.getAbility() == null) {
       return null;
     }
@@ -195,15 +197,14 @@ export default class ImagePickerPlugin implements FlutterPlugin, AbilityAware{
 }
 
 class AbilityState {
-  private ability: UIAbility;
-  private context: common.Context;
-  private abilityBinding: AbilityPluginBinding;
-  private messenger: BinaryMessenger;
-  private delegate: ImagePickerDelegate;
+  private ability: UIAbility | null;
+  private context: common.Context | null = null;
+  private abilityBinding: AbilityPluginBinding | null = null;
+  private messenger: BinaryMessenger | null = null;
+  private delegate: ImagePickerDelegate | null = null;
   private abilityLifecycleCallback: AbilityLifecycleCallback;
 
-  constructor(ability: UIAbility, delegate?: ImagePickerDelegate, messenger?: BinaryMessenger, handler?: ImagePickerApi,
-    registrar?: PluginRegistry, abilityBinding?: AbilityPluginBinding, context?: common.Context) {
+  constructor(ability: UIAbility, delegate?: ImagePickerDelegate | null, messenger?: BinaryMessenger, handler?: ImagePickerApi, abilityBinding?: AbilityPluginBinding, context?: common.Context) {
     this.ability = ability;
     if (context) {
       this.context = context;
@@ -249,13 +250,7 @@ class AbilityState {
     };
 
     this.delegate = ImagePickerPlugin.constructorDelegate(this.ability);
-    ImagePickerApi.setup(messenger, handler);
-    if (registrar != null) {
-      let applicationContext = this.context.getApplicationContext();
-      //globalThis.lifecycleId = applicationContext.on("abilityLifecycle", this.abilityLifecycleCallback);
-    } else {
-
-    }
+    ImagePickerApi.setup(messenger as BinaryMessenger, handler);
   }
 
   release(): void {
@@ -269,11 +264,11 @@ class AbilityState {
     this.delegate = null;
   }
 
-  getAbility(): Ability {
+  getAbility(): Ability | null {
     return this.ability;
   }
 
-  getDelegate(): ImagePickerDelegate {
+  getDelegate(): ImagePickerDelegate | null {
     return this.delegate;
   }
 }
