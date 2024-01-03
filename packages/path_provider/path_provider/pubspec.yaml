@@ -35,7 +35,7 @@ dependencies:
   path_provider_ohos: 
     git:
       url: "git@gitee.com:openharmony-sig/flutter_packages.git"
-      path: "packages/path_provider/path_provider/path_provider_ohos"
+      path: "packages/path_provider/path_provider_ohos"
       ref: "master"
 
 dev_dependencies:
