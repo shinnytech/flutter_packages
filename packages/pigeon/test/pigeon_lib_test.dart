@@ -779,8 +779,7 @@ abstract class Api {
 }
 ''';
     final ParseResults parseResult = parseSource(code);
-    expect(parseResult.errors.length, equals(1));
-    expect(parseResult.errors[0].message, contains('Enums'));
+    expect(parseResult.errors.length, equals(0));
   });
 
   test('enums list argument', () {
@@ -794,8 +793,7 @@ abstract class Api {
 }
 ''';
     final ParseResults parseResult = parseSource(code);
-    expect(parseResult.errors.length, equals(1));
-    expect(parseResult.errors[0].message, contains('Enums'));
+    expect(parseResult.errors.length, equals(0));
   });
 
   test('enums map argument key', () {
@@ -809,8 +807,7 @@ abstract class Api {
 }
 ''';
     final ParseResults parseResult = parseSource(code);
-    expect(parseResult.errors.length, equals(1));
-    expect(parseResult.errors[0].message, contains('Enums'));
+    expect(parseResult.errors.length, equals(0));
   });
 
   test('enums map argument value', () {
@@ -824,8 +821,7 @@ abstract class Api {
 }
 ''';
     final ParseResults parseResult = parseSource(code);
-    expect(parseResult.errors.length, equals(1));
-    expect(parseResult.errors[0].message, contains('Enums'));
+    expect(parseResult.errors.length, equals(0));
   });
 
   test('enums return value', () {
@@ -843,8 +839,7 @@ abstract class Api {
 }
 ''';
     final ParseResults parseResult = parseSource(code);
-    expect(parseResult.errors.length, equals(1));
-    expect(parseResult.errors[0].message, contains('Enums'));
+    expect(parseResult.errors.length, equals(0));
   });
 
   test('return type generics', () {
