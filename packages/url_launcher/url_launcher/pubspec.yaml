@@ -39,8 +39,10 @@ dependencies:
   url_launcher_platform_interface: ^2.1.0
   url_launcher_web: ^2.0.0
   url_launcher_windows: ">=2.0.0 <4.0.0"
-  url_launcher_ohos: 
-    path: ../url_launcher_ohos
+  url_launcher_ohos:
+    git:
+      url: "https://gitee.com/openharmony-sig/flutter_packages.git"
+      path: "packages/url_launcher/url_launcher"
 
 dev_dependencies:
   flutter_test:
