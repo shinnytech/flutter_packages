@@ -39,7 +39,7 @@ dependencies:
   shared_preferences_ohos:
     git:
       url: "https://gitee.com/openharmony-sig/flutter_packages.git"
-      path: "packages/shared_preferences/shared_preferences"
+      path: "packages/shared_preferences/shared_preferences_ohos"
 
 dev_dependencies:
   flutter_test:

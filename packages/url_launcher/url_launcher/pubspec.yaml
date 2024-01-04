@@ -42,7 +42,7 @@ dependencies:
   url_launcher_ohos:
     git:
       url: "https://gitee.com/openharmony-sig/flutter_packages.git"
-      path: "packages/url_launcher/url_launcher"
+      path: "packages/url_launcher/url_launcher_ohos"
 
 dev_dependencies:
   flutter_test:
