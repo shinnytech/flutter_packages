@@ -131,7 +131,7 @@ export async function documentPickerSelect(option: picker.DocumentSelectOptions,
 
   try {
     let result = await context.startAbilityForResult(config, {displayId: 1});
-    let select_item_list: ESObject = result.want?.parameters?.select_item_list;
+    let select_item_list: ESObject = result.want?.parameters?.['ability.params.stream'];
     let uris: ESObject = select_item_list.valueOf();
 
     return new Promise<ESObject>((resolve, reject) => {
