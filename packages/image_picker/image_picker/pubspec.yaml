@@ -40,7 +40,7 @@ dependencies:
   image_picker_ohos:
       git:
         url: "https://gitee.com/openharmony-sig/flutter_packages.git"
-        path: "packages/mage_picker/mage_picker_ohos"
+        path: "packages/image_picker/image_picker_ohos"
 
 dev_dependencies:
   build_runner: ^2.1.10
