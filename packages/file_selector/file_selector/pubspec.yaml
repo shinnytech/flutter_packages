@@ -36,7 +36,9 @@ dependencies:
   file_selector_web: ^0.9.1
   file_selector_windows: ^0.9.3
   file_selector_ohos:
-    path: ../file_selector_ohos
+    git:
+      url: "https://gitee.com/openharmony-sig/flutter_packages.git"
+      path: "packages/file_selector/file_selector_ohos"
   flutter:
     sdk: flutter
 
