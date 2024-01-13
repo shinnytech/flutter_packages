@@ -12,8 +12,8 @@
 # limitations under the License.
 name: file_selector_ohos
 description: Android implementation of the file_selector package.
-repository: https://github.com/flutter/packages/tree/main/packages/file_selector/file_selector_ohos
-issue_tracker: https://github.com/flutter/flutter/issues?q=is%3Aissue+is%3Aopen+label%3A%22p%3A+file_selector%22
+repository: https://gitee.com/openharmony-sig/flutter_packages/tree/master/packages/file_selector/file_selector_ohos
+issue_tracker: https://gitee.com/openharmony-sig/flutter_packages/issues
 version: 0.5.0+2
 
 environment:
