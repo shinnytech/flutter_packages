@@ -35,7 +35,7 @@ class SendMessageParams {
 
 export class UrlLauncher implements UrlLauncherApi {
   static LAUNCH_TYPE_TEL: string = 'tel';
-  static LAUNCH_TYPE_WEB: string = 'https';
+  static LAUNCH_TYPE_WEB: string = 'http';
   static LAUNCH_TYPE_MAILTO: string = 'mailto';
   static LAUNCH_TYPE_SMS: string = 'sms';
   static LAUNCH_TYPE_FILE: string = 'file';
