@@ -13,7 +13,7 @@
 
 name: image_picker_ohos
 description: Ohos implementation of the image_picker plugin.
-repository: https://gitee.com/openharmony-sig/flutter_packages/tree/master/packages/image_picker/image_picker_android
+repository: https://gitee.com/openharmony-sig/flutter_packages/tree/master/packages/image_picker/image_picker_ohos
 issue_tracker: https://gitee.com/openharmony-sig/flutter_packages/issues
 
 version: 0.8.7+4
