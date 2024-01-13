@@ -25,9 +25,10 @@ flutter:
     implements: url_launcher
     platforms:
       ohos:
-        package: io.flutter.plugins.urllauncher
-        pluginClass: UrlLauncherPlugin
         dartPluginClass: UrlLauncherOhos
+        package: io.flutter.plugins.url_launcher_ohos
+        pluginClass: UrlLauncherPlugin
+
 
 dependencies:
   flutter:
