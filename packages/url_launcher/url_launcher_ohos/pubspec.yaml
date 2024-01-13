@@ -13,8 +13,8 @@
 
 name: url_launcher_ohos
 description: Ohos implementation of the url_launcher plugin.
-repository: 
-issue_tracker: 
+repository: https://gitee.com/openharmony-sig/flutter_packages/tree/master/packages/url_launcher/url_launcher_ohos
+issue_tracker: https://gitee.com/openharmony-sig/flutter_packages/issues
 version: 6.0.38
 environment:
   sdk: ">=2.18.0 <4.0.0"
