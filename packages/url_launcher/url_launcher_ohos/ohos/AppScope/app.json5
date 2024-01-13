@@ -14,7 +14,7 @@
  */
 {
   "app": {
-    "bundleName": "io.flutter.plugins.urllauncher",
+    "bundleName": "io.flutter.plugins.url_launcher_ohos",
     "vendor": "example",
     "versionCode": 1000000,
     "versionName": "1.0.0",
