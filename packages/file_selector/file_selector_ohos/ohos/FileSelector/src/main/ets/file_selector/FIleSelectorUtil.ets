@@ -105,7 +105,6 @@ export async function documentPickerSelect(option: picker.DocumentSelectOptions,
     action: 'ohos.want.action.OPEN_FILE',
     parameters: {
       startMode: 'choose',
-      key_pick_num: 5,
       key_file_suffix_filter: [".txt", ".json"],
       key_pick_dir_path: ''
 
