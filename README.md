@@ -56,3 +56,12 @@ dependencies:
 示例：在某个Flutter兼容OpenHarmony项目中加入支持OpenHarmony平台的path_provider库依赖；
 
 可参考示例：https://gitee.com/openharmony-sig/flutter_samples/tree/master/ohos/pictures_provider_demo。
+
+## FAQ
+
+### 一、 运行 `flutter pub get` 遇到 `"File name too long"` 问题
+
+打开`Git Bash`或`运行 cmd`（需要将git添加到环境变量中）,执行以下命令：
+``` 
+  git config --global core.longpaths true
+```

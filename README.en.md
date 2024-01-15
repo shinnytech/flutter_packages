@@ -56,3 +56,12 @@ dependencies:
 Example: Add the path_provider library dependency that supports the OpenHarmony platform to a Flutter-compatible OpenHarmony project;
 
 Reference examples: https://gitee.com/openharmony-sig/flutter_samples/tree/master/ohos/pictures_provider_demo.
+
+## FAQ
+
+### 1. Run `flutter pub get` displayed `"File name too long"` error
+
+Open the `Git Bash` or `cmd.exe`(you need to have git as an environment variable) and execute the following command:
+``` 
+  git config --global core.longpaths true
+```
