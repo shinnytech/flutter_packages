@@ -1,0 +1,9 @@
+{
+  "module": {
+    "name": "webview_flutter",
+    "type": "har",
+    "deviceTypes": [
+      "default"
+    ]
+  }
+}
