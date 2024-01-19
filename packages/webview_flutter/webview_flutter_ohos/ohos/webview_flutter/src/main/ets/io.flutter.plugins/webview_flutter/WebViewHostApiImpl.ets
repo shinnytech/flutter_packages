@@ -26,7 +26,7 @@ import common from '@ohos.app.ability.common'
 import { WebChromeClient } from './WebChromeClientHostApiImpl'
 import { WebViewClient } from './WebViewClientHostApiImpl'
 import { WebSettings } from './WebSettingsHostApiImpl'
-import { DynamicUtils } from '@ohos/flutter_ohos/src/main/ets/view/DynamicView/DynamicUtils'
+import { DynamicUtils } from "./DynamicUtils"
 import { DownloadListener } from './DownloadListenerFlutterApiImpl'
 import { DisplayListenerProxy } from './DisplayListenerProxy'
 import { JavaScriptChannel } from './JavaScriptChannel'

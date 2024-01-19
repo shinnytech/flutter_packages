@@ -21,7 +21,6 @@ import { WebChromeClientFlutterApiImpl } from './WebChromeClientFlutterApiImpl';
 import { WebViewPlatformView } from './WebViewHostApiImpl'
 import { WebViewClient } from './WebViewClientHostApiImpl';
 import { BuilderParams, DVModelParameters } from '@ohos/flutter_ohos/src/main/ets/view/DynamicView/dynamicView'
-import { DynamicUtils } from "@ohos/flutter_ohos/src/main/ets/view/DynamicView/DynamicUtils"
 import web_webview from '@ohos.web.webview'
 
 const TAG: string = "WebChromeClientHostApiImpl";
