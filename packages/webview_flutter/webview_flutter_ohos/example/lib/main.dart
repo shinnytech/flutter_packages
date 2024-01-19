@@ -22,8 +22,6 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:path_provider_ohos/path_provider_ohos.dart';
-import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
 import 'package:webview_flutter_ohos/webview_flutter_ohos.dart';
 import 'package:webview_flutter_platform_interface/webview_flutter_platform_interface.dart';
 
@@ -101,8 +99,6 @@ class _WebViewExampleState extends State<WebViewExample> {
   @override
   void initState() {
     super.initState();
-    PathProviderPlatform.instance = PathProviderOhos();
-    WebViewPlatform.instance = OhosWebViewPlatform();
     _controller = PlatformWebViewController(
       OhosWebViewControllerCreationParams(),
     )

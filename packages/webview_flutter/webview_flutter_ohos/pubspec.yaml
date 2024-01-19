@@ -12,7 +12,7 @@ flutter:
   plugin:
     implements: webview_flutter
     platforms:
-      linux:
+      ohos:
         package: io.flutter.plugins.webviewflutter
         pluginClass: WebViewFlutterPlugin
         dartPluginClass: OhosWebViewPlatform
