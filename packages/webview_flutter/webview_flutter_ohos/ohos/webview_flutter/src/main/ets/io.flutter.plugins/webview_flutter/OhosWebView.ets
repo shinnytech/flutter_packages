@@ -14,7 +14,7 @@
 */
 
 import web_webview from '@ohos.web.webview'
-import { DynamicUtils } from "@ohos/flutter_ohos/src/main/ets/view/DynamicView/DynamicUtils"
+import { DynamicUtils } from "./DynamicUtils"
 
 import { BuilderParams, DVModelParameters } from '@ohos/flutter_ohos/src/main/ets/view/DynamicView/dynamicView'
 

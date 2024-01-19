@@ -18,7 +18,8 @@ import { DVModel, DVModelParameters } from '@ohos/flutter_ohos/src/main/ets/view
 import { Result, WebViewHostApi, WebViewPoint } from './GeneratedOhosWebView'
 import web_webview from '@ohos.web.webview'
 import { buildOhosWebView, OhosWebView } from './OhosWebView'
-import { createDVModelFromJson, DVModelJson }  from '@ohos/flutter_ohos/src/main/ets/view/DynamicView/dynamicViewJson'
+import { createDVModelFromJson } from '@ohos/flutter_ohos/src/main/ets/view/DynamicView/dynamicViewJson'
+import { DVModelJson } from "./DynamicUtils"
 import { InstanceManager } from './InstanceManager'
 import { BinaryMessenger } from '@ohos/flutter_ohos/src/main/ets/plugin/common/BinaryMessenger';
 import common from '@ohos.app.ability.common'
@@ -31,10 +32,9 @@ import { DisplayListenerProxy } from './DisplayListenerProxy'
 import { JavaScriptChannel } from './JavaScriptChannel'
 import Log from '@ohos/flutter_ohos/src/main/ets/util/Log';
 
-const TAG:string = "WebViewHostApiImpl";
-export class WebViewHostApiImpl extends WebViewHostApi {
-  public webview : WebViewPlatformView;
+const TAG: string = "WebViewHostApiImpl";
 
+export class WebViewHostApiImpl extends WebViewHostApi {
   private instanceManager: InstanceManager;
 
   private webViewProxy: WebViewProxy;
@@ -86,9 +86,11 @@ export class WebViewHostApiImpl extends WebViewHostApi {
       webView.getController().loadUrl(url, this.toWebHeaders(headers));
     } catch (err) {
       Log.e(TAG, "loadUrl err = " + err);
-      setTimeout(() => {
-        this.loadUrl(instanceId, url, headers);
-      }, 500)
+      setTimeout(
+        () => {
+          this.loadUrl(instanceId, url, headers);
+        }, 500
+      )
     }
   }
 
@@ -218,9 +220,11 @@ export class WebViewHostApiImpl extends WebViewHostApi {
       )
     } catch (err) {
       Log.e(TAG, "addJavaScriptChannel err = " + err);
-      setTimeout(() => {
-        this.addJavaScriptChannel(instanceId, javaScriptChannelInstanceId)
-      }, 500)
+      setTimeout(
+        () => {
+          this.addJavaScriptChannel(instanceId, javaScriptChannelInstanceId)
+        }, 500
+      )
     }
   }
 
@@ -256,13 +260,13 @@ export class WebViewPlatformView extends PlatformView {
 
   private downloadListener: DownloadListener = {} as ESObject;
 
-  private webChromeClient: WebChromeClient|null  = null;
+  private webChromeClient: WebChromeClient | null = null;
 
-  private webViewClint: WebViewClient|null = null;
+  private webViewClint: WebViewClient | null = null;
 
   private webSettings: WebSettings | null = null;
 
-  private dialogController: CustomDialogController|null = null;
+  private dialogController: CustomDialogController | null = null;
 
   private scrollX: number = 0;
 
@@ -367,7 +371,7 @@ export class WebViewPlatformView extends PlatformView {
     "other",
     [],
     {
-      src:"",
+      src: "",
       controller: this.controller,
       onDownloadStart: this.onDownloadStart,
       onPageBegin: this.onPageBegin,
@@ -401,7 +405,7 @@ export class WebViewPlatformView extends PlatformView {
     return this.controller;
   }
 
-  getWebCookieManager():web_webview.WebCookieManager{
+  getWebCookieManager(): web_webview.WebCookieManager {
     return this.WebCookieManager
   }
 
@@ -421,7 +425,7 @@ export class WebViewPlatformView extends PlatformView {
     this.dialogController = dialogController;
   }
 
-  getDialogController(): CustomDialogController|null {
+  getDialogController(): CustomDialogController | null {
     return this.dialogController;
   }
 
@@ -440,7 +444,7 @@ export class WebViewPlatformView extends PlatformView {
     return this.scrollY;
   }
 
-  setReturnValueForShouldOverrideUrlLoading(value : boolean) {
+  setReturnValueForShouldOverrideUrlLoading(value: boolean) {
     this.returnValueForShouldOverrideUrlLoading = value;
   }
 }

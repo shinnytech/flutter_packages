@@ -108,7 +108,7 @@ class SecureWebChromeClient implements WebChromeClient {
 
   onCreateWindow(webView: WebViewPlatformView, isDialog: boolean, isUserGesture: boolean, handler: ControllerHandler) {
     if (webView.getDialogController() != null) {
-      webView.getDialogController().close();
+      webView.getDialogController()?.close();
     }
     let newWebViewController: web_webview.WebviewController = new web_webview.WebviewController();
     let dialogController: CustomDialogController = new CustomDialogController({
