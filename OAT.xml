@@ -228,9 +228,6 @@
                 <filteritem type='filepath' name="packages/webview_flutter/webview_flutter_ohos/example/ohos/har/" desc='二进制文件,不影响兼容性'/>
                 <filteritem type='filepath' name="packages/webview_flutter/webview_flutter_ohos/ohos/har/" desc='二进制文件,不影响兼容性'/>
                 <filteritem type='filepath' name="packages/webview_flutter/webview_flutter_ohos/example/ohos/dta/" desc='二进制文件,不影响兼容性'/>
-                <filteritem type='filename' name="packages/webview_flutter/webview_flutter_ohos/README.md" desc='二进制文件,不影响兼容性'/>
-                <filteritem type='filename' name="packages/webview_flutter/webview_flutter_ohos/CHANGELOG.md" desc='二进制文件,不影响兼容性'/>
-                <filteritem type='filename' name="packages/webview_flutter/webview_flutter_ohos/example/README.md" desc='二进制文件,不影响兼容性'/>
                 <filteritem type='filepath' name="packages/webview_flutter/webview_flutter_ohos/example/assets/" desc='二进制文件,不影响兼容性'/>
             </filefilter>
             <filefilter name="defaultPolicyFilter" desc="Filters for compatibility，license header policies">
