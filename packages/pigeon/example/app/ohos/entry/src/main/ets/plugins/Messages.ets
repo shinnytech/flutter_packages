@@ -4,7 +4,7 @@
 * found in the LICENSE file.
 */
 import StandardMessageCodec from '@ohos/flutter_ohos/src/main/ets/plugin/common/StandardMessageCodec';
-import BasicMessageChannel from '@ohos/flutter_ohos/src/main/ets/plugin/common/BasicMessageChannel';
+import BasicMessageChannel, { Reply } from '@ohos/flutter_ohos/src/main/ets/plugin/common/BasicMessageChannel';
 import { BinaryMessenger,TaskQueue } from '@ohos/flutter_ohos/src/main/ets/plugin/common/BinaryMessenger';
 import MessageCodec from '@ohos/flutter_ohos/src/main/ets/plugin/common/MessageCodec';
 import { ByteBuffer } from '@ohos/flutter_ohos/src/main/ets/util/ByteBuffer';
@@ -224,11 +224,6 @@ export abstract class ExampleHostApi {
     }
   }
 }
-/** Public interface for sending reply. */ 
-interface Reply<T> {
-  reply(reply: T): void;
-}
-
 /* Generated class from Pigeon that represents Flutter messages that can be called from ArkTS.*/
 export class MessageFlutterApi {
   binaryMessenger: BinaryMessenger;
@@ -247,7 +242,7 @@ export class MessageFlutterApi {
         new BasicMessageChannel<Object>(
             this.binaryMessenger, "dev.flutter.pigeon.pigeon_example_package.MessageFlutterApi.flutterMethod", MessageFlutterApi.getCodec());
     channel.send(
-         { aStringArg: aStringArg },
+        [aStringArg],
         channelReply => {
           let output: string = channelReply as string;
           callback.reply(output);
