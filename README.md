@@ -27,7 +27,7 @@ dev_dependencies:
   pigeon:
     git:
       url: "https://gitee.com/openharmony-sig/flutter_packages.git"
-      path: "packages/pigeons"
+      path: "packages/pigeon"
  ```
 2. 项目根目录运行`flutter pub get`；
 
