@@ -1,0 +1,10 @@
+{
+  "module": {
+    "name": "shared_preferences",
+    "type": "har",
+    "deviceTypes": [
+      "default",
+      "tablet"
+    ]
+  }
+}

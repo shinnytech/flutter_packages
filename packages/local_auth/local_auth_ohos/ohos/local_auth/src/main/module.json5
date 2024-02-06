@@ -1,0 +1,9 @@
+{
+  "module": {
+    "name": "local_auth",
+    "type": "har",
+    "deviceTypes": [
+      "default",
+    ]
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "module": {
+    "name": "url_launcher",
+    "type": "har",
+    "deviceTypes": [
+      "default",
+      "tablet"
+    ]
+  }
+}

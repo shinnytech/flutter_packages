@@ -22,7 +22,7 @@ import LocalAuthPlugin from '@ohos/local_auth_ohos/src/main/ets/io/flutter/plugi
 export default class EntryAbility extends FlutterAbility {
 
   onFlutterEngineReady(): void {
-    super.onFlutterEngineReady()
+    // super.onFlutterEngineReady()
     this.addPlugin(new LocalAuthPlugin())
   }
 }
