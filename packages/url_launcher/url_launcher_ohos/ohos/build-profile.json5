@@ -35,8 +35,8 @@
   },
   "modules": [
     {
-      "name": "ohos",
-      "srcPath": "./ohos"
+      "name": "url_launcher",
+      "srcPath": "./url_launcher"
     }
   ]
 }

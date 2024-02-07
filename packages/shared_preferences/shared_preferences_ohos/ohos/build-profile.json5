@@ -49,8 +49,8 @@
   },
   "modules": [
     {
-      "name": "ohos",
-      "srcPath": "./ohos"
+      "name": "shared_preferences",
+      "srcPath": "./shared_preferences"
     }
   ]
 }

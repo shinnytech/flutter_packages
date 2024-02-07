@@ -1,0 +1,39 @@
+{
+  "ohos-module-shared_preferences": {
+    "SELECT_TARGET": "default",
+    "MODULE_BUILD_DIR": "E:\\lcj\\flutter_packages\\packages\\shared_preferences\\shared_preferences_ohos\\ohos\\shared_preferences\\build",
+    "TARGETS": {
+      "default": {
+        "SOURCE_ROOT": "E:\\lcj\\flutter_packages\\packages\\shared_preferences\\shared_preferences_ohos\\ohos\\shared_preferences\\src\\main",
+        "RESOURCES_PATH": [
+          "E:\\lcj\\flutter_packages\\packages\\shared_preferences\\shared_preferences_ohos\\ohos\\shared_preferences\\src\\main\\resources"
+        ],
+        "BUILD_PATH": {
+          "OUTPUT_PATH": "E:\\lcj\\flutter_packages\\packages\\shared_preferences\\shared_preferences_ohos\\ohos\\shared_preferences\\build\\default\\outputs\\default",
+          "INTERMEDIA_PATH": "E:\\lcj\\flutter_packages\\packages\\shared_preferences\\shared_preferences_ohos\\ohos\\shared_preferences\\build\\default\\intermediates",
+          "JS_ASSETS_PATH": "E:\\lcj\\flutter_packages\\packages\\shared_preferences\\shared_preferences_ohos\\ohos\\shared_preferences\\build\\default\\intermediates\\loader_out\\default",
+          "JS_LITE_ASSETS_PATH": "E:\\lcj\\flutter_packages\\packages\\shared_preferences\\shared_preferences_ohos\\ohos\\shared_preferences\\build\\default\\intermediates\\loader_out_lite\\default",
+          "RES_PATH": "E:\\lcj\\flutter_packages\\packages\\shared_preferences\\shared_preferences_ohos\\ohos\\shared_preferences\\build\\default\\intermediates\\res\\default",
+          "RES_PROFILE_PATH": "E:\\lcj\\flutter_packages\\packages\\shared_preferences\\shared_preferences_ohos\\ohos\\shared_preferences\\build\\default\\intermediates\\res\\default\\resources\\base\\profile",
+          "ETS_SUPER_VISUAL_PATH": "E:\\lcj\\flutter_packages\\packages\\shared_preferences\\shared_preferences_ohos\\ohos\\shared_preferences\\build\\default\\cache\\default\\default@CompileArkTS\\esmodule",
+          "JS_SUPER_VISUAL_PATH": "E:\\lcj\\flutter_packages\\packages\\shared_preferences\\shared_preferences_ohos\\ohos\\shared_preferences\\build\\default\\cache\\default\\default@CompileJS\\jsbundle",
+          "WORKER_LOADER": "E:\\lcj\\flutter_packages\\packages\\shared_preferences\\shared_preferences_ohos\\ohos\\shared_preferences\\build\\default\\intermediates\\loader\\default\\loader.json",
+          "MANIFEST_JSON": "E:\\lcj\\flutter_packages\\packages\\shared_preferences\\shared_preferences_ohos\\ohos\\shared_preferences\\build\\default\\intermediates\\manifest\\default",
+          "OUTPUT_METADATA_JSON": "E:\\lcj\\flutter_packages\\packages\\shared_preferences\\shared_preferences_ohos\\ohos\\shared_preferences\\build\\default\\intermediates\\hap_metadata\\default\\output_metadata.json"
+        },
+        "BUILD_OPTION": {
+          "debuggable": true
+        }
+      }
+    }
+  },
+  "ohos-project": {
+    "SELECT_PRODUCT_NAME": "default",
+    "MODULE_BUILD_DIR": "E:\\lcj\\flutter_packages\\packages\\shared_preferences\\shared_preferences_ohos\\ohos\\build",
+    "BUNDLE_NAME": "com.example.myapplication",
+    "BUILD_PATH": {
+      "OUTPUT_PATH": "E:\\lcj\\flutter_packages\\packages\\shared_preferences\\shared_preferences_ohos\\ohos\\build\\outputs\\default"
+    }
+  },
+  "version": 1
+}

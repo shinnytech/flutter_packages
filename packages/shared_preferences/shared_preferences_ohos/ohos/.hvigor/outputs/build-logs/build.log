@@ -1,0 +1,1122 @@
+[2024-02-06T11:05:52.099] [DEBUG] debug-file - env: nodejsVersion=v18.14.1
+[2024-02-06T11:05:52.101] [DEBUG] debug-file - env: hvigor-config.json5 content = {
+  hvigorVersion: '4.0.2',
+  dependencies: { '@ohos/hvigor-ohos-plugin': '4.0.2' }
+}
+[2024-02-06T11:05:59.167] [DEBUG] debug-file - env: daemon=true
+[2024-02-06T11:06:14.043] [DEBUG] debug-file - hvigor start cli arguments:{
+  prop: [ 'product=default' ],
+  sync: true,
+  analyze: true,
+  parallel: true,
+  incremental: true,
+  daemon: true,
+  _: []
+}
+[2024-02-06T11:06:14.066] [DEBUG] debug-file - session manager: set active socket. socketId=aSXtDbM9TVCBa7-iAAAB
+[2024-02-06T11:06:22.399] [DEBUG] debug-file - watch worker: worker id should be larger than 0. Nothing will be sent to any worker thread.
+[2024-02-06T11:06:22.407] [DEBUG] debug-file - Hvigor init with startParameters:{
+  hvigorfileTypeCheck: false,
+  parallelExecution: true,
+  incrementalExecution: true,
+  printStackTrace: false,
+  daemon: true,
+  analyze: 0,
+  logLevel: Level { level: 20000, levelStr: 'INFO', colour: 'green' },
+  enableSignTask: true,
+  skipNativeIncremental: false,
+  poolMaxCoreSize: undefined,
+  poolCacheCapacity: undefined,
+  poolCacheTtl: undefined
+}
+[2024-02-06T11:06:22.410] [DEBUG] debug-file - Cache service initialization finished in 3 ms 
+[2024-02-06T11:06:22.411] [DEBUG] debug-file - Since there is no instance or instance is terminated, create a new worker pool.
+[2024-02-06T11:06:22.411] [DEBUG] debug-file - Worker pool is initialized with config:  {
+  minPoolNum: 2,
+  maxCoreSize: undefined,
+  cacheCapacity: undefined,
+  cacheTtl: undefined
+}
+[2024-02-06T11:06:22.412] [DEBUG] debug-file - Create  resident worker with id: 0.
+[2024-02-06T11:06:22.414] [DEBUG] debug-file - Create  resident worker with id: 1.
+[2024-02-06T11:06:22.418] [DEBUG] debug-file - hvigorfile, resolving E:\lcj\flutter_packages\packages\shared_preferences\shared_preferences_ohos\ohos\hvigorfile.ts
+[2024-02-06T11:06:25.580] [DEBUG] debug-file - hvigorfile, require result:  {}
+[2024-02-06T11:06:25.580] [DEBUG] debug-file - hvigorfile, binding system plugins {}
+[2024-02-06T11:06:25.720] [DEBUG] debug-file - hvigorfile, resolve finished E:\lcj\flutter_packages\packages\shared_preferences\shared_preferences_ohos\ohos\hvigorfile.ts
+[2024-02-06T11:06:25.721] [DEBUG] debug-file - hvigorfile, resolving E:\lcj\flutter_packages\packages\shared_preferences\shared_preferences_ohos\ohos\shared_preferences\hvigorfile.ts
+[2024-02-06T11:06:25.727] [DEBUG] debug-file - hvigorfile, require result:  {}
+[2024-02-06T11:06:25.727] [DEBUG] debug-file - hvigorfile, binding system plugins {}
+[2024-02-06T11:06:25.755] [DEBUG] debug-file - Module shared_preferences Collected Dependency: 
+[2024-02-06T11:06:25.755] [DEBUG] debug-file - Module shared_preferences's total dependency: 0
+[2024-02-06T11:06:25.758] [DEBUG] debug-file - Start initialize module-target build option map, moduleName=shared_preferences, buildMode=debug
+[2024-02-06T11:06:25.759] [DEBUG] debug-file - Target 'default' config: {}
+[2024-02-06T11:06:25.759] [DEBUG] debug-file - Module 'shared_preferences' target 'default' build option: {
+  "debuggable": true,
+  "copyFrom": "default"
+}
+[2024-02-06T11:06:25.759] [DEBUG] debug-file - End initialize module-target build option map, moduleName=shared_preferences
+[2024-02-06T11:06:25.760] [DEBUG] debug-file - Module 'shared_preferences' target 'default' using build option: {
+  "debuggable": true,
+  "copyFrom": "default"
+} in this build.
+[2024-02-06T11:06:25.761] [DEBUG] debug-file - require SDK: toolchains,ArkTS; moduleName=shared_preferences
+[2024-02-06T11:06:25.767] [DEBUG] debug-file - Module shared_preferences task initialization takes 5 ms 
+[2024-02-06T11:06:25.768] [DEBUG] debug-file - hvigorfile, resolve finished E:\lcj\flutter_packages\packages\shared_preferences\shared_preferences_ohos\ohos\shared_preferences\hvigorfile.ts
+[2024-02-06T11:06:25.827] [DEBUG] debug-file - hvigorfile, resolve hvigorfile dependencies in 60 ms 
+[2024-02-06T11:06:25.828] [DEBUG] debug-file - Start initialize project's product build option map with build mode debug.
+[2024-02-06T11:06:25.828] [DEBUG] debug-file - Picking option from product 'default' with build mode 'debug'.
+[2024-02-06T11:06:25.828] [DEBUG] debug-file - Product 'default' build option: {}
+[2024-02-06T11:06:25.828] [DEBUG] debug-file - End initialize project's product build option map with build mode 'debug'.
+[2024-02-06T11:06:25.829] [DEBUG] debug-file - Module ohos Collected Dependency: 
+[2024-02-06T11:06:25.830] [DEBUG] debug-file - Module ohos's total dependency: 0
+[2024-02-06T11:06:25.831] [DEBUG] debug-file - Product 'default' using build option: {
+  "debuggable": true
+} in this build.
+[2024-02-06T11:06:25.839] [DEBUG] debug-file - Local scan or download HarmonyOS sdk components toolchains
+[2024-02-06T11:06:25.887] [DEBUG] debug-file - Local scan or download hmscore sdk components toolchains
+[2024-02-06T11:06:25.929] [DEBUG] debug-file - Sdk init in 94 ms 
+[2024-02-06T11:06:25.938] [DEBUG] debug-file - Project task initialization takes 9 ms 
+[2024-02-06T11:06:25.941] [DEBUG] debug-file - Sdk init in 4 ms 
+[2024-02-06T11:06:25.943] [DEBUG] debug-file - project has submodules:shared_preferences
+[2024-02-06T11:06:25.944] [DEBUG] debug-file - module:shared_preferences no need to execute packageHap
+[2024-02-06T11:06:25.945] [DEBUG] debug-file - Configuration phase cost:3 s 535 ms 
+[2024-02-06T11:06:25.946] [DEBUG] debug-file - Configuration task cost before running: 3 s 544 ms 
+[2024-02-06T11:06:25.947] [DEBUG] debug-file - shared_preferences : init start {
+  rss: 266747904,
+  heapTotal: 129347584,
+  heapUsed: 106348176,
+  external: 1055214,
+  arrayBuffers: 106703
+}
+[2024-02-06T11:06:25.947] [DEBUG] debug-file - Executing task :shared_preferences:init
+[2024-02-06T11:06:25.948] [DEBUG] debug-file - shared_preferences : init end {
+  rss: 266756096,
+  heapTotal: 129347584,
+  heapUsed: 106394240,
+  external: 1055254,
+  arrayBuffers: 107671
+}
+[2024-02-06T11:06:25.948] [DEBUG] debug-file - runTaskFromQueue task cost before running: 3 s 545 ms 
+[2024-02-06T11:06:25.948] [INFO] debug-file - Finished :shared_preferences:init... after 2 ms 
+[2024-02-06T11:06:25.949] [DEBUG] debug-file - ohos : init start {
+  rss: 266764288,
+  heapTotal: 129347584,
+  heapUsed: 106448792,
+  external: 1055254,
+  arrayBuffers: 109519
+}
+[2024-02-06T11:06:25.949] [DEBUG] debug-file - Executing task ::init
+[2024-02-06T11:06:25.949] [DEBUG] debug-file - ohos : init end {
+  rss: 266764288,
+  heapTotal: 129347584,
+  heapUsed: 106474176,
+  external: 1055254,
+  arrayBuffers: 110455
+}
+[2024-02-06T11:06:25.949] [DEBUG] debug-file - runTaskFromQueue task cost before running: 3 s 546 ms 
+[2024-02-06T11:06:25.949] [INFO] debug-file - Finished ::init... after 1 ms 
+[2024-02-06T11:06:25.957] [DEBUG] debug-file - Module 'shared_preferences' target 'default' using build option: {
+  "debuggable": true,
+  "copyFrom": "default"
+} in this build.
+[2024-02-06T11:06:25.961] [DEBUG] debug-file - hvigor build process will be closed.
+[2024-02-06T11:06:25.964] [DEBUG] debug-file - The build request was finished
+[2024-02-06T11:06:25.966] [DEBUG] debug-file - session manager: send message to worker process.
+[2024-02-06T11:06:25.967] [DEBUG] debug-file - session manager: send message to worker process.
+[2024-02-06T11:06:30.921] [DEBUG] debug-file - watch worker: worker id should be larger than 0. Nothing will be sent to any worker thread.
+[2024-02-06T11:06:30.921] [DEBUG] debug-file - watch worker: worker id should be larger than 0. Nothing will be sent to any worker thread.
+[2024-02-06T11:06:46.629] [DEBUG] debug-file - session manager: set active socket. socketId=0eeiMCCl5VFg1D2CAAAD
+[2024-02-06T11:06:46.635] [DEBUG] debug-file - watch worker: worker id should be larger than 0. Nothing will be sent to any worker thread.
+[2024-02-06T11:06:46.639] [DEBUG] debug-file - Hvigor init with startParameters:{
+  hvigorfileTypeCheck: false,
+  parallelExecution: true,
+  incrementalExecution: true,
+  printStackTrace: false,
+  daemon: true,
+  analyze: 0,
+  logLevel: Level { level: 20000, levelStr: 'INFO', colour: 'green' },
+  enableSignTask: true,
+  skipNativeIncremental: false,
+  poolMaxCoreSize: undefined,
+  poolCacheCapacity: undefined,
+  poolCacheTtl: undefined
+}
+[2024-02-06T11:06:46.639] [DEBUG] debug-file - Cache service initialization finished in 1 ms 
+[2024-02-06T11:06:46.640] [DEBUG] debug-file - hvigorfile, resolving E:\lcj\flutter_packages\packages\shared_preferences\shared_preferences_ohos\ohos\hvigorfile.ts
+[2024-02-06T11:06:46.646] [DEBUG] debug-file - hvigorfile, require result:  {}
+[2024-02-06T11:06:46.646] [DEBUG] debug-file - hvigorfile, binding system plugins {}
+[2024-02-06T11:06:46.652] [DEBUG] debug-file - hvigorfile, resolve finished E:\lcj\flutter_packages\packages\shared_preferences\shared_preferences_ohos\ohos\hvigorfile.ts
+[2024-02-06T11:06:46.653] [DEBUG] debug-file - hvigorfile, resolving E:\lcj\flutter_packages\packages\shared_preferences\shared_preferences_ohos\ohos\shared_preferences\hvigorfile.ts
+[2024-02-06T11:06:46.657] [DEBUG] debug-file - hvigorfile, require result:  {}
+[2024-02-06T11:06:46.657] [DEBUG] debug-file - hvigorfile, binding system plugins {}
+[2024-02-06T11:06:46.663] [DEBUG] debug-file - Module shared_preferences Collected Dependency: 
+[2024-02-06T11:06:46.663] [DEBUG] debug-file - Module shared_preferences's total dependency: 0
+[2024-02-06T11:06:46.666] [DEBUG] debug-file - Start initialize module-target build option map, moduleName=shared_preferences, buildMode=debug
+[2024-02-06T11:06:46.666] [DEBUG] debug-file - Target 'default' config: {}
+[2024-02-06T11:06:46.666] [DEBUG] debug-file - Module 'shared_preferences' target 'default' build option: {
+  "debuggable": true,
+  "copyFrom": "default"
+}
+[2024-02-06T11:06:46.666] [DEBUG] debug-file - End initialize module-target build option map, moduleName=shared_preferences
+[2024-02-06T11:06:46.666] [DEBUG] debug-file - Module 'shared_preferences' target 'default' using build option: {
+  "debuggable": true,
+  "copyFrom": "default"
+} in this build.
+[2024-02-06T11:06:46.667] [DEBUG] debug-file - require SDK: toolchains,ArkTS; moduleName=shared_preferences
+[2024-02-06T11:06:46.671] [DEBUG] debug-file - Module shared_preferences task initialization takes 4 ms 
+[2024-02-06T11:06:46.672] [DEBUG] debug-file - hvigorfile, resolve finished E:\lcj\flutter_packages\packages\shared_preferences\shared_preferences_ohos\ohos\shared_preferences\hvigorfile.ts
+[2024-02-06T11:06:46.728] [DEBUG] debug-file - hvigorfile, resolve hvigorfile dependencies in 57 ms 
+[2024-02-06T11:06:46.729] [DEBUG] debug-file - Start initialize project's product build option map with build mode debug.
+[2024-02-06T11:06:46.729] [DEBUG] debug-file - Picking option from product 'default' with build mode 'debug'.
+[2024-02-06T11:06:46.729] [DEBUG] debug-file - Product 'default' build option: {}
+[2024-02-06T11:06:46.729] [DEBUG] debug-file - End initialize project's product build option map with build mode 'debug'.
+[2024-02-06T11:06:46.730] [DEBUG] debug-file - Module ohos Collected Dependency: 
+[2024-02-06T11:06:46.730] [DEBUG] debug-file - Module ohos's total dependency: 0
+[2024-02-06T11:06:46.732] [DEBUG] debug-file - Product 'default' using build option: {
+  "debuggable": true
+} in this build.
+[2024-02-06T11:06:46.738] [DEBUG] debug-file - Sdk init in 3 ms 
+[2024-02-06T11:06:46.745] [DEBUG] debug-file - Project task initialization takes 8 ms 
+[2024-02-06T11:06:46.749] [DEBUG] debug-file - Sdk init in 3 ms 
+[2024-02-06T11:06:46.749] [DEBUG] debug-file - project has submodules:shared_preferences
+[2024-02-06T11:06:46.750] [DEBUG] debug-file - module:shared_preferences no need to execute packageHap
+[2024-02-06T11:06:46.751] [DEBUG] debug-file - Configuration phase cost:112 ms 
+[2024-02-06T11:06:46.751] [DEBUG] debug-file - Configuration task cost before running: 115 ms 
+[2024-02-06T11:06:46.756] [DEBUG] debug-file - shared_preferences : default@PreBuild start {
+  rss: 240791552,
+  heapTotal: 112046080,
+  heapUsed: 98380824,
+  external: 1054321,
+  arrayBuffers: 104215
+}
+[2024-02-06T11:06:46.756] [DEBUG] debug-file - Executing task :shared_preferences:default@PreBuild
+[2024-02-06T11:06:46.760] [DEBUG] debug-file - current product is not Atomic service.
+[2024-02-06T11:06:46.861] [DEBUG] debug-file - Use tool [win32: JAVA_HOME, CLASSPATH]
+ [ { JAVA_HOME: 'D:\\DevEco Studio\\jbr' }, { CLASSPATH: undefined } ]
+[2024-02-06T11:06:46.861] [DEBUG] debug-file - Use tool [win32: NODE_HOME]
+ [ { NODE_HOME: 'C:\\Users\\cjliaoc\\node\\node-18.14.1' } ]
+[2024-02-06T11:06:46.884] [DEBUG] debug-file - shared_preferences : default@PreBuild end {
+  rss: 261713920,
+  heapTotal: 133378048,
+  heapUsed: 104559976,
+  external: 1076253,
+  arrayBuffers: 109911
+}
+[2024-02-06T11:06:46.884] [DEBUG] debug-file - runTaskFromQueue task cost before running: 247 ms 
+[2024-02-06T11:06:46.885] [INFO] debug-file - Finished :shared_preferences:default@PreBuild... after 129 ms 
+[2024-02-06T11:06:46.887] [DEBUG] debug-file - shared_preferences : default@CreateHarBuildProfile start {
+  rss: 259448832,
+  heapTotal: 133378048,
+  heapUsed: 104794576,
+  external: 1076253,
+  arrayBuffers: 111795
+}
+[2024-02-06T11:06:46.887] [DEBUG] debug-file - Executing task :shared_preferences:default@CreateHarBuildProfile
+[2024-02-06T11:06:46.888] [DEBUG] debug-file - shared_preferences : default@CreateHarBuildProfile end {
+  rss: 259506176,
+  heapTotal: 133378048,
+  heapUsed: 104833712,
+  external: 1076253,
+  arrayBuffers: 112813
+}
+[2024-02-06T11:06:46.888] [DEBUG] debug-file - runTaskFromQueue task cost before running: 252 ms 
+[2024-02-06T11:06:46.889] [INFO] debug-file - Finished :shared_preferences:default@CreateHarBuildProfile... after 2 ms 
+[2024-02-06T11:06:46.891] [DEBUG] debug-file - shared_preferences : default@ProcessOHPackageJson start {
+  rss: 259723264,
+  heapTotal: 133378048,
+  heapUsed: 105031272,
+  external: 1076253,
+  arrayBuffers: 114732
+}
+[2024-02-06T11:06:46.891] [DEBUG] debug-file - Executing task :shared_preferences:default@ProcessOHPackageJson
+[2024-02-06T11:06:46.893] [DEBUG] debug-file - shared_preferences : default@ProcessOHPackageJson end {
+  rss: 259792896,
+  heapTotal: 133378048,
+  heapUsed: 105073144,
+  external: 1076253,
+  arrayBuffers: 115748
+}
+[2024-02-06T11:06:46.893] [DEBUG] debug-file - runTaskFromQueue task cost before running: 256 ms 
+[2024-02-06T11:06:46.893] [INFO] debug-file - Finished :shared_preferences:default@ProcessOHPackageJson... after 3 ms 
+[2024-02-06T11:06:46.894] [DEBUG] debug-file - shared_preferences : default@ConfigureCmake start {
+  rss: 259952640,
+  heapTotal: 133378048,
+  heapUsed: 105246416,
+  external: 1076253,
+  arrayBuffers: 117664
+}
+[2024-02-06T11:06:46.894] [DEBUG] debug-file - Executing task :shared_preferences:default@ConfigureCmake
+[2024-02-06T11:06:46.894] [DEBUG] debug-file - shared_preferences : default@ConfigureCmake end {
+  rss: 259985408,
+  heapTotal: 133378048,
+  heapUsed: 105292312,
+  external: 1076253,
+  arrayBuffers: 118668
+}
+[2024-02-06T11:06:46.895] [DEBUG] debug-file - runTaskFromQueue task cost before running: 258 ms 
+[2024-02-06T11:06:46.895] [INFO] debug-file - Finished :shared_preferences:default@ConfigureCmake... after 1 ms 
+[2024-02-06T11:06:46.897] [DEBUG] debug-file - shared_preferences : default@MergeProfile start {
+  rss: 260173824,
+  heapTotal: 133378048,
+  heapUsed: 105492144,
+  external: 1076253,
+  arrayBuffers: 120566
+}
+[2024-02-06T11:06:46.897] [DEBUG] debug-file - Executing task :shared_preferences:default@MergeProfile
+[2024-02-06T11:06:46.898] [DEBUG] debug-file - Change app api release type with 'Release'
+[2024-02-06T11:06:46.899] [DEBUG] debug-file - Change app compile API version with '4.0.0.58'
+[2024-02-06T11:06:46.899] [DEBUG] debug-file - Change app target API version with '40000010'
+[2024-02-06T11:06:46.899] [DEBUG] debug-file - Change app minimum API version with '40000010'
+[2024-02-06T11:06:46.901] [DEBUG] debug-file - shared_preferences : default@MergeProfile end {
+  rss: 260296704,
+  heapTotal: 133378048,
+  heapUsed: 105606952,
+  external: 1084445,
+  arrayBuffers: 131429
+}
+[2024-02-06T11:06:46.901] [DEBUG] debug-file - runTaskFromQueue task cost before running: 264 ms 
+[2024-02-06T11:06:46.901] [INFO] debug-file - Finished :shared_preferences:default@MergeProfile... after 4 ms 
+[2024-02-06T11:06:46.902] [DEBUG] debug-file - shared_preferences : default@BuildNativeWithCmake start {
+  rss: 260501504,
+  heapTotal: 133378048,
+  heapUsed: 105825088,
+  external: 1084445,
+  arrayBuffers: 133321
+}
+[2024-02-06T11:06:46.902] [DEBUG] debug-file - Executing task :shared_preferences:default@BuildNativeWithCmake
+[2024-02-06T11:06:46.902] [DEBUG] debug-file - shared_preferences : default@BuildNativeWithCmake end {
+  rss: 260526080,
+  heapTotal: 133378048,
+  heapUsed: 105851160,
+  external: 1084445,
+  arrayBuffers: 134337
+}
+[2024-02-06T11:06:46.902] [DEBUG] debug-file - runTaskFromQueue task cost before running: 266 ms 
+[2024-02-06T11:06:46.903] [INFO] debug-file - Finished :shared_preferences:default@BuildNativeWithCmake... after 1 ms 
+[2024-02-06T11:06:46.905] [DEBUG] debug-file - shared_preferences : default@ProcessProfile start {
+  rss: 260841472,
+  heapTotal: 133378048,
+  heapUsed: 106064224,
+  external: 1084445,
+  arrayBuffers: 136253
+}
+[2024-02-06T11:06:46.905] [DEBUG] debug-file - Executing task :shared_preferences:default@ProcessProfile
+[2024-02-06T11:06:46.907] [DEBUG] debug-file - [
+  'C:\\Users\\cjliaoc\\node\\node-18.14.1\\node.exe',
+  'D:\\env\\sdk\\HarmonyOS-NEXT-DP0\\base\\ets\\build-tools\\ets-loader\\bin\\ark\\ts2abc.js',
+  '--target-api-version',
+  '10'
+]
+[2024-02-06T11:07:01.409] [DEBUG] debug-file - 9.0.0.0
+[2024-02-06T11:07:01.411] [DEBUG] debug-file - shared_preferences : default@ProcessProfile end {
+  rss: 263479296,
+  heapTotal: 133378048,
+  heapUsed: 107933584,
+  external: 1131786,
+  arrayBuffers: 185585
+}
+[2024-02-06T11:07:01.411] [DEBUG] debug-file - runTaskFromQueue task cost before running: 14 s 775 ms 
+[2024-02-06T11:07:01.411] [INFO] debug-file - Finished :shared_preferences:default@ProcessProfile... after 14 s 507 ms 
+[2024-02-06T11:07:01.413] [DEBUG] debug-file - shared_preferences : default@BuildNativeWithNinja start {
+  rss: 263680000,
+  heapTotal: 133378048,
+  heapUsed: 108189080,
+  external: 1131786,
+  arrayBuffers: 187502
+}
+[2024-02-06T11:07:01.413] [DEBUG] debug-file - Executing task :shared_preferences:default@BuildNativeWithNinja
+[2024-02-06T11:07:01.415] [DEBUG] debug-file - shared_preferences : default@BuildNativeWithNinja end {
+  rss: 263757824,
+  heapTotal: 133378048,
+  heapUsed: 108262728,
+  external: 1131786,
+  arrayBuffers: 188518
+}
+[2024-02-06T11:07:01.416] [DEBUG] debug-file - runTaskFromQueue task cost before running: 14 s 779 ms 
+[2024-02-06T11:07:01.416] [INFO] debug-file - Finished :shared_preferences:default@BuildNativeWithNinja... after 4 ms 
+[2024-02-06T11:07:01.421] [DEBUG] debug-file - shared_preferences : default@LintArkTS start {
+  rss: 264151040,
+  heapTotal: 133378048,
+  heapUsed: 108641736,
+  external: 1139978,
+  arrayBuffers: 198631
+}
+[2024-02-06T11:07:01.421] [DEBUG] debug-file - Executing task :shared_preferences:default@LintArkTS
+[2024-02-06T11:07:01.430] [DEBUG] debug-file - default@LintArkTS work[0] is submitted.
+[2024-02-06T11:07:01.430] [DEBUG] debug-file - default@LintArkTS work[0] is pushed to ready queue.
+[2024-02-06T11:07:01.431] [DEBUG] debug-file - default@LintArkTS work[0] has been dispatched to worker[0].
+[2024-02-06T11:07:01.431] [DEBUG] debug-file - default@LintArkTS work[0] is dispatched.
+[2024-02-06T11:07:01.431] [DEBUG] debug-file - shared_preferences : default@LintArkTS end {
+  rss: 239980544,
+  heapTotal: 105590784,
+  heapUsed: 98129632,
+  external: 1084445,
+  arrayBuffers: 119784
+}
+[2024-02-06T11:07:01.434] [DEBUG] debug-file - restool module names: shared_preferences; moduleName=shared_preferences, taskName=default@ProcessResource
+[2024-02-06T11:07:01.435] [DEBUG] debug-file - shared_preferences : default@ProcessResource start {
+  rss: 240164864,
+  heapTotal: 105590784,
+  heapUsed: 98453840,
+  external: 1084445,
+  arrayBuffers: 120828
+}
+[2024-02-06T11:07:01.437] [DEBUG] debug-file - Executing task :shared_preferences:default@ProcessResource
+[2024-02-06T11:07:01.439] [DEBUG] debug-file - shared_preferences : default@ProcessResource end {
+  rss: 240381952,
+  heapTotal: 105590784,
+  heapUsed: 98593968,
+  external: 1092637,
+  arrayBuffers: 130025
+}
+[2024-02-06T11:07:01.442] [DEBUG] debug-file - runTaskFromQueue task cost before running: 14 s 805 ms 
+[2024-02-06T11:07:01.444] [INFO] debug-file - Finished :shared_preferences:default@ProcessResource... after 10 ms 
+[2024-02-06T11:07:01.447] [DEBUG] debug-file - shared_preferences : default@ProcessLibs start {
+  rss: 240771072,
+  heapTotal: 105590784,
+  heapUsed: 99019080,
+  external: 1092637,
+  arrayBuffers: 131932
+}
+[2024-02-06T11:07:01.447] [DEBUG] debug-file - Executing task :shared_preferences:default@ProcessLibs
+[2024-02-06T11:07:01.448] [DEBUG] debug-file - Libs: E:\lcj\flutter_packages\packages\shared_preferences\shared_preferences_ohos\ohos\shared_preferences\build\default\intermediates\cmake\default\obj
+E:\lcj\flutter_packages\packages\shared_preferences\shared_preferences_ohos\ohos\shared_preferences\libs
+[2024-02-06T11:07:01.455] [DEBUG] debug-file - Collect files: 
+[2024-02-06T11:07:01.457] [DEBUG] debug-file - Collect files: 
+[2024-02-06T11:07:01.457] [DEBUG] debug-file - []
+[2024-02-06T11:07:01.457] [DEBUG] debug-file - shared_preferences : default@ProcessLibs end {
+  rss: 240553984,
+  heapTotal: 105852928,
+  heapUsed: 99639400,
+  external: 1103901,
+  arrayBuffers: 146037
+}
+[2024-02-06T11:07:01.457] [DEBUG] debug-file - runTaskFromQueue task cost before running: 14 s 820 ms 
+[2024-02-06T11:07:01.457] [INFO] debug-file - Finished :shared_preferences:default@ProcessLibs... after 11 ms 
+[2024-02-06T11:07:01.460] [DEBUG] debug-file - restool module names: shared_preferences; moduleName=shared_preferences, taskName=default@CompileResource
+[2024-02-06T11:07:01.461] [DEBUG] debug-file - shared_preferences : default@CompileResource start {
+  rss: 240783360,
+  heapTotal: 105852928,
+  heapUsed: 99959512,
+  external: 1103901,
+  arrayBuffers: 148410
+}
+[2024-02-06T11:07:01.462] [DEBUG] debug-file - Executing task :shared_preferences:default@CompileResource
+[2024-02-06T11:07:01.466] [DEBUG] debug-file - Use tool [D:\env\sdk\HarmonyOS-NEXT-DP0\base\toolchains\restool.exe]
+ [
+  'D:\\env\\sdk\\HarmonyOS-NEXT-DP0\\base\\toolchains\\restool.exe',
+  '-l',
+  'E:\\lcj\\flutter_packages\\packages\\shared_preferences\\shared_preferences_ohos\\ohos\\shared_preferences\\build\\default\\intermediates\\res\\default\\resConfig.json'
+]
+[2024-02-06T11:07:01.467] [DEBUG] debug-file - current process  memoryUsage: {
+  rss: 242827264,
+  heapTotal: 123940864,
+  heapUsed: 98331960,
+  external: 1103901,
+  arrayBuffers: 118168
+} os memoryUsage :13.492084503173828
+[2024-02-06T11:07:02.600] [DEBUG] debug-file - Info: restool resources compile success.
+
+[2024-02-06T11:07:02.605] [DEBUG] debug-file - shared_preferences : default@CompileResource end {
+  rss: 304713728,
+  heapTotal: 123940864,
+  heapUsed: 98449528,
+  external: 1083859,
+  arrayBuffers: 117517
+}
+[2024-02-06T11:07:02.605] [DEBUG] debug-file - runTaskFromQueue task cost before running: 15 s 968 ms 
+[2024-02-06T11:07:02.605] [INFO] debug-file - Finished :shared_preferences:default@CompileResource... after 1 s 144 ms 
+[2024-02-06T11:07:02.608] [DEBUG] debug-file - shared_preferences : default@DoNativeStrip start {
+  rss: 305238016,
+  heapTotal: 123940864,
+  heapUsed: 98738144,
+  external: 1083859,
+  arrayBuffers: 119434
+}
+[2024-02-06T11:07:02.608] [DEBUG] debug-file - Executing task :shared_preferences:default@DoNativeStrip
+[2024-02-06T11:07:02.609] [DEBUG] debug-file - Start executing task ,{} DoNativeStrip
+[2024-02-06T11:07:02.610] [DEBUG] debug-file - do not need strip,now start copy so file in libs
+[2024-02-06T11:07:02.612] [DEBUG] debug-file - strip task all done
+[2024-02-06T11:07:02.612] [DEBUG] debug-file - do not need strip,copied so file in libs
+[2024-02-06T11:07:02.612] [DEBUG] debug-file - Task execution end,{} DoNativeStrip
+[2024-02-06T11:07:02.612] [DEBUG] debug-file - shared_preferences : default@DoNativeStrip end {
+  rss: 305639424,
+  heapTotal: 123940864,
+  heapUsed: 98985792,
+  external: 1085395,
+  arrayBuffers: 120698
+}
+[2024-02-06T11:07:02.613] [DEBUG] debug-file - runTaskFromQueue task cost before running: 15 s 976 ms 
+[2024-02-06T11:07:02.613] [INFO] debug-file - Finished :shared_preferences:default@DoNativeStrip... after 5 ms 
+[2024-02-06T11:07:02.616] [DEBUG] debug-file - shared_preferences : default@ProcessObfuscationFiles start {
+  rss: 306028544,
+  heapTotal: 123940864,
+  heapUsed: 99209672,
+  external: 1085395,
+  arrayBuffers: 122597
+}
+[2024-02-06T11:07:02.616] [DEBUG] debug-file - Executing task :shared_preferences:default@ProcessObfuscationFiles
+[2024-02-06T11:07:02.616] [DEBUG] debug-file - shared_preferences : default@ProcessObfuscationFiles end {
+  rss: 306094080,
+  heapTotal: 123940864,
+  heapUsed: 99236232,
+  external: 1085395,
+  arrayBuffers: 123618
+}
+[2024-02-06T11:07:02.616] [DEBUG] debug-file - runTaskFromQueue task cost before running: 15 s 980 ms 
+[2024-02-06T11:07:02.617] [INFO] debug-file - Finished :shared_preferences:default@ProcessObfuscationFiles... after 1 ms 
+[2024-02-06T11:07:02.620] [DEBUG] debug-file - shared_preferences : default@CacheNativeLibs start {
+  rss: 306688000,
+  heapTotal: 123940864,
+  heapUsed: 99514208,
+  external: 1093587,
+  arrayBuffers: 133739
+}
+[2024-02-06T11:07:02.621] [DEBUG] debug-file - Executing task :shared_preferences:default@CacheNativeLibs
+[2024-02-06T11:07:02.621] [DEBUG] debug-file - cache-native-libs start
+[2024-02-06T11:07:02.626] [DEBUG] debug-file - cache-native-libs end
+[2024-02-06T11:07:02.626] [DEBUG] debug-file - shared_preferences : default@CacheNativeLibs end {
+  rss: 307060736,
+  heapTotal: 123940864,
+  heapUsed: 99598640,
+  external: 1093587,
+  arrayBuffers: 127639
+}
+[2024-02-06T11:07:02.626] [DEBUG] debug-file - runTaskFromQueue task cost before running: 15 s 990 ms 
+[2024-02-06T11:07:02.627] [INFO] debug-file - Finished :shared_preferences:default@CacheNativeLibs... after 7 ms 
+[2024-02-06T11:07:12.530] [INFO] debug-file - [33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/util/Log.ets:50:50
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/util/Log.ets:64:50
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/util/Log.ets:78:50
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/util/Log.ets:92:50
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/util/Log.ets:106:50
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/view/DynamicView/dynamicView.ets:72:12
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/view/DynamicView/dynamicView.ets:74:120
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/view/DynamicView/dynamicView.ets:135:71
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/view/DynamicView/dynamicView.ets:135:137
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/view/DynamicView/dynamicView.ets:136:44
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/view/DynamicView/dynamicView.ets:140:58
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/view/DynamicView/dynamicView.ets:140:111
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/view/DynamicView/dynamicView.ets:141:44
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/view/DynamicView/dynamicView.ets:186:15
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/view/DynamicView/dynamicView.ets:195:15
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/platform/PlatformViewFactory.ets:21:41
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/platform/PlatformViewFactory.ets:24:45
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/platform/PlatformViewFactory.ets:38:73
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/platform/PlatformViewFactory.ets:41:38
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/util/ToolUtils.ets:21:35
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/MethodCall.ets:29:9
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/MethodCall.ets:31:37
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/MethodCall.ets:36:26
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/MethodCall.ets:40:32
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/MethodCall.ets:40:42
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/MethodCall.ets:52:32
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/MethodCall.ets:52:42
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/MethodCodec.ets:52:33
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/MethodCodec.ets:64:78
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/MethodCodec.ets:77:92
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/MethodCodec.ets:86:42
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/FlutterException.ets:21:12
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/FlutterException.ets:23:55
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/StandardMessageCodec.ets:63:67
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/StandardMessageCodec.ets:67:28
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/StandardMessageCodec.ets:73:42
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/StandardMessageCodec.ets:98:43
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/StandardMessageCodec.ets:98:54
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/StandardMessageCodec.ets:155:34
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/StandardMessageCodec.ets:159:35
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/StandardMessageCodec.ets:159:50
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/StandardMessageCodec.ets:164:34
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/StandardMessageCodec.ets:220:36
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/StandardMessageCodec.ets:234:56
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/StandardMessageCodec.ets:238:17
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/StandardMessageCodec.ets:241:17
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/StandardMessageCodec.ets:244:17
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/StandardMessageCodec.ets:247:17
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/StandardMessageCodec.ets:250:17
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/StandardMessageCodec.ets:253:17
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/StandardMessageCodec.ets:257:17
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/StandardMessageCodec.ets:261:17
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/StandardMessageCodec.ets:265:17
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/StandardMessageCodec.ets:275:17
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/StandardMessageCodec.ets:285:17
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/StandardMessageCodec.ets:295:17
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/StandardMessageCodec.ets:300:34
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/StandardMessageCodec.ets:304:17
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/StandardMessageCodec.ets:309:30
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/StandardMessageCodec.ets:309:40
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/StandardMessageCodec.ets:313:17
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/StandardMessageCodec.ets:323:17
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/StandardMethodCodec.ets:60:33
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/StandardMethodCodec.ets:67:78
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/StandardMethodCodec.ets:80:92
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/StandardMethodCodec.ets:94:42
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/MethodChannel.ets:60:38
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/MethodChannel.ets:142:21
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/MethodChannel.ets:153:66
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/MethodChannel.ets:199:27
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/MethodChannel.ets:203:72
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/JSONMessageCodec.ets:34:26
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/JSONMessageCodec.ets:41:40
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/JSONMethodCodec.ets:38:33
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/JSONMethodCodec.ets:52:32
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/JSONMethodCodec.ets:53:32
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/JSONMethodCodec.ets:64:33
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/JSONMethodCodec.ets:68:34
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/JSONMethodCodec.ets:68:80
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/JSONMethodCodec.ets:72:92
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/JSONMethodCodec.ets:76:42
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/JSONMethodCodec.ets:80:13
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/JSONMethodCodec.ets:81:18
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/JSONMethodCodec.ets:83:13
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/JSONMethodCodec.ets:84:32
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/JSONMethodCodec.ets:85:35
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/JSONMethodCodec.ets:86:37
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/FlutterNapi.ets:222:9
+ Use explicit types instead of "any", "unknown" (arkts-no-any-unknown)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/FlutterNapi.ets:282:22
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/FlutterEngineConnectionRegistry.ets:85:15
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/FlutterEngineConnectionRegistry.ets:88:11
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/FlutterEngineConnectionRegistry.ets:115:15
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/FlutterEngineConnectionRegistry.ets:116:9
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/editing/TextInputPlugin.ets:130:20
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/editing/TextInputPlugin.ets:138:20
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/TextInputChannel.ets:70:11
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/TextInputChannel.ets:119:70
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/TextInputChannel.ets:223:25
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/TextInputChannel.ets:297:34
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/TextInputChannel.ets:333:43
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/PlatformChannel.ets:391:17
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/PlatformChannel.ets:392:13
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/PlatformChannel.ets:394:26
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/PlatformChannel.ets:399:42
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/PlatformChannel.ets:405:15
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/PlatformChannel.ets:409:15
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/PlatformChannel.ets:412:26
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/PlatformChannel.ets:417:13
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/PlatformChannel.ets:419:26
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/PlatformChannel.ets:464:49
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/SystemChannel.ets:29:44
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/RestorationChannel.ets:98:27
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/RestorationChannel.ets:102:72
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/RestorationChannel.ets:169:53
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/RestorationChannel.ets:170:33
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/AccessibilityChannel.ets:42:45
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/AccessibilityChannel.ets:42:84
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/AccessibilityChannel.ets:44:35
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/AccessibilityChannel.ets:44:93
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/PlatformViewsChannel.ets:61:35
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/PlatformViewsChannel.ets:132:36
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/PlatformViewsChannel.ets:144:35
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/PlatformViewsChannel.ets:161:35
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/PlatformViewsChannel.ets:175:23
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/PlatformViewsChannel.ets:206:41
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/PlatformViewsChannel.ets:430:36
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/PlatformViewsChannel.ets:433:28
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/PlatformViewsChannel.ets:460:41
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/PlatformViewsChannel.ets:461:33
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/PlatformViewsChannel.ets:545:35
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/ohos/OhosTouchProcessor.ets:25:59
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/view/DynamicView/dynamicViewJson.ets:34:67
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/view/DynamicView/dynamicViewJson.ets:34:139
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/view/DynamicView/dynamicViewJson.ets:34:158
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/view/DynamicView/dynamicViewJson.ets:35:46
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/view/DynamicView/dynamicViewJson.ets:60:52
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/platform/RootDvModelManager.ets:23:19
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/platform/RootDvModelManager.ets:43:18
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/platform/RootDvModelManager.ets:44:14
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/platform/RootDvModelManager.ets:46:48
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/platform/RootDvModelManager.ets:46:71
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/platform/RootDvModelManager.ets:53:34
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/platform/PlatformViewWrapper.ets:47:64
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/platform/PlatformViewWrapper.ets:47:135
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/platform/PlatformViewWrapper.ets:48:44
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/platform/PlatformViewWrapper.ets:52:71
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/platform/PlatformViewWrapper.ets:52:137
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/platform/PlatformViewWrapper.ets:53:44
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/mutatorsstack/FlutterMutatorView.ets:30:34
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/mutatorsstack/FlutterMutatorView.ets:126:15
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/mutatorsstack/FlutterMutatorView.ets:127:11
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/mutatorsstack/FlutterMutatorView.ets:129:59
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/mutatorsstack/FlutterMutatorView.ets:129:77
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/platform/PlatformViewsController.ets:133:64
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/platform/PlatformViewsController.ets:133:135
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/platform/PlatformViewsController.ets:134:44
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/platform/PlatformViewsController.ets:288:9
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/shared_preferences/src/main/ets/shared_preferences/SharedPreferencesListEncoder.ets:23:31
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/shared_preferences/src/main/ets/shared_preferences/SharedPreferencesOhosPlugin.ets:87:28
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/shared_preferences/src/main/ets/shared_preferences/SharedPreferencesOhosPlugin.ets:113:28
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/shared_preferences/src/main/ets/shared_preferences/SharedPreferencesOhosPlugin.ets:138:28
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/shared_preferences/src/main/ets/shared_preferences/SharedPreferencesOhosPlugin.ets:163:28
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/shared_preferences/src/main/ets/shared_preferences/SharedPreferencesOhosPlugin.ets:188:28
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/shared_preferences/src/main/ets/shared_preferences/SharedPreferencesOhosPlugin.ets:213:28
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/shared_preferences/src/main/ets/shared_preferences/SharedPreferencesOhosPlugin.ets:238:28
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/shared_preferences/src/main/ets/shared_preferences/SharedPreferencesOhosPlugin.ets:254:43
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/shared_preferences/src/main/ets/shared_preferences/SharedPreferencesOhosPlugin.ets:280:27
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/shared_preferences/src/main/ets/shared_preferences/SharedPreferencesOhosPlugin.ets:318:22
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/shared_preferences/src/main/ets/shared_preferences/SharedPreferencesOhosPlugin.ets:353:47
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/shared_preferences/src/main/ets/shared_preferences/SharedPreferencesOhosPlugin.ets:376:22
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/shared_preferences/src/main/ets/shared_preferences/SharedPreferencesOhosPlugin.ets:390:22
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/shared_preferences/src/main/ets/shared_preferences/SharedPreferencesOhosPlugin.ets:409:26
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/shared_preferences/src/main/ets/shared_preferences/SharedPreferencesOhosPlugin.ets:410:16
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/shared_preferences/src/main/ets/shared_preferences/SharedPreferencesOhosPlugin.ets:410:27
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/shared_preferences/src/main/ets/shared_preferences/SharedPreferencesOhosPlugin.ets:428:31
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN: For details about ArkTS syntax errors, see FAQs[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/shared_preferences/shared_preferences_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@dcvuc7piekuf7mkvxp1jlovxo7k=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/FlutterNapi.ets:16:21
+ Currently module for 'libflutter.so' is not verified. If you're importing napi, its verification will be enabled in later SDK version. Please make sure the corresponding .d.ts file is provided and the napis are correctly declared.
+[39m
+
+[2024-02-06T11:07:12.531] [DEBUG] debug-file - worker[0] has one work done.
+[2024-02-06T11:07:12.532] [DEBUG] debug-file - default@LintArkTS work[0] done.
+[2024-02-06T11:07:12.532] [DEBUG] debug-file - A work dispatched to worker[0] failed because unable to get work from ready queue.
+[2024-02-06T11:07:12.533] [INFO] debug-file - Finished :shared_preferences:default@LintArkTS... after 11 s 112 ms 
+[2024-02-06T11:07:12.540] [DEBUG] debug-file - shared_preferences : default@PackageHar start {
+  rss: 590798848,
+  heapTotal: 123940864,
+  heapUsed: 100261104,
+  external: 1160404,
+  arrayBuffers: 196229
+}
+[2024-02-06T11:07:12.540] [DEBUG] debug-file - Executing task :shared_preferences:default@PackageHar
+[2024-02-06T11:07:12.618] [DEBUG] debug-file - shared_preferences : default@PackageHar end {
+  rss: 594706432,
+  heapTotal: 124203008,
+  heapUsed: 104249720,
+  external: 1219841,
+  arrayBuffers: 253499
+}
+[2024-02-06T11:07:12.618] [DEBUG] debug-file - runTaskFromQueue task cost before running: 25 s 982 ms 
+[2024-02-06T11:07:12.619] [INFO] debug-file - Finished :shared_preferences:default@PackageHar... after 79 ms 
+[2024-02-06T11:07:12.619] [DEBUG] debug-file - shared_preferences : assembleHar start {
+  rss: 594878464,
+  heapTotal: 124203008,
+  heapUsed: 104422208,
+  external: 1219841,
+  arrayBuffers: 255392
+}
+[2024-02-06T11:07:12.620] [DEBUG] debug-file - Executing task :shared_preferences:assembleHar
+[2024-02-06T11:07:12.620] [DEBUG] debug-file - shared_preferences : assembleHar end {
+  rss: 594907136,
+  heapTotal: 124203008,
+  heapUsed: 104446864,
+  external: 1219841,
+  arrayBuffers: 256374
+}
+[2024-02-06T11:07:12.620] [DEBUG] debug-file - runTaskFromQueue task cost before running: 25 s 983 ms 
+[2024-02-06T11:07:12.620] [INFO] debug-file - Finished :shared_preferences:assembleHar... after 1 ms 
+[2024-02-06T11:07:12.620] [DEBUG] debug-file - BUILD SUCCESSFUL in 25 s 984 ms 
+[2024-02-06T11:07:12.621] [DEBUG] debug-file - Update task shared_preferences:default@PreBuild input file:E:\lcj\flutter_packages\packages\shared_preferences\shared_preferences_ohos\ohos\AppScope\app.json5 cache by regenerate.
+[2024-02-06T11:07:12.622] [DEBUG] debug-file - Update task shared_preferences:default@PreBuild input file:E:\lcj\flutter_packages\packages\shared_preferences\shared_preferences_ohos\ohos\shared_preferences\src\main\module.json5 cache by regenerate.
+[2024-02-06T11:07:12.623] [DEBUG] debug-file - Update task shared_preferences:default@PreBuild input file:E:\lcj\flutter_packages\packages\shared_preferences\shared_preferences_ohos\ohos\build-profile.json5 cache by regenerate.
+[2024-02-06T11:07:12.623] [DEBUG] debug-file - Update task shared_preferences:default@PreBuild input file:E:\lcj\flutter_packages\packages\shared_preferences\shared_preferences_ohos\ohos\shared_preferences\build-profile.json5 cache by regenerate.
+[2024-02-06T11:07:12.624] [DEBUG] debug-file - Update task shared_preferences:default@PreBuild input file:E:\lcj\flutter_packages\packages\shared_preferences\shared_preferences_ohos\ohos\shared_preferences\oh-package.json5 cache by regenerate.
+[2024-02-06T11:07:12.624] [DEBUG] debug-file - Incremental task shared_preferences:default@PreBuild post-execution cost:4 ms .
+[2024-02-06T11:07:12.624] [DEBUG] debug-file - Update task shared_preferences:default@CreateHarBuildProfile input file:E:\lcj\flutter_packages\packages\shared_preferences\shared_preferences_ohos\ohos\AppScope\app.json5 cache by regenerate.
+[2024-02-06T11:07:12.625] [DEBUG] debug-file - Update task shared_preferences:default@CreateHarBuildProfile input file:E:\lcj\flutter_packages\packages\shared_preferences\shared_preferences_ohos\ohos\build-profile.json5 cache by regenerate.
+[2024-02-06T11:07:12.625] [DEBUG] debug-file - Update task shared_preferences:default@CreateHarBuildProfile output file:E:\lcj\flutter_packages\packages\shared_preferences\shared_preferences_ohos\ohos\shared_preferences\BuildProfile.ets cache.
+[2024-02-06T11:07:12.626] [DEBUG] debug-file - Incremental task shared_preferences:default@CreateHarBuildProfile post-execution cost:2 ms .
+[2024-02-06T11:07:12.626] [DEBUG] debug-file - Update task shared_preferences:default@ConfigureCmake output file:E:\lcj\flutter_packages\packages\shared_preferences\shared_preferences_ohos\ohos\shared_preferences\.cxx\default\default\hvigor cache.
+[2024-02-06T11:07:12.626] [DEBUG] debug-file - Incremental task shared_preferences:default@ConfigureCmake post-execution cost:1 ms .
+[2024-02-06T11:07:12.626] [DEBUG] debug-file - Update task shared_preferences:default@MergeProfile input file:E:\lcj\flutter_packages\packages\shared_preferences\shared_preferences_ohos\ohos\AppScope\app.json5 cache by regenerate.
+[2024-02-06T11:07:12.626] [DEBUG] debug-file - Update task shared_preferences:default@MergeProfile input file:E:\lcj\flutter_packages\packages\shared_preferences\shared_preferences_ohos\ohos\build-profile.json5 cache by regenerate.
+[2024-02-06T11:07:12.627] [DEBUG] debug-file - Update task shared_preferences:default@MergeProfile input file:E:\lcj\flutter_packages\packages\shared_preferences\shared_preferences_ohos\ohos\shared_preferences\src\main\module.json5 cache by regenerate.
+[2024-02-06T11:07:12.627] [DEBUG] debug-file - Update task shared_preferences:default@MergeProfile output file:E:\lcj\flutter_packages\packages\shared_preferences\shared_preferences_ohos\ohos\shared_preferences\build\default\intermediates\merge_profile\default\module.json cache.
+[2024-02-06T11:07:12.628] [DEBUG] debug-file - Incremental task shared_preferences:default@MergeProfile post-execution cost:2 ms .
+[2024-02-06T11:07:12.628] [DEBUG] debug-file - Update task shared_preferences:default@ProcessProfile input file:E:\lcj\flutter_packages\packages\shared_preferences\shared_preferences_ohos\ohos\shared_preferences\build\default\intermediates\merge_profile\default\module.json cache by regenerate.
+[2024-02-06T11:07:12.628] [DEBUG] debug-file - Update task shared_preferences:default@ProcessProfile output file:E:\lcj\flutter_packages\packages\shared_preferences\shared_preferences_ohos\ohos\shared_preferences\build\default\intermediates\process_profile\default\module.json cache.
+[2024-02-06T11:07:12.629] [DEBUG] debug-file - Incremental task shared_preferences:default@ProcessProfile post-execution cost:2 ms .
+[2024-02-06T11:07:12.629] [DEBUG] debug-file - Update task shared_preferences:default@LintArkTS input file:E:\lcj\flutter_packages\packages\shared_preferences\shared_preferences_ohos\ohos\shared_preferences\src\main\ets cache by regenerate.
+[2024-02-06T11:07:12.640] [DEBUG] debug-file - Update task shared_preferences:default@LintArkTS input file:E:\lcj\flutter_packages\packages\shared_preferences\shared_preferences_ohos\ohos\shared_preferences\BuildProfile.ets cache by regenerate.
+[2024-02-06T11:07:12.640] [DEBUG] debug-file - Incremental task shared_preferences:default@LintArkTS post-execution cost:11 ms .
+[2024-02-06T11:07:12.640] [DEBUG] debug-file - Update task shared_preferences:default@ProcessResource output file:E:\lcj\flutter_packages\packages\shared_preferences\shared_preferences_ohos\ohos\shared_preferences\build\default\intermediates\res\default\resConfig.json cache.
+[2024-02-06T11:07:12.641] [DEBUG] debug-file - Incremental task shared_preferences:default@ProcessResource post-execution cost:1 ms .
+[2024-02-06T11:07:12.641] [DEBUG] debug-file - Update task shared_preferences:default@ProcessLibs input file:E:\lcj\flutter_packages\packages\shared_preferences\shared_preferences_ohos\ohos\shared_preferences\libs cache by regenerate.
+[2024-02-06T11:07:12.641] [DEBUG] debug-file - Update task shared_preferences:default@ProcessLibs output file:E:\lcj\flutter_packages\packages\shared_preferences\shared_preferences_ohos\ohos\shared_preferences\build\default\intermediates\libs\default cache.
+[2024-02-06T11:07:12.642] [DEBUG] debug-file - Incremental task shared_preferences:default@ProcessLibs post-execution cost:2 ms .
+[2024-02-06T11:07:12.642] [DEBUG] debug-file - Update task shared_preferences:default@CompileResource input file:E:\lcj\flutter_packages\packages\shared_preferences\shared_preferences_ohos\ohos\shared_preferences\src\main\resources cache by regenerate.
+[2024-02-06T11:07:12.646] [DEBUG] debug-file - Update task shared_preferences:default@CompileResource input file:E:\lcj\flutter_packages\packages\shared_preferences\shared_preferences_ohos\ohos\shared_preferences\build\default\intermediates\process_profile\default\module.json cache by regenerate.
+[2024-02-06T11:07:12.647] [DEBUG] debug-file - Update task shared_preferences:default@CompileResource input file:E:\lcj\flutter_packages\packages\shared_preferences\shared_preferences_ohos\ohos\shared_preferences\build\default\intermediates\res\default\resConfig.json cache by regenerate.
+[2024-02-06T11:07:12.647] [DEBUG] debug-file - Update task shared_preferences:default@CompileResource output file:E:\lcj\flutter_packages\packages\shared_preferences\shared_preferences_ohos\ohos\shared_preferences\build\default\intermediates\res\default cache.
+[2024-02-06T11:07:12.650] [DEBUG] debug-file - Update task shared_preferences:default@CompileResource output file:E:\lcj\flutter_packages\packages\shared_preferences\shared_preferences_ohos\ohos\shared_preferences\build\default\generated\r\default\ResourceTable.h cache.
+[2024-02-06T11:07:12.650] [DEBUG] debug-file - Update task shared_preferences:default@CompileResource output file:E:\lcj\flutter_packages\packages\shared_preferences\shared_preferences_ohos\ohos\shared_preferences\build\default\generated\r\default cache.
+[2024-02-06T11:07:12.651] [DEBUG] debug-file - Incremental task shared_preferences:default@CompileResource post-execution cost:9 ms .
+[2024-02-06T11:07:12.651] [DEBUG] debug-file - Update task shared_preferences:default@DoNativeStrip input file:E:\lcj\flutter_packages\packages\shared_preferences\shared_preferences_ohos\ohos\shared_preferences\build\default\intermediates\libs\default cache by regenerate.
+[2024-02-06T11:07:12.652] [DEBUG] debug-file - Update task shared_preferences:default@DoNativeStrip output file:E:\lcj\flutter_packages\packages\shared_preferences\shared_preferences_ohos\ohos\shared_preferences\build\default\intermediates\stripped_native_libs\default cache.
+[2024-02-06T11:07:12.652] [DEBUG] debug-file - Incremental task shared_preferences:default@DoNativeStrip post-execution cost:2 ms .
+[2024-02-06T11:07:12.652] [DEBUG] debug-file - Update task shared_preferences:default@CacheNativeLibs input file:E:\lcj\flutter_packages\packages\shared_preferences\shared_preferences_ohos\ohos\shared_preferences\build\default\intermediates\libs\default cache by regenerate.
+[2024-02-06T11:07:12.653] [DEBUG] debug-file - Update task shared_preferences:default@CacheNativeLibs input file:E:\lcj\flutter_packages\packages\shared_preferences\shared_preferences_ohos\ohos\shared_preferences\build\default\intermediates\stripped_native_libs\default cache by regenerate.
+[2024-02-06T11:07:12.654] [DEBUG] debug-file - Update task shared_preferences:default@CacheNativeLibs output file:E:\lcj\flutter_packages\packages\shared_preferences\shared_preferences_ohos\ohos\shared_preferences\build\default\intermediates\patch\default\base_native_libs.json cache.
+[2024-02-06T11:07:12.654] [DEBUG] debug-file - Incremental task shared_preferences:default@CacheNativeLibs post-execution cost:2 ms .
+[2024-02-06T11:07:12.655] [DEBUG] debug-file - Update task shared_preferences:default@PackageHar input file:E:\lcj\flutter_packages\packages\shared_preferences\shared_preferences_ohos\ohos\shared_preferences\build\default\intermediates\merge_profile\default cache by regenerate.
+[2024-02-06T11:07:12.655] [DEBUG] debug-file - Update task shared_preferences:default@PackageHar input file:E:\lcj\flutter_packages\packages\shared_preferences\shared_preferences_ohos\ohos\shared_preferences cache by regenerate.
+[2024-02-06T11:07:12.666] [DEBUG] debug-file - Update task shared_preferences:default@PackageHar input file:E:\lcj\flutter_packages\packages\shared_preferences\shared_preferences_ohos\ohos\shared_preferences\build\default\intermediates\stripped_native_libs\default cache by regenerate.
+[2024-02-06T11:07:12.666] [DEBUG] debug-file - Update task shared_preferences:default@PackageHar input file:E:\lcj\flutter_packages\packages\shared_preferences\shared_preferences_ohos\ohos\shared_preferences\build\default\intermediates\res\default\ResourceTable.txt cache by regenerate.
+[2024-02-06T11:07:12.667] [DEBUG] debug-file - Update task shared_preferences:default@PackageHar input file:E:\lcj\flutter_packages\packages\shared_preferences\shared_preferences_ohos\ohos\shared_preferences\build\default\generated\pm\default cache by regenerate.
+[2024-02-06T11:07:12.667] [DEBUG] debug-file - Update task shared_preferences:default@PackageHar output file:E:\lcj\flutter_packages\packages\shared_preferences\shared_preferences_ohos\ohos\shared_preferences\build\default\cache\default\default@PackageHar cache.
+[2024-02-06T11:07:12.677] [DEBUG] debug-file - Update task shared_preferences:default@PackageHar output file:E:\lcj\flutter_packages\packages\shared_preferences\shared_preferences_ohos\ohos\shared_preferences\build\default\outputs\default cache.
+[2024-02-06T11:07:12.678] [DEBUG] debug-file - Incremental task shared_preferences:default@PackageHar post-execution cost:25 ms .
+[2024-02-06T11:07:12.688] [DEBUG] debug-file - Current worker pool is stopped or closed.
+[2024-02-06T11:07:12.689] [DEBUG] debug-file - Clear worker 1.
+[2024-02-06T11:07:12.689] [DEBUG] debug-file - Worker 1 has been cleared.
+[2024-02-06T11:07:12.689] [DEBUG] debug-file - Current idle worker size: 1.
+[2024-02-06T11:07:12.689] [DEBUG] debug-file - Current busy worker size: 0.
+[2024-02-06T11:07:12.689] [DEBUG] debug-file - Clear worker 0.
+[2024-02-06T11:07:12.689] [DEBUG] debug-file - Worker 0 has been cleared.
+[2024-02-06T11:07:12.689] [DEBUG] debug-file - Current idle worker size: 0.
+[2024-02-06T11:07:12.689] [DEBUG] debug-file - Current busy worker size: 0.
+[2024-02-06T11:07:12.690] [DEBUG] debug-file - hvigor build process will be closed.
+[2024-02-06T11:07:12.698] [DEBUG] debug-file - session manager: send message to worker process.
+[2024-02-06T11:07:12.699] [DEBUG] debug-file - session manager: send message to worker process.
+[2024-02-06T11:07:12.693] [DEBUG] debug-file - worker[1] exits with exit code 1.
+[2024-02-06T11:07:12.694] [DEBUG] debug-file - Current worker pool is terminated.
+[2024-02-06T11:07:12.698] [DEBUG] debug-file - watch worker: worker id should be larger than 0. Nothing will be sent to any worker thread.
+[2024-02-06T11:07:12.699] [DEBUG] debug-file - watch worker: worker id should be larger than 0. Nothing will be sent to any worker thread.
+[2024-02-06T11:07:12.722] [DEBUG] debug-file - worker[0] exits with exit code 1.
