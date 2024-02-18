@@ -141,6 +141,9 @@
                 <filteritem type='filepath' name="packages/shared_preferences/shared_preferences_ohos/example/ohos/har/har_product/flutter_embedding.har.release.9" desc='BSDStyleLicense,不影响兼容性'/>
                 <filteritem type='filepath' name="packages/shared_preferences/shared_preferences_ohos/example/ohos/har/har_product/libflutter.so.debug.10" desc='BSDStyleLicense,不影响兼容性'/>
                 <filteritem type='filepath' name="packages/url_launcher/url_launcher_ohos/example/ohos/dta/icudtl.dat" desc='二进制文件,不影响兼容性'/>
+                <filteritem type='filepath' name="packages/url_launcher/url_launcher_ohos/example/ohos/oh-package-lock.json5" desc='不影响兼容性'/>
+                <filteritem type='filepath' name="packages/url_launcher/url_launcher_ohos/example/ohos/entry/oh-package-lock.json5" desc='二进制文件,不影响兼容性'/>
+                <filteritem type='filepath' name="packages/url_launcher/url_launcher_ohos/ohos/url_launcher/hvigor/hvigor-wrapper.js" desc='二进制文件,不影响兼容性'/>
                 <filteritem type='filepath' name="packages/url_launcher/url_launcher_ohos/example/ohos/har/har_product/libflutter.so.debug.10" desc='二进制文件,不影响兼容性'/>
                 <filteritem type='filepath' name="packages/url_launcher/url_launcher_ohos/example/ohos/har/har_product/libflutter.so.profile.10" desc='二进制文件,不影响兼容性'/>
                 <filteritem type='filepath' name="packages/url_launcher/url_launcher_ohos/example/ohos/har/har_product/libflutter.so.release.1" desc='二进制文件,不影响兼容性'/>
