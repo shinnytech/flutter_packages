@@ -12,6 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 {
   "app": {
     "signingConfigs": [],
@@ -35,8 +36,8 @@
   },
   "modules": [
     {
-      "name": "ohos",
-      "srcPath": "./ohos"
+      "name": "local_auth",
+      "srcPath": "./local_auth"
     }
   ]
 }

@@ -105,7 +105,6 @@ export async function documentPickerSelect(option: picker.DocumentSelectOptions,
     action: 'ohos.want.action.OPEN_FILE',
     parameters: {
       startMode: 'choose',
-      key_pick_num: 5,
       key_file_suffix_filter: [".txt", ".json"],
       key_pick_dir_path: ''
 
@@ -131,7 +130,7 @@ export async function documentPickerSelect(option: picker.DocumentSelectOptions,
 
   try {
     let result = await context.startAbilityForResult(config, {displayId: 1});
-    let select_item_list: ESObject = result.want?.parameters?.select_item_list;
+    let select_item_list: ESObject = result.want?.parameters?.['ability.params.stream'];
     let uris: ESObject = select_item_list.valueOf();
 
     return new Promise<ESObject>((resolve, reject) => {

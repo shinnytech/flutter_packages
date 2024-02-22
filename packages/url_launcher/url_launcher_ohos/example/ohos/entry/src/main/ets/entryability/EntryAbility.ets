@@ -12,13 +12,20 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
-
-import { FlutterAbility } from '@ohos/flutter_ohos/src/main/ets/embedding/ohos/FlutterAbility'
+import { FlutterAbility } from '@ohos/flutter_ohos'
+import { FlutterPlugin } from '@ohos/flutter_ohos/src/main/ets/embedding/engine/plugins/FlutterPlugin';
+import { GeneratedPluginRegistrant } from '../plugins/GeneratedPluginRegistrant';
+import List from '@ohos.util.List';
+import FlutterEngine from '@ohos/flutter_ohos/src/main/ets/embedding/engine/FlutterEngine';
 import UrlLauncherPlugin from '@ohos/url_launcher_ohos'
 
 export default class EntryAbility extends FlutterAbility {
-  onFlutterEngineReady(): void {
-    super.onFlutterEngineReady()
-    this.addPlugin(new UrlLauncherPlugin())
+  configureFlutterEngine(flutterEngine: FlutterEngine) {
+    super.configureFlutterEngine(flutterEngine)
+    let plugins = GeneratedPluginRegistrant.getPlugins() as List<FlutterPlugin>;
+    plugins.forEach((plugin) => {
+      this.addPlugin(plugin);
+    })
   }
 }
+

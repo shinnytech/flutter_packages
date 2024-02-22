@@ -46,6 +46,9 @@ export default class PathProviderPlugin extends PathProviderApi implements Flutt
 
   onAttachedToEngine(binding: FlutterPluginBinding): void {
     this.pluginBinding = binding;
+    if (this.pluginBinding) {
+      this.setup(this.pluginBinding.getBinaryMessenger(), this.pluginBinding.getApplicationContext());
+    }
   }
 
   onDetachedFromEngine(binding: FlutterPluginBinding): void {
@@ -54,9 +57,6 @@ export default class PathProviderPlugin extends PathProviderApi implements Flutt
 
   onAttachedToAbility(binding: AbilityPluginBinding): void {
     Log.i(TAG, "onAttachedToAbility");
-    if (this.pluginBinding) {
-      this.setup(this.pluginBinding.getBinaryMessenger(), this.pluginBinding.getApplicationContext());
-    }
   }
 
   onDetachedFromAbility(): void {

@@ -91,7 +91,7 @@ class ArkTSGenerator extends StructuredGenerator<ArkTSOptions> {
     indent.writeln(
         "import StandardMessageCodec from '@ohos/flutter_ohos/src/main/ets/plugin/common/StandardMessageCodec';");
     indent.writeln(
-        "import BasicMessageChannel from '@ohos/flutter_ohos/src/main/ets/plugin/common/BasicMessageChannel';");
+        "import BasicMessageChannel, { Reply } from '@ohos/flutter_ohos/src/main/ets/plugin/common/BasicMessageChannel';");        
     indent.writeln(
         "import { BinaryMessenger,TaskQueue } from '@ohos/flutter_ohos/src/main/ets/plugin/common/BinaryMessenger';");
     indent.writeln(
@@ -202,14 +202,15 @@ class ArkTSGenerator extends StructuredGenerator<ArkTSOptions> {
     if (klass.fields.isNotEmpty) {
       for (final NamedType element in klass.fields) {
         final String type = _arkTSTypeForDartType(element.type);
-        final String name = element.name;
+        final String name = getSafeConstructorArgument(element.name);
         argSignature.add('$name: $type');
       }
     }
     indent.add('(${argSignature.join(', ')}) ');
     indent.addScoped('{', '}', () {
       for (final NamedType field in getFieldsInSerializationOrder(klass)) {
-        indent.writeln('this.${field.name} = ${field.name};');
+        final String value = getSafeConstructorArgument(field.name);
+        indent.writeln('this.${field.name} = $value;');
       }
     });
   }
@@ -288,17 +289,6 @@ class ArkTSGenerator extends StructuredGenerator<ArkTSOptions> {
     if (getCodecClasses(api, root).isNotEmpty) {
       _writeCodec(indent, api, root);
     }
-    // This warning can't be fixed without a breaking change, and the next
-    // breaking change to this part of the code should be eliminating Reply
-    // entirely in favor of using Result<T> for
-    // https://github.com/flutter/flutter/issues/118243
-    // See also the comment on the Result<T> code.
-    indent.writeln('/** Public interface for sending reply. */ ');
-    indent.write('interface Reply<T> ');
-    indent.addScoped('{', '}', () {
-      indent.writeln('reply(reply: T): void;');
-    });
-    indent.newln();
 
     const List<String> generatedMessages = <String>[
       ' Generated class from Pigeon that represents Flutter messages that can be called from ArkTS.'
@@ -368,30 +358,6 @@ class ArkTSGenerator extends StructuredGenerator<ArkTSOptions> {
           indent.write(
               '${func.name}($argsSignature, callback: Reply<$returnType>) ');
         }
-        // indent.addScoped('{', '}', () {
-        //   const String channel = 'channel';
-        //   indent.writeln('let $channel: BasicMessageChannel<Object> =');
-        //   indent.nest(2, () {
-        //     indent.addln('new BasicMessageChannel<Object>(');
-        //     indent.nest(2, () {
-        //       indent.add('this.binaryMessenger, "$channelName", this.getCodec());');
-        //     });
-        //   });
-        //   indent.newln();
-        //   indent.write('const methodResult: MethodResult = ');
-        //   indent.addScoped('{', '}', () {
-        //     indent.writeln('success(result: object) {');
-        //     indent.writeln('reply();');
-        //     indent.writeln('}');
-        //   });
-        //   indent.newln();
-        //   indent.write('this.$channel.invokeMethod(');
-        //   indent.nest(2, () {
-        //     indent.add('"${func.name}",');
-        //     indent.add('$sendArgument,');
-        //     indent.addln(' methodResult)');
-        //   });
-        // }
         indent.addScoped('{', '}', () {
           const String channel = 'channel';
           indent.writeln('let $channel: BasicMessageChannel<Object> = ');
@@ -563,7 +529,7 @@ class ArkTSGenerator extends StructuredGenerator<ArkTSOptions> {
 class ResultImp implements Result<$returnType>{
 \t\t\tsuccess(result: $returnType): void {
 \t\t\t\tlet res: Array<Object> = [];
-\t\t\t\tres.push(result);
+\t\t\t\tres.push($resultValue);
 \t\t\t\treply.reply(res);
 \t\t\t}
 
@@ -804,6 +770,11 @@ getByte(n: number): number {
 
   String _getSafeArgumentName(int count, NamedType argument) =>
       '${_getArgumentName(count, argument)}Arg';
+
+  /// arkts方法参数如果是arguments，会与参数关键字冲突
+  String getSafeConstructorArgument(String argument){
+    return (argument=='arguments')?'argumentsArg':argument;
+  }
 
 // get函数
   String _makeGetter(NamedType field) {

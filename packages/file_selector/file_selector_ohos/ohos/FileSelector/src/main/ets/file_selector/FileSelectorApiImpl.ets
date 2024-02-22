@@ -73,7 +73,6 @@ export class FileSelectorApiImpl {
     Log.d(TAG, 'openFiles types:' + allowedTypes.extensions + ' dir:' + initialDirectory)
     try {
       let documentSelectOptions = new picker.DocumentSelectOptions();
-      documentSelectOptions.maxSelectNumber = 5;
       documentSelectOptions.defaultFilePathUri = initialDirectory;
       documentSelectOptions.fileSuffixFilters = allowedTypes.extensions;
       documentPickerSelect(documentSelectOptions, this.getContext()).then((documentPickerResult: ESObject) => {

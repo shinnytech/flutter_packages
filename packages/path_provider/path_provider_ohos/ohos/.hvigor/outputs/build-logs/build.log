@@ -1,0 +1,1218 @@
+[2024-02-06T10:24:06.193] [DEBUG] debug-file - session manager: set active socket. socketId=OkS1NQZUjRtCKM2WAAAF
+[2024-02-06T10:24:06.199] [DEBUG] debug-file - watch worker: worker id should be larger than 0. Nothing will be sent to any worker thread.
+[2024-02-06T10:24:06.204] [DEBUG] debug-file - Hvigor init with startParameters:{
+  hvigorfileTypeCheck: false,
+  parallelExecution: true,
+  incrementalExecution: true,
+  printStackTrace: false,
+  daemon: true,
+  analyze: 0,
+  logLevel: Level { level: 20000, levelStr: 'INFO', colour: 'green' },
+  enableSignTask: true,
+  skipNativeIncremental: false,
+  poolMaxCoreSize: undefined,
+  poolCacheCapacity: undefined,
+  poolCacheTtl: undefined
+}
+[2024-02-06T10:24:06.206] [DEBUG] debug-file - Cache service initialization finished in 3 ms 
+[2024-02-06T10:24:06.206] [DEBUG] debug-file - Since there is no instance or instance is terminated, create a new worker pool.
+[2024-02-06T10:24:06.206] [DEBUG] debug-file - Worker pool is initialized with config:  {
+  minPoolNum: 2,
+  maxCoreSize: undefined,
+  cacheCapacity: undefined,
+  cacheTtl: undefined
+}
+[2024-02-06T10:24:06.206] [DEBUG] debug-file - Create  resident worker with id: 0.
+[2024-02-06T10:24:06.208] [DEBUG] debug-file - Create  resident worker with id: 1.
+[2024-02-06T10:24:06.210] [DEBUG] debug-file - hvigorfile, resolving E:\lcj\flutter_packages\packages\path_provider\path_provider_ohos\ohos\hvigorfile.ts
+[2024-02-06T10:24:06.216] [DEBUG] debug-file - hvigorfile, require result:  {}
+[2024-02-06T10:24:06.216] [DEBUG] debug-file - hvigorfile, binding system plugins {}
+[2024-02-06T10:24:06.221] [DEBUG] debug-file - hvigorfile, resolve finished E:\lcj\flutter_packages\packages\path_provider\path_provider_ohos\ohos\hvigorfile.ts
+[2024-02-06T10:24:06.223] [DEBUG] debug-file - hvigorfile, resolving E:\lcj\flutter_packages\packages\path_provider\path_provider_ohos\ohos\path_provider\hvigorfile.ts
+[2024-02-06T10:24:06.226] [DEBUG] debug-file - hvigorfile, require result:  {}
+[2024-02-06T10:24:06.227] [DEBUG] debug-file - hvigorfile, binding system plugins {}
+[2024-02-06T10:24:06.233] [DEBUG] debug-file - Module path_provider Collected Dependency: 
+[2024-02-06T10:24:06.233] [DEBUG] debug-file - Module path_provider's total dependency: 0
+[2024-02-06T10:24:06.236] [DEBUG] debug-file - Start initialize module-target build option map, moduleName=path_provider, buildMode=debug
+[2024-02-06T10:24:06.236] [DEBUG] debug-file - Target 'default' config: {}
+[2024-02-06T10:24:06.236] [DEBUG] debug-file - Module 'path_provider' target 'default' build option: {
+  "debuggable": true,
+  "copyFrom": "default"
+}
+[2024-02-06T10:24:06.236] [DEBUG] debug-file - End initialize module-target build option map, moduleName=path_provider
+[2024-02-06T10:24:06.236] [DEBUG] debug-file - Module 'path_provider' target 'default' using build option: {
+  "debuggable": true,
+  "copyFrom": "default"
+} in this build.
+[2024-02-06T10:24:06.237] [DEBUG] debug-file - require SDK: toolchains,ArkTS; moduleName=path_provider
+[2024-02-06T10:24:06.241] [DEBUG] debug-file - Module path_provider task initialization takes 3 ms 
+[2024-02-06T10:24:06.241] [DEBUG] debug-file - hvigorfile, resolve finished E:\lcj\flutter_packages\packages\path_provider\path_provider_ohos\ohos\path_provider\hvigorfile.ts
+[2024-02-06T10:24:06.306] [DEBUG] debug-file - hvigorfile, resolve hvigorfile dependencies in 66 ms 
+[2024-02-06T10:24:06.307] [DEBUG] debug-file - Start initialize project's product build option map with build mode debug.
+[2024-02-06T10:24:06.307] [DEBUG] debug-file - Picking option from product 'default' with build mode 'debug'.
+[2024-02-06T10:24:06.307] [DEBUG] debug-file - Product 'default' build option: {}
+[2024-02-06T10:24:06.307] [DEBUG] debug-file - End initialize project's product build option map with build mode 'debug'.
+[2024-02-06T10:24:06.308] [DEBUG] debug-file - Module ohos Collected Dependency: 
+[2024-02-06T10:24:06.308] [DEBUG] debug-file - Module ohos's total dependency: 0
+[2024-02-06T10:24:06.309] [DEBUG] debug-file - Product 'default' using build option: {
+  "debuggable": true
+} in this build.
+[2024-02-06T10:24:06.315] [DEBUG] debug-file - Sdk init in 3 ms 
+[2024-02-06T10:24:06.322] [DEBUG] debug-file - Project task initialization takes 8 ms 
+[2024-02-06T10:24:06.326] [DEBUG] debug-file - Sdk init in 4 ms 
+[2024-02-06T10:24:06.327] [DEBUG] debug-file - project has submodules:path_provider
+[2024-02-06T10:24:06.328] [DEBUG] debug-file - module:path_provider no need to execute packageHap
+[2024-02-06T10:24:06.329] [DEBUG] debug-file - Configuration phase cost:123 ms 
+[2024-02-06T10:24:06.329] [DEBUG] debug-file - Configuration task cost before running: 128 ms 
+[2024-02-06T10:24:06.330] [DEBUG] debug-file - path_provider : init start {
+  rss: 251318272,
+  heapTotal: 116600832,
+  heapUsed: 101834072,
+  external: 1095180,
+  arrayBuffers: 146746
+}
+[2024-02-06T10:24:06.330] [DEBUG] debug-file - Executing task :path_provider:init
+[2024-02-06T10:24:06.331] [DEBUG] debug-file - path_provider : init end {
+  rss: 251506688,
+  heapTotal: 116600832,
+  heapUsed: 101885824,
+  external: 1095180,
+  arrayBuffers: 147704
+}
+[2024-02-06T10:24:06.331] [DEBUG] debug-file - runTaskFromQueue task cost before running: 129 ms 
+[2024-02-06T10:24:06.331] [INFO] debug-file - Finished :path_provider:init... after 2 ms 
+[2024-02-06T10:24:06.331] [DEBUG] debug-file - ohos : init start {
+  rss: 251596800,
+  heapTotal: 116600832,
+  heapUsed: 101938072,
+  external: 1095180,
+  arrayBuffers: 149533
+}
+[2024-02-06T10:24:06.331] [DEBUG] debug-file - Executing task ::init
+[2024-02-06T10:24:06.331] [DEBUG] debug-file - ohos : init end {
+  rss: 251670528,
+  heapTotal: 116600832,
+  heapUsed: 101962672,
+  external: 1095180,
+  arrayBuffers: 150469
+}
+[2024-02-06T10:24:06.331] [DEBUG] debug-file - runTaskFromQueue task cost before running: 130 ms 
+[2024-02-06T10:24:06.331] [INFO] debug-file - Finished ::init... after 1 ms 
+[2024-02-06T10:24:06.339] [DEBUG] debug-file - Module 'path_provider' target 'default' using build option: {
+  "debuggable": true,
+  "copyFrom": "default"
+} in this build.
+[2024-02-06T10:24:06.342] [DEBUG] debug-file - hvigor build process will be closed.
+[2024-02-06T10:24:06.349] [DEBUG] debug-file - session manager: send message to worker process.
+[2024-02-06T10:24:06.349] [DEBUG] debug-file - session manager: send message to worker process.
+[2024-02-06T10:24:06.409] [DEBUG] debug-file - watch worker: worker id should be larger than 0. Nothing will be sent to any worker thread.
+[2024-02-06T10:24:06.410] [DEBUG] debug-file - watch worker: worker id should be larger than 0. Nothing will be sent to any worker thread.
+[2024-02-06T10:24:20.666] [DEBUG] debug-file - session manager: set active socket. socketId=J5vKcuoZt_d60ZCEAAAH
+[2024-02-06T10:24:20.673] [DEBUG] debug-file - watch worker: worker id should be larger than 0. Nothing will be sent to any worker thread.
+[2024-02-06T10:24:20.679] [DEBUG] debug-file - Hvigor init with startParameters:{
+  hvigorfileTypeCheck: false,
+  parallelExecution: true,
+  incrementalExecution: true,
+  printStackTrace: false,
+  daemon: true,
+  analyze: 0,
+  logLevel: Level { level: 20000, levelStr: 'INFO', colour: 'green' },
+  enableSignTask: true,
+  skipNativeIncremental: false,
+  poolMaxCoreSize: undefined,
+  poolCacheCapacity: undefined,
+  poolCacheTtl: undefined
+}
+[2024-02-06T10:24:20.679] [DEBUG] debug-file - Cache service initialization finished in 1 ms 
+[2024-02-06T10:24:20.680] [DEBUG] debug-file - hvigorfile, resolving E:\lcj\flutter_packages\packages\path_provider\path_provider_ohos\ohos\hvigorfile.ts
+[2024-02-06T10:24:20.685] [DEBUG] debug-file - hvigorfile, require result:  {}
+[2024-02-06T10:24:20.685] [DEBUG] debug-file - hvigorfile, binding system plugins {}
+[2024-02-06T10:24:20.690] [DEBUG] debug-file - hvigorfile, resolve finished E:\lcj\flutter_packages\packages\path_provider\path_provider_ohos\ohos\hvigorfile.ts
+[2024-02-06T10:24:20.692] [DEBUG] debug-file - hvigorfile, resolving E:\lcj\flutter_packages\packages\path_provider\path_provider_ohos\ohos\path_provider\hvigorfile.ts
+[2024-02-06T10:24:20.695] [DEBUG] debug-file - hvigorfile, require result:  {}
+[2024-02-06T10:24:20.695] [DEBUG] debug-file - hvigorfile, binding system plugins {}
+[2024-02-06T10:24:20.701] [DEBUG] debug-file - Module path_provider Collected Dependency: 
+[2024-02-06T10:24:20.701] [DEBUG] debug-file - Module path_provider's total dependency: 0
+[2024-02-06T10:24:20.703] [DEBUG] debug-file - Start initialize module-target build option map, moduleName=path_provider, buildMode=debug
+[2024-02-06T10:24:20.703] [DEBUG] debug-file - Target 'default' config: {}
+[2024-02-06T10:24:20.703] [DEBUG] debug-file - Module 'path_provider' target 'default' build option: {
+  "debuggable": true,
+  "copyFrom": "default"
+}
+[2024-02-06T10:24:20.704] [DEBUG] debug-file - End initialize module-target build option map, moduleName=path_provider
+[2024-02-06T10:24:20.704] [DEBUG] debug-file - Module 'path_provider' target 'default' using build option: {
+  "debuggable": true,
+  "copyFrom": "default"
+} in this build.
+[2024-02-06T10:24:20.704] [DEBUG] debug-file - require SDK: toolchains,ArkTS; moduleName=path_provider
+[2024-02-06T10:24:20.708] [DEBUG] debug-file - Module path_provider task initialization takes 3 ms 
+[2024-02-06T10:24:20.708] [DEBUG] debug-file - hvigorfile, resolve finished E:\lcj\flutter_packages\packages\path_provider\path_provider_ohos\ohos\path_provider\hvigorfile.ts
+[2024-02-06T10:24:20.762] [DEBUG] debug-file - hvigorfile, resolve hvigorfile dependencies in 54 ms 
+[2024-02-06T10:24:20.763] [DEBUG] debug-file - Start initialize project's product build option map with build mode debug.
+[2024-02-06T10:24:20.763] [DEBUG] debug-file - Picking option from product 'default' with build mode 'debug'.
+[2024-02-06T10:24:20.763] [DEBUG] debug-file - Product 'default' build option: {}
+[2024-02-06T10:24:20.763] [DEBUG] debug-file - End initialize project's product build option map with build mode 'debug'.
+[2024-02-06T10:24:20.764] [DEBUG] debug-file - Module ohos Collected Dependency: 
+[2024-02-06T10:24:20.764] [DEBUG] debug-file - Module ohos's total dependency: 0
+[2024-02-06T10:24:20.765] [DEBUG] debug-file - Product 'default' using build option: {
+  "debuggable": true
+} in this build.
+[2024-02-06T10:24:20.770] [DEBUG] debug-file - Sdk init in 2 ms 
+[2024-02-06T10:24:20.778] [DEBUG] debug-file - Project task initialization takes 8 ms 
+[2024-02-06T10:24:20.780] [DEBUG] debug-file - Sdk init in 3 ms 
+[2024-02-06T10:24:20.781] [DEBUG] debug-file - project has submodules:path_provider
+[2024-02-06T10:24:20.782] [DEBUG] debug-file - module:path_provider no need to execute packageHap
+[2024-02-06T10:24:20.783] [DEBUG] debug-file - Configuration phase cost:104 ms 
+[2024-02-06T10:24:20.783] [DEBUG] debug-file - Configuration task cost before running: 107 ms 
+[2024-02-06T10:24:20.788] [DEBUG] debug-file - path_provider : default@PreBuild start {
+  rss: 245075968,
+  heapTotal: 112144384,
+  heapUsed: 97409760,
+  external: 1062503,
+  arrayBuffers: 112297
+}
+[2024-02-06T10:24:20.789] [DEBUG] debug-file - Executing task :path_provider:default@PreBuild
+[2024-02-06T10:24:20.791] [DEBUG] debug-file - current product is not Atomic service.
+[2024-02-06T10:24:20.802] [DEBUG] debug-file - Use tool [win32: JAVA_HOME, CLASSPATH]
+ [ { JAVA_HOME: 'D:\\DevEco Studio\\jbr' }, { CLASSPATH: undefined } ]
+[2024-02-06T10:24:20.802] [DEBUG] debug-file - Use tool [win32: NODE_HOME]
+ [ { NODE_HOME: 'C:\\Users\\cjliaoc\\node\\node-18.14.1' } ]
+[2024-02-06T10:24:20.845] [DEBUG] debug-file - path_provider : default@PreBuild end {
+  rss: 250781696,
+  heapTotal: 116338688,
+  heapUsed: 93743408,
+  external: 1022569,
+  arrayBuffers: 56227
+}
+[2024-02-06T10:24:20.845] [DEBUG] debug-file - runTaskFromQueue task cost before running: 169 ms 
+[2024-02-06T10:24:20.846] [INFO] debug-file - Finished :path_provider:default@PreBuild... after 58 ms 
+[2024-02-06T10:24:20.848] [DEBUG] debug-file - path_provider : default@CreateHarBuildProfile start {
+  rss: 250781696,
+  heapTotal: 116338688,
+  heapUsed: 94086904,
+  external: 1022569,
+  arrayBuffers: 58092
+}
+[2024-02-06T10:24:20.848] [DEBUG] debug-file - Executing task :path_provider:default@CreateHarBuildProfile
+[2024-02-06T10:24:20.849] [DEBUG] debug-file - path_provider : default@CreateHarBuildProfile end {
+  rss: 250781696,
+  heapTotal: 116338688,
+  heapUsed: 94128576,
+  external: 1022569,
+  arrayBuffers: 59098
+}
+[2024-02-06T10:24:20.849] [DEBUG] debug-file - runTaskFromQueue task cost before running: 172 ms 
+[2024-02-06T10:24:20.849] [INFO] debug-file - Finished :path_provider:default@CreateHarBuildProfile... after 2 ms 
+[2024-02-06T10:24:20.852] [DEBUG] debug-file - path_provider : default@ProcessOHPackageJson start {
+  rss: 250781696,
+  heapTotal: 116338688,
+  heapUsed: 94326192,
+  external: 1022569,
+  arrayBuffers: 61000
+}
+[2024-02-06T10:24:20.852] [DEBUG] debug-file - Executing task :path_provider:default@ProcessOHPackageJson
+[2024-02-06T10:24:20.853] [DEBUG] debug-file - path_provider : default@ProcessOHPackageJson end {
+  rss: 250781696,
+  heapTotal: 116338688,
+  heapUsed: 94366096,
+  external: 1022569,
+  arrayBuffers: 62004
+}
+[2024-02-06T10:24:20.853] [DEBUG] debug-file - runTaskFromQueue task cost before running: 176 ms 
+[2024-02-06T10:24:20.853] [INFO] debug-file - Finished :path_provider:default@ProcessOHPackageJson... after 2 ms 
+[2024-02-06T10:24:20.854] [DEBUG] debug-file - path_provider : default@ConfigureCmake start {
+  rss: 250781696,
+  heapTotal: 116338688,
+  heapUsed: 94529560,
+  external: 1022569,
+  arrayBuffers: 63903
+}
+[2024-02-06T10:24:20.854] [DEBUG] debug-file - Executing task :path_provider:default@ConfigureCmake
+[2024-02-06T10:24:20.854] [DEBUG] debug-file - path_provider : default@ConfigureCmake end {
+  rss: 250781696,
+  heapTotal: 116338688,
+  heapUsed: 94560640,
+  external: 1022569,
+  arrayBuffers: 64895
+}
+[2024-02-06T10:24:20.854] [DEBUG] debug-file - runTaskFromQueue task cost before running: 177 ms 
+[2024-02-06T10:24:20.854] [INFO] debug-file - Finished :path_provider:default@ConfigureCmake... after 1 ms 
+[2024-02-06T10:24:20.856] [DEBUG] debug-file - path_provider : default@MergeProfile start {
+  rss: 250781696,
+  heapTotal: 116338688,
+  heapUsed: 94743992,
+  external: 1022569,
+  arrayBuffers: 66776
+}
+[2024-02-06T10:24:20.856] [DEBUG] debug-file - Executing task :path_provider:default@MergeProfile
+[2024-02-06T10:24:20.857] [DEBUG] debug-file - Change app api release type with 'Release'
+[2024-02-06T10:24:20.857] [DEBUG] debug-file - Change app compile API version with '4.0.0.58'
+[2024-02-06T10:24:20.857] [DEBUG] debug-file - Change app target API version with '40000010'
+[2024-02-06T10:24:20.857] [DEBUG] debug-file - Change app minimum API version with '40000010'
+[2024-02-06T10:24:20.859] [DEBUG] debug-file - path_provider : default@MergeProfile end {
+  rss: 250781696,
+  heapTotal: 116338688,
+  heapUsed: 94844784,
+  external: 1022569,
+  arrayBuffers: 69435
+}
+[2024-02-06T10:24:20.859] [DEBUG] debug-file - runTaskFromQueue task cost before running: 182 ms 
+[2024-02-06T10:24:20.859] [INFO] debug-file - Finished :path_provider:default@MergeProfile... after 3 ms 
+[2024-02-06T10:24:20.860] [DEBUG] debug-file - path_provider : default@BuildNativeWithCmake start {
+  rss: 250781696,
+  heapTotal: 116338688,
+  heapUsed: 95049440,
+  external: 1022569,
+  arrayBuffers: 71310
+}
+[2024-02-06T10:24:20.860] [DEBUG] debug-file - Executing task :path_provider:default@BuildNativeWithCmake
+[2024-02-06T10:24:20.860] [DEBUG] debug-file - path_provider : default@BuildNativeWithCmake end {
+  rss: 250781696,
+  heapTotal: 116338688,
+  heapUsed: 95075352,
+  external: 1022569,
+  arrayBuffers: 72314
+}
+[2024-02-06T10:24:20.860] [DEBUG] debug-file - runTaskFromQueue task cost before running: 183 ms 
+[2024-02-06T10:24:20.860] [INFO] debug-file - Finished :path_provider:default@BuildNativeWithCmake... after 1 ms 
+[2024-02-06T10:24:20.863] [DEBUG] debug-file - path_provider : default@ProcessProfile start {
+  rss: 250781696,
+  heapTotal: 116338688,
+  heapUsed: 95276296,
+  external: 1030761,
+  arrayBuffers: 82405
+}
+[2024-02-06T10:24:20.863] [DEBUG] debug-file - Executing task :path_provider:default@ProcessProfile
+[2024-02-06T10:24:20.864] [DEBUG] debug-file - [
+  'C:\\Users\\cjliaoc\\node\\node-18.14.1\\node.exe',
+  'D:\\env\\sdk\\HarmonyOS-NEXT-DP0\\base\\ets\\build-tools\\ets-loader\\bin\\ark\\ts2abc.js',
+  '--target-api-version',
+  '10'
+]
+[2024-02-06T10:24:35.242] [DEBUG] debug-file - 9.0.0.0
+[2024-02-06T10:24:35.242] [DEBUG] debug-file - path_provider : default@ProcessProfile end {
+  rss: 250851328,
+  heapTotal: 116338688,
+  heapUsed: 95494752,
+  external: 1030782,
+  arrayBuffers: 84405
+}
+[2024-02-06T10:24:35.242] [DEBUG] debug-file - runTaskFromQueue task cost before running: 14 s 566 ms 
+[2024-02-06T10:24:35.243] [INFO] debug-file - Finished :path_provider:default@ProcessProfile... after 14 s 380 ms 
+[2024-02-06T10:24:35.243] [DEBUG] debug-file - path_provider : default@BuildNativeWithNinja start {
+  rss: 250851328,
+  heapTotal: 116338688,
+  heapUsed: 95732984,
+  external: 1030782,
+  arrayBuffers: 86305
+}
+[2024-02-06T10:24:35.244] [DEBUG] debug-file - Executing task :path_provider:default@BuildNativeWithNinja
+[2024-02-06T10:24:35.245] [DEBUG] debug-file - path_provider : default@BuildNativeWithNinja end {
+  rss: 250851328,
+  heapTotal: 116338688,
+  heapUsed: 95780304,
+  external: 1030782,
+  arrayBuffers: 87309
+}
+[2024-02-06T10:24:35.245] [DEBUG] debug-file - runTaskFromQueue task cost before running: 14 s 568 ms 
+[2024-02-06T10:24:35.245] [INFO] debug-file - Finished :path_provider:default@BuildNativeWithNinja... after 2 ms 
+[2024-02-06T10:24:35.249] [DEBUG] debug-file - path_provider : default@LintArkTS start {
+  rss: 250851328,
+  heapTotal: 116338688,
+  heapUsed: 96134272,
+  external: 1038974,
+  arrayBuffers: 97405
+}
+[2024-02-06T10:24:35.249] [DEBUG] debug-file - Executing task :path_provider:default@LintArkTS
+[2024-02-06T10:24:35.255] [DEBUG] debug-file - default@LintArkTS work[1] is submitted.
+[2024-02-06T10:24:35.255] [DEBUG] debug-file - default@LintArkTS work[1] is pushed to ready queue.
+[2024-02-06T10:24:35.256] [DEBUG] debug-file - default@LintArkTS work[1] has been dispatched to worker[0].
+[2024-02-06T10:24:35.256] [DEBUG] debug-file - default@LintArkTS work[1] is dispatched.
+[2024-02-06T10:24:35.256] [DEBUG] debug-file - path_provider : default@LintArkTS end {
+  rss: 250875904,
+  heapTotal: 116338688,
+  heapUsed: 96534728,
+  external: 1040334,
+  arrayBuffers: 75673
+}
+[2024-02-06T10:24:35.258] [DEBUG] debug-file - restool module names: path_provider; moduleName=path_provider, taskName=default@ProcessResource
+[2024-02-06T10:24:35.259] [DEBUG] debug-file - path_provider : default@ProcessResource start {
+  rss: 251031552,
+  heapTotal: 116338688,
+  heapUsed: 96745640,
+  external: 1040334,
+  arrayBuffers: 76701
+}
+[2024-02-06T10:24:35.262] [DEBUG] debug-file - Executing task :path_provider:default@ProcessResource
+[2024-02-06T10:24:35.263] [DEBUG] debug-file - path_provider : default@ProcessResource end {
+  rss: 251174912,
+  heapTotal: 116338688,
+  heapUsed: 96887576,
+  external: 1048526,
+  arrayBuffers: 85887
+}
+[2024-02-06T10:24:35.265] [DEBUG] debug-file - runTaskFromQueue task cost before running: 14 s 588 ms 
+[2024-02-06T10:24:35.268] [INFO] debug-file - Finished :path_provider:default@ProcessResource... after 9 ms 
+[2024-02-06T10:24:35.270] [DEBUG] debug-file - path_provider : default@ProcessLibs start {
+  rss: 251564032,
+  heapTotal: 116338688,
+  heapUsed: 97313400,
+  external: 1056718,
+  arrayBuffers: 95968
+}
+[2024-02-06T10:24:35.270] [DEBUG] debug-file - Executing task :path_provider:default@ProcessLibs
+[2024-02-06T10:24:35.271] [DEBUG] debug-file - Libs: E:\lcj\flutter_packages\packages\path_provider\path_provider_ohos\ohos\path_provider\build\default\intermediates\cmake\default\obj
+E:\lcj\flutter_packages\packages\path_provider\path_provider_ohos\ohos\path_provider\libs
+[2024-02-06T10:24:35.276] [DEBUG] debug-file - Collect files: 
+[2024-02-06T10:24:35.277] [DEBUG] debug-file - Collect files: 
+[2024-02-06T10:24:35.277] [DEBUG] debug-file - []
+[2024-02-06T10:24:35.277] [DEBUG] debug-file - path_provider : default@ProcessLibs end {
+  rss: 251957248,
+  heapTotal: 116338688,
+  heapUsed: 97708680,
+  external: 1067982,
+  arrayBuffers: 110032
+}
+[2024-02-06T10:24:35.277] [DEBUG] debug-file - runTaskFromQueue task cost before running: 14 s 601 ms 
+[2024-02-06T10:24:35.278] [INFO] debug-file - Finished :path_provider:default@ProcessLibs... after 8 ms 
+[2024-02-06T10:24:35.280] [DEBUG] debug-file - restool module names: path_provider; moduleName=path_provider, taskName=default@CompileResource
+[2024-02-06T10:24:35.282] [DEBUG] debug-file - path_provider : default@CompileResource start {
+  rss: 251265024,
+  heapTotal: 116338688,
+  heapUsed: 98037544,
+  external: 1067982,
+  arrayBuffers: 112378
+}
+[2024-02-06T10:24:35.282] [DEBUG] debug-file - Executing task :path_provider:default@CompileResource
+[2024-02-06T10:24:35.284] [DEBUG] debug-file - Use tool [D:\env\sdk\HarmonyOS-NEXT-DP0\base\toolchains\restool.exe]
+ [
+  'D:\\env\\sdk\\HarmonyOS-NEXT-DP0\\base\\toolchains\\restool.exe',
+  '-l',
+  'E:\\lcj\\flutter_packages\\packages\\path_provider\\path_provider_ohos\\ohos\\path_provider\\build\\default\\intermediates\\res\\default\\resConfig.json'
+]
+[2024-02-06T10:24:35.284] [DEBUG] debug-file - current process  memoryUsage: {
+  rss: 251379712,
+  heapTotal: 116338688,
+  heapUsed: 98287312,
+  external: 1067982,
+  arrayBuffers: 102402
+} os memoryUsage :12.424728393554688
+[2024-02-06T10:24:36.290] [DEBUG] debug-file - Info: restool resources compile success.
+
+[2024-02-06T10:24:36.295] [DEBUG] debug-file - path_provider : default@CompileResource end {
+  rss: 318029824,
+  heapTotal: 116600832,
+  heapUsed: 98696912,
+  external: 1068108,
+  arrayBuffers: 101766
+}
+[2024-02-06T10:24:36.295] [DEBUG] debug-file - runTaskFromQueue task cost before running: 15 s 618 ms 
+[2024-02-06T10:24:36.295] [INFO] debug-file - Finished :path_provider:default@CompileResource... after 1 s 14 ms 
+[2024-02-06T10:24:36.299] [DEBUG] debug-file - path_provider : default@DoNativeStrip start {
+  rss: 318042112,
+  heapTotal: 116600832,
+  heapUsed: 98988968,
+  external: 1076300,
+  arrayBuffers: 111858
+}
+[2024-02-06T10:24:36.299] [DEBUG] debug-file - Executing task :path_provider:default@DoNativeStrip
+[2024-02-06T10:24:36.299] [DEBUG] debug-file - Start executing task ,{} DoNativeStrip
+[2024-02-06T10:24:36.300] [DEBUG] debug-file - do not need strip,now start copy so file in libs
+[2024-02-06T10:24:36.301] [DEBUG] debug-file - strip task all done
+[2024-02-06T10:24:36.301] [DEBUG] debug-file - do not need strip,copied so file in libs
+[2024-02-06T10:24:36.301] [DEBUG] debug-file - Task execution end,{} DoNativeStrip
+[2024-02-06T10:24:36.302] [DEBUG] debug-file - path_provider : default@DoNativeStrip end {
+  rss: 318050304,
+  heapTotal: 116600832,
+  heapUsed: 99174376,
+  external: 1077836,
+  arrayBuffers: 113139
+}
+[2024-02-06T10:24:36.302] [DEBUG] debug-file - runTaskFromQueue task cost before running: 15 s 625 ms 
+[2024-02-06T10:24:36.302] [INFO] debug-file - Finished :path_provider:default@DoNativeStrip... after 4 ms 
+[2024-02-06T10:24:36.303] [DEBUG] debug-file - path_provider : default@ProcessObfuscationFiles start {
+  rss: 318054400,
+  heapTotal: 116600832,
+  heapUsed: 99417400,
+  external: 1077836,
+  arrayBuffers: 115023
+}
+[2024-02-06T10:24:36.304] [DEBUG] debug-file - Executing task :path_provider:default@ProcessObfuscationFiles
+[2024-02-06T10:24:36.304] [DEBUG] debug-file - path_provider : default@ProcessObfuscationFiles end {
+  rss: 318054400,
+  heapTotal: 116600832,
+  heapUsed: 99443272,
+  external: 1077836,
+  arrayBuffers: 116034
+}
+[2024-02-06T10:24:36.304] [DEBUG] debug-file - runTaskFromQueue task cost before running: 15 s 627 ms 
+[2024-02-06T10:24:36.304] [INFO] debug-file - Finished :path_provider:default@ProcessObfuscationFiles... after 1 ms 
+[2024-02-06T10:24:36.307] [DEBUG] debug-file - path_provider : default@CacheNativeLibs start {
+  rss: 318062592,
+  heapTotal: 116600832,
+  heapUsed: 99710808,
+  external: 1077836,
+  arrayBuffers: 117948
+}
+[2024-02-06T10:24:36.307] [DEBUG] debug-file - Executing task :path_provider:default@CacheNativeLibs
+[2024-02-06T10:24:36.308] [DEBUG] debug-file - cache-native-libs start
+[2024-02-06T10:24:36.310] [DEBUG] debug-file - cache-native-libs end
+[2024-02-06T10:24:36.310] [DEBUG] debug-file - path_provider : default@CacheNativeLibs end {
+  rss: 318066688,
+  heapTotal: 116600832,
+  heapUsed: 99799648,
+  external: 1077836,
+  arrayBuffers: 111888
+}
+[2024-02-06T10:24:36.310] [DEBUG] debug-file - runTaskFromQueue task cost before running: 15 s 633 ms 
+[2024-02-06T10:24:36.311] [INFO] debug-file - Finished :path_provider:default@CacheNativeLibs... after 4 ms 
+[2024-02-06T10:24:46.157] [INFO] debug-file - [33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/util/Log.ets:50:50
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/util/Log.ets:64:50
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/util/Log.ets:78:50
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/util/Log.ets:92:50
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/util/Log.ets:106:50
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/view/DynamicView/dynamicView.ets:72:12
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/view/DynamicView/dynamicView.ets:74:120
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/view/DynamicView/dynamicView.ets:135:71
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/view/DynamicView/dynamicView.ets:135:137
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/view/DynamicView/dynamicView.ets:136:44
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/view/DynamicView/dynamicView.ets:140:58
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/view/DynamicView/dynamicView.ets:140:111
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/view/DynamicView/dynamicView.ets:141:44
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/view/DynamicView/dynamicView.ets:186:15
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/view/DynamicView/dynamicView.ets:195:15
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/platform/PlatformViewFactory.ets:21:41
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/platform/PlatformViewFactory.ets:24:45
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/platform/PlatformViewFactory.ets:38:73
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/platform/PlatformViewFactory.ets:41:38
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/util/ToolUtils.ets:21:35
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/MethodCall.ets:29:9
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/MethodCall.ets:31:37
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/MethodCall.ets:36:26
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/MethodCall.ets:40:32
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/MethodCall.ets:40:42
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/MethodCall.ets:52:32
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/MethodCall.ets:52:42
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/MethodCodec.ets:52:33
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/MethodCodec.ets:64:78
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/MethodCodec.ets:77:92
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/MethodCodec.ets:86:42
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/FlutterException.ets:21:12
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/FlutterException.ets:23:55
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/StandardMessageCodec.ets:63:67
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/StandardMessageCodec.ets:67:28
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/StandardMessageCodec.ets:73:42
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/StandardMessageCodec.ets:98:43
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/StandardMessageCodec.ets:98:54
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/StandardMessageCodec.ets:155:34
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/StandardMessageCodec.ets:159:35
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/StandardMessageCodec.ets:159:50
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/StandardMessageCodec.ets:164:34
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/StandardMessageCodec.ets:220:36
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/StandardMessageCodec.ets:234:56
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/StandardMessageCodec.ets:238:17
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/StandardMessageCodec.ets:241:17
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/StandardMessageCodec.ets:244:17
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/StandardMessageCodec.ets:247:17
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/StandardMessageCodec.ets:250:17
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/StandardMessageCodec.ets:253:17
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/StandardMessageCodec.ets:257:17
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/StandardMessageCodec.ets:261:17
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/StandardMessageCodec.ets:265:17
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/StandardMessageCodec.ets:275:17
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/StandardMessageCodec.ets:285:17
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/StandardMessageCodec.ets:295:17
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/StandardMessageCodec.ets:300:34
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/StandardMessageCodec.ets:304:17
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/StandardMessageCodec.ets:309:30
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/StandardMessageCodec.ets:309:40
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/StandardMessageCodec.ets:313:17
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/StandardMessageCodec.ets:323:17
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/StandardMethodCodec.ets:60:33
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/StandardMethodCodec.ets:67:78
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/StandardMethodCodec.ets:80:92
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/StandardMethodCodec.ets:94:42
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/MethodChannel.ets:60:38
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/MethodChannel.ets:142:21
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/MethodChannel.ets:153:66
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/MethodChannel.ets:199:27
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/MethodChannel.ets:203:72
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/JSONMessageCodec.ets:34:26
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/JSONMessageCodec.ets:41:40
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/JSONMethodCodec.ets:38:33
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/JSONMethodCodec.ets:52:32
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/JSONMethodCodec.ets:53:32
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/JSONMethodCodec.ets:64:33
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/JSONMethodCodec.ets:68:34
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/JSONMethodCodec.ets:68:80
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/JSONMethodCodec.ets:72:92
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/JSONMethodCodec.ets:76:42
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/JSONMethodCodec.ets:80:13
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/JSONMethodCodec.ets:81:18
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/JSONMethodCodec.ets:83:13
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/JSONMethodCodec.ets:84:32
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/JSONMethodCodec.ets:85:35
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/JSONMethodCodec.ets:86:37
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/FlutterNapi.ets:222:9
+ Use explicit types instead of "any", "unknown" (arkts-no-any-unknown)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/FlutterNapi.ets:282:22
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/FlutterEngineConnectionRegistry.ets:85:15
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/FlutterEngineConnectionRegistry.ets:88:11
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/FlutterEngineConnectionRegistry.ets:115:15
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/FlutterEngineConnectionRegistry.ets:116:9
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/editing/TextInputPlugin.ets:130:20
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/editing/TextInputPlugin.ets:138:20
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/TextInputChannel.ets:70:11
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/TextInputChannel.ets:119:70
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/TextInputChannel.ets:223:25
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/TextInputChannel.ets:297:34
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/TextInputChannel.ets:333:43
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/PlatformChannel.ets:391:17
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/PlatformChannel.ets:392:13
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/PlatformChannel.ets:394:26
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/PlatformChannel.ets:399:42
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/PlatformChannel.ets:405:15
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/PlatformChannel.ets:409:15
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/PlatformChannel.ets:412:26
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/PlatformChannel.ets:417:13
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/PlatformChannel.ets:419:26
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/PlatformChannel.ets:464:49
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/SystemChannel.ets:29:44
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/RestorationChannel.ets:98:27
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/RestorationChannel.ets:102:72
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/RestorationChannel.ets:169:53
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/RestorationChannel.ets:170:33
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/AccessibilityChannel.ets:42:45
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/AccessibilityChannel.ets:42:84
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/AccessibilityChannel.ets:44:35
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/AccessibilityChannel.ets:44:93
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/PlatformViewsChannel.ets:61:35
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/PlatformViewsChannel.ets:132:36
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/PlatformViewsChannel.ets:144:35
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/PlatformViewsChannel.ets:161:35
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/PlatformViewsChannel.ets:175:23
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/PlatformViewsChannel.ets:206:41
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/PlatformViewsChannel.ets:430:36
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/PlatformViewsChannel.ets:433:28
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/PlatformViewsChannel.ets:460:41
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/PlatformViewsChannel.ets:461:33
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/PlatformViewsChannel.ets:545:35
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/ohos/OhosTouchProcessor.ets:25:59
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/view/DynamicView/dynamicViewJson.ets:34:67
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/view/DynamicView/dynamicViewJson.ets:34:139
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/view/DynamicView/dynamicViewJson.ets:34:158
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/view/DynamicView/dynamicViewJson.ets:35:46
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/view/DynamicView/dynamicViewJson.ets:60:52
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/platform/RootDvModelManager.ets:23:19
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/platform/RootDvModelManager.ets:43:18
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/platform/RootDvModelManager.ets:44:14
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/platform/RootDvModelManager.ets:46:48
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/platform/RootDvModelManager.ets:46:71
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/platform/RootDvModelManager.ets:53:34
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/platform/PlatformViewWrapper.ets:47:64
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/platform/PlatformViewWrapper.ets:47:135
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/platform/PlatformViewWrapper.ets:48:44
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/platform/PlatformViewWrapper.ets:52:71
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/platform/PlatformViewWrapper.ets:52:137
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/platform/PlatformViewWrapper.ets:53:44
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/mutatorsstack/FlutterMutatorView.ets:30:34
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/mutatorsstack/FlutterMutatorView.ets:126:15
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/mutatorsstack/FlutterMutatorView.ets:127:11
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/mutatorsstack/FlutterMutatorView.ets:129:59
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/mutatorsstack/FlutterMutatorView.ets:129:77
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/platform/PlatformViewsController.ets:133:64
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/platform/PlatformViewsController.ets:133:135
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/platform/PlatformViewsController.ets:134:44
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/platform/PlatformViewsController.ets:288:9
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/util/PathUtils.ets:41:9
+ Type 'null' is not assignable to type 'string'.
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/path_provider/src/main/ets/io/flutter/plugins/pathprovider/Messages.ets:38:45
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/path_provider/src/main/ets/io/flutter/plugins/pathprovider/Messages.ets:39:28
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/path_provider/src/main/ets/io/flutter/plugins/pathprovider/Messages.ets:56:12
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/path_provider/src/main/ets/io/flutter/plugins/pathprovider/Messages.ets:58:55
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/path_provider/src/main/ets/io/flutter/plugins/pathprovider/Messages.ets:80:35
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/path_provider/src/main/ets/io/flutter/plugins/pathprovider/Messages.ets:86:42
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/path_provider/src/main/ets/io/flutter/plugins/pathprovider/Messages.ets:87:31
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/path_provider/src/main/ets/io/flutter/plugins/pathprovider/Messages.ets:93:32
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/path_provider/src/main/ets/io/flutter/plugins/pathprovider/Messages.ets:93:49
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/path_provider/src/main/ets/io/flutter/plugins/pathprovider/Messages.ets:95:32
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/path_provider/src/main/ets/io/flutter/plugins/pathprovider/Messages.ets:95:54
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/path_provider/src/main/ets/io/flutter/plugins/pathprovider/Messages.ets:100:41
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/path_provider/src/main/ets/io/flutter/plugins/pathprovider/Messages.ets:111:42
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/path_provider/src/main/ets/io/flutter/plugins/pathprovider/Messages.ets:112:31
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/path_provider/src/main/ets/io/flutter/plugins/pathprovider/Messages.ets:118:32
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/path_provider/src/main/ets/io/flutter/plugins/pathprovider/Messages.ets:118:49
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/path_provider/src/main/ets/io/flutter/plugins/pathprovider/Messages.ets:120:32
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/path_provider/src/main/ets/io/flutter/plugins/pathprovider/Messages.ets:120:54
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/path_provider/src/main/ets/io/flutter/plugins/pathprovider/Messages.ets:125:41
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/path_provider/src/main/ets/io/flutter/plugins/pathprovider/Messages.ets:136:42
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/path_provider/src/main/ets/io/flutter/plugins/pathprovider/Messages.ets:137:31
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/path_provider/src/main/ets/io/flutter/plugins/pathprovider/Messages.ets:143:32
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/path_provider/src/main/ets/io/flutter/plugins/pathprovider/Messages.ets:143:49
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/path_provider/src/main/ets/io/flutter/plugins/pathprovider/Messages.ets:145:32
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/path_provider/src/main/ets/io/flutter/plugins/pathprovider/Messages.ets:145:54
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/path_provider/src/main/ets/io/flutter/plugins/pathprovider/Messages.ets:150:41
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/path_provider/src/main/ets/io/flutter/plugins/pathprovider/Messages.ets:161:42
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/path_provider/src/main/ets/io/flutter/plugins/pathprovider/Messages.ets:162:31
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/path_provider/src/main/ets/io/flutter/plugins/pathprovider/Messages.ets:168:32
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/path_provider/src/main/ets/io/flutter/plugins/pathprovider/Messages.ets:168:49
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/path_provider/src/main/ets/io/flutter/plugins/pathprovider/Messages.ets:170:32
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/path_provider/src/main/ets/io/flutter/plugins/pathprovider/Messages.ets:170:54
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/path_provider/src/main/ets/io/flutter/plugins/pathprovider/Messages.ets:175:41
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/path_provider/src/main/ets/io/flutter/plugins/pathprovider/Messages.ets:186:42
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/path_provider/src/main/ets/io/flutter/plugins/pathprovider/Messages.ets:187:31
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/path_provider/src/main/ets/io/flutter/plugins/pathprovider/Messages.ets:193:32
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/path_provider/src/main/ets/io/flutter/plugins/pathprovider/Messages.ets:193:49
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/path_provider/src/main/ets/io/flutter/plugins/pathprovider/Messages.ets:195:32
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/path_provider/src/main/ets/io/flutter/plugins/pathprovider/Messages.ets:195:54
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/path_provider/src/main/ets/io/flutter/plugins/pathprovider/Messages.ets:200:41
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/path_provider/src/main/ets/io/flutter/plugins/pathprovider/Messages.ets:211:42
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/path_provider/src/main/ets/io/flutter/plugins/pathprovider/Messages.ets:212:31
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/path_provider/src/main/ets/io/flutter/plugins/pathprovider/Messages.ets:218:32
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/path_provider/src/main/ets/io/flutter/plugins/pathprovider/Messages.ets:218:49
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/path_provider/src/main/ets/io/flutter/plugins/pathprovider/Messages.ets:220:32
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/path_provider/src/main/ets/io/flutter/plugins/pathprovider/Messages.ets:220:54
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/path_provider/src/main/ets/io/flutter/plugins/pathprovider/Messages.ets:225:41
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/path_provider/src/main/ets/io/flutter/plugins/pathprovider/Messages.ets:236:42
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/path_provider/src/main/ets/io/flutter/plugins/pathprovider/Messages.ets:237:31
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/path_provider/src/main/ets/io/flutter/plugins/pathprovider/Messages.ets:243:32
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/path_provider/src/main/ets/io/flutter/plugins/pathprovider/Messages.ets:243:49
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/path_provider/src/main/ets/io/flutter/plugins/pathprovider/Messages.ets:245:32
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/path_provider/src/main/ets/io/flutter/plugins/pathprovider/Messages.ets:245:54
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/path_provider/src/main/ets/io/flutter/plugins/pathprovider/Messages.ets:246:29
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/path_provider/src/main/ets/io/flutter/plugins/pathprovider/Messages.ets:252:41
+ Usage of "ESObject" type is restricted (arkts-limited-esobj)
+[39m
+[33mWARN: [33mArkTS:WARN: For details about ArkTS syntax errors, see FAQs[39m
+[33mWARN: [33mArkTS:WARN File: E:/lcj/flutter_packages/packages/path_provider/path_provider_ohos/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ieoq7nx2t2mmmqcisieyovxzsrs=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/FlutterNapi.ets:16:21
+ Currently module for 'libflutter.so' is not verified. If you're importing napi, its verification will be enabled in later SDK version. Please make sure the corresponding .d.ts file is provided and the napis are correctly declared.
+[39m
+
+[2024-02-06T10:24:46.158] [DEBUG] debug-file - worker[0] has one work done.
+[2024-02-06T10:24:46.159] [DEBUG] debug-file - default@LintArkTS work[1] done.
+[2024-02-06T10:24:46.159] [DEBUG] debug-file - A work dispatched to worker[0] failed because unable to get work from ready queue.
+[2024-02-06T10:24:46.160] [INFO] debug-file - Finished :path_provider:default@LintArkTS... after 10 s 911 ms 
+[2024-02-06T10:24:46.165] [DEBUG] debug-file - path_provider : default@PackageHar start {
+  rss: 588918784,
+  heapTotal: 116740096,
+  heapUsed: 100460368,
+  external: 1152301,
+  arrayBuffers: 188116
+}
+[2024-02-06T10:24:46.165] [DEBUG] debug-file - Executing task :path_provider:default@PackageHar
+[2024-02-06T10:24:46.251] [DEBUG] debug-file - path_provider : default@PackageHar end {
+  rss: 574619648,
+  heapTotal: 100872192,
+  heapUsed: 94712344,
+  external: 1068465,
+  arrayBuffers: 102123
+}
+[2024-02-06T10:24:46.251] [DEBUG] debug-file - runTaskFromQueue task cost before running: 25 s 574 ms 
+[2024-02-06T10:24:46.252] [INFO] debug-file - Finished :path_provider:default@PackageHar... after 87 ms 
+[2024-02-06T10:24:46.252] [DEBUG] debug-file - path_provider : assembleHar start {
+  rss: 574783488,
+  heapTotal: 100872192,
+  heapUsed: 94894320,
+  external: 1068465,
+  arrayBuffers: 104000
+}
+[2024-02-06T10:24:46.252] [DEBUG] debug-file - Executing task :path_provider:assembleHar
+[2024-02-06T10:24:46.252] [DEBUG] debug-file - path_provider : assembleHar end {
+  rss: 574808064,
+  heapTotal: 100872192,
+  heapUsed: 94918584,
+  external: 1068465,
+  arrayBuffers: 104971
+}
+[2024-02-06T10:24:46.252] [DEBUG] debug-file - runTaskFromQueue task cost before running: 25 s 576 ms 
+[2024-02-06T10:24:46.252] [INFO] debug-file - Finished :path_provider:assembleHar... after 1 ms 
+[2024-02-06T10:24:46.253] [DEBUG] debug-file - BUILD SUCCESSFUL in 25 s 576 ms 
+[2024-02-06T10:24:46.254] [DEBUG] debug-file - Update task path_provider:default@PreBuild input file:E:\lcj\flutter_packages\packages\path_provider\path_provider_ohos\ohos\AppScope\app.json5 cache by regenerate.
+[2024-02-06T10:24:46.254] [DEBUG] debug-file - Update task path_provider:default@PreBuild input file:E:\lcj\flutter_packages\packages\path_provider\path_provider_ohos\ohos\path_provider\src\main\module.json5 cache by regenerate.
+[2024-02-06T10:24:46.254] [DEBUG] debug-file - Update task path_provider:default@PreBuild input file:E:\lcj\flutter_packages\packages\path_provider\path_provider_ohos\ohos\build-profile.json5 cache by regenerate.
+[2024-02-06T10:24:46.255] [DEBUG] debug-file - Update task path_provider:default@PreBuild input file:E:\lcj\flutter_packages\packages\path_provider\path_provider_ohos\ohos\path_provider\build-profile.json5 cache by regenerate.
+[2024-02-06T10:24:46.255] [DEBUG] debug-file - Update task path_provider:default@PreBuild input file:E:\lcj\flutter_packages\packages\path_provider\path_provider_ohos\ohos\path_provider\oh-package.json5 cache by regenerate.
+[2024-02-06T10:24:46.256] [DEBUG] debug-file - Incremental task path_provider:default@PreBuild post-execution cost:3 ms .
+[2024-02-06T10:24:46.256] [DEBUG] debug-file - Update task path_provider:default@CreateHarBuildProfile input file:E:\lcj\flutter_packages\packages\path_provider\path_provider_ohos\ohos\AppScope\app.json5 cache by regenerate.
+[2024-02-06T10:24:46.256] [DEBUG] debug-file - Update task path_provider:default@CreateHarBuildProfile input file:E:\lcj\flutter_packages\packages\path_provider\path_provider_ohos\ohos\build-profile.json5 cache by regenerate.
+[2024-02-06T10:24:46.257] [DEBUG] debug-file - Update task path_provider:default@CreateHarBuildProfile output file:E:\lcj\flutter_packages\packages\path_provider\path_provider_ohos\ohos\path_provider\BuildProfile.ets cache.
+[2024-02-06T10:24:46.257] [DEBUG] debug-file - Incremental task path_provider:default@CreateHarBuildProfile post-execution cost:2 ms .
+[2024-02-06T10:24:46.257] [DEBUG] debug-file - Update task path_provider:default@ConfigureCmake output file:E:\lcj\flutter_packages\packages\path_provider\path_provider_ohos\ohos\path_provider\.cxx\default\default\hvigor cache.
+[2024-02-06T10:24:46.257] [DEBUG] debug-file - Incremental task path_provider:default@ConfigureCmake post-execution cost:1 ms .
+[2024-02-06T10:24:46.258] [DEBUG] debug-file - Update task path_provider:default@MergeProfile input file:E:\lcj\flutter_packages\packages\path_provider\path_provider_ohos\ohos\AppScope\app.json5 cache by regenerate.
+[2024-02-06T10:24:46.258] [DEBUG] debug-file - Update task path_provider:default@MergeProfile input file:E:\lcj\flutter_packages\packages\path_provider\path_provider_ohos\ohos\build-profile.json5 cache by regenerate.
+[2024-02-06T10:24:46.258] [DEBUG] debug-file - Update task path_provider:default@MergeProfile input file:E:\lcj\flutter_packages\packages\path_provider\path_provider_ohos\ohos\path_provider\src\main\module.json5 cache by regenerate.
+[2024-02-06T10:24:46.259] [DEBUG] debug-file - Update task path_provider:default@MergeProfile output file:E:\lcj\flutter_packages\packages\path_provider\path_provider_ohos\ohos\path_provider\build\default\intermediates\merge_profile\default\module.json cache.
+[2024-02-06T10:24:46.259] [DEBUG] debug-file - Incremental task path_provider:default@MergeProfile post-execution cost:2 ms .
+[2024-02-06T10:24:46.259] [DEBUG] debug-file - Update task path_provider:default@ProcessProfile input file:E:\lcj\flutter_packages\packages\path_provider\path_provider_ohos\ohos\path_provider\build\default\intermediates\merge_profile\default\module.json cache by regenerate.
+[2024-02-06T10:24:46.260] [DEBUG] debug-file - Update task path_provider:default@ProcessProfile output file:E:\lcj\flutter_packages\packages\path_provider\path_provider_ohos\ohos\path_provider\build\default\intermediates\process_profile\default\module.json cache.
+[2024-02-06T10:24:46.260] [DEBUG] debug-file - Incremental task path_provider:default@ProcessProfile post-execution cost:1 ms .
+[2024-02-06T10:24:46.260] [DEBUG] debug-file - Update task path_provider:default@LintArkTS input file:E:\lcj\flutter_packages\packages\path_provider\path_provider_ohos\ohos\path_provider\src\main\ets cache by regenerate.
+[2024-02-06T10:24:46.264] [DEBUG] debug-file - Update task path_provider:default@LintArkTS input file:E:\lcj\flutter_packages\packages\path_provider\path_provider_ohos\ohos\path_provider\BuildProfile.ets cache by regenerate.
+[2024-02-06T10:24:46.264] [DEBUG] debug-file - Incremental task path_provider:default@LintArkTS post-execution cost:4 ms .
+[2024-02-06T10:24:46.264] [DEBUG] debug-file - Update task path_provider:default@ProcessResource output file:E:\lcj\flutter_packages\packages\path_provider\path_provider_ohos\ohos\path_provider\build\default\intermediates\res\default\resConfig.json cache.
+[2024-02-06T10:24:46.264] [DEBUG] debug-file - Incremental task path_provider:default@ProcessResource post-execution cost:1 ms .
+[2024-02-06T10:24:46.265] [DEBUG] debug-file - Update task path_provider:default@ProcessLibs input file:E:\lcj\flutter_packages\packages\path_provider\path_provider_ohos\ohos\path_provider\libs cache by regenerate.
+[2024-02-06T10:24:46.265] [DEBUG] debug-file - Update task path_provider:default@ProcessLibs output file:E:\lcj\flutter_packages\packages\path_provider\path_provider_ohos\ohos\path_provider\build\default\intermediates\libs\default cache.
+[2024-02-06T10:24:46.266] [DEBUG] debug-file - Incremental task path_provider:default@ProcessLibs post-execution cost:2 ms .
+[2024-02-06T10:24:46.266] [DEBUG] debug-file - Update task path_provider:default@CompileResource input file:E:\lcj\flutter_packages\packages\path_provider\path_provider_ohos\ohos\path_provider\src\main\resources cache by regenerate.
+[2024-02-06T10:24:46.270] [DEBUG] debug-file - Update task path_provider:default@CompileResource input file:E:\lcj\flutter_packages\packages\path_provider\path_provider_ohos\ohos\path_provider\build\default\intermediates\process_profile\default\module.json cache by regenerate.
+[2024-02-06T10:24:46.270] [DEBUG] debug-file - Update task path_provider:default@CompileResource input file:E:\lcj\flutter_packages\packages\path_provider\path_provider_ohos\ohos\path_provider\build\default\intermediates\res\default\resConfig.json cache by regenerate.
+[2024-02-06T10:24:46.270] [DEBUG] debug-file - Update task path_provider:default@CompileResource output file:E:\lcj\flutter_packages\packages\path_provider\path_provider_ohos\ohos\path_provider\build\default\intermediates\res\default cache.
+[2024-02-06T10:24:46.273] [DEBUG] debug-file - Update task path_provider:default@CompileResource output file:E:\lcj\flutter_packages\packages\path_provider\path_provider_ohos\ohos\path_provider\build\default\generated\r\default\ResourceTable.h cache.
+[2024-02-06T10:24:46.273] [DEBUG] debug-file - Update task path_provider:default@CompileResource output file:E:\lcj\flutter_packages\packages\path_provider\path_provider_ohos\ohos\path_provider\build\default\generated\r\default cache.
+[2024-02-06T10:24:46.274] [DEBUG] debug-file - Incremental task path_provider:default@CompileResource post-execution cost:9 ms .
+[2024-02-06T10:24:46.274] [DEBUG] debug-file - Update task path_provider:default@DoNativeStrip input file:E:\lcj\flutter_packages\packages\path_provider\path_provider_ohos\ohos\path_provider\build\default\intermediates\libs\default cache by regenerate.
+[2024-02-06T10:24:46.275] [DEBUG] debug-file - Update task path_provider:default@DoNativeStrip output file:E:\lcj\flutter_packages\packages\path_provider\path_provider_ohos\ohos\path_provider\build\default\intermediates\stripped_native_libs\default cache.
+[2024-02-06T10:24:46.275] [DEBUG] debug-file - Incremental task path_provider:default@DoNativeStrip post-execution cost:2 ms .
+[2024-02-06T10:24:46.276] [DEBUG] debug-file - Update task path_provider:default@CacheNativeLibs input file:E:\lcj\flutter_packages\packages\path_provider\path_provider_ohos\ohos\path_provider\build\default\intermediates\libs\default cache by regenerate.
+[2024-02-06T10:24:46.276] [DEBUG] debug-file - Update task path_provider:default@CacheNativeLibs input file:E:\lcj\flutter_packages\packages\path_provider\path_provider_ohos\ohos\path_provider\build\default\intermediates\stripped_native_libs\default cache by regenerate.
+[2024-02-06T10:24:46.277] [DEBUG] debug-file - Update task path_provider:default@CacheNativeLibs output file:E:\lcj\flutter_packages\packages\path_provider\path_provider_ohos\ohos\path_provider\build\default\intermediates\patch\default\base_native_libs.json cache.
+[2024-02-06T10:24:46.277] [DEBUG] debug-file - Incremental task path_provider:default@CacheNativeLibs post-execution cost:2 ms .
+[2024-02-06T10:24:46.277] [DEBUG] debug-file - Update task path_provider:default@PackageHar input file:E:\lcj\flutter_packages\packages\path_provider\path_provider_ohos\ohos\path_provider\build\default\intermediates\merge_profile\default cache by regenerate.
+[2024-02-06T10:24:46.278] [DEBUG] debug-file - Update task path_provider:default@PackageHar input file:E:\lcj\flutter_packages\packages\path_provider\path_provider_ohos\ohos\path_provider cache by regenerate.
+[2024-02-06T10:24:46.289] [DEBUG] debug-file - Update task path_provider:default@PackageHar input file:E:\lcj\flutter_packages\packages\path_provider\path_provider_ohos\ohos\path_provider\build\default\intermediates\stripped_native_libs\default cache by regenerate.
+[2024-02-06T10:24:46.290] [DEBUG] debug-file - Update task path_provider:default@PackageHar input file:E:\lcj\flutter_packages\packages\path_provider\path_provider_ohos\ohos\path_provider\build\default\intermediates\res\default\ResourceTable.txt cache by regenerate.
+[2024-02-06T10:24:46.290] [DEBUG] debug-file - Update task path_provider:default@PackageHar input file:E:\lcj\flutter_packages\packages\path_provider\path_provider_ohos\ohos\path_provider\build\default\generated\pm\default cache by regenerate.
+[2024-02-06T10:24:46.291] [DEBUG] debug-file - Update task path_provider:default@PackageHar output file:E:\lcj\flutter_packages\packages\path_provider\path_provider_ohos\ohos\path_provider\build\default\cache\default\default@PackageHar cache.
+[2024-02-06T10:24:46.301] [DEBUG] debug-file - Update task path_provider:default@PackageHar output file:E:\lcj\flutter_packages\packages\path_provider\path_provider_ohos\ohos\path_provider\build\default\outputs\default cache.
+[2024-02-06T10:24:46.302] [DEBUG] debug-file - Incremental task path_provider:default@PackageHar post-execution cost:25 ms .
+[2024-02-06T10:24:46.311] [DEBUG] debug-file - Current worker pool is stopped or closed.
+[2024-02-06T10:24:46.311] [DEBUG] debug-file - Clear worker 1.
+[2024-02-06T10:24:46.312] [DEBUG] debug-file - Worker 1 has been cleared.
+[2024-02-06T10:24:46.312] [DEBUG] debug-file - Current idle worker size: 1.
+[2024-02-06T10:24:46.312] [DEBUG] debug-file - Current busy worker size: 0.
+[2024-02-06T10:24:46.312] [DEBUG] debug-file - Clear worker 0.
+[2024-02-06T10:24:46.312] [DEBUG] debug-file - Worker 0 has been cleared.
+[2024-02-06T10:24:46.312] [DEBUG] debug-file - Current idle worker size: 0.
+[2024-02-06T10:24:46.312] [DEBUG] debug-file - Current busy worker size: 0.
+[2024-02-06T10:24:46.313] [DEBUG] debug-file - hvigor build process will be closed.
+[2024-02-06T10:24:46.313] [DEBUG] debug-file - Current worker pool is terminated.
+[2024-02-06T10:24:46.314] [DEBUG] debug-file - worker[1] exits with exit code 1.
+[2024-02-06T10:24:46.322] [DEBUG] debug-file - session manager: send message to worker process.
+[2024-02-06T10:24:46.323] [DEBUG] debug-file - session manager: send message to worker process.
+[2024-02-06T10:24:46.323] [DEBUG] debug-file - watch worker: worker id should be larger than 0. Nothing will be sent to any worker thread.
+[2024-02-06T10:24:46.323] [DEBUG] debug-file - watch worker: worker id should be larger than 0. Nothing will be sent to any worker thread.
+[2024-02-06T10:24:46.344] [DEBUG] debug-file - worker[0] exits with exit code 1.
