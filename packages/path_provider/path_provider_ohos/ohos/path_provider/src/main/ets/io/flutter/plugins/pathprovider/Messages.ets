@@ -102,7 +102,7 @@ export abstract class PathProviderApi {
             }
             reply.reply(wrapped);
           }
-        })
+        } as ESObject)
       } else {
         channel.setMessageHandler(null);
       }
@@ -127,7 +127,7 @@ export abstract class PathProviderApi {
             }
             reply.reply(wrapped);
           }
-        })
+        } as ESObject)
       } else {
         channel.setMessageHandler(null);
       }
@@ -152,7 +152,7 @@ export abstract class PathProviderApi {
             }
             reply.reply(wrapped);
           }
-        })
+        } as ESObject)
       } else {
         channel.setMessageHandler(null);
       }
@@ -177,7 +177,7 @@ export abstract class PathProviderApi {
             }
             reply.reply(wrapped);
           }
-        })
+        } as ESObject)
       } else {
         channel.setMessageHandler(null);
       }
@@ -202,7 +202,7 @@ export abstract class PathProviderApi {
             }
             reply.reply(wrapped);
           }
-        })
+        } as ESObject)
       } else {
         channel.setMessageHandler(null);
       }
@@ -227,7 +227,7 @@ export abstract class PathProviderApi {
             }
             reply.reply(wrapped);
           }
-        })
+        } as ESObject)
       } else {
         channel.setMessageHandler(null);
       }
@@ -254,7 +254,7 @@ export abstract class PathProviderApi {
             }
             reply.reply(wrapped);
           }
-        })
+        } as ESObject)
       } else {
         channel.setMessageHandler(null);
       }
