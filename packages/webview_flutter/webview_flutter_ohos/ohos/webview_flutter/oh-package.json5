@@ -20,7 +20,7 @@
   "main": "Index.ets",
   "author": "",
   "license": "Apache-2.0",
-  "devDependencies": {
+  "dependencies": {
     "@ohos/flutter_ohos": "file:libs/flutter_embedding.har"
   }
 }
