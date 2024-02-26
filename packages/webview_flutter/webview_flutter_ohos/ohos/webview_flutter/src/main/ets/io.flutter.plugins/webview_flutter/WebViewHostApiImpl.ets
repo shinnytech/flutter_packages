@@ -83,7 +83,11 @@ export class WebViewHostApiImpl extends WebViewHostApi {
   loadUrl(instanceId: number, url: string, headers: Map<string, string>): void {
     const webView: WebViewPlatformView = this.instanceManager.getInstance(instanceId);
     try {
-      webView.getController().loadUrl(url, this.toWebHeaders(headers));
+      if (url.startsWith("resources/rawfile/")) {
+        webView.getController().loadUrl($rawfile(url.replace("resources/rawfile/","")), this.toWebHeaders(headers));
+      }else {
+        webView.getController().loadUrl(url, this.toWebHeaders(headers));
+      }
     } catch (err) {
       Log.e(TAG, "loadUrl err = " + err);
       setTimeout(
