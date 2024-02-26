@@ -2930,13 +2930,13 @@ export abstract class FlutterAssetManagerHostApi {
       if (api != null) {
         channel.setMessageHandler(
           {
-            onMessage: (message: ESObject, reply: Reply<ESObject>) => {
+            onMessage: async (message: ESObject, reply: Reply<ESObject>) => {
               let wrapped: ArrayList<ESObject> = new ArrayList<ESObject>();
               const args: Array<ESObject> = message;
               const pathArg: string = args[0];
               try {
-                let output: ESObject = api.list(pathArg);
-                wrapped.insert(null, 0);
+                let output: ESObject = await api.list(pathArg);
+                wrapped.insert(output, 0);
               } catch (err) {
                 const wrappedError: ArrayList<ESObject> = GeneratedOhosWebView.wrapError(err);
                 wrapped = wrappedError;
@@ -2964,7 +2964,7 @@ export abstract class FlutterAssetManagerHostApi {
               const nameArg: string = args[0];
               try {
                 let output: ESObject = api.getAssetFilePathByName(nameArg);
-                wrapped.insert(null, 0);
+                wrapped.insert(output, 0);
               } catch (err) {
                 const wrappedError: ArrayList<ESObject> = GeneratedOhosWebView.wrapError(err);
                 wrapped = wrappedError;

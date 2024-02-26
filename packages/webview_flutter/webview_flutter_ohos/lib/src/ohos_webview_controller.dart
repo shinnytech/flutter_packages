@@ -275,11 +275,9 @@ class OhosWebViewController extends PlatformWebViewController {
         'key',
       );
     }
-
-    return _webView.loadUrl(
-      Uri.file('/ohos_asset/$assetFilePath').toString(),
-      <String, String>{},
-    );
+    _webView.settings.setAllowFileAccess(true);
+    final String  url = "resources/rawfile/" + assetFilePath;
+    return _webView.loadUrl(url, <String, String>{});
   }
 
   @override
