@@ -594,19 +594,19 @@ export class ImagePickerApiCodec extends StandardMessageCodec {
       case 128:
         t = new CacheRetrievalError()
         return t.fromList(this.readValue(buffer));
-      case -127:
+      case 129:
         t = new CacheRetrievalResult()
         return t.fromList(this.readValue(buffer));
-      case -126:
+      case 130:
         return GeneralOptions.fromList(this.readValue(buffer));
-      case -125:
+      case 131:
         return ImageSelectionOptions.fromList(this.readValue(buffer));
-      case -124:
+      case 132:
         t = new MediaSelectionOptions()
         return t.fromList(this.readValue(buffer));
-      case -123:
+      case 133:
         return SourceSpecification.fromList(this.readValue(buffer));
-      case -122:
+      case 134:
         return VideoSelectionOptions.fromList(this.readValue(buffer));
       default:
         return super.readValueOfType(type, buffer);
@@ -618,22 +618,22 @@ export class ImagePickerApiCodec extends StandardMessageCodec {
       stream.writeInt8(128);
       super.writeValue(stream, value.toList());
     } else if (value instanceof CacheRetrievalResult) {
-      stream.writeInt8(-127);
+      stream.writeInt8(129);
       super.writeValue(stream, value.toList());
     } else if (value instanceof GeneralOptions) {
-      stream.writeInt8(-126);
+      stream.writeInt8(129);
       super.writeValue(stream, value.toList());
     } else if (value instanceof ImageSelectionOptions) {
-      stream.writeInt8(-125);
+      stream.writeInt8(130);
       super.writeValue(stream, value.toList());
     } else if (value instanceof MediaSelectionOptions) {
-      stream.writeInt8(-124);
+      stream.writeInt8(131);
       super.writeValue(stream, value.toList());
     } else if (value instanceof SourceSpecification) {
-      stream.writeInt8(-123);
+      stream.writeInt8(132);
       super.writeValue(stream, value.toList());
     } else if (value instanceof VideoSelectionOptions) {
-      stream.writeInt8(-122);
+      stream.writeInt8(134);
       super.writeValue(stream, value.toList());
     } else {
       super.writeValue(stream, value);

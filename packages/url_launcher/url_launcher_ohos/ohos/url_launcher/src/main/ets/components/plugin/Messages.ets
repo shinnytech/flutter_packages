@@ -159,5 +159,5 @@ export interface UrlLauncherApi {
   getCodec(): MessageCodec<ESObject>;
 
   /** Sets up an instance of `UrlLauncherApi` to handle messages through the `binaryMessenger`. */
-  setup(binaryMessenger: BinaryMessenger | null, api: UrlLauncherApi | null);
+  setup(binaryMessenger: BinaryMessenger | null, api: UrlLauncherApi | null): ESObject;
 }

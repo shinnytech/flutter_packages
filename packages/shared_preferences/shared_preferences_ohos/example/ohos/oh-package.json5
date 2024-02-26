@@ -22,5 +22,8 @@
   "description": "Please describe the basic information.",
   "main": "",
   "version": "1.0.0",
-  "dependencies": {}
+  "dependencies": {},
+  "overrides": {
+    '@ohos/flutter_ohos': 'file:./har/flutter.har'
+  }
 }

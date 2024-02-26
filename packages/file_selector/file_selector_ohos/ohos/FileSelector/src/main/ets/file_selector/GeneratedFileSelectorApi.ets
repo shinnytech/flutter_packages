@@ -203,7 +203,7 @@ export class FileSelectorApiCodec extends StandardMessageCodec {
         case 128:
           let res0 =  FileResponse.fromList(super.readValue(buffer) as Array<ESObject>);
           return res0;
-        case -127:
+        case 129:
           let vur: ESObject = super.readValue(buffer)
           let res1 =  FileTypes.fromList(vur as Array<ESObject>);
           return res1;
@@ -218,7 +218,7 @@ export class FileSelectorApiCodec extends StandardMessageCodec {
         stream.writeInt8(128);
         return this.writeValue(stream, (value as FileResponse).toList());
       } else if (value instanceof FileTypes) {
-        stream.writeInt8(-127);
+        stream.writeInt8(129);
         return this.writeValue(stream, (value as FileTypes).toList());
       } else {
         return super.writeValue(stream, value);
