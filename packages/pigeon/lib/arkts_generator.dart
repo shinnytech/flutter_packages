@@ -349,9 +349,7 @@ class ArkTSGenerator extends StructuredGenerator<ArkTSOptions> {
               indexMap(func.arguments, _getSafeArgumentName);
           final Iterable<String> enumSafeArgNames =
               indexMap(func.arguments, getEnumSafeArgumentExpression);
-          final String invokeArgs =
-              argNames.map((String x) => '$x: $x ').join(', ');
-          sendArgument = ' { $invokeArgs}';
+          sendArgument = '[${argNames.join(', ')}]';
           final String argsSignature =
               map2(argTypes, argNames, (String x, String y) => '$y: $x')
                   .join(',');
