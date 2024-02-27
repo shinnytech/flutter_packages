@@ -11,5 +11,4 @@
 **/.test
 entry/src/main/resources/rawfile/
 har/flutter.har
-entry/libs/arm64-v8a/
 entry/src/main/resources/rawfile/flutter_assets
