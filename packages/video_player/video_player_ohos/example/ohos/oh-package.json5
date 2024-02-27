@@ -24,7 +24,7 @@
     "@ohos/flutter_ohos": "file:./har/flutter.har",
     '@ohos/video_player_ohos': 'file:./entry/har/video_player_ohos.har',
   },
-  "devDependencies": {
+  "dependencies": {
     "@ohos/hypium": "1.0.6"
   }
 }
