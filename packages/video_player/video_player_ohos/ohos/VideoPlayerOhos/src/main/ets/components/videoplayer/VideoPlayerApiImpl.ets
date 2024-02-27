@@ -177,7 +177,7 @@ export class VideoPlayerApiImpl {
           let wrapped = new Array<Object>();
           try {
             api.initialize();
-            wrapped.push(null);
+            wrapped.push(new TextureMessage());
             reply.reply(wrapped);
           } catch (err) {
             let wrappedError = wrapError(err);
@@ -219,7 +219,7 @@ export class VideoPlayerApiImpl {
           let textureMsg = args[0] as TextureMessage;
           try {
             api.dispose(textureMsg);
-            wrapped.push(null);
+            wrapped.push(new TextureMessage());
             reply.reply(wrapped);
           } catch (err) {
             let wrappedError = wrapError(err);
@@ -239,7 +239,7 @@ export class VideoPlayerApiImpl {
           let loopMsg = args[0] as LoopingMessage;
           try {
             api.setLooping(loopMsg);
-            wrapped.push(null);
+            wrapped.push(new TextureMessage());
             reply.reply(wrapped);
           } catch (err) {
             let wrappedError = wrapError(err);
@@ -259,7 +259,7 @@ export class VideoPlayerApiImpl {
           let volumeMsg = args[0] as VolumeMessage;
           try {
             api.setVolume(volumeMsg);
-            wrapped.push(null);
+            wrapped.push(new TextureMessage());
             reply.reply(wrapped);
           } catch (err) {
             let wrappedError = wrapError(err);
@@ -279,7 +279,7 @@ export class VideoPlayerApiImpl {
           let playbackSpeedMsg = args[0] as PlaybackSpeedMessage;
           try {
             api.setPlaybackSpeed(playbackSpeedMsg);
-            wrapped.push(null);
+            wrapped.push(new TextureMessage());
             reply.reply(wrapped);
           } catch (err) {
             let wrappedError = wrapError(err);
@@ -299,7 +299,7 @@ export class VideoPlayerApiImpl {
           let textureMsg = args[0] as TextureMessage;
           try {
             api.play(textureMsg);
-            wrapped.push(null);
+            wrapped.push(new TextureMessage());
             reply.reply(wrapped);
           } catch (err) {
             let wrappedError = wrapError(err);
@@ -339,7 +339,7 @@ export class VideoPlayerApiImpl {
           let positionMsg = args[0] as PositionMessage;
           try {
             api.seekTo(positionMsg);
-            wrapped.push(null);
+            wrapped.push(new TextureMessage());
             reply.reply(wrapped);
           } catch (err) {
             let wrappedError = wrapError(err);
@@ -359,7 +359,7 @@ export class VideoPlayerApiImpl {
           let textureMsg = args[0] as TextureMessage;
           try {
             api.pause(textureMsg);
-            wrapped.push(null);
+            wrapped.push(new TextureMessage());
             reply.reply(wrapped);
           } catch (err) {
             let wrappedError = wrapError(err);
@@ -379,7 +379,7 @@ export class VideoPlayerApiImpl {
           let mixWithOthersMsg = args[0] as MixWithOthersMessage;
           try {
             api.setMixWithOthers(mixWithOthersMsg);
-            wrapped.push(null);
+            wrapped.push(new TextureMessage());
             reply.reply(wrapped);
           } catch (err) {
             let wrappedError = wrapError(err);

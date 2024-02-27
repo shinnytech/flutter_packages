@@ -153,30 +153,7 @@ export class LoopingMessage {
     }
     this.isLooping = setterArg;
   }
-
-// public static final class Builder {
-//
-//   private @Nullable Long textureId;
-//
-//   public @NonNull Builder setTextureId(@NonNull Long setterArg) {
-//   this.textureId = setterArg;
-//   return this;
-// }
-//
-// private @Nullable Boolean isLooping;
-//
-// public @NonNull Builder setIsLooping(@NonNull Boolean setterArg) {
-//   this.isLooping = setterArg;
-//   return this;
-// }
-//
-// public @NonNull LoopingMessage build() {
-//         LoopingMessage pigeonReturn = new LoopingMessage();
-//         pigeonReturn.setTextureId(textureId);
-//         pigeonReturn.setIsLooping(isLooping);
-//         return pigeonReturn;
-//       }
-// }
+  
   toList(): Array<Object> {
     let toListResult: Array<Object> = new Array<Object>(2);
     toListResult[0] = this.textureId;
@@ -212,21 +189,6 @@ export class MixWithOthersMessage {
     }
     this.mixWithOthers = setterArg;
   }
-
-// public static final class Builder {
-//
-//   private @Nullable Boolean mixWithOthers;
-//
-//   public @NonNull Builder setMixWithOthers(@NonNull Boolean setterArg) {
-//   this.mixWithOthers = setterArg;
-//   return this;
-// }
-// public @NonNull MixWithOthersMessage build() {
-//         MixWithOthersMessage pigeonReturn = new MixWithOthersMessage();
-//         pigeonReturn.setMixWithOthers(mixWithOthers);
-//         return pigeonReturn;
-//       }
-// }
 
   toList(): Array<Object> {
     let toListResult: Array<Object> = new Array<Object>(1);
@@ -269,31 +231,6 @@ export class PlaybackSpeedMessage {
     this.speed = setterArg;
   }
 
-
-// public static final class Builder {
-//
-//   private @Nullable Long textureId;
-//
-//   public @NonNull Builder setTextureId(@NonNull Long setterArg) {
-//   this.textureId = setterArg;
-//   return this;
-// }
-//
-// private @Nullable Double speed;
-//
-// public @NonNull Builder setSpeed(@NonNull Double setterArg) {
-//   this.speed = setterArg;
-//   return this;
-// }
-//
-// public @NonNull PlaybackSpeedMessage build() {
-//         PlaybackSpeedMessage pigeonReturn = new PlaybackSpeedMessage();
-//         pigeonReturn.setTextureId(textureId);
-//         pigeonReturn.setSpeed(speed);
-//         return pigeonReturn;
-//       }
-// }
-
   toList(): Array<Object>  {
       let toListResult: Array<Object>  = new Array<Object>();
       toListResult[0] = this.textureId;
@@ -334,31 +271,6 @@ export class PositionMessage {
     this.position = setterArg;
   }
 
-
-// public static final class Builder {
-//
-//   private @Nullable Long textureId;
-//
-//   public @NonNull Builder setTextureId(@NonNull Long setterArg) {
-//   this.textureId = setterArg;
-//   return this;
-// }
-//
-// private @Nullable Long position;
-//
-// public @NonNull Builder setPosition(@NonNull Long setterArg) {
-//   this.position = setterArg;
-//   return this;
-// }
-//
-// public @NonNull PositionMessage build() {
-//         PositionMessage pigeonReturn = new PositionMessage();
-//         pigeonReturn.setTextureId(textureId);
-//         pigeonReturn.setPosition(position);
-//         return pigeonReturn;
-//       }
-// }
-
   toList(): Array<Object> {
     let toListResult: Array<Object> = new Array<Object>();
     toListResult[0] = this.textureId;
@@ -387,24 +299,6 @@ export class TextureMessage {
   public setTextureId(setterArg: Number): void {
     this.textureId = setterArg;
   }
-
-
-// public static final class Builder {
-//
-//   private  Long textureId;
-//
-//   public  Builder setTextureId( Long setterArg) {
-//   this.textureId = setterArg;
-//   return this;
-// }
-//
-// public  TextureMessage build() {
-//         TextureMessage pigeonReturn = new TextureMessage();
-//         pigeonReturn.setTextureId(textureId);
-//         return pigeonReturn;
-//       }
-// }
-
 
  toList(): Array<Object> {
       let toListResult: Array<Object> = new Array<Object>(1);
@@ -440,30 +334,6 @@ export class VolumeMessage {
   public setVolume(setterArg: Number): void {
     this.volume = setterArg;
   }
-// public static final class Builder {
-//
-//   private  Long textureId;
-//
-//   public Builder setTextureId( Long setterArg) {
-//   this.textureId = setterArg;
-//   return this;
-// }
-//
-// private Double volume;
-//
-// public Builder setVolume(Double setterArg) {
-//   this.volume = setterArg;
-//   return this;
-// }
-//
-// public VolumeMessage build() {
-//         VolumeMessage pigeonReturn = new VolumeMessage();
-//         pigeonReturn.setTextureId(textureId);
-//         pigeonReturn.setVolume(volume);
-//         return pigeonReturn;
-//       }
-// }
-
 
  toList(): Array<Object> {
    let toListResult: Array<Object> = new Array<Object>(2);
