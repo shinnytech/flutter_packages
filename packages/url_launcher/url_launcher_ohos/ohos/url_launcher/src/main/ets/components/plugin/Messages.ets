@@ -125,7 +125,7 @@ export class UrlLauncherApiCodec extends StandardMessageCodec {
 
   readValueOfType(type: number, buffer: ByteBuffer): Object {
     switch (type) {
-      case -128:
+      case 128:
         return WebViewOptions.fromList(super.readValue(buffer) as Array<Object>);
       default:
         return super.readValueOfType(type, buffer);
@@ -134,7 +134,7 @@ export class UrlLauncherApiCodec extends StandardMessageCodec {
 
   writeValue(stream: ByteBuffer, value: ESObject): void {
     if (value instanceof WebViewOptions) {
-      stream.writeInt8(-128);
+      stream.writeInt8(128);
       this.writeValue(stream, (value as WebViewOptions).toList());
     } else {
       super.writeValue(stream, value);
