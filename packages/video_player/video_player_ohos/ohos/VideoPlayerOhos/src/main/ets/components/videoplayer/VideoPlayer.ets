@@ -177,12 +177,6 @@ export class VideoPlayer {
     })
   }
 
-  setUpVideoPlayer(): void {
-    let imageReceiver = this.textureEntry.getImageReceiver();
-    imageReceiver.getReceivingSurfaceId().then((receivingSurfaceId) => {
-      this.surfaceId = receivingSurfaceId;
-    })
-  }
 
   /**
    * Release the video player.

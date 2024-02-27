@@ -19,6 +19,7 @@ import { BinaryMessenger } from '@ohos/flutter_ohos/src/main/ets/plugin/common/B
 import BasicMessageChannel, { Reply } from '@ohos/flutter_ohos/src/main/ets/plugin/common/BasicMessageChannel';
 import Log from '@ohos/flutter_ohos/src/main/ets/util/Log';
 import { FlutterRenderer } from '@ohos/flutter_ohos/src/main/ets/embedding/engine/renderer/FlutterRenderer';
+import { SurfaceTextureEntry } from '@ohos/flutter_ohos/src/main/ets/view/TextureRegistry';
 import { VideoPlayer } from './VideoPlayer';
 import { VideoPlayerApi } from './VideoPlayerApi';
 import { CreateMessage, LoopingMessage,
@@ -74,7 +75,7 @@ export class VideoPlayerApiImpl {
     // src: resourceManager.RawFileDescriptor = await getContext().resourceManager.getRawFd(uri);
     let textureId: number = flutterRenderer.getTextureId();
     Log.i(TAG, "enter getRawFd, textureId=" + textureId);
-    let surfaceTextureEntry = flutterRenderer.registerTexture(textureId);
+    let surfaceTextureEntry: SurfaceTextureEntry  = flutterRenderer.registerTexture(textureId);
     this.getContext().resourceManager.getRawFd("video1.mp4").then((rawFileDescriptor) => {
       let videoPlayer = new VideoPlayer(playerModel, surfaceTextureEntry, rawFileDescriptor);
       this.videoPlayers.set(textureId.toString(), videoPlayer);
