@@ -232,9 +232,9 @@
                 <filteritem type='filepath' name="packages/webview_flutter/webview_flutter_ohos/ohos/har/" desc='二进制文件,不影响兼容性'/>
                 <filteritem type='filepath' name="packages/webview_flutter/webview_flutter_ohos/example/ohos/dta/" desc='二进制文件,不影响兼容性'/>
                 <filteritem type='filepath' name="packages/webview_flutter/webview_flutter_ohos/example/assets/" desc='二进制文件,不影响兼容性'/>
-                <filteritem type='filepath' name="packages/video_player/video_player_ohos/example/ohos/dta/icudtl.dat" desc='二进制文件,不影响兼容性'/>
+                <filteritem type='filename' name="packages/video_player/video_player_ohos/example/ohos/dta/icudtl.dat" desc='二进制文件,不影响兼容性'/>
                 <filteritem type='filepath' name="packages/video_player/video_player_ohos/example/ohos/hvigor/hvigor-wrapper.js" desc='编译文件,不影响兼容性'/>
-                <filteritem type='filepath' name="packages/video_player/video_player_ohos/example/ohos/entry/oh-package-lock.json5" desc='编译文件,不影响兼容性'/>
+                <filteritem type='filename' name="packages/video_player/video_player_ohos/example/ohos/entry/oh-package-lock.json5" desc='编译文件,不影响兼容性'/>
             </filefilter>
             <filefilter name="defaultPolicyFilter" desc="Filters for compatibility，license header policies">
                 <filteritem type='filepath' name="packages/pigeon/example/app/ohos/entry/src/main/ets/plugins/Messages.ets" desc='BSDStyleLicense,不影响兼容性'/>
