@@ -107,7 +107,7 @@ export default class PathProviderPlugin extends PathProviderApi implements Flutt
 
   private getPathProviderTemporaryDirectory(): string {
     if (this.context) {
-      return this.context.tempDir;
+      return this.context.cacheDir;
     }
     return "";
   }
