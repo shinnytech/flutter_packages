@@ -12,7 +12,6 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
-
 {
   name: 'entry',
   version: '1.0.0',
@@ -21,8 +20,7 @@
   author: '',
   license: '',
   dependencies: {
-    '@ohos/flutter_ohos': 'file:../har/flutter_embedding.har',
-    '@ohos/file_selector_ohos': 'file:../har/file_selector_ohos.har',
+    '@ohos/flutter_ohos': 'file:../har/flutter.har',
+    '@ohos/file_selector_ohos': 'file:./har/file_selector_ohos.har',
   },
 }
-

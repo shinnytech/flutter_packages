@@ -1814,7 +1814,7 @@ class WebViewClientFlutterApiCodec extends StandardMessageCodec {
     switch (type) {
       case 128:
         return WebResourceErrorData.fromArray(this.readValue(buffer));
-      case -127:
+      case 129:
         return WebResourceRequestData.fromArray(this.readValue(buffer));
       default:
         return super.readValueOfType(type, buffer);
@@ -1826,7 +1826,7 @@ class WebViewClientFlutterApiCodec extends StandardMessageCodec {
       stream.writeInt8(128);
       super.writeValue(stream, value.toArray());
     } else if (value instanceof WebResourceRequestData) {
-      stream.writeInt8(-127);
+      stream.writeInt8(129);
       super.writeValue(stream, value.toArray());
     } else {
       super.writeValue(stream, value);

@@ -38,7 +38,7 @@ export default class UrlLauncherPlugin implements FlutterPlugin, AbilityAware {
     console.debug(TAG, 'onAttachedToAbility ')
     this.urlLauncherApi = new UrlLauncher(binding.getAbility().context);
     this.urlLauncherApi.setup(
-      this.pluginBinding?.getBinaryMessenger(), this.urlLauncherApi);
+      this.pluginBinding?.getBinaryMessenger() ?? null, this.urlLauncherApi);
   }
   onDetachedFromAbility(): void {
     this.urlLauncherApi?.setup(null, null);

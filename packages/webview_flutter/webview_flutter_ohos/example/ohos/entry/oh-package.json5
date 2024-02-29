@@ -12,7 +12,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 {
   license: '',
   devDependencies: {},
@@ -22,7 +21,7 @@
   main: '',
   version: '1.0.0',
   dependencies: {
-    '@ohos/flutter_ohos': 'file:../har/flutter_embedding.har',
+    '@ohos/flutter_ohos': 'file:../har/flutter.har',
     '@ohos/path_provider_ohos': 'file:./har/path_provider_ohos.har',
     '@ohos/webview_flutter_ohos': 'file:./har/webview_flutter_ohos.har',
   },

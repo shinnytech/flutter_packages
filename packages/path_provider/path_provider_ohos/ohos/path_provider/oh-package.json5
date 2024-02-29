@@ -20,6 +20,6 @@
   "author": "",
   "license": "Apache-2.0",
   "dependencies": {
-    "@ohos/flutter_ohos": "file:libs/flutter_embedding.har"
+    "@ohos/flutter_ohos": "file:libs/flutter.har"
   }
 }

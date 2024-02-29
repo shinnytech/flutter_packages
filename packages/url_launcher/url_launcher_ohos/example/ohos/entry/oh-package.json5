@@ -21,7 +21,7 @@
   main: '',
   version: '1.0.0',
   dependencies: {
-    '@ohos/url_launcher_ohos': 'file:../har/url_launcher_ohos.har',
     '@ohos/integration_test': 'file:./har/integration_test.har',
+    '@ohos/url_launcher_ohos': 'file:./har/url_launcher_ohos.har',
   },
 }

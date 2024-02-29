@@ -12,4 +12,4 @@
 entry/libs/arm64-v8a/libapp.so
 entry/libs/arm64-v8a/libflutter.so
 entry/src/main/resources/rawfile/flutter_assets/
-har/flutter_embedding.har
+har/flutter.har

@@ -10,6 +10,5 @@
 /.clang-tidy
 **/.test
 entry/src/main/resources/rawfile/
-har/flutter_embedding.har
-entry/libs/arm64-v8a/
+har/flutter.har
 entry/src/main/resources/rawfile/flutter_assets
