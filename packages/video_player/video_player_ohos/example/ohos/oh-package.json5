@@ -26,5 +26,8 @@
   },
   "dependencies": {
     "@ohos/hypium": "1.0.6"
+  },
+  "overrides": {
+    "@ohos/flutter_ohos": "file:./har/flutter.har",
   }
 }
