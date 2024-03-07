@@ -11,3 +11,5 @@
 **/.test
 /.hvigor
 entry/src/main/resources/rawfile/flutter_assets
+*.har
+oh-package-lock.json5
