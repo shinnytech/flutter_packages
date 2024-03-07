@@ -4,3 +4,5 @@
 /build
 /.cxx
 /.test
+src/main/resources/rawfile/flutter_assets
+oh-package-lock.json5
