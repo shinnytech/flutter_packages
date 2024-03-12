@@ -578,7 +578,7 @@ export class CacheRetrievalResult {
 export interface Result<T> {
   success(result: T): void;
 
-  error(error: Error | ESObject);
+  error(error: Error | ESObject): Error | ESObject;
 }
 
 export class ImagePickerApiCodec extends StandardMessageCodec {
