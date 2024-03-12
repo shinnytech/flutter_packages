@@ -70,13 +70,14 @@ export class VideoPlayerApiImpl {
     }
     let playerModel = new PlayerModel();
     let flutterRenderer = this.flutterState.getTextureRegistry();
-    //todo 传入CreateMessage参数
     let uri: string = arg.getUri();
-    // src: resourceManager.RawFileDescriptor = await getContext().resourceManager.getRawFd(uri);
+    Log.i(TAG, "uri " + uri);
+    let asset: string = arg.getAsset();
+    Log.i(TAG, "asset " + asset);
     let textureId: number = flutterRenderer.getTextureId();
     Log.i(TAG, "enter getRawFd, textureId=" + textureId);
     let surfaceTextureEntry: SurfaceTextureEntry  = flutterRenderer.registerTexture(textureId);
-    this.getContext().resourceManager.getRawFd("video1.mp4").then((rawFileDescriptor) => {
+    this.getContext().resourceManager.getRawFd("flutter_assets/" + asset).then((rawFileDescriptor) => {
       let videoPlayer = new VideoPlayer(playerModel, surfaceTextureEntry, rawFileDescriptor);
       this.videoPlayers.set(textureId.toString(), videoPlayer);
       this.printPlayers();

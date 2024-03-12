@@ -48,13 +48,13 @@ export function wrapError(exception: Error): Array<Object> {
 export class CreateMessage {
   constructor() {
   }
-  private asset: String = "";
+  private asset: string = "";
 
-  public getAsset(): String {
+  public getAsset(): string {
     return this.asset;
   }
 
-  public setAsset(setterArg: String): void {
+  public setAsset(setterArg: string): void {
   this.asset = setterArg;
   }
 
@@ -115,7 +115,7 @@ export class CreateMessage {
 
   static fromList(list: Array<Object>): CreateMessage {
     let pigeonResult: CreateMessage = new CreateMessage();
-    pigeonResult.setAsset(list[0] as String);
+    pigeonResult.setAsset(list[0] as string);
     pigeonResult.setUri(list[1] as string);
     pigeonResult.setPackageName(list[2] as String);
     pigeonResult.setFormatHint(list[3] as String);
