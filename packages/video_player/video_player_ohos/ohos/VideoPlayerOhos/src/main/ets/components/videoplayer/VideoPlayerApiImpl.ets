@@ -76,11 +76,16 @@ export class VideoPlayerApiImpl {
     let textureId: number = flutterRenderer.getTextureId();
     Log.i(TAG, "enter getRawFd, textureId=" + textureId);
     let surfaceTextureEntry: SurfaceTextureEntry  = flutterRenderer.registerTexture(textureId);
-    this.getContext().resourceManager.getRawFd("flutter_assets/" + asset).then((rawFileDescriptor) => {
-      let videoPlayer = new VideoPlayer(playerModel, surfaceTextureEntry, rawFileDescriptor);
+
+    if (asset != null) {
+      this.getContext().resourceManager.getRawFd("flutter_assets/" + asset).then((rawFileDescriptor) => {
+        let videoPlayer = new VideoPlayer(playerModel, surfaceTextureEntry, rawFileDescriptor, null);
+        this.videoPlayers.set(textureId.toString(), videoPlayer);
+      });
+    } else if (uri != null) {
+      let videoPlayer = new VideoPlayer(playerModel, surfaceTextureEntry, null, uri);
       this.videoPlayers.set(textureId.toString(), videoPlayer);
-      this.printPlayers();
-    });
+    }
 
     let textureMessage = new TextureMessage();
     textureMessage.setTextureId(textureId);
