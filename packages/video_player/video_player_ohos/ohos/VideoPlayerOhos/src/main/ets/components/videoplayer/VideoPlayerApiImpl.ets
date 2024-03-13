@@ -34,6 +34,7 @@ import { VideoPlayerApiCodec } from './VideoPlayerApiCodec';
 import { FlutterState } from './VideoPlayerPlugin';
 import resourceManager from '@ohos.resourceManager';
 import common from '@ohos.app.ability.common';
+import { media } from '@kit.MediaKit';
 
 const TAG: string = "VideoPlayerApiImpl";
 export class VideoPlayerApiImpl {
@@ -71,9 +72,7 @@ export class VideoPlayerApiImpl {
     let playerModel = new PlayerModel();
     let flutterRenderer = this.flutterState.getTextureRegistry();
     let uri: string = arg.getUri();
-    Log.i(TAG, "uri " + uri);
     let asset: string = arg.getAsset();
-    Log.i(TAG, "asset " + asset);
     let textureId: number = flutterRenderer.getTextureId();
     Log.i(TAG, "enter getRawFd, textureId=" + textureId);
     let surfaceTextureEntry: SurfaceTextureEntry  = flutterRenderer.registerTexture(textureId);
@@ -118,9 +117,12 @@ export class VideoPlayerApiImpl {
   setPlaybackSpeed(arg: PlaybackSpeedMessage) {
     let videoPlayer = this.videoPlayers.get(arg.getTextureId().toString());
     Log.d(TAG, "setPlaybackSpeed, id=" + arg.getTextureId() + ", videoPlayer=" + videoPlayer);
-    this.printPlayers();
-    //todo PlaybackSpeedMessage中使用media.PlaybackSpeed，是否需要从外部转换？
-    videoPlayer?.setSpeed(arg.getSpeed());
+    let speed: media.PlaybackSpeed | null = arg.getSpeed();
+    if (speed != null) {
+      videoPlayer?.setSpeed(speed);
+    } else {
+      Log.w(TAG, "unsupported playBackSpeed!");
+    }
   }
 
   play(arg: TextureMessage) {
