@@ -41,19 +41,20 @@ export class VideoPlayer {
   private status: number = -1;
   private loop: boolean = false;
   private index: number = 0;
-  private url?: resourceManager.RawFileDescriptor = {} as resourceManager.RawFileDescriptor;
-  private iUrl: string = '';
+  private url?: resourceManager.RawFileDescriptor | null = {} as resourceManager.RawFileDescriptor;
+  private iUrl: string | null = null;
   private surfaceId: string = '';
   private seekTime: number = PlayConstants.PROGRESS_SEEK_TIME;
   private positionX: number = PlayConstants.POSITION_X;
   private positionY: number = PlayConstants.POSITION_Y;
   private textureEntry: SurfaceTextureEntry;
 
-  constructor(playerModel: PlayerModel, textureEntry: SurfaceTextureEntry, url: resourceManager.RawFileDescriptor ) {
+  constructor(playerModel: PlayerModel, textureEntry: SurfaceTextureEntry, url: resourceManager.RawFileDescriptor | null, iUrl: string | null) {
     this.playerModel = playerModel;
     this.textureEntry = textureEntry;
     this.surfaceId = textureEntry.getSurfaceId().toString();
     this.url = url;
+    this.iUrl = iUrl;
     Log.i(TAG, "surfaceId : " + this.surfaceId);
     this.createAVPlayer();
   }
@@ -63,9 +64,17 @@ export class VideoPlayer {
    */
   async createAVPlayer() {
     Log.i(TAG, "enter createAVPlayer");
-    this.avPlayer = await media.createAVPlayer();
-    await this.bindState();
-    this.avPlayer.fdSrc = this.url;
+    if (this.avPlayer == null) {
+      this.avPlayer = await media.createAVPlayer();
+    }
+    if (this.avPlayer != null) {
+      await this.bindState();
+      if (this.iUrl != null) {
+        this.avPlayer.url = this.iUrl;
+      } else {
+        this.avPlayer.fdSrc = this.url!;
+      }
+    }
   }
 
   /**
@@ -93,7 +102,7 @@ export class VideoPlayer {
             this.avPlayer.url = this.iUrl;
           } else {
             Log.i(TAG, "bindState, use url, on step4");
-            this.avPlayer.fdSrc = this.url;
+            this.avPlayer.fdSrc = this.url!;
           }
           break;
         case AvplayerStatus.INITIALIZED:
