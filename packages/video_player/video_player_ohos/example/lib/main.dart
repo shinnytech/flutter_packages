@@ -171,14 +171,11 @@ class _ControlsOverlay extends StatelessWidget {
   const _ControlsOverlay({required this.controller});
 
   static const List<double> _examplePlaybackRates = <double>[
-    0.25,
-    0.5,
+    0.75,
     1.0,
-    1.5,
+    1.25,
+    1.75,
     2.0,
-    3.0,
-    5.0,
-    10.0,
   ];
 
   final MiniController controller;

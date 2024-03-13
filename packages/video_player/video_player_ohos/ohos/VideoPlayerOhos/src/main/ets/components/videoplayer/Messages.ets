@@ -221,13 +221,25 @@ export class PlaybackSpeedMessage {
     }
   }
 
-  private speed: media.PlaybackSpeed = media.PlaybackSpeed.SPEED_FORWARD_1_00_X;
+  private speed: Number= 1.0;
 
-  public getSpeed(): media.PlaybackSpeed {
-    return this.speed;
+  public getSpeed(): media.PlaybackSpeed | null {
+    if (this.speed == 0.75) {
+      return media.PlaybackSpeed.SPEED_FORWARD_0_75_X;
+    } else if (this.speed == 1.0) {
+      return media.PlaybackSpeed.SPEED_FORWARD_1_00_X;
+    } else if (this.speed == 1.25) {
+      return media.PlaybackSpeed.SPEED_FORWARD_1_25_X;
+    } else if (this.speed == 1.75) {
+      return media.PlaybackSpeed.SPEED_FORWARD_1_75_X;
+    } else if (this.speed == 2.0) {
+      return media.PlaybackSpeed.SPEED_FORWARD_2_00_X;
+    } else {
+      return null;
+    }
   }
 
-  public setSpeed(setterArg: media.PlaybackSpeed): void {
+  public setSpeed(setterArg: Number): void {
     this.speed = setterArg;
   }
 
