@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 {
-  "name": "local_auth",
+  "name": "local_auth_ohos",
   "version": "1.0.0",
   "description": "Please describe the basic information.",
   "main": "",

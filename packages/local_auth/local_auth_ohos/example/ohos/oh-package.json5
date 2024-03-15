@@ -23,7 +23,6 @@
   "main": "",
   "version": "1.0.0",
   "dependencies": {
-    '@ohos/flutter_ohos': 'file:./har/flutter.har'
   },
   "overrides": {
     '@ohos/flutter_ohos': 'file:./har/flutter.har'

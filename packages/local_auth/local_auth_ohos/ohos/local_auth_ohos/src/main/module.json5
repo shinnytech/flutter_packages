@@ -1,0 +1,9 @@
+{
+  "module": {
+    "name": "local_auth_ohos",
+    "type": "har",
+    "deviceTypes": [
+      "default",
+    ]
+  }
+}
