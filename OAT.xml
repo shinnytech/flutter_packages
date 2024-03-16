@@ -264,6 +264,10 @@
                 <filteritem type='filepath' name="packages/webview_flutter-v4.4.4/webview_flutter_ohos/ohos/har/libflutter.so.debug.10" desc='二进制文件,不影响兼容性'/>
                 <filteritem type='filepath' name="packages/webview_flutter-v4.4.4/webview_flutter_ohos/example/ohos/har/har_product/flutter_embedding.har.profile.10" desc='二进制文件,不影响兼容性'/>
                 <filteritem type='filepath' name="packages/webview_flutter-v4.4.4/webview_flutter_ohos/example/ohos/har/har_product/flutter_embedding.har.debug.9" desc='二进制文件,不影响兼容性'/>
+                <filteritem type='filepath' name="packages/webview_flutter-v4.4.4/webview_flutter_android/example/assets/sample_video.mp4" desc='二进制文件,不影响兼容性'/>
+                <filteritem type='filepath' name="packages/webview_flutter-v4.4.4/webview_flutter_ohos/ohos/har/flutter_embedding.har.release.9" desc='二进制文件,不影响兼容性'/>
+                <filteritem type='filepath' name="packages/webview_flutter-v4.4.4/webview_flutter_ohos/example/ohos/dta/icudtl.dat" desc='二进制文件,不影响兼容性'/>
+                <filteritem type='filepath' name="packages/webview_flutter-v4.4.4/webview_flutter_android/example/assets/sample_audio.ogg" desc='二进制文件,不影响兼容性'/>
             </filefilter>
             <filefilter name="defaultPolicyFilter" desc="Filters for compatibility，license header policies">
                 <filteritem type='filepath' name="packages/pigeon/example/app/ohos/entry/src/main/ets/plugins/Messages.ets" desc='BSDStyleLicense,不影响兼容性'/>
