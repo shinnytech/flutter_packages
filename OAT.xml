@@ -237,6 +237,43 @@
                 <filteritem type='filepath' name="packages/video_player/video_player_ohos/ohos/dta/" desc='二进制文件,不影响兼容性'/>
                 <filteritem type='filepath' name="packages/video_player/video_player_ohos/example/assets/Butterfly-209.mp4" desc='二进制文件,不影响兼容性'/>
                 <filteritem type='filepath' name="packages/video_player/video_player_ohos/example/assets/video1.mp4" desc='二进制文件,不影响兼容性'/>
+                <filteritem type='filepath' name="packages/video_player/video_player_ohos/example/ohos/entry/src/main/resources/rawfile/video1.mp4" desc='二进制文件,不影响兼容性'/>
+                <filteritem type='filepath' name="packages/webview_flutter-v4.4.4/webview_flutter_ohos/example/ohos/entry/src/main/resources/rawfile/flutter_assets/fonts/MaterialIcons-Regular.otf" desc='二进制文件,不影响兼容性'/>
+                <filteritem type='filepath' name="packages/webview_flutter-v4.4.4/webview_flutter_ohos/example/ohos/har/har_product/flutter_embedding.har.debug.11" desc='二进制文件,不影响兼容性'/>
+                <filteritem type='filepath' name="packages/webview_flutter-v4.4.4/webview_flutter_ohos/example/ohos/har/har_product/libflutter.so.debug.11" desc='二进制文件,不影响兼容性'/>
+                <filteritem type='filepath' name="packages/webview_flutter-v4.4.4/webview_flutter_ohos/ohos/har/flutter_embedding.har.release.10" desc='二进制文件,不影响兼容性'/>
+                <filteritem type='filepath' name="packages/webview_flutter-v4.4.4/webview_flutter_ohos/ohos/har/flutter_embedding.har.debug.10" desc='二进制文件,不影响兼容性'/>
+                <filteritem type='filepath' name="packages/webview_flutter-v4.4.4/webview_flutter_ohos/example/ohos/har/har_product/flutter_embedding.har.release.11" desc='二进制文件,不影响兼容性'/>
+                <filteritem type='filepath' name="packages/webview_flutter-v4.4.4/webview_flutter_ohos/example/ohos/entry/src/main/resources/rawfile/flutter_assets/isolate_snapshot_data" desc='二进制文件,不影响兼容性'/>
+                <filteritem type='filepath' name="packages/webview_flutter-v4.4.4/webview_flutter_ohos/example/ohos/entry/src/main/resources/rawfile/flutter_assets/vm_snapshot_data" desc='二进制文件,不影响兼容性'/>
+                <filteritem type='filepath' name="packages/webview_flutter-v4.4.4/webview_flutter_ohos/example/ohos/har/har_product/libflutter.so.release.11" desc='二进制文件,不影响兼容性'/>
+                <filteritem type='filepath' name="packages/webview_flutter-v4.4.4/webview_flutter_ohos/example/ohos/entry/src/main/resources/rawfile/flutter_assets/assets/sample_video.mp4" desc='二进制文件,不影响兼容性'/>
+                <filteritem type='filepath' name="packages/webview_flutter-v4.4.4/webview_flutter_ohos/example/ohos/entry/src/main/resources/rawfile/flutter_assets/NOTICES.Z" desc='二进制文件,不影响兼容性'/>
+                <filteritem type='filepath' name="packages/webview_flutter-v4.4.4/webview_flutter_ohos/example/ohos/entry/src/main/resources/rawfile/flutter_assets/kernel_blob.bin" desc='二进制文件,不影响兼容性'/>
+                <filteritem type='filepath' name="packages/webview_flutter-v4.4.4/webview_flutter_ohos/example/ohos/har/har_product/libflutter.so.debug.10" desc='二进制文件,不影响兼容性'/>
+                <filteritem type='filepath' name="packages/webview_flutter-v4.4.4/webview_flutter_ohos/example/ohos/har/har_product/libflutter.so.release.10" desc='二进制文件,不影响兼容性'/>
+                <filteritem type='filepath' name="packages/webview_flutter-v4.4.4/webview_flutter_ohos/ohos/har/flutter_embedding.har.debug.9" desc='二进制文件,不影响兼容性'/>
+                <filteritem type='filepath' name="packages/webview_flutter-v4.4.4/webview_flutter_ohos/example/ohos/entry/src/main/resources/rawfile/flutter_assets/assets/sample_audio.ogg" desc='二进制文件,不影响兼容性'/>
+                <filteritem type='filepath' name="packages/webview_flutter-v4.4.4/webview_flutter_ohos/example/ohos/har/har_product/flutter_embedding.har.release.9" desc='二进制文件,不影响兼容性'/>
+                <filteritem type='filepath' name="packages/webview_flutter-v4.4.4/webview_flutter_ohos/example/ohos/entry/src/main/resources/rawfile/flutter_assets/icudtl.dat" desc='二进制文件,不影响兼容性'/>
+                <filteritem type='filepath' name="packages/webview_flutter-v4.4.4/webview_flutter_ohos/example/ohos/har/har_product/libflutter.so.profile.10" desc='二进制文件,不影响兼容性'/>
+                <filteritem type='filepath' name="packages/webview_flutter-v4.4.4/webview_flutter_ohos/example/ohos/entry/src/main/resources/rawfile/flutter_assets/shaders/ink_sparkle.frag" desc='二进制文件,不影响兼容性'/>
+                <filteritem type='filepath' name="packages/webview_flutter-v4.4.4/webview_flutter_ohos/example/ohos/har/har_product/flutter_embedding.har.debug.10" desc='二进制文件,不影响兼容性'/>
+                <filteritem type='filepath' name="packages/webview_flutter-v4.4.4/webview_flutter_ohos/example/ohos/har/har_product/flutter_embedding.har.release.10" desc='二进制文件,不影响兼容性'/>
+                <filteritem type='filepath' name="packages/webview_flutter-v4.4.4/webview_flutter_ohos/ohos/har/libflutter.so.release.10" desc='二进制文件,不影响兼容性'/>
+                <filteritem type='filepath' name="packages/webview_flutter-v4.4.4/webview_flutter_ohos/ohos/har/libflutter.so.debug.10" desc='二进制文件,不影响兼容性'/>
+                <filteritem type='filepath' name="packages/webview_flutter-v4.4.4/webview_flutter_ohos/example/ohos/har/har_product/flutter_embedding.har.profile.10" desc='二进制文件,不影响兼容性'/>
+                <filteritem type='filepath' name="packages/webview_flutter-v4.4.4/webview_flutter_ohos/example/ohos/har/har_product/flutter_embedding.har.debug.9" desc='二进制文件,不影响兼容性'/>
+                <filteritem type='filepath' name="packages/webview_flutter-v4.4.4/webview_flutter_android/example/assets/sample_video.mp4" desc='二进制文件,不影响兼容性'/>
+                <filteritem type='filepath' name="packages/webview_flutter-v4.4.4/webview_flutter_ohos/ohos/har/flutter_embedding.har.release.9" desc='二进制文件,不影响兼容性'/>
+                <filteritem type='filepath' name="packages/webview_flutter-v4.4.4/webview_flutter_ohos/example/ohos/dta/icudtl.dat" desc='二进制文件,不影响兼容性'/>
+                <filteritem type='filepath' name="packages/webview_flutter-v4.4.4/webview_flutter_android/example/assets/sample_audio.ogg" desc='二进制文件,不影响兼容性'/>
+                <filteritem type='filepath' name="packages/webview_flutter-v4.4.4/webview_flutter_wkwebview/example/assets/sample_video.mp4" desc='二进制文件,不影响兼容性'/>
+                <filteritem type='filepath' name="packages/webview_flutter-v4.4.4/webview_flutter_wkwebview/example/assets/sample_audio.ogg" desc='二进制文件,不影响兼容性'/>
+                <filteritem type='filepath' name="packages/webview_flutter-v4.4.4/webview_flutter/example/assets/sample_audio.ogg" desc='二进制文件,不影响兼容性'/>
+                <filteritem type='filepath' name="packages/webview_flutter-v4.4.4/webview_flutter/example/assets/sample_video.mp4" desc='二进制文件,不影响兼容性'/>
+                <filteritem type='filepath' name="packages/webview_flutter-v4.4.4/webview_flutter_ohos/example/assets/sample_video.mp4" desc='二进制文件,不影响兼容性'/>
+                <filteritem type='filepath' name="packages/webview_flutter-v4.4.4/webview_flutter_ohos/example/assets/sample_audio.ogg" desc='二进制文件,不影响兼容性'/>
             </filefilter>
             <filefilter name="defaultPolicyFilter" desc="Filters for compatibility，license header policies">
                 <filteritem type='filepath' name="packages/pigeon/example/app/ohos/entry/src/main/ets/plugins/Messages.ets" desc='BSDStyleLicense,不影响兼容性'/>
