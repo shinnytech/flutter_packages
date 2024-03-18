@@ -32,7 +32,7 @@ dependencies:
     path: ../
   webview_flutter_platform_interface:
     git:
-      url: "https://gitee.com/tigerliu1998/flutter_packages_2.git"
+      url: "https://gitee.com/openharmony-sig/flutter_packages.git"
       path: "packages/webview_flutter_platform_interface-v2.10.0/webview_flutter_platform_interface"
 
 dev_dependencies:
