@@ -19,13 +19,13 @@
         "name": "default",
         "type": "HarmonyOS",
         "material": {
-          "certpath": "C:\\Users\\lihui\\.ohos\\config\\default_ohos_w6a2xWcCBglyYDGGCzYIratd_0zJsx8sbNeQcH96HSY=.cer",
-          "storePassword": "0000001BBF6598AE23B0807C01908E045B5643800A181E780C08A0A9B6C923ACD4D188C95A124EA663C43D",
+          "certpath": "",
+          "storePassword": "",
           "keyAlias": "debugKey",
-          "keyPassword": "0000001BCF9478B8F0AE0421869480899D478B966EDB4BD7B8188B66F5A8450E9D9E145C360C7F93DE06A4",
-          "profile": "C:\\Users\\lihui\\.ohos\\config\\default_ohos_w6a2xWcCBglyYDGGCzYIratd_0zJsx8sbNeQcH96HSY=.p7b",
-          "signAlg": "SHA256withECDSA",
-          "storeFile": "C:\\Users\\lihui\\.ohos\\config\\default_ohos_w6a2xWcCBglyYDGGCzYIratd_0zJsx8sbNeQcH96HSY=.p12"
+          "keyPassword": "",
+          "profile": "",
+          "signAlg": "",
+          "storeFile": ""
         }
       }
     ],
