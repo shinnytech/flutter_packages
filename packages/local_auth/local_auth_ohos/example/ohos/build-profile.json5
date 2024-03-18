@@ -14,21 +14,7 @@
  */
 {
   "app": {
-    "signingConfigs": [
-      {
-        "name": "default",
-        "type": "HarmonyOS",
-        "material": {
-          "certpath": "",
-          "storePassword": "",
-          "keyAlias": "debugKey",
-          "keyPassword": "",
-          "profile": "",
-          "signAlg": "",
-          "storeFile": ""
-        }
-      }
-    ],
+    "signingConfigs": [],
     "products": [
       {
         "name": "default",
