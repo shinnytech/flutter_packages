@@ -23,3 +23,5 @@ export default class EntryAbility extends FlutterAbility {
     GeneratedPluginRegistrant.registerWith(flutterEngine)
   }
 }
+
+#触发diff
