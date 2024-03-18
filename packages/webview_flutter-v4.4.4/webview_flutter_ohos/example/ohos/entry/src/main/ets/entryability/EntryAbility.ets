@@ -23,4 +23,3 @@ export default class EntryAbility extends FlutterAbility {
     GeneratedPluginRegistrant.registerWith(flutterEngine)
   }
 }
-

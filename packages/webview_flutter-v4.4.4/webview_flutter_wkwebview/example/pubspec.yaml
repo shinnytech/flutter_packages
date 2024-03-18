@@ -16,14 +16,17 @@ description: Demonstrates how to use the webview_flutter_wkwebview plugin.
 publish_to: none
 
 environment:
-  sdk: ">=3.0.0 <4.0.0"
-  flutter: ">=3.10.0"
+  sdk: ">=2.19.6 <4.0.0"
+  flutter: ">=3.7.0"
 
 dependencies:
   flutter:
     sdk: flutter
   path_provider: ^2.0.6
-  webview_flutter_platform_interface: ^2.7.0
+  webview_flutter_platform_interface:
+    git:
+      url: "https://gitee.com/openharmony-sig/flutter_packages.git"
+      path: "packages/webview_flutter_platform_interface-v2.10.0/webview_flutter_platform_interface"
   webview_flutter_wkwebview:
     # When depending on this package from a real application you should use:
     #   webview_flutter: ^x.y.z
