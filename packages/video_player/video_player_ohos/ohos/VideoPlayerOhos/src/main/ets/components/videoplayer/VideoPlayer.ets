@@ -28,6 +28,10 @@ import DateFormatUtil from './util/DateFormatUtil';
 import { GlobalContext } from './util/GlobalContext';
 import { VideoItem } from './VideoItem';
 import { BusinessError } from '@ohos.base';
+import { EventChannel } from '@ohos/flutter_ohos';
+import { EventSink, StreamHandler } from '@ohos/flutter_ohos/src/main/ets/plugin/common/EventChannel';
+import { QueuingEventSink } from './QueuingEventSink';
+import { ArrayList, HashMap } from '@kit.ArkTS';
 
 const FORMAT_SS: String = 'ss';
 const FORMAT_DASH: String = 'dash';
@@ -48,13 +52,16 @@ export class VideoPlayer {
   private positionX: number = PlayConstants.POSITION_X;
   private positionY: number = PlayConstants.POSITION_Y;
   private textureEntry: SurfaceTextureEntry;
+  private eventChannel: EventChannel | null = null;
+  private eventSink: QueuingEventSink | null = null;
 
-  constructor(playerModel: PlayerModel, textureEntry: SurfaceTextureEntry, url: resourceManager.RawFileDescriptor | null, iUrl: string | null) {
+  constructor(playerModel: PlayerModel, textureEntry: SurfaceTextureEntry, url: resourceManager.RawFileDescriptor | null, iUrl: string | null, eventChannel: EventChannel) {
     this.playerModel = playerModel;
     this.textureEntry = textureEntry;
     this.surfaceId = textureEntry.getSurfaceId().toString();
     this.url = url;
     this.iUrl = iUrl;
+    this.eventChannel = eventChannel;
     Log.i(TAG, "surfaceId : " + this.surfaceId);
     this.createAVPlayer();
   }
@@ -74,6 +81,10 @@ export class VideoPlayer {
       } else {
         this.avPlayer.fdSrc = this.url!;
       }
+      this.eventSink = new QueuingEventSink();
+      this.eventChannel?.setStreamHandler(
+        new StreamHandlerImpl(this.eventSink)
+      );
     }
   }
 
@@ -112,7 +123,7 @@ export class VideoPlayer {
         case AvplayerStatus.PREPARED:
           this.avPlayer.videoScaleType = 0;
           this.setVideoSize();
-          // this.onImageArrival(this.textureEntry.getImageReceiver());
+          this.sendInitialized();
           this.duration = this.avPlayer.duration;
           break;
         case AvplayerStatus.PLAYING:
@@ -131,6 +142,7 @@ export class VideoPlayer {
           if (this.playerModel != null) {
             this.playerModel.playSpeed = PlayConstants.PLAY_SPEED;
           }
+          this.sendCompleted();
           this.duration = PlayConstants.PLAYER_DURATION;
           if (!this.loop) {
             let curIndex = this.index + PlayConstants.PLAYER_NEXT;
@@ -156,12 +168,18 @@ export class VideoPlayer {
           break;
       }
     });
+
     this.avPlayer.on(Events.TIME_UPDATE, (time: number) => {
       this.initProgress(time);
     });
-    this.avPlayer.on(Events.ERROR, (err: ESObject) => {
+
+    this.avPlayer.on(Events.BUFFER_UPDATE, (infoType: media.BufferingInfoType, value: number) => {
+      this.sendBufferingUpdate(infoType, value);
+    });
+
+    this.avPlayer.on(Events.ERROR, (err: Object) => {
       Log.e(TAG, "avPlayer Events.ERROR: " + JSON.stringify(err))
-      this.playError();
+      this.sendError(err);
     })
   }
 
@@ -193,6 +211,7 @@ export class VideoPlayer {
   release() {
     if (this.avPlayer !== null) {
       this.avPlayer.release();
+      this.eventChannel?.setStreamHandler(null);
     }
   }
 
@@ -235,6 +254,9 @@ export class VideoPlayer {
   }
 
   setLooping(isLooping: boolean) {
+    if (this.avPlayer != null) {
+      this.avPlayer.loop = isLooping;
+    }
     this.loop = isLooping;
   }
 
@@ -522,5 +544,57 @@ export class VideoPlayer {
       duration: PlayConstants.PLAY_ERROR_TIME,
       message: $r('app.string.link_check_address_internet')
     });
+  }
+
+  sendInitialized(): void {
+    Log.i(TAG, "sendInitialized")
+    let event: HashMap<string, Object> = new HashMap<string, Object>();
+    event.set("event", "initialized");
+    event.set("duration", this.avPlayer?.duration);
+    event.set("width", this.avPlayer?.width);
+    event.set("height", this.avPlayer?.height);
+    this.eventSink?.success(event);
+  }
+
+  sendCompleted(): void {
+    let event: HashMap<string, Object> = new HashMap<string, Object>();
+    event.set("event", "completed");
+    this.eventSink?.success(event);
+  }
+
+  sendBufferingUpdate(infoType: media.BufferingInfoType, bufferingPosition: number): void {
+    let event: HashMap<string, Object> = new HashMap<string, Object>();
+    if (infoType == media.BufferingInfoType.BUFFERING_START) {
+      event.set("event", "bufferingStart");
+    } else if (infoType == media.BufferingInfoType.BUFFERING_END) {
+      event.set("event", "bufferingEnd");
+    } else if (infoType == media.BufferingInfoType.CACHED_DURATION) {
+      event.set("event", "cachedDuration");
+    } else {
+      event.set("event", "bufferingUpdate");
+      let range: ArrayList<number> = new ArrayList<number>();
+      range.add(bufferingPosition);
+      event.set("values", range);
+    }
+    this.eventSink?.success(event);
+  }
+
+  sendError(error: Object): void {
+    this.eventSink?.error("videoError", "video player had error！", error);
+  }
+}
+
+class StreamHandlerImpl implements StreamHandler {
+  private eventSink: QueuingEventSink | null = null;
+
+  constructor(eventSink: QueuingEventSink ) {
+    this.eventSink = eventSink;
+  }
+  onListen(args: Object, events: EventSink): void {
+    this.eventSink?.setDelegate(events);
+  }
+
+  onCancel(args: Object): void {
+    this.eventSink?.setDelegate(null);
   }
 }

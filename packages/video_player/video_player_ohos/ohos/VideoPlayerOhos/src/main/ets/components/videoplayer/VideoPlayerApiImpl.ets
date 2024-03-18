@@ -35,6 +35,7 @@ import { FlutterState } from './VideoPlayerPlugin';
 import resourceManager from '@ohos.resourceManager';
 import common from '@ohos.app.ability.common';
 import { media } from '@kit.MediaKit';
+import { EventChannel } from '@ohos/flutter_ohos';
 
 const TAG: string = "VideoPlayerApiImpl";
 export class VideoPlayerApiImpl {
@@ -76,14 +77,14 @@ export class VideoPlayerApiImpl {
     let textureId: number = flutterRenderer.getTextureId();
     Log.i(TAG, "enter getRawFd, textureId=" + textureId);
     let surfaceTextureEntry: SurfaceTextureEntry  = flutterRenderer.registerTexture(textureId);
-
+    let eventChannel: EventChannel = new EventChannel(this.flutterState.getBinaryMessenger(), "flutter.io/videoPlayer/videoEvents" + textureId.toString());
     if (asset != null) {
       this.getContext().resourceManager.getRawFd("flutter_assets/" + asset).then((rawFileDescriptor) => {
-        let videoPlayer = new VideoPlayer(playerModel, surfaceTextureEntry, rawFileDescriptor, null);
+        let videoPlayer = new VideoPlayer(playerModel, surfaceTextureEntry, rawFileDescriptor, null, eventChannel);
         this.videoPlayers.set(textureId.toString(), videoPlayer);
       });
     } else if (uri != null) {
-      let videoPlayer = new VideoPlayer(playerModel, surfaceTextureEntry, null, uri);
+      let videoPlayer = new VideoPlayer(playerModel, surfaceTextureEntry, null, uri, eventChannel);
       this.videoPlayers.set(textureId.toString(), videoPlayer);
     }
 
