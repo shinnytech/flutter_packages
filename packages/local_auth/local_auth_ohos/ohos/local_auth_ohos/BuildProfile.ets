@@ -1,5 +1,5 @@
-/*
- * Copyright (c) 2023 Hunan OpenValley Digital Industry Development Co., Ltd.
+/**
+ * Copyright (c) 2024 Hunan OpenValley Digital Industry Development Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -12,14 +12,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-{
-  "name": "local_auth",
-  "version": "1.0.0",
-  "description": "Please describe the basic information.",
-  "main": "",
-  "author": "",
-  "license": "Apache-2.0",
-  "dependencies": {
-    "@ohos/flutter_ohos": "file:./libs/flutter.har"
-  }
+export default class BuildProfile {
+	static readonly HAR_VERSION = '1.0.0';
+	static readonly BUILD_MODE_NAME = 'release';
+	static readonly DEBUG = false;
 }

@@ -10,7 +10,7 @@
     },
     {
       "name": "EntryAbility_label",
-      "value": "label"
+      "value": "local_auth_demo"
     },
     {
       "name": "EntryAbility_accessBiometricReason",
