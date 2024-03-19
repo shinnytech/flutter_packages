@@ -65,7 +65,7 @@ export class VideoPlayerApiImpl {
     return this.binding.getAbility().context;
   }
 
-  create(arg: CreateMessage): TextureMessage {
+  async create(arg: CreateMessage): Promise<TextureMessage>  {
     Log.i(TAG, "enter create");
     if (this.flutterState == null) {
       throw new Error("Illegal flutterState null.");
@@ -79,12 +79,13 @@ export class VideoPlayerApiImpl {
     let surfaceTextureEntry: SurfaceTextureEntry  = flutterRenderer.registerTexture(textureId);
     let eventChannel: EventChannel = new EventChannel(this.flutterState.getBinaryMessenger(), "flutter.io/videoPlayer/videoEvents" + textureId.toString());
     if (asset != null) {
-      this.getContext().resourceManager.getRawFd("flutter_assets/" + asset).then((rawFileDescriptor) => {
-        let videoPlayer = new VideoPlayer(playerModel, surfaceTextureEntry, rawFileDescriptor, null, eventChannel);
-        this.videoPlayers.set(textureId.toString(), videoPlayer);
-      });
+      let rawFileDescriptor: resourceManager.RawFileDescriptor = await this.getContext().resourceManager.getRawFd("flutter_assets/" + asset);
+      let videoPlayer = new VideoPlayer(playerModel, surfaceTextureEntry, rawFileDescriptor, null, eventChannel);
+      await videoPlayer.createAVPlayer();
+      this.videoPlayers.set(textureId.toString(), videoPlayer);
     } else if (uri != null) {
       let videoPlayer = new VideoPlayer(playerModel, surfaceTextureEntry, null, uri, eventChannel);
+      await videoPlayer.createAVPlayer();
       this.videoPlayers.set(textureId.toString(), videoPlayer);
     }
 
@@ -178,7 +179,6 @@ export class VideoPlayerApiImpl {
     }
     {
       const channel: BasicMessageChannel<Object> = new BasicMessageChannel<Object>(
-        // binaryMessenger, "dev.flutter.pigeon.AndroidVideoPlayerApi.initialize", VideoPlayerApiCodec.INSTANCE);
         binaryMessenger, "dev.flutter.pigeon.OhosVideoPlayerApi.initialize", VideoPlayerApiCodec.INSTANCE);
       channel.setMessageHandler({
         onMessage(msg: Object, reply: Reply<Object>): void {
@@ -197,7 +197,6 @@ export class VideoPlayerApiImpl {
     }
     {
       const channel: BasicMessageChannel<Object> = new BasicMessageChannel<Object>(
-        // binaryMessenger, "dev.flutter.pigeon.AndroidVideoPlayerApi.create", VideoPlayerApiCodec.INSTANCE);
         binaryMessenger, "dev.flutter.pigeon.OhosVideoPlayerApi.create", VideoPlayerApiCodec.INSTANCE);
       channel.setMessageHandler({
         onMessage(msg: Object, reply: Reply<Object>): void {
@@ -206,10 +205,10 @@ export class VideoPlayerApiImpl {
           let args = msg as Array<Object>;
           let createMsg = args[0] as CreateMessage;
           try {
-            Log.i(TAG, "VideoPlayer create");
-            let textureMessage: TextureMessage = api.create(createMsg);
-            wrapped.push(textureMessage);
-            reply.reply(wrapped);
+            api.create(createMsg).then((textureMessage: TextureMessage) => {
+              wrapped.push(textureMessage);
+              reply.reply(wrapped);
+            });
           } catch (err) {
             let wrappedError = wrapError(err);
             reply.reply(wrappedError);
@@ -222,7 +221,6 @@ export class VideoPlayerApiImpl {
         binaryMessenger, "dev.flutter.pigeon.OhosVideoPlayerApi.dispose", VideoPlayerApiCodec.INSTANCE);
       channel.setMessageHandler({
         onMessage(msg: Object, reply: Reply<Object>): void {
-          // Log.d(TAG, 'onMessage reply:' + reply)
           let wrapped = new Array<Object>();
           let args = msg as Array<Object>;
           let textureMsg = args[0] as TextureMessage;
@@ -242,7 +240,6 @@ export class VideoPlayerApiImpl {
         binaryMessenger, "dev.flutter.pigeon.OhosVideoPlayerApi.setLooping", VideoPlayerApiCodec.INSTANCE);
       channel.setMessageHandler({
         onMessage(msg: Object, reply: Reply<Object>): void {
-          // Log.d(TAG, 'onMessage reply:' + reply)
           let wrapped = new Array<Object>();
           let args = msg as Array<Object>;
           let loopMsg = args[0] as LoopingMessage;
@@ -262,7 +259,6 @@ export class VideoPlayerApiImpl {
         binaryMessenger, "dev.flutter.pigeon.OhosVideoPlayerApi.setVolume", VideoPlayerApiCodec.INSTANCE);
       channel.setMessageHandler({
         onMessage(msg: Object, reply: Reply<Object>): void {
-          // Log.d(TAG, 'onMessage reply:' + reply)
           let wrapped = new Array<Object>();
           let args = msg as Array<Object>;
           let volumeMsg = args[0] as VolumeMessage;
@@ -282,7 +278,6 @@ export class VideoPlayerApiImpl {
         binaryMessenger, "dev.flutter.pigeon.OhosVideoPlayerApi.setPlaybackSpeed", VideoPlayerApiCodec.INSTANCE);
       channel.setMessageHandler({
         onMessage(msg: Object, reply: Reply<Object>): void {
-          // Log.d(TAG, 'onMessage reply:' + reply)
           let wrapped = new Array<Object>();
           let args = msg as Array<Object>;
           let playbackSpeedMsg = args[0] as PlaybackSpeedMessage;
@@ -302,7 +297,6 @@ export class VideoPlayerApiImpl {
         binaryMessenger, "dev.flutter.pigeon.OhosVideoPlayerApi.play", VideoPlayerApiCodec.INSTANCE);
       channel.setMessageHandler({
         onMessage(msg: Object, reply: Reply<Object>): void {
-          // Log.d(TAG, 'onMessage reply:' + reply)
           let wrapped = new Array<Object>();
           let args = msg as Array<Object>;
           let textureMsg = args[0] as TextureMessage;
@@ -322,7 +316,6 @@ export class VideoPlayerApiImpl {
         binaryMessenger, "dev.flutter.pigeon.OhosVideoPlayerApi.position", VideoPlayerApiCodec.INSTANCE);
       channel.setMessageHandler({
         onMessage(msg: Object, reply: Reply<Object>): void {
-          // Log.d(TAG, 'onMessage reply:' + reply)
           let wrapped = new Array<Object>();
           let args = msg as Array<Object>;
           let textureMsg = args[0] as TextureMessage;
@@ -342,7 +335,6 @@ export class VideoPlayerApiImpl {
         binaryMessenger, "dev.flutter.pigeon.OhosVideoPlayerApi.seekTo", VideoPlayerApiCodec.INSTANCE);
       channel.setMessageHandler({
         onMessage(msg: Object, reply: Reply<Object>): void {
-          // Log.d(TAG, 'onMessage reply:' + reply)
           let wrapped = new Array<Object>();
           let args = msg as Array<Object>;
           let positionMsg = args[0] as PositionMessage;
@@ -362,7 +354,6 @@ export class VideoPlayerApiImpl {
         binaryMessenger, "dev.flutter.pigeon.OhosVideoPlayerApi.pause", VideoPlayerApiCodec.INSTANCE);
       channel.setMessageHandler({
         onMessage(msg: Object, reply: Reply<Object>): void {
-          // Log.d(TAG, 'onMessage reply:' + reply)
           let wrapped = new Array<Object>();
           let args = msg as Array<Object>;
           let textureMsg = args[0] as TextureMessage;
@@ -382,7 +373,6 @@ export class VideoPlayerApiImpl {
         binaryMessenger, "dev.flutter.pigeon.OhosVideoPlayerApi.setMixWithOthers", VideoPlayerApiCodec.INSTANCE);
       channel.setMessageHandler({
         onMessage(msg: Object, reply: Reply<Object>): void {
-          // Log.d(TAG, 'onMessage reply:' + reply)
           let wrapped = new Array<Object>();
           let args = msg as Array<Object>;
           let mixWithOthersMsg = args[0] as MixWithOthersMessage;

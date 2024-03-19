@@ -63,7 +63,6 @@ export class VideoPlayer {
     this.iUrl = iUrl;
     this.eventChannel = eventChannel;
     Log.i(TAG, "surfaceId : " + this.surfaceId);
-    this.createAVPlayer();
   }
 
   /**
@@ -75,16 +74,18 @@ export class VideoPlayer {
       this.avPlayer = await media.createAVPlayer();
     }
     if (this.avPlayer != null) {
+      this.eventSink = new QueuingEventSink();
+      Log.i(TAG, "enter setStreamHandler");
+      this.eventChannel?.setStreamHandler(
+        new StreamHandlerImpl(this.eventSink)
+      );
+
       await this.bindState();
       if (this.iUrl != null) {
         this.avPlayer.url = this.iUrl;
       } else {
         this.avPlayer.fdSrc = this.url!;
       }
-      this.eventSink = new QueuingEventSink();
-      this.eventChannel?.setStreamHandler(
-        new StreamHandlerImpl(this.eventSink)
-      );
     }
   }
 
