@@ -65,7 +65,7 @@ export class VideoPlayerApiImpl {
     return this.binding.getAbility().context;
   }
 
-  async create(arg: CreateMessage): Promise<TextureMessage>  {
+  async create(arg: CreateMessage): Promise<TextureMessage> {
     Log.i(TAG, "enter create");
     if (this.flutterState == null) {
       throw new Error("Illegal flutterState null.");
