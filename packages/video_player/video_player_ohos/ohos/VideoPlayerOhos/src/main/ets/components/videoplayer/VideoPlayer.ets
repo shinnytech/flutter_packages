@@ -128,9 +128,6 @@ export class VideoPlayer {
           this.duration = this.avPlayer.duration;
           break;
         case AvplayerStatus.PLAYING:
-          if (this.playerModel != null) {
-            this.avPlayer.setVolume(this.playerModel.volume);
-          }
           this.setBright();
           this.status = CommonConstants.STATUS_START;
           this.watchStatus();
