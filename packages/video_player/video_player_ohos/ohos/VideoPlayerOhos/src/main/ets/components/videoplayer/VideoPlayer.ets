@@ -179,32 +179,11 @@ export class VideoPlayer {
     });
 
     this.avPlayer.on(Events.ERROR, (err: Object) => {
-      Log.e(TAG, "avPlayer Events.ERROR: " + JSON.stringify(err))
+      Log.e(TAG, "avPlayer Events.ERROR: " + JSON.stringify(err));
+      this.avPlayer?.reset();
       this.sendError(err);
     })
   }
-
-  onImageArrival(receiver: image.ImageReceiver): void {
-    receiver.on('imageArrival', () => {
-      receiver.readNextImage((err: BusinessError, nextImage: image.Image) => {
-        if (err || nextImage === undefined) {
-          return;
-        }
-        // entry.InitNativeImage(nextImage);
-        console.log("[camera test] format: " + nextImage.format);
-        // 不释放资源会阻塞
-        nextImage.release((err : BusinessError) =>{
-          if (err != undefined) {
-            console.log('Failed to release the image source instance.');
-          } else {
-            console.log('Succeeded in releasing the image source instance.');
-          }
-        });
-
-      })
-    })
-  }
-
 
   /**
    * Release the video player.
@@ -235,7 +214,6 @@ export class VideoPlayer {
   seekTo(position: number) {
     if (this.avPlayer !== null) {
       this.avPlayer.seek(position, media.SeekMode.SEEK_PREV_SYNC);
-      this.avPlayer.currentTime
     }
   }
 

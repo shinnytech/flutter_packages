@@ -97,6 +97,7 @@ export class VideoPlayerApiImpl {
   dispose(arg: TextureMessage): void {
     let videoPlayer = this.videoPlayers.get(arg.getTextureId().toString());
     videoPlayer?.release();
+    this.flutterState?.getTextureRegistry().unregisterTexture(arg.getTextureId().valueOf());
     this.videoPlayers.remove(arg.getTextureId().toString());
   }
 
