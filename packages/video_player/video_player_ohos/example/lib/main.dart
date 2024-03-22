@@ -14,8 +14,12 @@
 */
 
 
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
+import 'fileselector/file_selector.dart';
+import 'fileselector/x_type_group.dart';
 import 'mini_controller.dart';
 
 void main() {
@@ -38,10 +42,17 @@ class _App extends StatelessWidget {
           bottom: const TabBar(
             isScrollable: true,
             tabs: <Widget>[
-              Tab(icon: Icon(Icons.insert_drive_file), text: 'Asset'),
+              Tab(
+                icon: Icon(Icons.insert_drive_file),
+                text: 'Asset'
+              ),
               Tab(
                 icon: Icon(Icons.cloud),
                 text: 'Remote',
+              ),
+              Tab(
+                icon: Icon(Icons.file_open),
+                text: 'LocalFile'
               ),
             ],
           ),
@@ -50,6 +61,7 @@ class _App extends StatelessWidget {
           children: <Widget>[
             _ButterFlyAssetVideo(),
             _BumbleBeeRemoteVideo(),
+            _LocalFileVideo(),
           ],
         ),
       ),
@@ -104,6 +116,104 @@ class _ButterFlyAssetVideoState extends State<_ButterFlyAssetVideo> {
                   VideoProgressIndicator(_controller),
                 ],
               ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _LocalFileVideo extends StatefulWidget {
+  @override
+  _LocalFileVideoState createState() => _LocalFileVideoState();
+}
+
+class _LocalFileVideoState extends State<_LocalFileVideo> {
+  late MiniController _controller;
+  late int fileFd;
+
+  Future<void> selectorFile() async {
+    print("selectorFile");
+    const XTypeGroup typeGroup = XTypeGroup(
+      label: 'video',
+      extensions: <String>['mp4'],
+      uniformTypeIdentifiers: <String>['public.video'],
+    );
+    final FileSelector instance = FileSelector();
+    fileFd = (await instance
+        .openFile(acceptedTypeGroups: <XTypeGroup>[typeGroup]))!;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+     _controller = MiniController.file(94);
+    //
+    // _controller.addListener(() {
+    //   setState(() {});
+    // });
+    // _controller.initialize().then((_) => setState(() {}));
+    // _controller.play();
+    // _controller.initialize().then((_) => setState(() {})).then((_) => {_controller.play()});
+
+  }
+
+  void getFileFd() {
+    print("getFileFd");
+    selectorFile().then((_) => setState(() {
+      _controller = MiniController.file(fileFd);
+      _controller.addListener(() {
+        setState(() {});
+      });
+      _controller.initialize().then((_) => setState(() {}));
+      _controller.play();
+    }));
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final ButtonStyle style = ElevatedButton.styleFrom(
+      foregroundColor: Colors.blue,
+      backgroundColor: Colors.white,
+    );
+    return SingleChildScrollView(
+      child: Column(
+        children: <Widget>[
+          Container(
+            padding: const EdgeInsets.only(top: 20.0),
+          ),
+          const Text('With local file mp4'),
+          Container(
+            padding: const EdgeInsets.all(20),
+            child: AspectRatio(
+              aspectRatio: _controller.value.aspectRatio,
+              child: Stack(
+                alignment: Alignment.bottomCenter,
+                children: <Widget>[
+                  VideoPlayer(_controller),
+                  _ControlsOverlay(controller: _controller),
+                  VideoProgressIndicator(_controller),
+                ],
+              ),
+            ),
+          ),
+          Container(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                ElevatedButton(
+                  style: style,
+                  child: const Text('Open a video file'),
+                  onPressed: () => {getFileFd()},
+                ),
+              ],
             ),
           ),
         ],

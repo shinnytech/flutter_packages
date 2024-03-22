@@ -187,8 +187,8 @@ class MiniController extends ValueNotifier<VideoPlayerValue> {
         super(const VideoPlayerValue(duration: Duration.zero));
 
   /// Constructs a [MiniController] playing a video from obtained from a file.
-  MiniController.file(File file)
-      : dataSource = Uri.file(file.absolute.path).toString(),
+  MiniController.file(int fileFd)
+      : dataSource = "fd://$fileFd",
         dataSourceType = DataSourceType.file,
         package = null,
         super(const VideoPlayerValue(duration: Duration.zero));
