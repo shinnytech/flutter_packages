@@ -243,12 +243,6 @@ class MiniController extends ValueNotifier<VideoPlayerValue> {
           uri: dataSource,
         );
         break;
-      case DataSourceType.contentUri:
-        dataSourceDescription = DataSource(
-          sourceType: DataSourceType.contentUri,
-          uri: dataSource,
-        );
-        break;
     }
 
     _textureId = (await _platform.create(dataSourceDescription)) ??

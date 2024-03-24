@@ -148,15 +148,7 @@ class _LocalFileVideoState extends State<_LocalFileVideo> {
   @override
   void initState() {
     super.initState();
-     _controller = MiniController.file(94);
-    //
-    // _controller.addListener(() {
-    //   setState(() {});
-    // });
-    // _controller.initialize().then((_) => setState(() {}));
-    // _controller.play();
-    // _controller.initialize().then((_) => setState(() {})).then((_) => {_controller.play()});
-
+     _controller = MiniController.file(0);
   }
 
   void getFileFd() {
