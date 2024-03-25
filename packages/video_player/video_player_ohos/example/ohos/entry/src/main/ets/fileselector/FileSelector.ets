@@ -49,7 +49,7 @@ export class FileSelector {
       const documentViewPicker = new picker.DocumentViewPicker();
       documentViewPicker.select(documentSelectOptions).then((documentSelectResult: Array<string>) => {
         uris = documentSelectResult;
-        Log.e(TAG, 'documentViewPicker select file succeed and uris are:' + uris);
+        Log.i(TAG, 'documentViewPicker select file succeed and uris are:' + uris);
         let file = fs.openSync(uris[0], fs.OpenMode.READ_ONLY);
         let response = new FileResponse(file.path, file.name, file.fd);
         result.success(response);

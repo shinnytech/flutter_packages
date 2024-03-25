@@ -101,24 +101,15 @@ export class VideoPlayerApiImpl {
     this.videoPlayers.remove(arg.getTextureId().toString());
   }
 
-  private printPlayers(): void {
-    Log.d(TAG, "videoPlayers, length=" + this.videoPlayers.length);
-    // this.videoPlayers.forEach((key, value) => {
-    //   Log.d(TAG, "videoPlayers, key=" + key + ",value=" + value);
-    // });
-  }
-
   setLooping(arg: LoopingMessage) {
     let videoPlayer = this.videoPlayers.get(arg.getTextureId().toString());
     Log.d(TAG, "setLooping, id=" + arg.getTextureId() + ", videoPlayer=" + videoPlayer);
-    this.printPlayers();
     videoPlayer?.setLooping(arg.getIsLooping());
   }
 
   setVolume(arg: VolumeMessage) {
     let videoPlayer = this.videoPlayers.get(arg.getTextureId().toString());
     Log.d(TAG, "setVolume, id=" + arg.getTextureId() + ", videoPlayer=" + videoPlayer);
-    this.printPlayers();
     videoPlayer?.setVolume(arg.getVolume().valueOf());
   }
 
@@ -136,7 +127,6 @@ export class VideoPlayerApiImpl {
   play(arg: TextureMessage) {
     let videoPlayer = this.videoPlayers.get(arg.getTextureId().toString());
     Log.d(TAG, "play, id=" + arg.getTextureId() + ", videoPlayer=" + videoPlayer);
-    this.printPlayers();
     if (videoPlayer != null) {
       videoPlayer.play();
     } else {
@@ -148,7 +138,6 @@ export class VideoPlayerApiImpl {
   position(arg: TextureMessage): PositionMessage {
     let videoPlayer = this.videoPlayers.get(arg.getTextureId().toString());
     Log.d(TAG, "position, id=" + arg.getTextureId() + ", videoPlayer=" + videoPlayer);
-    this.printPlayers();
     let positionMessage = new PositionMessage();
     positionMessage.setTextureId(arg.getTextureId());
     positionMessage.setPosition(videoPlayer?.getPosition() ?? 0);
@@ -158,14 +147,12 @@ export class VideoPlayerApiImpl {
   seekTo(arg: PositionMessage) {
     let videoPlayer = this.videoPlayers.get(arg.getTextureId().toString());
     Log.d(TAG, "seekTo, id=" + arg.getTextureId() + ", videoPlayer=" + videoPlayer);
-    this.printPlayers();
     videoPlayer?.seekTo(arg.getPosition().valueOf());
   }
 
   pause(arg: TextureMessage) {
     let videoPlayer = this.videoPlayers.get(arg.getTextureId().toString());
     Log.d(TAG, "pause, id=" + arg.getTextureId() + ", videoPlayer=" + videoPlayer);
-    this.printPlayers();
     videoPlayer?.pause();
   }
 
@@ -183,7 +170,6 @@ export class VideoPlayerApiImpl {
         binaryMessenger, "dev.flutter.pigeon.OhosVideoPlayerApi.initialize", VideoPlayerApiCodec.INSTANCE);
       channel.setMessageHandler({
         onMessage(msg: Object, reply: Reply<Object>): void {
-          // Log.d(TAG, 'onMessage reply:' + reply)
           let wrapped = new Array<Object>();
           try {
             api.initialize();
@@ -201,7 +187,6 @@ export class VideoPlayerApiImpl {
         binaryMessenger, "dev.flutter.pigeon.OhosVideoPlayerApi.create", VideoPlayerApiCodec.INSTANCE);
       channel.setMessageHandler({
         onMessage(msg: Object, reply: Reply<Object>): void {
-          // Log.d(TAG, 'onMessage reply:' + reply)
           let wrapped = new Array<Object>();
           let args = msg as Array<Object>;
           let createMsg = args[0] as CreateMessage;

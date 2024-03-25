@@ -95,7 +95,7 @@ export class VideoPlayer {
   async bindState() {
     Log.i(TAG, "enter bindState");
     if (this.avPlayer == null) {
-      Log.e(TAG, "bindState, avPlayer is null, tag1");
+      Log.e(TAG, "bindState, avPlayer is null");
       return;
     }
     this.avPlayer.on(Events.STATE_CHANGE, async (state: media.AVPlayerState) => {
@@ -110,10 +110,8 @@ export class VideoPlayer {
         case AvplayerStatus.IDLE:
           this.resetProgress();
           if (this.iUrl) {
-            Log.i(TAG, "bindState, use iUrl, on step3");
             this.avPlayer.url = this.iUrl;
           } else {
-            Log.i(TAG, "bindState, use url, on step4");
             this.avPlayer.fdSrc = this.url!;
           }
           break;
