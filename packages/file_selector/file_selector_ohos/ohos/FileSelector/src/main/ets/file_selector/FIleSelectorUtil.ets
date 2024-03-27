@@ -15,12 +15,11 @@
 
 import picker from '@ohos.file.picker';
 import common from '@ohos.app.ability.common';
+import { FileTypes } from './GeneratedFileSelectorApi';
+import { BusinessError } from '@kit.BasicServicesKit';
+import { Log } from '@ohos/flutter_ohos';
 
-const CREATE_FILE_NAME_LENGTH_LIMIT = 256;
-const ARGS_ZERO = 0;
-const ARGS_ONE = 1;
-const ARGS_TWO = 2;
-
+const TAG = "FileSelectorUtil";
 enum PhotoViewMIMETypes {
   IMAGE_TYPE = 'image/*',
   VIDEO_TYPE = 'video/*',
@@ -111,7 +110,6 @@ export async function documentPickerSelect(option: picker.DocumentSelectOptions,
     }
   }
 
-
   if (option.maxSelectNumber != null && option.maxSelectNumber > 0) {
     config.parameters.key_pick_num = option.maxSelectNumber;
   }
@@ -145,4 +143,28 @@ export async function documentPickerSelect(option: picker.DocumentSelectOptions,
     console.error(`Invoke documentViewPicker.select failed, code is ${err.code}, message is ${err.message}`);
   }
   return undefined;
+}
+
+export async function filePicker(initialDirectory: string, allowedTypes: FileTypes, selectorNumber?: number): Promise<ESObject> {
+  let documentSelectOptions = new picker.DocumentSelectOptions();
+  documentSelectOptions.defaultFilePathUri = initialDirectory;
+  if (selectorNumber != undefined) {
+    documentSelectOptions.maxSelectNumber = selectorNumber;
+  }
+  let file_suffix: Array<string> = [];
+  if (allowedTypes.extensions != null) {
+    for (let extensionType of allowedTypes.extensions) {
+      file_suffix.push("." + extensionType);
+    }
+  }
+  documentSelectOptions.fileSuffixFilters = file_suffix;
+  try {
+    const documentViewPicker = new picker.DocumentViewPicker();
+    let documentSelectResult = await documentViewPicker.select(documentSelectOptions);
+    Log.i(TAG, "documentViewPicker select file succeed.");
+    return new Promise<ESObject> ((resolve) => {resolve(documentSelectResult)});
+  } catch (err) {
+    Log.e(TAG, "documentViewPicker select file failed.")
+    return new Promise<ESObject> ((resolve) => {resolve(undefined)});
+  }
 }

@@ -22,7 +22,7 @@ import MessageCodec from '@ohos/flutter_ohos/src/main/ets/plugin/common/MessageC
 import BasicMessageChannel, { Reply } from '@ohos/flutter_ohos/src/main/ets/plugin/common/BasicMessageChannel';
 import { AbilityPluginBinding } from '@ohos/flutter_ohos/src/main/ets/embedding/engine/plugins/ability/AbilityPluginBinding';
 import common from '@ohos.app.ability.common';
-import { photoPickerSelect, documentPickerSelect } from './FIleSelectorUtil'
+import { photoPickerSelect, documentPickerSelect, filePicker } from './FIleSelectorUtil'
 import ArrayList from '@ohos.util.ArrayList';
 
 const TAG = "FileSelectorApiImpl";
@@ -39,62 +39,43 @@ export class FileSelectorApiImpl {
     this.binding = binding;
   }
 
-    openFileWithExtensions(initialDirectory: string, allowedTypes: FileTypes, result: Result<FileResponse>): void {
+  openFileWithExtensions(initialDirectory: string, allowedTypes: FileTypes, result: Result<FileResponse>): void {
     Log.d(TAG, 'openFile types:' + allowedTypes.extensions + ' dir:' + initialDirectory)
-    try {
-      let documentSelectOptions = new picker.DocumentSelectOptions();
-      documentSelectOptions.maxSelectNumber = 1;
-      documentSelectOptions.defaultFilePathUri = initialDirectory;
-      documentSelectOptions.fileSuffixFilters = allowedTypes.extensions;
-      documentPickerSelect(documentSelectOptions, this.getContext()).then((documentPickerResult: ESObject) => {
-        if (Number.isNaN(Number(documentPickerResult))) {
-          let uri: string = documentPickerResult[0];
-          Log.i(TAG,'documentPickerSelect select successfully, documentPicker uri: ' + uri);
-          Log.i(TAG,'documentPickerSelect select successfully, documentPicker fileName: ' + uri.substring(uri.lastIndexOf("/")));
-          FileSelectorApiImpl.toFileResponse(uri, MIME_TYPE, uri.substring(uri.lastIndexOf("/") + 1))
-            .then((file) => {
-              result.success(file);
-            }).catch((err: ESObject) => {
-            Log.e(TAG, 'documentPickerSelect select failed with err: ' + err);
-            result.error(err);
-          });
-        } else {
-          Log.e(TAG, 'documentPickerSelect select failed with errCode: ' + documentPickerResult);
-          result.error(new Error("Failed to select file with errCode: " + documentPickerResult))
-        }
-      });
-    } catch (err) {
-      Log.e(TAG, 'documentPickerSelect select failed with err: ' + err);
-      result.error(new Error("Failed to read file: " + initialDirectory));
-    }
+    filePicker(initialDirectory, allowedTypes, 1).then((filePickerResult: ESObject) => {
+      if (filePickerResult != undefined) {
+        let uri: string = filePickerResult[0];
+        Log.i(TAG,'documentPickerSelect select file successfully, documentPicker uri: ' + uri);
+        FileSelectorApiImpl.toFileResponse(uri, MIME_TYPE, uri.substring(uri.lastIndexOf("/") + 1))
+          .then((file) => {
+            result.success(file);
+          }).catch((err: ESObject) => {
+          Log.e(TAG, 'documentPickerSelect select file failed with err: ' + err);
+          result.error(err);
+        });
+      } else {
+        Log.e(TAG, 'documentPickerSelect select file failed with errCode: ' + filePickerResult);
+        result.error(new Error("Failed to select file with errCode: " + filePickerResult))
+      }
+    });
   }
 
   openFilesWithExtensions(initialDirectory: string, allowedTypes: FileTypes, result: Result<Array<FileResponse>>): void {
     Log.d(TAG, 'openFiles types:' + allowedTypes.extensions + ' dir:' + initialDirectory)
-    try {
-      let documentSelectOptions = new picker.DocumentSelectOptions();
-      documentSelectOptions.defaultFilePathUri = initialDirectory;
-      documentSelectOptions.fileSuffixFilters = allowedTypes.extensions;
-      documentPickerSelect(documentSelectOptions, this.getContext()).then((documentPickerResult: ESObject) => {
-        if (Number.isNaN(Number(documentPickerResult))) {
-          let pickerResult = documentPickerResult as Array<string>;
-          Log.i(TAG,'documentPickerSelect select successfully, documentPicker uris: ' + pickerResult.toString());
-          FileSelectorApiImpl.toFileListResponse(pickerResult, MIME_TYPE)
-            .then((files) => {
-              result.success(files);
-            }).catch((err: ESObject) => {
-            Log.e(TAG, 'documentPickerSelect select failed with err: ' + err);
-            result.error(err);
-          });
-        } else {
-          Log.e(TAG, 'documentPickerSelect select failed with errCode: ' + documentPickerResult);
-          result.error(new Error("Failed to select file with errCode: " + documentPickerResult))
-        }
-      });
-    } catch (err) {
-      Log.e(TAG, 'documentPickerSelect select failed with err: ' + err);
-      result.error(new Error("Failed to read file: " + initialDirectory));
-    }
+    filePicker(initialDirectory, allowedTypes).then((filePickerResult: ESObject) => {
+      if (filePickerResult != undefined) {
+        Log.i(TAG,'documentPickerSelect select files successfully, documentPicker uris: ' + filePickerResult);
+        FileSelectorApiImpl.toFileListResponse(filePickerResult, MIME_TYPE)
+          .then((file) => {
+            result.success(file);
+          }).catch((err: ESObject) => {
+          Log.e(TAG, 'documentPickerSelect select files failed with err: ' + err);
+          result.error(err);
+        });
+      } else {
+        Log.e(TAG, 'documentPickerSelect select files failed with errCode: ' + filePickerResult);
+        result.error(new Error("Failed to select files with errCode: " + filePickerResult))
+      }
+    });
   }
 
   openFile(initialDirectory: string, allowedTypes: FileTypes, result: Result<FileResponse>): void {
