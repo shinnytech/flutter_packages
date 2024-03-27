@@ -23,7 +23,7 @@
   "dependencies": {
     "@ohos/flutter_ohos": "file:./har/flutter.har",
   },
-  "devDependencies": {
+  "dependencies": {
     "@ohos/hypium": "1.0.6"
   },
   "overrides": {
