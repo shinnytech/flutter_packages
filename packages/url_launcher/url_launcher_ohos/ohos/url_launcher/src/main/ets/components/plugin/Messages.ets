@@ -17,6 +17,7 @@ import StandardMessageCodec from '@ohos/flutter_ohos/src/main/ets/plugin/common/
 import { BinaryMessenger } from '@ohos/flutter_ohos/src/main/ets/plugin/common/BinaryMessenger';
 import { ByteBuffer } from '@ohos/flutter_ohos/src/main/ets/util/ByteBuffer';
 import Log from '@ohos/flutter_ohos/src/main/ets/util/Log';
+import { Any } from '@ohos/flutter_ohos';
 
 const TAG = 'UrlLauncher'
 
@@ -25,9 +26,9 @@ export class FlutterError extends Error {
   public code: string = '';
 
   /** The error details. Must be a datatype supported by the api codec. */
-  public details: ESObject | null;
+  public details: Any | null;
 
-  constructor(code: string, message: string, details: ESObject) {
+  constructor(code: string, message: string, details: Any) {
     super(message);
     this.code = code;
     this.details = details;
@@ -93,7 +94,7 @@ export class WebViewOptions {
     this.headers = setterArg;
   }
 
-  toList(): Array<ESObject> {
+  toList(): Array<Any> {
     let toListResult = new Array<Object>();
     toListResult.push(this.enableJavaScript);
     toListResult.push(this.enableDomStorage);
@@ -132,7 +133,7 @@ export class UrlLauncherApiCodec extends StandardMessageCodec {
     }
   }
 
-  writeValue(stream: ByteBuffer, value: ESObject): void {
+  writeValue(stream: ByteBuffer, value: Any): void {
     if (value instanceof WebViewOptions) {
       stream.writeInt8(128);
       this.writeValue(stream, (value as WebViewOptions).toList());
@@ -156,8 +157,8 @@ export interface UrlLauncherApi {
   closeWebView(): boolean;
 
   /** The codec used by UrlLauncherApi. */
-  getCodec(): MessageCodec<ESObject>;
+  getCodec(): MessageCodec<Any>;
 
   /** Sets up an instance of `UrlLauncherApi` to handle messages through the `binaryMessenger`. */
-  setup(binaryMessenger: BinaryMessenger | null, api: UrlLauncherApi | null): ESObject;
+  setup(binaryMessenger: BinaryMessenger | null, api: UrlLauncherApi | null): Any;
 }
