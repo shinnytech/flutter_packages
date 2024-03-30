@@ -2,9 +2,11 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+import 'package:camera_platform_interface/camera_platform_interface.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'dart:math' as math;
 
 import 'camera_controller.dart';
 
@@ -21,23 +23,33 @@ class CameraPreview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var _angle = 0.0;
+    if (controller.description.lensDirection == CameraLensDirection.back) {
+      _angle = 90 * math.pi / 180;
+    } else {
+      _angle = -90 * math.pi / 180;
+    }
+
     return controller.value.isInitialized
         ? ValueListenableBuilder<CameraValue>(
             valueListenable: controller,
             builder: (BuildContext context, Object? value, Widget? child) {
               final double cameraAspectRatio =
-                  controller.value.previewSize!.width /
-                      controller.value.previewSize!.height;
+                  controller.value.previewSize!.height /
+                      controller.value.previewSize!.width;
               return AspectRatio(
                 aspectRatio: _isLandscape()
                     ? cameraAspectRatio
                     : (1 / cameraAspectRatio),
-                child: Stack(
-                  fit: StackFit.expand,
-                  children: <Widget>[
-                    _wrapInRotatedBox(child: controller.buildPreview()),
-                    child ?? Container(),
-                  ],
+                child: Transform.rotate(
+                  angle: _angle,
+                  child: Stack(
+                    fit: StackFit.expand,
+                    children: <Widget>[
+                      _wrapInRotatedBox(child: controller.buildPreview()),
+                      child ?? Container(),
+                    ],
+                  ),
                 ),
               );
             },

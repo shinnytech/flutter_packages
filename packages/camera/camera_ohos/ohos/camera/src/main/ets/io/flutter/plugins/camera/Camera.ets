@@ -109,6 +109,7 @@ export class Camera implements CameraCaptureStateListener {
   private cameras: Array<camera.CameraDevice> | null = null;
   private photoOutPut: camera.PhotoOutput | null = null;
   private fd: number = -1;
+  private isVideoMode : boolean = false;
   private aVRecorderProfile: media.AVRecorderProfile = {
     audioChannels: 2,
     audioCodec: media.CodecMimeType.AUDIO_AAC,
@@ -760,8 +761,9 @@ export class Camera implements CameraCaptureStateListener {
   async startCapture(record: boolean, stream: boolean) {
 
     try {
-      if (this.session != undefined) {
+      if (this.session != undefined && !this.isVideoMode) {
         await this.session?.stop()
+        this.isVideoMode = true;
       }
     } catch (e) {
       Log.d(TAG, "session stop error")
@@ -812,7 +814,9 @@ export class Camera implements CameraCaptureStateListener {
         await this.videoSession?.start();
         await this.videoOutput.start();
         try {
-          await this.avRecorder.start();
+          if(record){
+            await this.avRecorder.start();
+          }
         } catch (e) {
           Log.d(TAG, "startAVRecorder error")
         }
