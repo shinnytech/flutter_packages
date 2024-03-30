@@ -23,10 +23,7 @@ import FlutterEngine from '@ohos/flutter_ohos/src/main/ets/embedding/engine/Flut
 export default class EntryAbility extends FlutterAbility {
   configureFlutterEngine(flutterEngine: FlutterEngine) {
     super.configureFlutterEngine(flutterEngine)
-    let plugins = GeneratedPluginRegistrant.getPlugins() as List<FlutterPlugin>;
-    plugins.forEach((plugin) => {
-      this.addPlugin(plugin);
-    })
+    GeneratedPluginRegistrant.registerWith(flutterEngine);
     this.addPlugin(new MessagePlugin())
   }
 }
