@@ -22,10 +22,7 @@ import UrlLauncherPlugin from '@ohos/url_launcher_ohos'
 export default class EntryAbility extends FlutterAbility {
   configureFlutterEngine(flutterEngine: FlutterEngine) {
     super.configureFlutterEngine(flutterEngine)
-    let plugins = GeneratedPluginRegistrant.getPlugins() as List<FlutterPlugin>;
-    plugins.forEach((plugin) => {
-      this.addPlugin(plugin);
-    })
+    GeneratedPluginRegistrant.registerWith(flutterEngine);
   }
 }
 
