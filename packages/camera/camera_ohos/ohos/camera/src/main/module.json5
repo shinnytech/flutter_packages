@@ -23,22 +23,67 @@
     ],
     "requestPermissions": [
       {
-        "name": "ohos.permission.CAMERA"
+        "name": "ohos.permission.INTERNET"
       },
       {
-        "name": "ohos.permission.MICROPHONE"
+        "name": "ohos.permission.CAMERA",
+        "reason": "$string:reason",
+        "usedScene": {
+          "abilities": [
+            "FormAbility"
+          ],
+          "when": "inuse"
+        }
       },
       {
-        "name": "ohos.permission.READ_IMAGEVIDEO"
+        "name": "ohos.permission.MICROPHONE",
+        "reason": "$string:reason",
+        "usedScene": {
+          "abilities": [
+            "FormAbility"
+          ],
+          "when": "inuse"
+        }
       },
       {
-        "name": "ohos.permission.WRITE_IMAGEVIDEO"
+        "name": "ohos.permission.READ_IMAGEVIDEO",
+        "reason": "$string:reason",
+        "usedScene": {
+          "abilities": [
+            "FormAbility"
+          ],
+          "when": "inuse"
+        },
       },
       {
-        "name": "ohos.permission.READ_MEDIA"
+        "name": "ohos.permission.WRITE_IMAGEVIDEO",
+        "reason": "$string:reason",
+        "usedScene": {
+          "abilities": [
+            "FormAbility"
+          ],
+          "when": "inuse"
+        }
       },
       {
-        "name": "ohos.permission.WRITE_MEDIA"
+        "name": "ohos.permission.READ_MEDIA",
+        "reason": "$string:reason",
+        "usedScene": {
+          "abilities": [
+            "FormAbility"
+          ],
+          "when": "inuse"
+        }
+      },
+      {
+        "name": "ohos.permission.WRITE_MEDIA",
+        "reason": "$string:reason",
+        "usedScene": {
+          "abilities": [
+            "FormAbility"
+          ],
+          "when": "inuse"
+        }
       },
       //      {
       //        "name": "ohos.permission.CAPTURE_VOICE_DOWNLINK_AUDIO"

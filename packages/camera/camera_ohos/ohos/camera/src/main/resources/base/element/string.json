@@ -11,6 +11,10 @@
     {
       "name": "EntryAbility_label",
       "value": "camera_ohos"
+    },
+    {
+      "name": "reason",
+      "value": "example"
     }
   ]
 }
