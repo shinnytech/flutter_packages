@@ -1106,7 +1106,7 @@ export interface Reply<T> {
    *
    * @param reply the reply, possibly null.
    */
-  reply: (reply: T) => void;
+  reply: (reply: T | null) => void;
 }
 
 export class WebViewFlutterApi {

@@ -18,31 +18,31 @@ import { InstanceManager } from './InstanceManager';
 import { WebViewPlatformView } from './WebViewHostApiImpl';
 
 export interface WebSettings {
-  setDomStorageEnabled(flag: boolean);
+  setDomStorageEnabled(flag: boolean): void;
 
-  setJavaScriptCanOpenWindowsAutomatically(flag: boolean);
+  setJavaScriptCanOpenWindowsAutomatically(flag: boolean): void;
 
-  setSupportMultipleWindows(support: boolean);
+  setSupportMultipleWindows(support: boolean): void;
 
-  setJavaScriptEnabled(flag: boolean);
+  setJavaScriptEnabled(flag: boolean): void;
 
-  setUserAgentString(userAgentString: string);
+  setUserAgentString(userAgentString: string): void;
 
-  setMediaPlaybackRequiresUserGesture(require: boolean);
+  setMediaPlaybackRequiresUserGesture(require: boolean): void;
 
-  setSupportZoom(support: boolean);
+  setSupportZoom(support: boolean): void;
 
-  setLoadWithOverviewMode(overview: boolean);
+  setLoadWithOverviewMode(overview: boolean): void;
 
-  setUseWideViewPort(use: boolean);
+  setUseWideViewPort(use: boolean): void;
 
-  setDisplayZoomControls(enabled: boolean);
+  setDisplayZoomControls(enabled: boolean): void;
 
-  setBuiltInZoomControls(enabled: boolean);
+  setBuiltInZoomControls(enabled: boolean): void;
 
-  setAllowFileAccess(enabled: boolean);
+  setAllowFileAccess(enabled: boolean): void;
 
-  setTextZoom(textZoom: number);
+  setTextZoom(textZoom: number): void;
 }
 
 export class WebSettingsCreator {
