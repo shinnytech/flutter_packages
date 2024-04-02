@@ -66,5 +66,5 @@ class DownloadListenerImpl implements DownloadListener {
 }
 
 export interface DownloadListener {
-  onDownloadStart(url: string, userAgent: string, contentDisposition: string, mimeType: string, contentLength: number);
+  onDownloadStart(url: string, userAgent: string, contentDisposition: string, mimeType: string, contentLength: number): void;
 }

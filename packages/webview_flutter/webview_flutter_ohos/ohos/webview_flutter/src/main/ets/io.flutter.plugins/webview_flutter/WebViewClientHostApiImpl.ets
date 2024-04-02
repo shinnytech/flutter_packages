@@ -19,15 +19,15 @@ import { WebViewClientFlutterApiImpl } from './WebViewClientFlutterApiImpl';
 import { WebViewPlatformView } from './WebViewHostApiImpl';
 
 export interface WebViewClient {
-  onPageStarted(view: WebViewPlatformView, url: string);
+  onPageStarted(view: WebViewPlatformView, url: string): void;
 
-  onPageFinished(view: WebViewPlatformView, url: string);
+  onPageFinished(view: WebViewPlatformView, url: string): void;
 
-  onReceivedError(view: WebViewPlatformView, request: WebResourceRequest, error: WebResourceError);
+  onReceivedError(view: WebViewPlatformView, request: WebResourceRequest, error: WebResourceError): void;
 
   shouldOverrideUrlLoading(view: WebViewPlatformView, request: WebResourceRequest): boolean;
 
-  doUpdateVisitedHistory(view: WebViewPlatformView, url: string, isReload: boolean);
+  doUpdateVisitedHistory(view: WebViewPlatformView, url: string, isReload: boolean): void;
 }
 
 export class WebViewClientImpl implements WebViewClient {

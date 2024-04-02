@@ -26,21 +26,21 @@ import web_webview from '@ohos.web.webview'
 const TAG: string = "WebChromeClientHostApiImpl";
 
 export interface WebChromeClient {
-  onProgressChanged(view: WebViewPlatformView, progress: number);
+  onProgressChanged(view: WebViewPlatformView, progress: number): void;
 
-  onGeolocationPermissionsShowPrompt(origin: string, callback: JsGeolocation);
+  onGeolocationPermissionsShowPrompt(origin: string, callback: JsGeolocation): void;
 
-  onGeolocationPermissionsHidePrompt();
+  onGeolocationPermissionsHidePrompt(): void;
 
   onShowFileChooser(
     webView: WebViewPlatformView, filePathCallback: FileSelectorResult, fileChooserParams: FileSelectorParam
   ): boolean;
 
-  onPermissionRequest(request: PermissionRequest);
+  onPermissionRequest(request: PermissionRequest): void;
 
-  onConsoleMessage(message: ConsoleMessage);
+  onConsoleMessage(message: ConsoleMessage): void;
 
-  onCreateWindow(webView: WebViewPlatformView, isDialog: boolean, isUserGesture: boolean, handler: ControllerHandler);
+  onCreateWindow(webView: WebViewPlatformView, isDialog: boolean, isUserGesture: boolean, handler: ControllerHandler): void;
 }
 
 export class WebChromeClientHostApiImpl extends WebChromeClientHostApi {
@@ -171,8 +171,8 @@ class WebChromeClientImpl extends SecureWebChromeClient {
     let currentReturnValueForOnShowFileChooser: boolean = this.returnValueForOnShowFileChooser;
     this.flutterApi.onShowFileChooserImpl(
       this, webView, fileChooserParams, {
-      reply: (reply: Array<string>) => {
-        if (currentReturnValueForOnShowFileChooser) {
+      reply: (reply: Array<string> | null) => {
+        if (currentReturnValueForOnShowFileChooser && reply) {
           filePathCallback.handleFileList(reply);
         }
       }

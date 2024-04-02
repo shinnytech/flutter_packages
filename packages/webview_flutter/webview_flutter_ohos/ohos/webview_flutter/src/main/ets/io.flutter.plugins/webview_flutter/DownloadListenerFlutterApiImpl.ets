@@ -54,5 +54,5 @@ export class DownloadListenerFlutterApiImpl extends DownloadListenerFlutterApi {
 }
 
 export interface DownloadListener {
-  onDownloadStart(url: string, userAgent: string, contentDisposition: string, mimeType: string, contentLength: number);
+  onDownloadStart(url: string, userAgent: string, contentDisposition: string, mimeType: string, contentLength: number): void;
 }
