@@ -573,7 +573,6 @@ export class Camera implements CameraCaptureStateListener {
     }
 
     this.cameraFeatures.setAutoFocus(this.cameraFeatureFactory.createAutoFocusFeature(this.cameraProperties, false));
-    this.recordingVideo = false;
     try {
       if (this.avRecorder != undefined && this.avRecorder.state === 'started') { // 仅在started状态下调用pause为合理状态切换
         // 停止录像
@@ -593,34 +592,6 @@ export class Camera implements CameraCaptureStateListener {
     }
 
   }
-
-
-  getFd() {
-    try {
-      let PhotoSelectOptions = new picker.PhotoSelectOptions();
-      PhotoSelectOptions.MIMEType = picker.PhotoViewMIMETypes.VIDEO_TYPE;
-      PhotoSelectOptions.maxSelectNumber = 1;
-      let photoPicker = new picker.PhotoViewPicker();
-      let uris: Array<string> = [];
-      photoPicker.select(PhotoSelectOptions).then((PhotoSelectResult: picker.PhotoSelectResult) => {
-        console.info('PhotoViewPicker.select successfully, PhotoSelectResult uri: ' + JSON.stringify(PhotoSelectResult));
-        uris = PhotoSelectResult.photoUris;
-        console.info('PhotoSelectResult.select to file succeed and uris are:' + uris);
-        let file = fs.openSync(uris[0], fs.OpenMode.READ_ONLY);
-        console.info('file fd: ' + file.fd);
-        console.info('file.path: ' + file.path);
-        console.info('file.name: ' + file.name);
-        this.fd = file.fd;
-      }).catch((err: BusinessError) => {
-        console.error('PhotoViewPicker.select failed with err: ' + JSON.stringify(err));
-      });
-    } catch (error) {
-      let err: BusinessError = error as BusinessError;
-      console.error('PhotoViewPicker failed with err: ' + JSON.stringify(err));
-    }
-
-  }
-
 
   startPreview() {
     if (this.recordingVideo) {
@@ -651,21 +622,6 @@ export class Camera implements CameraCaptureStateListener {
     await this.session.start();
   }
 
-  async startVideoPreview() {
-    this.cameraOutputCapability = CameraUtils.getSupportedOutputCapability(this.cameraDevice!, camera.SceneMode.NORMAL_VIDEO, this.cameraManager)
-    let previewProfile = this.cameraOutputCapability.previewProfiles[0];
-    this.previewOutput =
-      this.cameraManager.createPreviewOutput(previewProfile, this.flutterTexture.getSurfaceId().toString());
-
-    this.videoSession = this.cameraManager.createSession(camera.SceneMode.NORMAL_VIDEO) as camera.VideoSession;
-    this.videoSession.beginConfig();
-    await this.cameraInput?.open();
-    this.videoSession.addInput(this.cameraInput);
-    this.videoSession.addOutput(this.previewOutput);
-    await this.videoSession.commitConfig();
-    await this.videoSession.start();
-
-  }
 
   startPreviewWithVideoRendererStream() {
     // todo ohos无法实现videoRenderer，此方法是否需要
