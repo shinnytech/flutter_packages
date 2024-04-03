@@ -123,6 +123,7 @@ export class Camera implements CameraCaptureStateListener {
     videoFrameRate: 30 // 视频帧率
   };
   private phAccessHelper: photoAccessHelper.PhotoAccessHelper;
+  private videoPath : string | undefined = undefined;
 
   constructor(
     ability: UIAbility,
@@ -574,20 +575,23 @@ export class Camera implements CameraCaptureStateListener {
     this.cameraFeatures.setAutoFocus(this.cameraFeatureFactory.createAutoFocusFeature(this.cameraProperties, false));
     this.recordingVideo = false;
     try {
-      // 停止录像
-      await this.avRecorder?.stop();
-      this.avRecorder?.release();
-      // 停止录像输出流
-      this.videoOutput?.stop();
+      if (this.avRecorder != undefined && this.avRecorder.state === 'started') { // 仅在started状态下调用pause为合理状态切换
+        // 停止录像
+        await this.avRecorder?.stop();
+        this.avRecorder?.release().then(() => {
+          this.recordingVideo = false;
+          // 停止录像输出流
+          this.videoOutput?.stop();
+          this.videoPath =  this.captureFile?.path;
+          fs.close(this.captureFile);
+          result.success(this.videoPath);
+          this.captureFile = null;
+        });
+      }
     } catch (e) {
       Log.d(TAG, "videoSession stop error")
     }
-    ;
-    //this.getFd();
-    result.success(this.captureFile?.path);
-    fs.close(this.captureFile);
 
-    this.captureFile = null;
   }
 
 
@@ -720,7 +724,7 @@ export class Camera implements CameraCaptureStateListener {
         await this.avRecorder.resume();
       } else {
         result.error(
-          "videoRecordingFailed", "resumeVideoRecording requires Android API +24.", null);
+          "videoRecordingFailed", "avRecorder state is not paused", null);
         return;
       }
     } catch (e) {
