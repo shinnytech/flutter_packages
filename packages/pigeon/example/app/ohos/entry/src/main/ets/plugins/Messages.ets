@@ -111,7 +111,7 @@ class ExampleHostApiCodec extends StandardMessageCodec {
   static INSTANCE: ExampleHostApiCodec = new ExampleHostApiCodec();
 
   getByte(n: number): number {
-    let byteArray = new Int8Array(1);
+    let byteArray = new Uint8Array(1);
     byteArray[0] = n;
     return byteArray[0] as number;
   }
@@ -127,7 +127,7 @@ class ExampleHostApiCodec extends StandardMessageCodec {
 
   writeValue(stream: ByteBuffer, value: ESObject): ESObject {
     if (value instanceof MessageData) {
-      stream.writeInt8(this.getByte(128));
+      stream.writeUint8(this.getByte(128));
       this.writeValue(stream, (value as MessageData).toList());
     } else {
       super.writeValue(stream, value);

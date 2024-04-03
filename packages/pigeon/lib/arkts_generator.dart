@@ -91,7 +91,7 @@ class ArkTSGenerator extends StructuredGenerator<ArkTSOptions> {
     indent.writeln(
         "import StandardMessageCodec from '@ohos/flutter_ohos/src/main/ets/plugin/common/StandardMessageCodec';");
     indent.writeln(
-        "import BasicMessageChannel, { Reply } from '@ohos/flutter_ohos/src/main/ets/plugin/common/BasicMessageChannel';");        
+        "import BasicMessageChannel, { Reply } from '@ohos/flutter_ohos/src/main/ets/plugin/common/BasicMessageChannel';");
     indent.writeln(
         "import { BinaryMessenger,TaskQueue } from '@ohos/flutter_ohos/src/main/ets/plugin/common/BinaryMessenger';");
     indent.writeln(
@@ -266,7 +266,8 @@ class ArkTSGenerator extends StructuredGenerator<ArkTSOptions> {
       for (int i = 0; i < klass.fields.length; i++) {
         final NamedType field = klass.fields[i];
         if (customEnumNames.contains(field.type.baseName)) {
-          indent.add('${field.type.baseName}[${field.type.baseName}[arr[$i] as number]]');
+          indent.add(
+              '${field.type.baseName}[${field.type.baseName}[arr[$i] as number]]');
         } else {
           final String type = _arkTSTypeForDartType(field.type);
           indent.add('arr[$i] as $type');
@@ -628,8 +629,10 @@ let $resultName: Result<$returnType> = new ResultImp();
           }
           indent.add('if (value instanceof ${customClass.name}) ');
           indent.addScoped('{', '} else ', () {
-            indent.writeln('stream.writeInt8(this.getByte(${customClass.enumeration}));');
-            indent.writeln('this.writeValue(stream, (value as ${customClass.name}).toList());');
+            indent.writeln(
+                'stream.writeUint8(this.getByte(${customClass.enumeration}));');
+            indent.writeln(
+                'this.writeValue(stream, (value as ${customClass.name}).toList());');
           }, addTrailingNewline: false);
         }
         indent.addScoped('{', '}', () {
@@ -731,10 +734,10 @@ function wrapError(error: Error): Array<Object> {
 }''');
   }
 
-  void _writeGetByteMethoe(Indent indent){
+  void _writeGetByteMethoe(Indent indent) {
     indent.format('''
 getByte(n: number): number {
-\tlet byteArray = new Int8Array(1);
+\tlet byteArray = new Uint8Array(1);
 \tbyteArray[0] = n;
 \treturn byteArray[0] as number;
 }''');
@@ -770,8 +773,8 @@ getByte(n: number): number {
       '${_getArgumentName(count, argument)}Arg';
 
   /// arkts方法参数如果是arguments，会与参数关键字冲突
-  String getSafeConstructorArgument(String argument){
-    return (argument=='arguments')?'argumentsArg':argument;
+  String getSafeConstructorArgument(String argument) {
+    return (argument == 'arguments') ? 'argumentsArg' : argument;
   }
 
 // get函数
