@@ -31,14 +31,10 @@ dependencies:
   flutter:
     sdk: flutter
   path_provider:
-    git:
-      url: "https://gitee.com/openharmony-sig/flutter_packages.git"
-      path: "packages/path_provider/path_provider"
+    path: "../../../path_provider/path_provider"
   quiver: ^3.0.0
   video_player:
-    git:
-      url: "https://gitee.com/openharmony-sig/flutter_packages.git"
-      path: "packages/video_player/video_player"
+    path: "../../../video_player/video_player"
 
 dev_dependencies:
   build_runner: ^2.1.10

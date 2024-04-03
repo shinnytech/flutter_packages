@@ -30,9 +30,7 @@ dependencies:
   video_player_platform_interface: ">=6.1.0 <7.0.0"
   video_player_web: ^2.0.0
   video_player_ohos:
-    git:
-      url: "https://gitee.com/openharmony-sig/flutter_packages.git"
-      path: "packages/video_player/video_player_ohos"
+    path: "../video_player_ohos"
 
 dev_dependencies:
   flutter_test:
