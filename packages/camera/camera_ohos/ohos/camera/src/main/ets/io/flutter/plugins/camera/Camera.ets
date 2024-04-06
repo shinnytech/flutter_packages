@@ -109,7 +109,7 @@ export class Camera implements CameraCaptureStateListener {
   private cameras: Array<camera.CameraDevice> | null = null;
   private photoOutPut: camera.PhotoOutput | null = null;
   private fd: number = -1;
-  private isVideoMode : boolean = false;
+  private isVideoMode: boolean = false;
   private aVRecorderProfile: media.AVRecorderProfile = {
     audioChannels: 2,
     audioCodec: media.CodecMimeType.AUDIO_AAC,
@@ -123,7 +123,7 @@ export class Camera implements CameraCaptureStateListener {
     videoFrameRate: 30 // 视频帧率
   };
   private phAccessHelper: photoAccessHelper.PhotoAccessHelper;
-  private videoPath : string | undefined = undefined;
+  private videoPath: string | undefined = undefined;
 
   constructor(
     ability: UIAbility,
@@ -258,11 +258,11 @@ export class Camera implements CameraCaptureStateListener {
   getFocusMode(result: MethodResult) {
     let nowFocusMode: camera.FocusMode = camera.FocusMode.FOCUS_MODE_AUTO
 
-    try{
+    try {
       nowFocusMode = this.session!.getFocusMode()
-      if(nowFocusMode == camera.FocusMode.FOCUS_MODE_MANUAL) {
+      if (nowFocusMode == camera.FocusMode.FOCUS_MODE_MANUAL) {
         nowFocusMode = camera.FocusMode.FOCUS_MODE_AUTO
-      } else if(nowFocusMode == camera.FocusMode.FOCUS_MODE_CONTINUOUS_AUTO) {
+      } else if (nowFocusMode == camera.FocusMode.FOCUS_MODE_CONTINUOUS_AUTO) {
         nowFocusMode = camera.FocusMode.FOCUS_MODE_AUTO
       }
     } catch (error) {
@@ -295,7 +295,7 @@ export class Camera implements CameraCaptureStateListener {
       }
     }
 
-    try{
+    try {
       this.session!.setFocusMode(newMode)
       result?.success(null)
     } catch (error) {
@@ -477,8 +477,7 @@ export class Camera implements CameraCaptureStateListener {
   }
 
   async savePicture(buffer: ArrayBuffer, img: image.Image) {
-    let options: photoAccessHelper.CreateOptions = { title: Date.now().toString() };
-    let photoUri: string = await this.phAccessHelper?.createAsset(PhotoAccessHelper.PhotoType.IMAGE, 'jpg', options);
+    let photoUri: string = getContext(this).cacheDir + '/IMG_' + Date.now().toString() + '.jpg';
     let file: fs.File = fs.openSync(photoUri, fs.OpenMode.READ_WRITE | fs.OpenMode.CREATE);
     await fs.write(file.fd, buffer);
     fs.closeSync(file);
@@ -581,7 +580,7 @@ export class Camera implements CameraCaptureStateListener {
           this.recordingVideo = false;
           // 停止录像输出流
           this.videoOutput?.stop();
-          this.videoPath =  this.captureFile?.path;
+          this.videoPath = this.captureFile?.path;
           fs.close(this.captureFile);
           result.success(this.videoPath);
           this.captureFile = null;
@@ -774,7 +773,7 @@ export class Camera implements CameraCaptureStateListener {
         await this.videoSession?.start();
         await this.videoOutput.start();
         try {
-          if(record){
+          if (record) {
             await this.avRecorder.start();
           }
         } catch (e) {
