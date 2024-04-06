@@ -530,7 +530,7 @@ export default class ImagePickerDelegate {
         pathList.add(element);
         pathList.add(file.fd.toString());
       }
-      localResult.success(path as ArrayList<string>);
+      localResult.success(pathList as ArrayList<string>);
     }
   }
 

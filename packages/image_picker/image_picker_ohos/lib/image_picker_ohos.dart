@@ -243,7 +243,7 @@ class ImagePickerOhos extends ImagePickerPlatform {
       pathList.add(paths[i - 1]);
     }
         
-    return pathList.map((String? path) => XFile(path!).toList());
+    return pathList.map((String? path) => XFile(path!)).toList();
   }
 
   @override
