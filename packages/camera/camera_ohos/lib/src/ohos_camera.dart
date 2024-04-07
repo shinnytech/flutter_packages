@@ -465,12 +465,12 @@ class OhosCamera extends CameraPlatform {
 
   @override
   Future<double> getMinZoomLevel(int cameraId) async {
-    final double? minZoomLevel = await _channel.invokeMethod<double>(
+    final int? minZoomLevel = await _channel.invokeMethod<int>(
       'getMinZoomLevel',
       <String, dynamic>{'cameraId': cameraId},
     );
 
-    return minZoomLevel!;
+    return minZoomLevel!.toDouble();
   }
 
   @override
