@@ -289,6 +289,7 @@ class OhosWebViewController extends PlatformWebViewController {
       baseUrl: baseUrl,
       data: html,
       mimeType: 'text/html',
+      encoding: 'UTF-8'
     );
   }
 

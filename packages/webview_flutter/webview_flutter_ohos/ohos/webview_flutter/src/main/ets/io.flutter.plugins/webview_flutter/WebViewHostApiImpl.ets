@@ -77,7 +77,16 @@ export class WebViewHostApiImpl extends WebViewHostApi {
     instanceId: number, baseUrl: string, data: string, mimeType: string, encoding: string, historyUrl: string
   ): void {
     const webView: WebViewPlatformView = this.instanceManager.getInstance(instanceId);
-    webView.getController().loadData(data, mimeType, encoding, baseUrl, historyUrl);
+    try {
+      webView.getController().loadData(data, mimeType, encoding, baseUrl == null ? "" : baseUrl , historyUrl == null ? "" : historyUrl);
+    } catch (err) {
+      Log.e(TAG, "loadDataWithBaseUrl err = " + err);
+      setTimeout(
+        () => {
+          this.loadDataWithBaseUrl(instanceId, baseUrl, data, mimeType, encoding, historyUrl);
+        }, 500
+      )
+    }
   }
 
   loadUrl(instanceId: number, url: string, headers: Map<string, string>): void {
