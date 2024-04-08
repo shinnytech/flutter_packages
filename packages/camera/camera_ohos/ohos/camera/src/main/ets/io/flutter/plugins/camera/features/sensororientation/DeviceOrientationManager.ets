@@ -15,20 +15,11 @@
 
 import Ability from '@ohos.app.ability.Ability';
 import { DartMessenger } from '../../DartMessenger';
-// import screen from '@ohos.screen';  // todo:screen模块找不到
+import display from '@ohos.display';
 
-import Device from '@system.device';
-import UIAbility from '@ohos.app.ability.UIAbility';
-import { BusinessError } from '@ohos.base';
+import { BusinessError, Callback } from '@ohos.base';
 
-// import { DeviceOrientation } from '@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/PlatformChannel';
-
-export enum DeviceOrientation {
-  PORTRAIT_UP = "DeviceOrientation.portraitUp",
-  PORTRAIT_DOWN = "DeviceOrientation.portraitDown",
-  LANDSCAPE_LEFT = "DeviceOrientation.landscapeLeft",
-  LANDSCAPE_RIGHT = "DeviceOrientation.landscapeRight",
-} // 等flutter embedding修改后，使用flutter里的
+import { DeviceOrientation } from '@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/PlatformChannel';
 
 const handleOrientationChange = (
   newOrientation: DeviceOrientation,
@@ -48,7 +39,7 @@ export class DeviceOrientationManager {
   private readonly isFrontFacing: boolean;
   private readonly sensorOrientation: number;
   private lastOrientation: DeviceOrientation = DeviceOrientation.PORTRAIT_UP;
-  // private screenClass: screen.Screen | null = null;  // todo:screen模块找不到
+  private displayClass: display.Display | null = null;
 
 
   public static create(
@@ -71,27 +62,16 @@ export class DeviceOrientationManager {
     this.sensorOrientation = sensorOrientation;
   }
 
-  // todo:screen模块找不到
   public start() {
-    // screen.getAllScreens((err: BusinessError, data: Array<screen.Screen>) => {
-    //   const errCode: number = err.code;
-    //   if (errCode) {
-    //     console.error('Failed to get all screens. Cause:  ' + JSON.stringify(err));
-    //     return;
-    //   }
-    //   console.info('Succeeded in getting all screens. Data:' + JSON.stringify(data));
-    //   this.screenClass = data[0];
-    // });
-    //
-    // // 屏幕方向改变监听 模块import screen from '@ohos.screen';sdk找不到
-    // screen.on('change', this.handleUIOrientationChange)
-
+    let callback: Callback<number> = (data: number) => {
+      this.handleUIOrientationChange();
+    };
+    display.on('change', callback)
   }
 
-  // todo:screen模块找不到
   public stop() {
-    // screen.off('connect');
-    // this.screenClass = null;
+    display.off('change');
+    this.displayClass = null;
   }
 
   public getPhotoOrientation(orientation?: DeviceOrientation) {
@@ -164,31 +144,37 @@ export class DeviceOrientationManager {
 
 
   getUIOrientation(): DeviceOrientation {
-    // const   rotation:number = getDisplay().getRotation();
-    // const  orientation:number = activity.getResources().getConfiguration().orientation;
-    //
-    // switch (orientation) {
-    //   case Configuration.ORIENTATION_PORTRAIT:
-    //     if (rotation == Surface.ROTATION_0 || rotation == Surface.ROTATION_90) {
-    //       return PlatformChannel.DeviceOrientation.PORTRAIT_UP;
-    //     } else {
-    //       return PlatformChannel.DeviceOrientation.PORTRAIT_DOWN;
-    //     }
-    //   case Configuration.ORIENTATION_LANDSCAPE:
-    //     if (rotation == Surface.ROTATION_0 || rotation == Surface.ROTATION_90) {
-    //       return PlatformChannel.DeviceOrientation.LANDSCAPE_LEFT;
-    //     } else {
-    //       return PlatformChannel.DeviceOrientation.LANDSCAPE_RIGHT;
-    //     }
-    //   case Configuration.ORIENTATION_SQUARE:
-    //   case Configuration.ORIENTATION_UNDEFINED:
-    //   default:
-    //     return PlatformChannel.DeviceOrientation.PORTRAIT_UP;
-    // }
-
-    return DeviceOrientation.PORTRAIT_UP;
+    const rotation: number | undefined = display.getDefaultDisplaySync().rotation;
+    const orientation: display.Orientation | undefined = display.getDefaultDisplaySync().orientation
+    switch (orientation) {
+      case display.Orientation.PORTRAIT:
+        if (rotation == 0 || rotation == 90) {
+          return DeviceOrientation.PORTRAIT_UP;
+        } else {
+          return DeviceOrientation.PORTRAIT_DOWN;
+        }
+      case display.Orientation.LANDSCAPE:
+        if (rotation == 0 || rotation == 90) {
+          return DeviceOrientation.LANDSCAPE_LEFT;
+        } else {
+          return DeviceOrientation.LANDSCAPE_RIGHT;
+        }
+      case display.Orientation.PORTRAIT_INVERTED:
+        if (rotation == 0 || rotation == 90) {
+          return DeviceOrientation.PORTRAIT_UP;
+        } else {
+          return DeviceOrientation.PORTRAIT_DOWN;
+        }
+      case display.Orientation.LANDSCAPE_INVERTED:
+        if (rotation == 0 || rotation == 90) {
+          return DeviceOrientation.LANDSCAPE_RIGHT;
+        } else {
+          return DeviceOrientation.LANDSCAPE_LEFT;
+        }
+      default:
+        return DeviceOrientation.PORTRAIT_UP;
+    }
   }
-
   // getDeviceDefaultOrientation():number{
   //    Configuration config = activity.getResources().getConfiguration();
   //   int rotation = getDisplay().getRotation();

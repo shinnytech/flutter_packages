@@ -40,7 +40,7 @@ import { CameraState } from './CameraState';
 import { AutoFocusFeature } from './features/autofocus/AutoFocusFeature';
 import mediaLibrary from '@ohos.multimedia.mediaLibrary';
 import fileIO from '@ohos.fileio';
-import { DeviceOrientation, DeviceOrientationManager } from './features/sensororientation/DeviceOrientationManager';
+import { DeviceOrientationManager } from './features/sensororientation/DeviceOrientationManager';
 import { Point } from './features/Point';
 import { FlashFeature } from './features/flash/FlashFeature';
 import { ExposureLockFeature } from './features/exposurelock/ExposureLockFeature';
@@ -55,6 +55,7 @@ import PhotoAccessHelper from '@ohos.file.photoAccessHelper';
 import systemDateTime from '@ohos.systemDateTime';
 import photoAccessHelper from '@ohos.file.photoAccessHelper';
 import { picker } from '@kit.CoreFileKit';
+import { DeviceOrientation } from '@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/PlatformChannel';
 
 const TAG = "Camera";
 
@@ -751,9 +752,7 @@ export class Camera implements CameraCaptureStateListener {
     media.createAVRecorder(async (error, recorder) => {
       if (recorder != null) {
         this.avRecorder = recorder;
-        let options: photoAccessHelper.CreateOptions = { title: Date.now().toString() };
-        let videoUri: string = await this.phAccessHelper.createAsset(PhotoAccessHelper.PhotoType.VIDEO, 'mp4', options);
-        // 生成临时文件
+        let videoUri: string = getContext(this).cacheDir + '/REC' + Date.now().toString() + '.mp4';
         this.captureFile = fs.openSync(videoUri, fs.OpenMode.READ_WRITE | fs.OpenMode.CREATE);
         let fd = this.captureFile.fd;
         // 当前录像配置

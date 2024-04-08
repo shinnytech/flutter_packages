@@ -18,7 +18,8 @@ import Ability from '@ohos.app.ability.Ability';
 import { CameraFeature } from '../CameraFeature';
 import { DartMessenger } from '../../DartMessenger';
 import { CameraProperties } from '../../CameraProperties';
-import { DeviceOrientation, DeviceOrientationManager } from './DeviceOrientationManager';
+import {  DeviceOrientationManager } from './DeviceOrientationManager';
+import { DeviceOrientation } from '@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/PlatformChannel';
 
 export class SensorOrientationFeature extends CameraFeature<number> {
   private currentSetting: number = 0;

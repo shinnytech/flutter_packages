@@ -35,7 +35,7 @@ import { CameraPropertiesImpl } from './CameraPropertiesImpl';
 import { ExposureMode } from './features/exposurelock/ExposureMode';
 import { CameraFeatureFactoryImpl } from './features/CameraFeatureFactoryImpl';
 import { ResolutionPreset, ResolutionPreset_valueOf } from './types/ResolutionPreset';
-import { DeviceOrientation } from './features/sensororientation/DeviceOrientationManager';
+import { DeviceOrientation } from '@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/PlatformChannel';
 
 const TAG: string = "MethodCallHandlerImpl";
 
