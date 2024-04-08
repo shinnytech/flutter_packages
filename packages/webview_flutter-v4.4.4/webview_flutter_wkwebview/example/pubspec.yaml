@@ -24,9 +24,7 @@ dependencies:
     sdk: flutter
   path_provider: ^2.0.6
   webview_flutter_platform_interface:
-    git:
-      url: "https://gitee.com/openharmony-sig/flutter_packages.git"
-      path: "packages/webview_flutter_platform_interface-v2.10.0/webview_flutter_platform_interface"
+    path: "../../webview_flutter_platform_interface"
   webview_flutter_wkwebview:
     # When depending on this package from a real application you should use:
     #   webview_flutter: ^x.y.z
