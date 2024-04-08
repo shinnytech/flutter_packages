@@ -585,7 +585,8 @@ export class Camera implements CameraCaptureStateListener {
 
     this.cameraFeatures.setAutoFocus(this.cameraFeatureFactory.createAutoFocusFeature(this.cameraProperties, false));
     try {
-      if (this.avRecorder != undefined && this.avRecorder.state === 'started') { // 仅在started状态下调用pause为合理状态切换
+      // 仅在started和paused状态下调用stop为合理状态切换
+      if (this.avRecorder != undefined && (this.avRecorder.state === 'started' || this.avRecorder.state === 'paused')) {
         // 停止录像
         await this.avRecorder?.stop();
         this.avRecorder?.release().then(() => {
