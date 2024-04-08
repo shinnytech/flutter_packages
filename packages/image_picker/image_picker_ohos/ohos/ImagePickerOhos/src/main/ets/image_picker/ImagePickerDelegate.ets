@@ -265,6 +265,9 @@ export default class ImagePickerDelegate {
     abilityAccessCtrl.createAtManager()
       .requestPermissionsFromUser(this.context, ['ohos.permission.READ_MEDIA'])
       .then(async (permission) => {
+        if(permission.authResults[0] !== 0){
+          return
+        }
         let result: ESObject = null;
         if (this.context) {
           result = await this.context.startAbilityForResult(want);
@@ -483,10 +486,12 @@ export default class ImagePickerDelegate {
     if (path != null) {
       let realPath = FileUtils.getPathFromUri(this.context as Context, path);
       Log.i(ImagePickerDelegate.TAG, "realPath :" + realPath);
+      let file = fs.openSync(realPath, fs.OpenMode.READ_ONLY);
       if (realPath != null) {
         path = realPath;
       }
-      pathList.add(path);
+      pathList.add(realPath)
+      pathList.add(file.fd.toString());
     }
 
     let localResult: Result<ArrayList<string>> | null = null;
@@ -518,7 +523,14 @@ export default class ImagePickerDelegate {
     } else if (path) {
 
       Log.i(ImagePickerDelegate.TAG, path[0]);
-      localResult.success(path as ArrayList<string>);
+      let pathList: ArrayList<string> = new ArrayList();
+      for (let i = 0; i < path.length; i++) {
+        const element: string = path[i];
+        let file = fs.openSync(element);
+        pathList.add(element);
+        pathList.add(file.fd.toString());
+      }
+      localResult.success(pathList as ArrayList<string>);
     }
   }
 

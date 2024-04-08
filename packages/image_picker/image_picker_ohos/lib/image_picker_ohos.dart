@@ -22,6 +22,7 @@ class ImagePickerOhos extends ImagePickerPlatform {
       : _hostApi = api ?? ImagePickerApi();
 
   final ImagePickerApi _hostApi;
+  final Map<String?, int?> fileFdlist = new Map();
   bool useOhosPhotoPicker = false;
   static void registerWith() {
     ImagePickerPlatform.instance = ImagePickerOhos();
@@ -67,7 +68,7 @@ class ImagePickerOhos extends ImagePickerPlatform {
     double? maxWidth,
     double? maxHeight,
     int? imageQuality,
-  }) {
+  }) async {
     if (imageQuality != null && (imageQuality < 0 || imageQuality > 100)) {
       throw ArgumentError.value(
           imageQuality, 'imageQuality', 'must be between 0 and 100');
@@ -81,7 +82,7 @@ class ImagePickerOhos extends ImagePickerPlatform {
       throw ArgumentError.value(maxHeight, 'maxHeight', 'cannot be negative');
     }
 
-    return _hostApi.pickImages(
+    final List<String?> path = await _hostApi.pickImages(
       SourceSpecification(type: SourceType.gallery),
       ImageSelectionOptions(
           maxWidth: maxWidth,
@@ -90,6 +91,14 @@ class ImagePickerOhos extends ImagePickerPlatform {
       GeneralOptions(
           allowMultiple: true, usePhotoPicker: useOhosPhotoPicker),
     );
+
+    List<String?> pathList = [];
+
+    for(int i = 0 ; i<path.length; i+=2){
+      pathList.add(path[i]);
+    }
+
+    return pathList;
   }
 
   Future<String?> _getImagePath({
@@ -154,7 +163,15 @@ class ImagePickerOhos extends ImagePickerPlatform {
         usePhotoPicker: useOhosPhotoPicker,
       ),
     );
+    fileFdlist[paths.first] = int.parse(paths[1] ?? '0');
     return paths.isEmpty ? null : paths.first;
+  }
+
+  int getFileFd(String? file) {
+    if(file == null){
+      return 0;
+    }
+    return fileFdlist[file]!;
   }
 
   @override
@@ -213,15 +230,20 @@ class ImagePickerOhos extends ImagePickerPlatform {
   Future<List<XFile>> getMedia({
     required MediaOptions options,
   }) async {
-    return (await _hostApi.pickMedia(
+    final List<String?> paths = await _hostApi.pickMedia(
       _mediaOptionsToMediaSelectionOptions(options),
       GeneralOptions(
         allowMultiple: options.allowMultiple,
         usePhotoPicker: useOhosPhotoPicker,
       ),
-    ))
-        .map((String? path) => XFile(path!))
-        .toList();
+    );
+    final List<String?> pathList = [];
+    for(int i = 1; i< paths.length; i+=2){
+      fileFdlist[paths[i-1]] = int.parse(paths[i] ?? '0');
+      pathList.add(paths[i - 1]);
+    }
+        
+    return pathList.map((String? path) => XFile(path!)).toList();
   }
 
   @override
