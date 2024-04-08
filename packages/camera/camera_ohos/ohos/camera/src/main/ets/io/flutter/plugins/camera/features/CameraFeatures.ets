@@ -64,6 +64,7 @@ export class CameraFeatures {
     let sensorOrientationFeature: SensorOrientationFeature =
       cameraFeatureFactory.createSensorOrientationFeature(
         cameraProperties, ability, dartMessenger);
+    cameraFeatures.setSensorOrientation(sensorOrientationFeature);
     cameraFeatures.setExposurePoint(
       cameraFeatureFactory.createExposurePointFeature(
         cameraProperties, sensorOrientationFeature));

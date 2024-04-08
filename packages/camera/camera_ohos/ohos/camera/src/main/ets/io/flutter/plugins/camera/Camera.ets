@@ -40,7 +40,7 @@ import { CameraState } from './CameraState';
 import { AutoFocusFeature } from './features/autofocus/AutoFocusFeature';
 import mediaLibrary from '@ohos.multimedia.mediaLibrary';
 import fileIO from '@ohos.fileio';
-import { DeviceOrientation, DeviceOrientationManager } from './features/sensororientation/DeviceOrientationManager';
+import { DeviceOrientationManager } from './features/sensororientation/DeviceOrientationManager';
 import { Point } from './features/Point';
 import { FlashFeature } from './features/flash/FlashFeature';
 import { ExposureLockFeature } from './features/exposurelock/ExposureLockFeature';
@@ -55,6 +55,7 @@ import PhotoAccessHelper from '@ohos.file.photoAccessHelper';
 import systemDateTime from '@ohos.systemDateTime';
 import photoAccessHelper from '@ohos.file.photoAccessHelper';
 import { picker } from '@kit.CoreFileKit';
+import { DeviceOrientation } from '@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/PlatformChannel';
 
 const TAG = "Camera";
 

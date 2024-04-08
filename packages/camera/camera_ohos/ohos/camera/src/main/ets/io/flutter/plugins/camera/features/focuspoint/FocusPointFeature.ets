@@ -17,7 +17,7 @@ import { Size } from '@kit.ArkUI';
 import { Point } from '../Point';
 import { CameraFeature } from '../CameraFeature';
 import { CameraProperties } from '../../CameraProperties';
-import { DeviceOrientation } from '../sensororientation/DeviceOrientationManager';
+import { DeviceOrientation } from '@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/PlatformChannel';
 import { SensorOrientationFeature } from '../sensororientation/SensorOrientationFeature';
 
 export class FocusPointFeature extends CameraFeature<Point> {

@@ -18,7 +18,7 @@ import { CameraFeature } from '../CameraFeature';
 import { Point } from '../Point';
 import { SensorOrientationFeature } from '../sensororientation/SensorOrientationFeature';
 import { Size } from '@kit.ArkUI';
-import { DeviceOrientation } from '../sensororientation/DeviceOrientationManager';
+import { DeviceOrientation } from '@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/PlatformChannel';
 import camera from '@ohos.multimedia.camera';
 import { Rect } from '@ohos.UiTest';
 

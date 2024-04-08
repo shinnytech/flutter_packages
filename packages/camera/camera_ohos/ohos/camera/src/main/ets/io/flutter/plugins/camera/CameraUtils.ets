@@ -18,7 +18,7 @@ import { BusinessError } from '@ohos.base';
 import { HashMap } from '@kit.ArkTS';
 import mediaLibrary from '@ohos.multimedia.mediaLibrary';
 import DateTimeUtil from './utlis/DateTimeUtil';
-import { DeviceOrientation } from './features/sensororientation/DeviceOrientationManager';
+import { DeviceOrientation } from '@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/PlatformChannel';
 
 
 interface FileInfo {
