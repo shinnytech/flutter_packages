@@ -751,9 +751,7 @@ export class Camera implements CameraCaptureStateListener {
     media.createAVRecorder(async (error, recorder) => {
       if (recorder != null) {
         this.avRecorder = recorder;
-        let options: photoAccessHelper.CreateOptions = { title: Date.now().toString() };
-        let videoUri: string = await this.phAccessHelper.createAsset(PhotoAccessHelper.PhotoType.VIDEO, 'mp4', options);
-        // 生成临时文件
+        let videoUri: string = getContext(this).cacheDir + '/REC' + Date.now().toString() + '.mp4';
         this.captureFile = fs.openSync(videoUri, fs.OpenMode.READ_WRITE | fs.OpenMode.CREATE);
         let fd = this.captureFile.fd;
         // 当前录像配置
