@@ -21,7 +21,6 @@
   license: '',
   dependencies: {
     '@ohos/video_player_ohos': 'file:./har/video_player_ohos.har',
-    '@ohos/integration_test': 'file:./har/integration_test.har',
     '@ohos/image_picker_ohos': 'file:./har/image_picker_ohos.har',
   },
 }
