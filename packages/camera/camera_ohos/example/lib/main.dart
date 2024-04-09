@@ -15,6 +15,7 @@ import 'package:video_player/video_player.dart';
 
 import 'camera_controller.dart';
 import 'camera_preview.dart';
+import 'fileselector/file_selector.dart';
 
 /// Camera example home widget.
 class CameraExampleHome extends StatefulWidget {
@@ -994,11 +995,15 @@ class _CameraExampleHomeState extends State<CameraExampleHome>
     if (videoFile == null) {
       return;
     }
-    return;
-    print("========videoFile!.path is: "+videoFile!.path);
-    int fd = int.parse(videoFile!.path);
-    final VideoPlayerController vController =  VideoPlayerController.fileFd(fd);
-    print("========fileFd is: "+videoFile!.path);
+    final VideoPlayerController vController;
+    if (Platform.operatingSystem == 'ohos') {
+      final FileSelector instance = FileSelector();
+      int? fileFd = await instance.openFileByPath(videoFile!.path);
+      vController =  VideoPlayerController.fileFd(fileFd!);
+    } else {
+      vController =  kIsWeb? VideoPlayerController.network(videoFile!.path)
+          : VideoPlayerController.file(File(videoFile!.path));
+    }
     videoPlayerListener = () {
       if (videoController != null) {
         // Refreshing the state to update video player with the correct ratio.
