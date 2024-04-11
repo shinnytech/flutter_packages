@@ -14,8 +14,8 @@
 */
 
 { 
-  "hvigorVersion": "4.0.2",
+  "hvigorVersion": "file:/opt/ohos/dependencies/hvigor-4.1.2.tgz",
   "dependencies": {
-    "@ohos/hvigor-ohos-plugin": "4.0.2"
+    "@ohos/hvigor-ohos-plugin": "file:/opt/ohos/dependencies/hvigor-ohos-plugin-4.1.2.tgz"
   }
 }
