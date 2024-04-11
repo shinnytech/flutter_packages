@@ -23,5 +23,7 @@
   dependencies: {
     '@ohos/integration_test': 'file:./har/integration_test.har',
     '@ohos/camera_ohos': 'file:./har/camera_ohos.har',
+    '@ohos/path_provider_ohos': 'file:./har/path_provider_ohos.har',
+    '@ohos/video_player_ohos': 'file:./har/video_player_ohos.har',
   },
 }
