@@ -39,6 +39,12 @@ import { DeviceOrientation } from '@ohos/flutter_ohos/src/main/ets/embedding/eng
 
 const TAG: string = "MethodCallHandlerImpl";
 
+const enum STATUS {
+  DEFAULT,
+  CREATE_ING,
+  INITIALIZE_ING,
+}
+
 export class MethodCallHandlerImpl implements MethodCallHandler {
   private ability: UIAbility;
   private context: Context;
@@ -50,6 +56,7 @@ export class MethodCallHandlerImpl implements MethodCallHandler {
   private camera: Camera | null = null;
   private flutterTexture: SurfaceTextureEntry | null = null;
   private textureId: number = -1;
+  private curStatus: STATUS = STATUS.DEFAULT;
 
   constructor(
     ability: UIAbility,
@@ -80,10 +87,15 @@ export class MethodCallHandlerImpl implements MethodCallHandler {
         break;
       }
       case 'create': {
-        if(this.camera){
+        if (this.curStatus != STATUS.DEFAULT) {
+          result.success(null);
+          return;
+        }
+        this.curStatus = STATUS.CREATE_ING;
+        if (this.camera) {
           this.camera.releaseCamera();
         }
-        if(this.textureId >-1){
+        if (this.textureId > -1) {
           this.unregisterTexture(this.textureId);
         }
         // 检查权限
@@ -96,9 +108,11 @@ export class MethodCallHandlerImpl implements MethodCallHandler {
                 this.registerCameraTexture();
                 this.instantiateCamera(call, result);
               } catch (e) {
+                this.curStatus = STATUS.DEFAULT;
                 this.handleException(e, result);
               }
             } else {
+              this.curStatus = STATUS.DEFAULT;
               result.error(errCode, errDesc, null);
             }
           }
@@ -106,14 +120,18 @@ export class MethodCallHandlerImpl implements MethodCallHandler {
         break;
       }
       case 'initialize':
+        this.curStatus = STATUS.INITIALIZE_ING;
         if (this.camera != null) {
           try {
             this.camera.open(call.argument('imageFormatGroup'));
+            this.curStatus = STATUS.DEFAULT;
             result.success(null)
           } catch (e) {
+            this.curStatus = STATUS.DEFAULT;
             this.handleException(e, result)
           }
         } else {
+          this.curStatus = STATUS.DEFAULT;
           result.error(
             "cameraNotFound",
             "Camera Not found. Please call the 'create' method before calling 'initialize",

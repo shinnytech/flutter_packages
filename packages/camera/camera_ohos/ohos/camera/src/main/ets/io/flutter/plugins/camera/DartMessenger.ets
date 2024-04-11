@@ -20,13 +20,7 @@ import { BinaryMessenger } from '@ohos/flutter_ohos/src/main/ets/plugin/common/B
 import { CameraUtils } from './CameraUtils';
 import { FocusMode } from './features/autofocus/FocusMode';
 import { ExposureMode } from './features/exposurelock/ExposureMode';
-
-enum DeviceOrientation {
-  PORTRAIT_UP = "DeviceOrientation.portraitUp",
-  PORTRAIT_DOWN = "DeviceOrientation.portraitDown",
-  LANDSCAPE_LEFT = "DeviceOrientation.landscapeLeft",
-  LANDSCAPE_RIGHT = "DeviceOrientation.landscapeRight",
-}
+import { DeviceOrientation } from '@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/PlatformChannel';
 
 enum DeviceEventType {
   ORIENTATION_CHANGED = "orientation_changed",
