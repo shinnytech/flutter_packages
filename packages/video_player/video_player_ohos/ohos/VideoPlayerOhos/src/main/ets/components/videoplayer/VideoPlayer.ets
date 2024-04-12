@@ -32,6 +32,7 @@ import { EventChannel } from '@ohos/flutter_ohos';
 import { EventSink, StreamHandler } from '@ohos/flutter_ohos/src/main/ets/plugin/common/EventChannel';
 import { QueuingEventSink } from './QueuingEventSink';
 import { ArrayList, HashMap } from '@kit.ArkTS';
+import { audio } from '@kit.AudioKit';
 
 const FORMAT_SS: String = 'ss';
 const FORMAT_DASH: String = 'dash';
@@ -54,14 +55,19 @@ export class VideoPlayer {
   private textureEntry: SurfaceTextureEntry;
   private eventChannel: EventChannel | null = null;
   private eventSink: QueuingEventSink | null = null;
+  private interruptMode: audio.InterruptMode = audio.InterruptMode.SHARE_MODE;
 
-  constructor(playerModel: PlayerModel, textureEntry: SurfaceTextureEntry, url: resourceManager.RawFileDescriptor | null, iUrl: string | null, eventChannel: EventChannel) {
+  constructor(playerModel: PlayerModel, textureEntry: SurfaceTextureEntry, url: resourceManager.RawFileDescriptor | null, iUrl: string | null, eventChannel: EventChannel, AudioFocus: Boolean) {
     this.playerModel = playerModel;
     this.textureEntry = textureEntry;
     this.surfaceId = textureEntry.getSurfaceId().toString();
     this.url = url;
     this.iUrl = iUrl;
     this.eventChannel = eventChannel;
+    if (AudioFocus == true) {
+      this.interruptMode = audio.InterruptMode.INDEPENDENT_MODE;
+      Log.i(TAG, "set interruptMode : " + this.interruptMode);
+    }
     Log.i(TAG, "surfaceId : " + this.surfaceId);
   }
 
@@ -69,7 +75,7 @@ export class VideoPlayer {
    * Creates a videoPlayer object.
    */
   async createAVPlayer() {
-    Log.i(TAG, "enter createAVPlayer");
+    Log.i(TAG + ":" + this.textureEntry.getTextureId(), " createAVPlayer");
     if (this.avPlayer == null) {
       this.avPlayer = await media.createAVPlayer();
     }
@@ -121,6 +127,7 @@ export class VideoPlayer {
           break;
         case AvplayerStatus.PREPARED:
           this.avPlayer.videoScaleType = 0;
+          this.avPlayer.audioInterruptMode = this.interruptMode;
           this.setVideoSize();
           this.sendInitialized();
           this.duration = this.avPlayer.duration;
