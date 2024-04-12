@@ -42,6 +42,7 @@ export class VideoPlayerApiImpl {
   private videoPlayers: HashMap<String, VideoPlayer> = new HashMap<String, VideoPlayer>();
   private flutterState: FlutterState | null = null;
   private binding: AbilityPluginBinding | null = null;
+  private AudioFocus: Boolean = false;
 
   constructor(flutterState: FlutterState | null, binding: AbilityPluginBinding | null) {
     this.flutterState = flutterState;
@@ -80,11 +81,11 @@ export class VideoPlayerApiImpl {
     let eventChannel: EventChannel = new EventChannel(this.flutterState.getBinaryMessenger(), "flutter.io/videoPlayer/videoEvents" + textureId.toString());
     if (asset != null) {
       let rawFileDescriptor: resourceManager.RawFileDescriptor = await this.getContext().resourceManager.getRawFd("flutter_assets/" + asset);
-      let videoPlayer = new VideoPlayer(playerModel, surfaceTextureEntry, rawFileDescriptor, null, eventChannel);
+      let videoPlayer = new VideoPlayer(playerModel, surfaceTextureEntry, rawFileDescriptor, null, eventChannel, this.AudioFocus);
       await videoPlayer.createAVPlayer();
       this.videoPlayers.set(textureId.toString(), videoPlayer);
     } else if (uri != null) {
-      let videoPlayer = new VideoPlayer(playerModel, surfaceTextureEntry, null, uri, eventChannel);
+      let videoPlayer = new VideoPlayer(playerModel, surfaceTextureEntry, null, uri, eventChannel, this.AudioFocus);
       await videoPlayer.createAVPlayer();
       this.videoPlayers.set(textureId.toString(), videoPlayer);
     }
@@ -157,7 +158,8 @@ export class VideoPlayerApiImpl {
   }
 
   setMixWithOthers(arg: MixWithOthersMessage) {
-    // let videoPlayer = this.videoPlayers.get(arg.getTextureId());
+    Log.d(TAG, "set MixWithOthers:" + arg.getMixWithOthers());
+    this.AudioFocus = arg.getMixWithOthers();
   }
 
   setup(binaryMessenger: BinaryMessenger): void {
