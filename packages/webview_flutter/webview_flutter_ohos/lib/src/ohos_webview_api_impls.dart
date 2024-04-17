@@ -370,10 +370,6 @@ class WebViewHostApiImpl extends WebViewHostApi {
     );
   }
 
-  /// Helper method to convert instances ids to objects.
-  Future<void> setBackgroundColorFromInstance(WebView instance, int color) {
-    return setBackgroundColor(instanceManager.getIdentifier(instance)!, color);
-  }
 }
 
 /// Flutter API implementation for [WebView].
@@ -448,6 +444,11 @@ class WebSettingsHostApiImpl extends WebSettingsHostApi {
   ) {
     return setSupportMultipleWindows(
         instanceManager.getIdentifier(instance)!, support);
+  }
+
+  /// Helper method to convert instances ids to objects.
+  Future<void> setBackgroundColorFromInstance(WebSettings instance, int color) {
+    return setBackgroundColor(instanceManager.getIdentifier(instance)!, color);
   }
 
   /// Helper method to convert instances ids to objects.

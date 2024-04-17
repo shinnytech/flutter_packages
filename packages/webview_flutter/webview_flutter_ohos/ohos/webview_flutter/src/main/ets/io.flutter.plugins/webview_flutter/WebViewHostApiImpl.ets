@@ -257,10 +257,6 @@ export class WebViewHostApiImpl extends WebViewHostApi {
     webView.setWebChromeClient(this.instanceManager.getInstance(clientInstanceId));
   }
 
-  setBackgroundColor(instanceId: number, color: number) {
-    //TODO:Web ground
-  }
-
   getInstanceManager(): InstanceManager {
     return this.instanceManager;
   }
@@ -491,6 +487,12 @@ class WebSettingsImpl implements WebSettings {
 
   setSupportMultipleWindows(support: boolean) {
     DynamicUtils.setParams(this.params, "multiWindowAccess", support);
+  }
+
+  setBackgroundColor(color: number) {
+    // number 无法实现透明度，所以转成 string
+    let colorStr = `#${color.toString(16).padStart(8, '0')}`;
+    DynamicUtils.setParams(this.params, "backgroundColor", colorStr);
   }
 
   setJavaScriptEnabled(flag: boolean) {
