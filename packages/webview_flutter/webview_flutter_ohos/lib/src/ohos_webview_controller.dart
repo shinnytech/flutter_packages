@@ -432,7 +432,7 @@ class OhosWebViewController extends PlatformWebViewController {
 
   @override
   Future<void> setBackgroundColor(Color color) =>
-      _webView.setBackgroundColor(color);
+      _webView.settings.setBackgroundColor(color);
 
   @override
   Future<void> setJavaScriptMode(JavaScriptMode javaScriptMode) =>
