@@ -23,7 +23,9 @@ dependencies:
   flutter:
     sdk: flutter
   path_provider:
-    path: "../../../path_provider/path_provider"
+    git:
+      url: "https://gitee.com/openharmony-sig/flutter_packages.git"
+      path: "packages/path_provider/path_provider"
   path_provider_platform_interface: ^2.0.0
   webview_flutter_ohos:
     # When depending on this package from a real application you should use:
