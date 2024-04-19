@@ -28,7 +28,9 @@ dependencies:
   camera_platform_interface: ^2.5.0
   camera_web: ^0.3.1
   camera_ohos:
-    path: "../camera_ohos"
+    git:
+      url: "https://gitee.com/openharmony-sig/flutter_packages.git"
+      path: "packages/camera/camera_ohos"
   flutter:
     sdk: flutter
   flutter_plugin_android_lifecycle: ^2.0.2
