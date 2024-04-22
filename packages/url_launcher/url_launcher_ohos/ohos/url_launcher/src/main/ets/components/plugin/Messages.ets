@@ -8,7 +8,7 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * WITHOUT WARRANTIES OR CONDITIONS OF ESObject KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
@@ -17,7 +17,6 @@ import StandardMessageCodec from '@ohos/flutter_ohos/src/main/ets/plugin/common/
 import { BinaryMessenger } from '@ohos/flutter_ohos/src/main/ets/plugin/common/BinaryMessenger';
 import { ByteBuffer } from '@ohos/flutter_ohos/src/main/ets/util/ByteBuffer';
 import Log from '@ohos/flutter_ohos/src/main/ets/util/Log';
-import { Any } from '@ohos/flutter_ohos';
 
 const TAG = 'UrlLauncher'
 
@@ -26,9 +25,9 @@ export class FlutterError extends Error {
   public code: string = '';
 
   /** The error details. Must be a datatype supported by the api codec. */
-  public details: Any | null;
+  public details: ESObject | null;
 
-  constructor(code: string, message: string, details: Any) {
+  constructor(code: string, message: string, details: ESObject) {
     super(message);
     this.code = code;
     this.details = details;
@@ -94,7 +93,7 @@ export class WebViewOptions {
     this.headers = setterArg;
   }
 
-  toList(): Array<Any> {
+  toList(): Array<ESObject> {
     let toListResult = new Array<Object>();
     toListResult.push(this.enableJavaScript);
     toListResult.push(this.enableDomStorage);
@@ -133,7 +132,7 @@ export class UrlLauncherApiCodec extends StandardMessageCodec {
     }
   }
 
-  writeValue(stream: ByteBuffer, value: Any): void {
+  writeValue(stream: ByteBuffer, value: ESObject): void {
     if (value instanceof WebViewOptions) {
       stream.writeInt8(128);
       this.writeValue(stream, (value as WebViewOptions).toList());
@@ -157,8 +156,8 @@ export interface UrlLauncherApi {
   closeWebView(): boolean;
 
   /** The codec used by UrlLauncherApi. */
-  getCodec(): MessageCodec<Any>;
+  getCodec(): MessageCodec<ESObject>;
 
   /** Sets up an instance of `UrlLauncherApi` to handle messages through the `binaryMessenger`. */
-  setup(binaryMessenger: BinaryMessenger | null, api: UrlLauncherApi | null): Any;
+  setup(binaryMessenger: BinaryMessenger | null, api: UrlLauncherApi | null): ESObject;
 }
