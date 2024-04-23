@@ -24,7 +24,6 @@ import Log from '@ohos/flutter_ohos/src/main/ets/util/Log';
 import call from '@ohos.telephony.call';
 import i18n from '@ohos.i18n';
 import abilityAccessCtrl, { Permissions } from '@ohos.abilityAccessCtrl';
-import { Any } from '@ohos/flutter_ohos';
 
 const TAG = 'UrlLauncher'
 
@@ -118,7 +117,7 @@ export class UrlLauncher implements UrlLauncherApi {
     let params = new Array<SendMessageParams>();
     params.push(msgParam);
 
-    let actionData: Any = {};
+    let actionData: ESObject = {};
     actionData.contactObjects = JSON.stringify(params);
     actionData.pageFlag = 'conversation';
     let str : Want = {
@@ -132,7 +131,7 @@ export class UrlLauncher implements UrlLauncherApi {
     Log.i(TAG, 'jumpToMms want: %s', JSON.stringify(params));
     this.context.startAbility(str).then(() => {
       Log.i(TAG, 'jumpToMms success.');
-    }).catch((error: Any) => {
+    }).catch((error: ESObject) => {
       Log.e(TAG, 'jumpToMms failed: %s', JSON.stringify(error));
     })
     return true
@@ -143,7 +142,7 @@ export class UrlLauncher implements UrlLauncherApi {
     let phoneNum = this.parseUrl(url, UrlLauncher.LAUNCH_TYPE_TEL + ':');
     call.makeCall(phoneNum).then(() => {
       Log.e(TAG, `launchTel success`);
-    }).catch((err: Any) => {
+    }).catch((err: ESObject) => {
       Log.e(TAG, `launchTel failed,  error: ${JSON.stringify(err)}`);
     })
     return true;
@@ -166,7 +165,7 @@ export class UrlLauncher implements UrlLauncherApi {
       .then(() => {
         Log.i(TAG, 'Invoke getCurrentBundleStats succeeded.');
       })
-      .catch((err: Any) => {
+      .catch((err: ESObject) => {
         Log.e(TAG, `Invoke startAbility failed, code is ${err.code}, message is ${err.message}`);
       });
     return true;
@@ -241,7 +240,7 @@ export class UrlLauncher implements UrlLauncherApi {
     throw new Error('Method not implemented.');
   }
 
-  getCodec(): MessageCodec<Any> {
+  getCodec(): MessageCodec<ESObject> {
     return UrlLauncherApiCodec.INSTANCE;
   }
 
@@ -250,13 +249,13 @@ export class UrlLauncher implements UrlLauncherApi {
       if (binaryMessenger == null) {
         return;
       }
-      let channel: BasicMessageChannel<Any> = new BasicMessageChannel<Any>(
+      let channel: BasicMessageChannel<ESObject> = new BasicMessageChannel<ESObject>(
         binaryMessenger, "dev.flutter.pigeon.UrlLauncherApi.canLaunchUrl", this.getCodec());
       Log.d(TAG, 'setup launchUrl')
       if (api != null && api != undefined) {
         Log.d(TAG, 'setMessageHandler')
         channel.setMessageHandler({
-          onMessage(msg: Any, reply: Reply<Any>): void {
+          onMessage(msg: ESObject, reply: Reply<ESObject>): void {
             let wrapped = new Array<Object>();
             let args = msg as Array<Object>;
             let urlArg = args[0] as string;
@@ -281,7 +280,7 @@ export class UrlLauncher implements UrlLauncherApi {
       if (api != null && api != undefined) {
         Log.d(TAG, 'setMessageHandler')
         channel.setMessageHandler({
-          onMessage(msg: Any, reply: Reply<Any>): void {
+          onMessage(msg: ESObject, reply: Reply<ESObject>): void {
             let wrapped = new Array<Object>();
             let args = msg as Array<Object>;
             let urlArg = args[0] as string;
@@ -307,7 +306,7 @@ export class UrlLauncher implements UrlLauncherApi {
       if (api != null && api != undefined) {
         Log.d(TAG, 'setMessageHandler')
         channel.setMessageHandler({
-          onMessage(msg: Any, reply: Reply<Any>): void {
+          onMessage(msg: ESObject, reply: Reply<ESObject>): void {
             let wrapped = new Array<Object>();
             let args = msg as Array<Object>;
             let urlArg = args[0] as string;
@@ -333,7 +332,7 @@ export class UrlLauncher implements UrlLauncherApi {
       if (api != null && api != undefined) {
         Log.d(TAG, 'setMessageHandler')
         channel.setMessageHandler({
-          onMessage(msg: Any, reply: Reply<Any>): void {
+          onMessage(msg: ESObject, reply: Reply<ESObject>): void {
             let wrapped = new Array<Object>();
             try {
               let output = api.closeWebView();
