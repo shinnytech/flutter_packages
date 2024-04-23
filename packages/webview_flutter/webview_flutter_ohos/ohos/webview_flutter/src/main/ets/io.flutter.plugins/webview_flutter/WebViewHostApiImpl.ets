@@ -231,6 +231,7 @@ export class WebViewHostApiImpl extends WebViewHostApi {
         javaScriptChannel.getJavaScriptChannelName(),
         ["postMessage"]
       )
+      webView.getController().refresh()
     } catch (err) {
       Log.e(TAG, "addJavaScriptChannel err = " + err);
       setTimeout(
