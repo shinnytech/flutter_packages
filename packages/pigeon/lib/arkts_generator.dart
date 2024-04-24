@@ -250,8 +250,7 @@ if(this.$fieldName instanceof Array){
       arr.push(this.$fieldName);
     }else {
       arr.push(this.$fieldName.toList());
-    }
-''');
+    }''');
         } else {
           indent.writeln('arr.push(this.$fieldName);');
         }
