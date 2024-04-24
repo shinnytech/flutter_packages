@@ -238,7 +238,23 @@ class ArkTSGenerator extends StructuredGenerator<ArkTSOptions> {
       indent.writeln('let arr: Object[] = new Array();');
       for (final NamedType field in getFieldsInSerializationOrder(klass)) {
         final String fieldName = field.name;
-        indent.writeln('arr.push(this.$fieldName);');
+        final HostDatatype hostDatatype = getFieldHostDatatype(
+            field,
+            root.classes,
+            root.enums,
+            (TypeDeclaration x) => _arkTSTypeForBuiltinDartType(x));
+        if (!hostDatatype.isBuiltin &&
+            customClassNames.contains(field.type.baseName)) {
+          indent.writeln('''
+if(this.$fieldName instanceof Array){
+\t\t\tarr.push(this.$fieldName);
+\t\t}else {
+\t\t\tarr.push(this.$fieldName.toList());
+\t\t}
+''');
+        } else {
+          indent.writeln('arr.push(this.$fieldName);');
+        }
       }
       indent.writeln('return arr;');
     });
