@@ -246,9 +246,9 @@ class ArkTSGenerator extends StructuredGenerator<ArkTSOptions> {
         if (!hostDatatype.isBuiltin &&
             customClassNames.contains(field.type.baseName)) {
           indent.writeln('''
-if(this.$fieldName instanceof Array){
+if (this.$fieldName instanceof Array) {
       arr.push(this.$fieldName);
-    }else {
+    } else {
       arr.push(this.$fieldName.toList());
     }''');
         } else {
