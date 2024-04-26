@@ -274,6 +274,9 @@ export default class SharedPreferencesOhosPlugin implements FlutterPlugin, Share
   }
 
   setInt(key: string, value: number): Promise<void> {
+    if(typeof value == "bigint") {
+      return this.put(key, Number(value));
+    }
     return this.put(key, value);
   }
 
