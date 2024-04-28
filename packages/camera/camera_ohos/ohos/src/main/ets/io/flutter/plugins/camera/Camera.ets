@@ -288,7 +288,6 @@ export class Camera implements CameraCaptureStateListener {
 
         // todo:
 
-
           break;
         case camera.FocusMode.FOCUS_MODE_AUTO:
           this.unlockAutoFocus();
@@ -386,13 +385,13 @@ export class Camera implements CameraCaptureStateListener {
     // }
 
     let modeExistence: boolean = false;
-    Object.values(camera.ExposureMode).forEach(async(value) => {
-      if(newMode == value) {
+    Object.values(camera.ExposureMode).forEach(async (value) => {
+      if (newMode == value) {
         modeExistence = true
       }
     })
 
-    if(!modeExistence) {
+    if (!modeExistence) {
       result.error("setExposureModeFailed", "The exposure mode is unsupported.", null);
       return;
     }
@@ -478,15 +477,7 @@ export class Camera implements CameraCaptureStateListener {
         })
       });
     })
-
-    const autoFocusFeature: AutoFocusFeature = this.cameraFeatures.getAutoFocus();
-    const isAutoFocusSupported: boolean = autoFocusFeature.checkIsSupported();
-    // if (isAutoFocusSupported && autoFocusFeature.getValue() == camera.FocusMode.FOCUS_MODE_AUTO) {
-    if (true) {
-      this.runPictureAutoFocus();
-    } else {
-      this.runPrecaptureSequence();
-    }
+    this.runPictureAutoFocus();
   }
 
   async savePicture(buffer: ArrayBuffer, img: image.Image) {
@@ -502,11 +493,6 @@ export class Camera implements CameraCaptureStateListener {
   private runPictureAutoFocus() {
     this.cameraCaptureCallback.setCameraState(CameraState.STATE_WAITING_FOCUS);
     this.lockAutoFocus();
-  }
-
-  // todo:
-  private runPrecaptureSequence() {
-
   }
 
   async lockAutoFocus(): Promise<void> {
@@ -616,10 +602,13 @@ export class Camera implements CameraCaptureStateListener {
 
   async startRegularPreview() {
     this.cameraOutputCapability = CameraUtils.getSupportedOutputCapability(this.cameraDevice!, camera.SceneMode.NORMAL_PHOTO, this.cameraManager)
-    let previewProfile = this.cameraOutputCapability.previewProfiles[0];
+    let captureSize: camera.Size = this.cameraFeatures.getResolution().getCaptureSize();
+
+    let previewProfile = this.cameraOutputCapability.previewProfiles.find((profile: camera.Profile) => {
+      return profile.size.width === captureSize.width && profile.size.height === captureSize.height;
+    });
     this.previewOutput =
       this.cameraManager.createPreviewOutput(previewProfile, this.flutterTexture.getSurfaceId().toString());
-    let captureSize: camera.Size = this.cameraFeatures.getResolution().getCaptureSize();
     let photoProfile = this.cameraOutputCapability.photoProfiles.find((profile: camera.Profile) => {
       return profile.size.width === captureSize.width && profile.size.height === captureSize.height;
     });

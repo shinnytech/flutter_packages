@@ -33,7 +33,9 @@ dependencies:
   path_provider_platform_interface: ^2.1.0
   path_provider_windows: ^2.2.0
   path_provider_ohos:
-    path: ../path_provider_ohos
+    git:
+      url: "https://gitee.com/openharmony-sig/flutter_packages.git"
+      path: "packages/path_provider/path_provider_ohos"
 
 
 dev_dependencies:

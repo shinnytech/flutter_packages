@@ -29,7 +29,9 @@ dependencies:
   local_auth_platform_interface: ^1.0.1
   local_auth_windows: ^1.0.0
   local_auth_ohos:
-    path: "../local_auth_ohos"
+    git:
+      url: "https://gitee.com/openharmony-sig/flutter_packages.git"
+      path: "packages/local_auth/local_auth_ohos"
 
 dev_dependencies:
   flutter_driver:
