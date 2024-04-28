@@ -14,7 +14,7 @@
  */
 
 {
-  "name": "shared_preferences",
+  "name": "shared_preferences_ohos",
   "version": "1.0.0",
   "description": "Please describe the basic information.",
   "main": "index.ets",
