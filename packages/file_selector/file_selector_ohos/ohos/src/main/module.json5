@@ -15,7 +15,7 @@
 
 {
   "module": {
-    "name": "FileSelector",
+    "name": "file_selector_ohos",
     "type": "har",
     "deviceTypes": [
       "default",
