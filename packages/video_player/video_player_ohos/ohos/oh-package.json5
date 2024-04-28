@@ -14,7 +14,7 @@
 */
 
 {
-  "name": "VideoPlayerOhos",
+  "name": "video_player_ohos",
   "version": "1.0.0",
   "description": "Please describe the basic information.",
   "main": "Index.ets",
