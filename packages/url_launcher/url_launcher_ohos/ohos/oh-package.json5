@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 {
-  "name": "url_launcher",
+  "name": "url_launcher_ohos",
   "version": "1.0.0",
   "description": "Please describe the basic information.",
   "main": "index.ets",
