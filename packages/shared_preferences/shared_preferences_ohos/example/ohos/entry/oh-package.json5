@@ -8,8 +8,6 @@
   "version": "1.0.0",
   "dependencies": {
     "@ohos/flutter_ohos": "file:../har/flutter.har",
-    "@ohos/integration_test": "file:./har/integration_test.har",
-    "@ohos/shared_preferences_ohos": "file:./har/shared_preferences_ohos.har",
     "integration_test": "file:../har/integration_test.har",
     "shared_preferences_ohos": "file:../har/shared_preferences_ohos.har"
   }

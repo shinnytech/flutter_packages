@@ -7,8 +7,6 @@
   "main": "",
   "version": "1.0.0",
   "dependencies": {
-    "@ohos/integration_test": "file:./har/integration_test.har",
-    "@ohos/url_launcher_ohos": "file:./har/url_launcher_ohos.har",
     "integration_test": "file:../har/integration_test.har",
     "url_launcher_ohos": "file:../har/url_launcher_ohos.har"
   }
