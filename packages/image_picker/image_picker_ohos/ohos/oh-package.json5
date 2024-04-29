@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 {
-  "name": "imagepickerohos",
+  "name": "image_picker_ohos",
   "version": "1.0.0",
   "description": "Please describe the basic information.",
   "main": "index.ets",

@@ -14,7 +14,7 @@
  */
 {
   "module": {
-    "name": "shared_preferences",
+    "name": "shared_preferences_ohos",
     "type": "har",
     "deviceTypes": [
       "default",

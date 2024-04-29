@@ -14,7 +14,7 @@
 */
 {
   "module": {
-    "name": "VideoPlayerOhos",
+    "name": "video_player_ohos",
     "type": "har",
     "deviceTypes": [
       "default",

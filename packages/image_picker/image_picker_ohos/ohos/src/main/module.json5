@@ -14,10 +14,11 @@
  */
 {
   "module": {
-    "name": "ImagePickerOhos",
+    "name": "image_picker_ohos",
     "type": "har",
     "deviceTypes": [
-      "default"
+      "default",
+      "tablet"
     ]
   }
 }

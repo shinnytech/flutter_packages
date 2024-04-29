@@ -24,6 +24,8 @@ export interface WebSettings {
 
   setSupportMultipleWindows(support: boolean): void;
 
+  setBackgroundColor(color: number): void;
+
   setJavaScriptEnabled(flag: boolean): void;
 
   setUserAgentString(userAgentString: string): void;
@@ -80,6 +82,11 @@ export class WebSettingsHostApiImpl extends WebSettingsHostApi {
   setSupportMultipleWindows(instanceId: number, support: boolean) {
     const webSettings:WebSettings = this.instanceManager.getInstance(instanceId);
     webSettings.setSupportMultipleWindows(support);
+  }
+
+  setBackgroundColor(instanceId: number, color: number) {
+    const webSettings:WebSettings = this.instanceManager.getInstance(instanceId);
+    webSettings.setBackgroundColor(color);
   }
 
   setJavaScriptEnabled(instanceId: number, flag: boolean) {

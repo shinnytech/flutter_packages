@@ -27,7 +27,6 @@ export class VideoPlayerApiCodec extends StandardMessageCodec {
   public static INSTANCE = new VideoPlayerApiCodec();
 
   readValueOfType(type: number, buffer: ByteBuffer): ESObject {
-    Log.d(TAG, 'readValueOfType type:' + type + ' buffer:' + buffer)
     switch (type) {
       case 128:
         let res0 =  CreateMessage.fromList(super.readValue(buffer) as Array<ESObject>);
@@ -57,7 +56,6 @@ export class VideoPlayerApiCodec extends StandardMessageCodec {
   }
 
   writeValue(stream: ByteBuffer, value: ESObject): ESObject {
-    // Log.d(TAG, 'writeValue')
     if (value instanceof CreateMessage) {
       stream.writeInt8(-128);
       return this.writeValue(stream, (value as CreateMessage).toList());
@@ -82,6 +80,5 @@ export class VideoPlayerApiCodec extends StandardMessageCodec {
     } else {
       return super.writeValue(stream, value);
     }
-    return stream
   }
 }

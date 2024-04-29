@@ -15,7 +15,7 @@
 
 {
   "module": {
-    "name": "camera",
+    "name": "camera_ohos",
     "type": "har",
     "deviceTypes": [
       "phone",

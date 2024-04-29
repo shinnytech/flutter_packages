@@ -13,10 +13,12 @@
 * limitations under the License.
 */
 
-import { FlutterAbility } from '@ohos/flutter_ohos'
+import { FlutterAbility, FlutterEngine } from '@ohos/flutter_ohos';
+import { GeneratedPluginRegistrant } from '../plugins/GeneratedPluginRegistrant';
 
 export default class EntryAbility extends FlutterAbility {
-  onFlutterEngineReady(): void {
-    super.onFlutterEngineReady()
+  configureFlutterEngine(flutterEngine: FlutterEngine) {
+    super.configureFlutterEngine(flutterEngine)
+    GeneratedPluginRegistrant.registerWith(flutterEngine)
   }
 }
