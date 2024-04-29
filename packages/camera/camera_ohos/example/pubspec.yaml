@@ -30,15 +30,17 @@ dependencies:
   camera_platform_interface: ^2.5.0
   flutter:
     sdk: flutter
-  path_provider:
-    git:
-      url: "https://gitee.com/openharmony-sig/flutter_packages.git"
-      path: "packages/path_provider/path_provider"
   quiver: ^3.0.0
+  path_provider:
+    path: ../../../path_provider/path_provider
   video_player:
-    git:
-      url: "https://gitee.com/openharmony-sig/flutter_packages.git"
-      path: "packages/video_player/video_player"
+    path: ../../../video_player/video_player
+
+dependency_overrides:
+  path_provider_ohos:
+    path: ../../../path_provider/path_provider_ohos
+  video_player_ohos:
+    path: ../../../video_player/video_player_ohos
 
 dev_dependencies:
   build_runner: ^2.1.10

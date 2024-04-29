@@ -34,6 +34,10 @@ dependencies:
     path: ../
   webview_flutter_platform_interface: ^2.4.0
 
+dependency_overrides:
+  path_provider_ohos:
+    path: ../../../path_provider/path_provider_ohos
+
 dev_dependencies:
   espresso: ^0.2.0
   flutter_test:

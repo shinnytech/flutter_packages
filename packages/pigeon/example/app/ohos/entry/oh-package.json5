@@ -7,7 +7,6 @@
   "license": "",
   "dependencies": {
     "@ohos/flutter_ohos": "file:../har/flutter.har",
-    "@ohos/integration_test": "file:./har/integration_test.har",
     "integration_test": "file:../har/integration_test.har"
   }
 }

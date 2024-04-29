@@ -25,6 +25,10 @@ dependencies:
     path: ../../path_provider
   path_provider_platform_interface: ^2.0.0
 
+dependency_overrides:
+  path_provider_ohos:
+    path: ../../path_provider_ohos
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

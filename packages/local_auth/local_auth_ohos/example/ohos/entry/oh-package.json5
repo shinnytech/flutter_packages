@@ -8,7 +8,6 @@
   "version": "1.0.0",
   "dependencies": {
     "@ohos/flutter_ohos": "file:../har/flutter.har",
-    "@ohos/local_auth_ohos": "file:./har/local_auth_ohos.har",
     "local_auth_ohos": "file:../har/local_auth_ohos.har"
   }
 }
