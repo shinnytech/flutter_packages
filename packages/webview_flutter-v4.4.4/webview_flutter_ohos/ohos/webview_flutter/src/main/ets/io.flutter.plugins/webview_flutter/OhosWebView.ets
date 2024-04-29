@@ -46,7 +46,7 @@ export struct OhosWebView {
         .onWindowExit(DynamicUtils.getParams(this.params, "onWindowExit"))
         .domStorageAccess(DynamicUtils.getParams(this.params, "domStorageAccess"))
         .allowWindowOpenMethod(DynamicUtils.getParams(this.params, "allowWindowOpenMethod"))
-        .multiWindowAccess(DynamicUtils.getParams(this.params, "multiWindowAccess"))
+        .multiWindowAccess(false)
         .javaScriptAccess(DynamicUtils.getParams(this.params, "javaScriptAccess"))
         .mediaPlayGestureAccess(DynamicUtils.getParams(this.params, "mediaPlayGestureAccess"))
         .zoomAccess(DynamicUtils.getParams(this.params, "zoomAccess"))
