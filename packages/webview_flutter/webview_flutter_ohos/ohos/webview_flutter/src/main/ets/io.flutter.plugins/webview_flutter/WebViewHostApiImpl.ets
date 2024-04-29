@@ -73,24 +73,21 @@ export class WebViewHostApiImpl extends WebViewHostApi {
     webView.getController().loadData(data, mimeType, encoding);
   }
 
-  loadDataWithBaseUrl(
+  async loadDataWithBaseUrl(
     instanceId: number, baseUrl: string, data: string, mimeType: string, encoding: string, historyUrl: string
-  ): void {
+  ): Promise<void> {
     const webView: WebViewPlatformView = this.instanceManager.getInstance(instanceId);
+    await webView.checkControllerAttached();
     try {
       webView.getController().loadData(data, mimeType, encoding, baseUrl == null ? "" : baseUrl , historyUrl == null ? "" : historyUrl);
     } catch (err) {
       Log.e(TAG, "loadDataWithBaseUrl err = " + err);
-      setTimeout(
-        () => {
-          this.loadDataWithBaseUrl(instanceId, baseUrl, data, mimeType, encoding, historyUrl);
-        }, 500
-      )
     }
   }
 
-  loadUrl(instanceId: number, url: string, headers: Map<string, string>): void {
+  async loadUrl(instanceId: number, url: string, headers: Map<string, string>): Promise<void> {
     const webView: WebViewPlatformView = this.instanceManager.getInstance(instanceId);
+    await webView.checkControllerAttached();
     try {
       if (url.startsWith("resources/rawfile/")) {
         webView.getController().loadUrl($rawfile(url.replace("resources/rawfile/","")), this.toWebHeaders(headers));
@@ -99,11 +96,6 @@ export class WebViewHostApiImpl extends WebViewHostApi {
       }
     } catch (err) {
       Log.e(TAG, "loadUrl err = " + err);
-      setTimeout(
-        () => {
-          this.loadUrl(instanceId, url, headers);
-        }, 500
-      )
     }
   }
 
@@ -284,6 +276,8 @@ export class WebViewPlatformView extends PlatformView {
 
   private returnValueForShouldOverrideUrlLoading: boolean = false;
 
+  private controllerAttached: boolean = false;
+
   private onDownloadStart = (event: ESObject) => {
     if (this.downloadListener) {
       this.downloadListener.onDownloadStart(
@@ -377,6 +371,11 @@ export class WebViewPlatformView extends PlatformView {
     this.scrollY = event.yOffset;
   }
 
+  private onControllerAttached = () => {
+    Log.d(TAG, "onControllerAttached");
+    this.controllerAttached = true
+  }
+
   ohosWebView: DVModelJson = new DVModelJson(
     "other",
     [],
@@ -396,7 +395,8 @@ export class WebViewPlatformView extends PlatformView {
       onPermissionRequest: this.onPermissionRequest,
       onWindowNew: this.onWindowNew,
       onWindowExit: this.onWindowExit,
-      onScroll: this.onScroll
+      onScroll: this.onScroll,
+      onControllerAttached: this.onControllerAttached
     },
     {},
     buildOhosWebView
@@ -457,6 +457,28 @@ export class WebViewPlatformView extends PlatformView {
   setReturnValueForShouldOverrideUrlLoading(value: boolean) {
     this.returnValueForShouldOverrideUrlLoading = value;
   }
+
+  async waitControllerAttached() {
+    if (!this.controllerAttached) {
+      await this.checkControllerAttached()
+    }
+  }
+
+  checkControllerAttached(): Promise<void> {
+    return new Promise((resolve, reject) => {
+      try {
+        let intervalId = setInterval(() => {
+          if (this.controllerAttached) {
+            clearInterval(intervalId)
+            resolve()
+          }
+        }, 20)
+      } catch (err) {
+        reject()
+      }
+    })
+  }
+
 }
 
 export class WebViewProxy {
