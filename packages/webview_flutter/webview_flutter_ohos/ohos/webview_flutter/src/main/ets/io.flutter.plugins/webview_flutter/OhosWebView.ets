@@ -55,6 +55,7 @@ export struct OhosWebView {
         .fileAccess(DynamicUtils.getParams(this.params, "fileAccess"))
         .textZoomRatio(DynamicUtils.getParams(this.params, "textZoomRatio"))
         .onScroll(DynamicUtils.getParams(this.params, "onScroll"))
+        .onControllerAttached(DynamicUtils.getParams(this.params, "onControllerAttached"))
         .onWindowNew((event) => {
           let newWebViewController: web_webview.WebviewController = new web_webview.WebviewController();
           let dialogController: CustomDialogController = new CustomDialogController({
