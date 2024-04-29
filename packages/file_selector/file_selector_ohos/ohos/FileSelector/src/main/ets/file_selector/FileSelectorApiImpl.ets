@@ -24,6 +24,7 @@ import { AbilityPluginBinding } from '@ohos/flutter_ohos/src/main/ets/embedding/
 import common from '@ohos.app.ability.common';
 import { photoPickerSelect, documentPickerSelect, filePicker } from './FIleSelectorUtil'
 import ArrayList from '@ohos.util.ArrayList';
+import List from '@ohos.util.List';
 
 const TAG = "FileSelectorApiImpl";
 const DOCUMENT = "Document";
@@ -41,9 +42,10 @@ export class FileSelectorApiImpl {
 
   openFileWithExtensions(initialDirectory: string, allowedTypes: FileTypes, result: Result<FileResponse>): void {
     Log.d(TAG, 'openFile types:' + allowedTypes.extensions + ' dir:' + initialDirectory)
-    filePicker(initialDirectory, allowedTypes, 1).then((filePickerResult: ESObject) => {
+    filePicker(initialDirectory, allowedTypes, 1).then(async (filePickerResult: ESObject) => {
       if (filePickerResult != undefined) {
-        let uri: string = filePickerResult[0];
+        let fileUris = await this.getUrisForPaths(filePickerResult);
+        let uri: string = fileUris[0];
         Log.i(TAG,'documentPickerSelect select file successfully, documentPicker uri: ' + uri);
         FileSelectorApiImpl.toFileResponse(uri, MIME_TYPE, uri.substring(uri.lastIndexOf("/") + 1))
           .then((file) => {
@@ -214,6 +216,26 @@ export class FileSelectorApiImpl {
 
   getDirectoryPath(initialDirectory: string, result: Result<string>): void {
     throw new Error('Method not implemented.')
+  }
+
+  async getUrisForPaths(paths: List<string>): Promise<Array<string>> {
+    Log.i(TAG, "getUrisForPaths");
+    let uris = new Array<string>();
+    try {
+      paths.forEach(async path => {
+        let folder = this.getContext().cacheDir;
+        if (!fs.accessSync(folder)) {
+          fs.mkdirSync(folder);
+        }
+        let oldFile: fs.File = fs.openSync(path);
+        let newFile = folder + '/' + oldFile.name;
+        fs.copyFileSync(oldFile.fd, newFile);
+        uris.push(newFile);
+      })
+    } catch (err) {
+      Log.e(TAG, 'Failed to getUrisForPaths: ' + JSON.stringify(err));
+    }
+    return uris;
   }
 
   static getCodec(): MessageCodec<ESObject> {
