@@ -77,7 +77,7 @@ export class WebViewHostApiImpl extends WebViewHostApi {
     instanceId: number, baseUrl: string, data: string, mimeType: string, encoding: string, historyUrl: string
   ): Promise<void> {
     const webView: WebViewPlatformView = this.instanceManager.getInstance(instanceId);
-    await webView.checkControllerAttached();
+    await webView.waitControllerAttached();
     try {
       webView.getController().loadData(data, mimeType, encoding, baseUrl == null ? "" : baseUrl , historyUrl == null ? "" : historyUrl);
     } catch (err) {
@@ -87,7 +87,7 @@ export class WebViewHostApiImpl extends WebViewHostApi {
 
   async loadUrl(instanceId: number, url: string, headers: Map<string, string>): Promise<void> {
     const webView: WebViewPlatformView = this.instanceManager.getInstance(instanceId);
-    await webView.checkControllerAttached();
+    await webView.waitControllerAttached();
     try {
       if (url.startsWith("resources/rawfile/")) {
         webView.getController().loadUrl($rawfile(url.replace("resources/rawfile/","")), this.toWebHeaders(headers));
@@ -311,8 +311,7 @@ export class WebViewPlatformView extends PlatformView {
   private onLoadIntercept = (event: ESObject) => {
     Log.i(TAG, "onLoadIntercept event = " + JSON.stringify(event))
     if (this.webViewClint) {
-      // this.webViewClint.shouldOverrideUrlLoading(this, event.data);
-      return this.returnValueForShouldOverrideUrlLoading;
+      return this.webViewClint.shouldOverrideUrlLoading(this, event.data);
     }
     return false;
   }

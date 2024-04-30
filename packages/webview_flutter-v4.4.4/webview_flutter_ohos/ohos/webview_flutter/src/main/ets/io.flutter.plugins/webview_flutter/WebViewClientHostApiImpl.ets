@@ -55,8 +55,11 @@ export class WebViewClientImpl implements WebViewClient {
   }
 
   shouldOverrideUrlLoading(view: WebViewPlatformView, request: WebResourceRequest): boolean {
-    view.setReturnValueForShouldOverrideUrlLoading(this.returnValueForShouldOverrideUrlLoading);
-    return this.returnValueForShouldOverrideUrlLoading;
+    if(this.returnValueForShouldOverrideUrlLoading && request.isRequestGesture()){
+      this.flutterApi.requestLoadingImpl(this, view, request, this.emptyReply)
+      return true;
+    }
+    return false
   }
 
   doUpdateVisitedHistory(view: WebViewPlatformView, url: string, isReload: boolean) {
