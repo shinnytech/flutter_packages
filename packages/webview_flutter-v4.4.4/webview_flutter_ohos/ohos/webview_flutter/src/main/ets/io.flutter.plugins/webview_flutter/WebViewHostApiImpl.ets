@@ -284,7 +284,7 @@ export class WebViewPlatformView extends PlatformView {
   private controllerAttached: boolean = false;
 
   private onDownloadStart = (event: ESObject) => {
-    if (this.downloadListener) {
+    if (this.downloadListener && this.downloadListener.onDownloadStart) {
       this.downloadListener.onDownloadStart(
         event.url,
         event.userAgent,
