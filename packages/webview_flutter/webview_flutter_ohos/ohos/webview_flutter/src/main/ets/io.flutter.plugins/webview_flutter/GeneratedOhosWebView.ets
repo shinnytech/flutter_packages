@@ -1369,12 +1369,78 @@ export abstract class WebChromeClientFlutterApi {
       (channelReply: ESObject) => callback.reply(null)
     );
   }
+
+  onJsAlert(
+    instanceIdArg: number,
+    urlArg: string,
+    messageArg: string,
+    callback: Reply<void>
+  ): void {
+    const channel: BasicMessageChannel<ESObject> = new BasicMessageChannel<ESObject>(
+      this.binaryMessenger,
+      "dev.flutter.pigeon.webview_flutter_ohos.WebChromeClientFlutterApi.onJsAlert",
+      WebChromeClientFlutterApi.getCodec()
+    )
+    channel.send(
+      [instanceIdArg, urlArg, messageArg],
+      (channelReply: ESObject) => {
+        callback.reply(null);
+      }
+    );
+  }
+
+  onJsConfirm(
+    instanceIdArg: number,
+    urlArg: string,
+    messageArg: string,
+    callback: Reply<boolean>
+  ): void {
+    const channel: BasicMessageChannel<ESObject> = new BasicMessageChannel<ESObject>(
+      this.binaryMessenger,
+      "dev.flutter.pigeon.webview_flutter_ohos.WebChromeClientFlutterApi.onJsConfirm",
+      WebChromeClientFlutterApi.getCodec()
+    )
+    channel.send(
+      [instanceIdArg, urlArg, messageArg],
+      (channelReply: ESObject) => {
+        let output: boolean = channelReply as boolean;
+        callback.reply(output);
+      }
+    );
+  }
+
+  onJsPrompt(
+    instanceIdArg: number,
+    urlArg: string,
+    messageArg: string,
+    defaultValueArg: string,
+    callback: Reply<string>
+  ): void {
+    const channel: BasicMessageChannel<ESObject> = new BasicMessageChannel<ESObject>(
+      this.binaryMessenger,
+      "dev.flutter.pigeon.webview_flutter_ohos.WebChromeClientFlutterApi.onJsPrompt",
+      WebChromeClientFlutterApi.getCodec()
+    )
+    channel.send(
+      [instanceIdArg, urlArg, messageArg, defaultValueArg],
+      (channelReply: ESObject) => {
+        let output: string = channelReply as string;
+        callback.reply(output);
+      }
+    );
+  }
 }
 
 export abstract class WebChromeClientHostApi {
   abstract create(instanceId: number): void;
 
   abstract setSynchronousReturnValueForOnShowFileChooser(instanceId: number, value: boolean): void;
+
+  abstract setSynchronousReturnValueForOnJsAlert(instanceId: number, value: boolean): void;
+
+  abstract setSynchronousReturnValueForOnJsConfirm(instanceId: number, value: boolean): void;
+
+  abstract setSynchronousReturnValueForOnJsPrompt(instanceId: number, value: boolean): void;
 
   static getCodec(): MessageCodec<ESObject> {
     return new StandardMessageCodec();
@@ -1437,6 +1503,93 @@ export abstract class WebChromeClientHostApi {
             }
           }
         );
+      } else {
+        channel.setMessageHandler(null);
+      }
+    }
+    {
+      const channel: BasicMessageChannel<ESObject> =
+        new BasicMessageChannel<ESObject>(
+          binaryMessenger,
+          "dev.flutter.pigeon.webview_flutter_ohos.WebChromeClientHostApi.setSynchronousReturnValueForOnJsAlert",
+          WebChromeClientHostApi.getCodec());
+      if (api != null) {
+        channel.setMessageHandler({
+          onMessage: (message: ESObject, reply: Reply<ESObject>) => {
+            let wrapped: ArrayList<ESObject> = new ArrayList<ESObject>();
+            const args: Array<ESObject> = message;
+            const instanceIdArg: number = args[0];
+            const valueArg: boolean = args[1];
+            try {
+              api.setSynchronousReturnValueForOnJsAlert(
+                instanceIdArg, valueArg
+              );
+              wrapped.insert(null, 0);
+            } catch (err) {
+              const wrappedError: ArrayList<ESObject> = GeneratedOhosWebView.wrapError(err);
+              wrapped = wrappedError;
+            }
+            reply.reply(wrapped.convertToArray());
+          }
+        });
+      } else {
+        channel.setMessageHandler(null);
+      }
+    }
+    {
+      const channel: BasicMessageChannel<ESObject> =
+        new BasicMessageChannel<ESObject>(
+          binaryMessenger,
+          "dev.flutter.pigeon.webview_flutter_ohos.WebChromeClientHostApi.setSynchronousReturnValueForOnJsConfirm",
+          WebChromeClientHostApi.getCodec());
+      if (api != null) {
+        channel.setMessageHandler({
+          onMessage: (message: ESObject, reply: Reply<ESObject>) => {
+            let wrapped: ArrayList<ESObject> = new ArrayList<ESObject>();
+            const args: Array<ESObject> = message;
+            const instanceIdArg: number = args[0];
+            const valueArg: boolean = args[1];
+            try {
+              api.setSynchronousReturnValueForOnJsConfirm(
+                instanceIdArg, valueArg
+              );
+              wrapped.insert(null, 0);
+            } catch (err) {
+              const wrappedError: ArrayList<ESObject> = GeneratedOhosWebView.wrapError(err);
+              wrapped = wrappedError;
+            }
+            reply.reply(wrapped.convertToArray());
+          }
+        });
+      } else {
+        channel.setMessageHandler(null);
+      }
+    }
+    {
+      const channel: BasicMessageChannel<ESObject> =
+        new BasicMessageChannel<ESObject>(
+          binaryMessenger,
+          "dev.flutter.pigeon.webview_flutter_ohos.WebChromeClientHostApi.setSynchronousReturnValueForOnJsPrompt",
+          WebChromeClientHostApi.getCodec());
+      if (api != null) {
+        channel.setMessageHandler({
+          onMessage: (message: ESObject, reply: Reply<ESObject>) => {
+            let wrapped: ArrayList<ESObject> = new ArrayList<ESObject>();
+            const args: Array<ESObject> = message;
+            const instanceIdArg: number = args[0];
+            const valueArg: boolean = args[1];
+            try {
+              api.setSynchronousReturnValueForOnJsPrompt(
+                instanceIdArg, valueArg
+              );
+              wrapped.insert(null, 0);
+            } catch (err) {
+              const wrappedError: ArrayList<ESObject> = GeneratedOhosWebView.wrapError(err);
+              wrapped = wrappedError;
+            }
+            reply.reply(wrapped.convertToArray());
+          }
+        });
       } else {
         channel.setMessageHandler(null);
       }

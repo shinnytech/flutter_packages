@@ -375,6 +375,27 @@ export class WebViewPlatformView extends PlatformView {
     this.controllerAttached = true
   }
 
+  private onJsAlert = (event: ESObject): boolean => {
+    if (this.webChromeClient && event) {
+      return this.webChromeClient.onJsAlert(this, event.url, event.message, event.result);
+    }
+    return true;
+  }
+
+  private onJsConfirm = (event: ESObject): boolean => {
+    if (this.webChromeClient && event) {
+      return this.webChromeClient.onJsConfirm(this, event.url, event.message, event.result);
+    }
+    return true;
+  }
+
+  private onJsPrompt = (event: ESObject): boolean => {
+    if (this.webChromeClient && event) {
+      return this.webChromeClient.onJsPrompt(this, event.url, event.message, "", event.result);
+    }
+    return true;
+  }
+
   ohosWebView: DVModelJson = new DVModelJson(
     "other",
     [],
@@ -395,7 +416,10 @@ export class WebViewPlatformView extends PlatformView {
       onWindowNew: this.onWindowNew,
       onWindowExit: this.onWindowExit,
       onScroll: this.onScroll,
-      onControllerAttached: this.onControllerAttached
+      onControllerAttached: this.onControllerAttached,
+      onJsAlert: this.onJsAlert,
+      onJsConfirm: this.onJsConfirm,
+      onJsPrompt: this.onJsPrompt,
     },
     {},
     buildOhosWebView

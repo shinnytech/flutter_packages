@@ -39,22 +39,27 @@ class OhosWebViewProxy {
   final ohos_webview.WebView Function() createOhosWebView;
 
   /// Constructs a [ohos_webview.WebChromeClient].
-  final ohos_webview.WebChromeClient Function(
-      {void Function(ohos_webview.WebView webView, int progress)?
-          onProgressChanged,
-      Future<List<String>> Function(
-        ohos_webview.WebView webView,
-        ohos_webview.FileChooserParams params,
-      )? onShowFileChooser,
-      void Function(
-        ohos_webview.WebChromeClient instance,
-        ohos_webview.PermissionRequest request,
-      )? onPermissionRequest,
-      Future<void> Function(String origin,
-              ohos_webview.GeolocationPermissionsCallback callback)?
-          onGeolocationPermissionsShowPrompt,
-      void Function(ohos_webview.WebChromeClient instance)?
-          onGeolocationPermissionsHidePrompt}) createOhosWebChromeClient;
+  final ohos_webview.WebChromeClient Function({
+    void Function(ohos_webview.WebView webView, int progress)?
+        onProgressChanged,
+    Future<List<String>> Function(
+      ohos_webview.WebView webView,
+      ohos_webview.FileChooserParams params,
+    )? onShowFileChooser,
+    void Function(
+      ohos_webview.WebChromeClient instance,
+      ohos_webview.PermissionRequest request,
+    )? onPermissionRequest,
+    Future<void> Function(String origin,
+            ohos_webview.GeolocationPermissionsCallback callback)?
+        onGeolocationPermissionsShowPrompt,
+    void Function(ohos_webview.WebChromeClient instance)?
+        onGeolocationPermissionsHidePrompt,
+    Future<void> Function(String url, String message)? onJsAlert,
+    Future<bool> Function(String url, String message)? onJsConfirm,
+    Future<String> Function(String url, String message, String defaultValue)?
+        onJsPrompt,
+  }) createOhosWebChromeClient;
 
   /// Constructs a [ohos_webview.WebViewClient].
   final ohos_webview.WebViewClient Function({
@@ -82,8 +87,7 @@ class OhosWebViewProxy {
   }) createOhosWebViewClient;
 
   /// Constructs a [ohos_webview.FlutterAssetManager].
-  final ohos_webview.FlutterAssetManager Function()
-      createFlutterAssetManager;
+  final ohos_webview.FlutterAssetManager Function() createFlutterAssetManager;
 
   /// Constructs a [ohos_webview.JavaScriptChannel].
   final ohos_webview.JavaScriptChannel Function(

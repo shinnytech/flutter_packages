@@ -205,6 +205,49 @@ class OhosWebViewController extends PlatformWebViewController {
         };
       },
     ),
+    onJsAlert: withWeakReferenceTo(this,
+        (WeakReference<OhosWebViewController> weakReference) {
+      return (String url, String message) async {
+        final Future<void> Function(JavaScriptAlertDialogRequest)? callback =
+            weakReference.target?._onJavaScriptAlert;
+        if (callback != null) {
+          final JavaScriptAlertDialogRequest request =
+              JavaScriptAlertDialogRequest(message: message, url: url);
+
+          await callback.call(request);
+        }
+        return;
+      };
+    }),
+    onJsConfirm: withWeakReferenceTo(this,
+        (WeakReference<OhosWebViewController> weakReference) {
+      return (String url, String message) async {
+        final Future<bool> Function(JavaScriptConfirmDialogRequest)? callback =
+            weakReference.target?._onJavaScriptConfirm;
+        if (callback != null) {
+          final JavaScriptConfirmDialogRequest request =
+              JavaScriptConfirmDialogRequest(message: message, url: url);
+          final bool result = await callback.call(request);
+          return result;
+        }
+        return false;
+      };
+    }),
+    onJsPrompt: withWeakReferenceTo(this,
+        (WeakReference<OhosWebViewController> weakReference) {
+      return (String url, String message, String defaultValue) async {
+        final Future<String> Function(JavaScriptTextInputDialogRequest)?
+            callback = weakReference.target?._onJavaScriptPrompt;
+        if (callback != null) {
+          final JavaScriptTextInputDialogRequest request =
+              JavaScriptTextInputDialogRequest(
+                  message: message, url: url, defaultText: defaultValue);
+          final String result = await callback.call(request);
+          return result;
+        }
+        return '';
+      };
+    }),
   );
 
   /// The native [ohos_webview.FlutterAssetManager] allows managing assets.
@@ -224,6 +267,13 @@ class OhosWebViewController extends PlatformWebViewController {
   OnGeolocationPermissionsHidePrompt? _onGeolocationPermissionsHidePrompt;
 
   void Function(PlatformWebViewPermissionRequest)? _onPermissionRequestCallback;
+
+  Future<void> Function(JavaScriptAlertDialogRequest request)?
+  _onJavaScriptAlert;
+  Future<bool> Function(JavaScriptConfirmDialogRequest request)?
+  _onJavaScriptConfirm;
+  Future<String> Function(JavaScriptTextInputDialogRequest request)?
+  _onJavaScriptPrompt;
 
   /// Whether to enable the platform's webview content debugging tools.
   ///
@@ -276,7 +326,7 @@ class OhosWebViewController extends PlatformWebViewController {
       );
     }
     _webView.settings.setAllowFileAccess(true);
-    final String  url = "resources/rawfile/" + assetFilePath;
+    final String url = "resources/rawfile/" + assetFilePath;
     return _webView.loadUrl(url, <String, String>{});
   }
 
@@ -286,11 +336,7 @@ class OhosWebViewController extends PlatformWebViewController {
     String? baseUrl,
   }) {
     return _webView.loadDataWithBaseUrl(
-      baseUrl: baseUrl,
-      data: html,
-      mimeType: 'text/html',
-      encoding: 'UTF-8'
-    );
+        baseUrl: baseUrl, data: html, mimeType: 'text/html', encoding: 'UTF-8');
   }
 
   @override
@@ -388,12 +434,10 @@ class OhosWebViewController extends PlatformWebViewController {
     // When JavaScript channel with the same name exists make sure to remove it
     // before registering the new channel.
     if (_javaScriptChannelParams.containsKey(ohosJavaScriptParams.name)) {
-      _webView
-          .removeJavaScriptChannel(ohosJavaScriptParams._javaScriptChannel);
+      _webView.removeJavaScriptChannel(ohosJavaScriptParams._javaScriptChannel);
     }
 
-    _javaScriptChannelParams[ohosJavaScriptParams.name] =
-        ohosJavaScriptParams;
+    _javaScriptChannelParams[ohosJavaScriptParams.name] = ohosJavaScriptParams;
 
     return _webView
         .addJavaScriptChannel(ohosJavaScriptParams._javaScriptChannel);
@@ -500,6 +544,30 @@ class OhosWebViewController extends PlatformWebViewController {
   }) async {
     _onGeolocationPermissionsShowPrompt = onShowPrompt;
     _onGeolocationPermissionsHidePrompt = onHidePrompt;
+  }
+
+  @override
+  Future<void> setOnJavaScriptAlertDialog(
+      Future<void> Function(JavaScriptAlertDialogRequest request)
+      onJavaScriptAlertDialog) async {
+    _onJavaScriptAlert = onJavaScriptAlertDialog;
+    return _webChromeClient.setSynchronousReturnValueForOnJsAlert(true);
+  }
+
+  @override
+  Future<void> setOnJavaScriptConfirmDialog(
+      Future<bool> Function(JavaScriptConfirmDialogRequest request)
+      onJavaScriptConfirmDialog) async {
+    _onJavaScriptConfirm = onJavaScriptConfirmDialog;
+    return _webChromeClient.setSynchronousReturnValueForOnJsConfirm(true);
+  }
+
+  @override
+  Future<void> setOnJavaScriptTextInputDialog(
+      Future<String> Function(JavaScriptTextInputDialogRequest request)
+      onJavaScriptTextInputDialog) async {
+    _onJavaScriptPrompt = onJavaScriptTextInputDialog;
+    return _webChromeClient.setSynchronousReturnValueForOnJsPrompt(true);
   }
 }
 
@@ -649,8 +717,7 @@ class OhosJavaScriptChannelParams extends JavaScriptChannelParams {
   OhosJavaScriptChannelParams({
     required super.name,
     required super.onMessageReceived,
-    @visibleForTesting
-    OhosWebViewProxy webViewProxy = const OhosWebViewProxy(),
+    @visibleForTesting OhosWebViewProxy webViewProxy = const OhosWebViewProxy(),
   })  : assert(name.isNotEmpty),
         _javaScriptChannel = webViewProxy.createJavaScriptChannel(
           name,
@@ -674,8 +741,7 @@ class OhosJavaScriptChannelParams extends JavaScriptChannelParams {
   /// [JavaScriptChannelParams].
   OhosJavaScriptChannelParams.fromJavaScriptChannelParams(
     JavaScriptChannelParams params, {
-    @visibleForTesting
-    OhosWebViewProxy webViewProxy = const OhosWebViewProxy(),
+    @visibleForTesting OhosWebViewProxy webViewProxy = const OhosWebViewProxy(),
   }) : this(
           name: params.name,
           onMessageReceived: params.onMessageReceived,
@@ -794,7 +860,7 @@ class OhosWebViewWidget extends PlatformWebViewWidget {
       viewType: 'plugins.flutter.io/webview',
       layoutDirection: _ohosParams.layoutDirection,
       creationParams: _ohosParams.instanceManager.getIdentifier(
-            (_ohosParams.controller as OhosWebViewController)._webView),
+          (_ohosParams.controller as OhosWebViewController)._webView),
       creationParamsCodec: const StandardMessageCodec(),
       gestureRecognizers: _ohosParams.gestureRecognizers,
     );
@@ -1020,8 +1086,7 @@ class OhosNavigationDelegate extends PlatformNavigationDelegate {
   @Deprecated(
     'This value is not used by `OhosWebViewController` and has no effect on the `WebView`.',
   )
-  ohos_webview.WebChromeClient get ohosWebChromeClient =>
-      _webChromeClient;
+  ohos_webview.WebChromeClient get ohosWebChromeClient => _webChromeClient;
 
   late final ohos_webview.WebViewClient _webViewClient;
 
@@ -1035,8 +1100,7 @@ class OhosNavigationDelegate extends PlatformNavigationDelegate {
   /// Gets the native [ohos_webview.DownloadListener] that is bridged by this [OhosNavigationDelegate].
   ///
   /// Used by the [OhosWebViewController] to set the `ohos_webview.WebView.setDownloadListener`.
-  ohos_webview.DownloadListener get ohosDownloadListener =>
-      _downloadListener;
+  ohos_webview.DownloadListener get ohosDownloadListener => _downloadListener;
 
   PageEventCallback? _onPageFinished;
   PageEventCallback? _onPageStarted;
