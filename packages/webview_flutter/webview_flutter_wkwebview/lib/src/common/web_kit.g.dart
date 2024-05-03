@@ -11,6 +11,17 @@ import 'dart:typed_data' show Float64List, Int32List, Int64List, Uint8List;
 import 'package:flutter/foundation.dart' show ReadBuffer, WriteBuffer;
 import 'package:flutter/services.dart';
 
+List<Object?> wrapResponse(
+    {Object? result, PlatformException? error, bool empty = false}) {
+  if (empty) {
+    return <Object?>[];
+  }
+  if (error == null) {
+    return <Object?>[result];
+  }
+  return <Object?>[error.code, error.message, error.details];
+}
+
 /// Mirror of NSKeyValueObservingOptions.
 ///
 /// See https://developer.apple.com/documentation/foundation/nskeyvalueobservingoptions?language=objc.
@@ -497,13 +508,17 @@ class WKNavigationActionData {
 class WKFrameInfoData {
   WKFrameInfoData({
     required this.isMainFrame,
+    required this.request,
   });
 
   bool isMainFrame;
 
+  NSUrlRequestData request;
+
   Object encode() {
     return <Object?>[
       isMainFrame,
+      request.encode(),
     ];
   }
 
@@ -511,6 +526,7 @@ class WKFrameInfoData {
     result as List<Object?>;
     return WKFrameInfoData(
       isMainFrame: result[0]! as bool,
+      request: NSUrlRequestData.decode(result[1]! as List<Object?>),
     );
   }
 }
@@ -2688,6 +2704,18 @@ abstract class WKUIDelegateFlutterApi {
       WKFrameInfoData frame,
       WKMediaCaptureTypeData type);
 
+  /// Callback to Dart function `WKUIDelegate.runJavaScriptAlertPanel`.
+  Future<void> runJavaScriptAlertPanel(
+      int identifier, String message, WKFrameInfoData frame);
+
+  /// Callback to Dart function `WKUIDelegate.runJavaScriptConfirmPanel`.
+  Future<bool> runJavaScriptConfirmPanel(
+      int identifier, String message, WKFrameInfoData frame);
+
+  /// Callback to Dart function `WKUIDelegate.runJavaScriptTextInputPanel`.
+  Future<String> runJavaScriptTextInputPanel(
+      int identifier, String prompt, String defaultText, WKFrameInfoData frame);
+
   static void setup(WKUIDelegateFlutterApi? api,
       {BinaryMessenger? binaryMessenger}) {
     {
@@ -2754,6 +2782,111 @@ abstract class WKUIDelegateFlutterApi {
               await api.requestMediaCapturePermission(arg_identifier!,
                   arg_webViewIdentifier!, arg_origin!, arg_frame!, arg_type!);
           return output;
+        });
+      }
+    }
+    {
+      final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
+          'dev.flutter.pigeon.webview_flutter_wkwebview.WKUIDelegateFlutterApi.runJavaScriptAlertPanel',
+          codec,
+          binaryMessenger: binaryMessenger);
+      if (api == null) {
+        channel.setMessageHandler(null);
+      } else {
+        channel.setMessageHandler((Object? message) async {
+          assert(message != null,
+              'Argument for dev.flutter.pigeon.webview_flutter_wkwebview.WKUIDelegateFlutterApi.runJavaScriptAlertPanel was null.');
+          final List<Object?> args = (message as List<Object?>?)!;
+          final int? arg_identifier = (args[0] as int?);
+          assert(arg_identifier != null,
+              'Argument for dev.flutter.pigeon.webview_flutter_wkwebview.WKUIDelegateFlutterApi.runJavaScriptAlertPanel was null, expected non-null int.');
+          final String? arg_message = (args[1] as String?);
+          assert(arg_message != null,
+              'Argument for dev.flutter.pigeon.webview_flutter_wkwebview.WKUIDelegateFlutterApi.runJavaScriptAlertPanel was null, expected non-null String.');
+          final WKFrameInfoData? arg_frame = (args[2] as WKFrameInfoData?);
+          assert(arg_frame != null,
+              'Argument for dev.flutter.pigeon.webview_flutter_wkwebview.WKUIDelegateFlutterApi.runJavaScriptAlertPanel was null, expected non-null WKFrameInfoData.');
+          try {
+            await api.runJavaScriptAlertPanel(
+                arg_identifier!, arg_message!, arg_frame!);
+            return wrapResponse(empty: true);
+          } on PlatformException catch (e) {
+            return wrapResponse(error: e);
+          } catch (e) {
+            return wrapResponse(
+                error: PlatformException(code: 'error', message: e.toString()));
+          }
+        });
+      }
+    }
+    {
+      final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
+          'dev.flutter.pigeon.webview_flutter_wkwebview.WKUIDelegateFlutterApi.runJavaScriptConfirmPanel',
+          codec,
+          binaryMessenger: binaryMessenger);
+      if (api == null) {
+        channel.setMessageHandler(null);
+      } else {
+        channel.setMessageHandler((Object? message) async {
+          assert(message != null,
+              'Argument for dev.flutter.pigeon.webview_flutter_wkwebview.WKUIDelegateFlutterApi.runJavaScriptConfirmPanel was null.');
+          final List<Object?> args = (message as List<Object?>?)!;
+          final int? arg_identifier = (args[0] as int?);
+          assert(arg_identifier != null,
+              'Argument for dev.flutter.pigeon.webview_flutter_wkwebview.WKUIDelegateFlutterApi.runJavaScriptConfirmPanel was null, expected non-null int.');
+          final String? arg_message = (args[1] as String?);
+          assert(arg_message != null,
+              'Argument for dev.flutter.pigeon.webview_flutter_wkwebview.WKUIDelegateFlutterApi.runJavaScriptConfirmPanel was null, expected non-null String.');
+          final WKFrameInfoData? arg_frame = (args[2] as WKFrameInfoData?);
+          assert(arg_frame != null,
+              'Argument for dev.flutter.pigeon.webview_flutter_wkwebview.WKUIDelegateFlutterApi.runJavaScriptConfirmPanel was null, expected non-null WKFrameInfoData.');
+          try {
+            final bool output = await api.runJavaScriptConfirmPanel(
+                arg_identifier!, arg_message!, arg_frame!);
+            return wrapResponse(result: output);
+          } on PlatformException catch (e) {
+            return wrapResponse(error: e);
+          } catch (e) {
+            return wrapResponse(
+                error: PlatformException(code: 'error', message: e.toString()));
+          }
+        });
+      }
+    }
+    {
+      final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
+          'dev.flutter.pigeon.webview_flutter_wkwebview.WKUIDelegateFlutterApi.runJavaScriptTextInputPanel',
+          codec,
+          binaryMessenger: binaryMessenger);
+      if (api == null) {
+        channel.setMessageHandler(null);
+      } else {
+        channel.setMessageHandler((Object? message) async {
+          assert(message != null,
+              'Argument for dev.flutter.pigeon.webview_flutter_wkwebview.WKUIDelegateFlutterApi.runJavaScriptTextInputPanel was null.');
+          final List<Object?> args = (message as List<Object?>?)!;
+          final int? arg_identifier = (args[0] as int?);
+          assert(arg_identifier != null,
+              'Argument for dev.flutter.pigeon.webview_flutter_wkwebview.WKUIDelegateFlutterApi.runJavaScriptTextInputPanel was null, expected non-null int.');
+          final String? arg_prompt = (args[1] as String?);
+          assert(arg_prompt != null,
+              'Argument for dev.flutter.pigeon.webview_flutter_wkwebview.WKUIDelegateFlutterApi.runJavaScriptTextInputPanel was null, expected non-null String.');
+          final String? arg_defaultText = (args[2] as String?);
+          assert(arg_defaultText != null,
+              'Argument for dev.flutter.pigeon.webview_flutter_wkwebview.WKUIDelegateFlutterApi.runJavaScriptTextInputPanel was null, expected non-null String.');
+          final WKFrameInfoData? arg_frame = (args[3] as WKFrameInfoData?);
+          assert(arg_frame != null,
+              'Argument for dev.flutter.pigeon.webview_flutter_wkwebview.WKUIDelegateFlutterApi.runJavaScriptTextInputPanel was null, expected non-null WKFrameInfoData.');
+          try {
+            final String output = await api.runJavaScriptTextInputPanel(
+                arg_identifier!, arg_prompt!, arg_defaultText!, arg_frame!);
+            return wrapResponse(result: output);
+          } on PlatformException catch (e) {
+            return wrapResponse(error: e);
+          } catch (e) {
+            return wrapResponse(
+                error: PlatformException(code: 'error', message: e.toString()));
+          }
         });
       }
     }

@@ -216,6 +216,46 @@ class WebKitWebViewController extends PlatformWebViewController {
           return decisionCompleter.future;
         }
       },
+      runJavaScriptAlertDialog: (String message, WKFrameInfo frame) async {
+        final Future<void> Function(JavaScriptAlertDialogRequest request)?
+            callback = weakThis.target?._onJavaScriptAlertDialog;
+        if (callback != null) {
+          final JavaScriptAlertDialogRequest request =
+              JavaScriptAlertDialogRequest(
+                  message: message, url: frame.request.url);
+          await callback.call(request);
+          return;
+        }
+      },
+      runJavaScriptConfirmDialog: (String message, WKFrameInfo frame) async {
+        final Future<bool> Function(JavaScriptConfirmDialogRequest request)?
+            callback = weakThis.target?._onJavaScriptConfirmDialog;
+        if (callback != null) {
+          final JavaScriptConfirmDialogRequest request =
+              JavaScriptConfirmDialogRequest(
+                  message: message, url: frame.request.url);
+          final bool result = await callback.call(request);
+          return result;
+        }
+
+        return false;
+      },
+      runJavaScriptTextInputDialog:
+          (String prompt, String defaultText, WKFrameInfo frame) async {
+        final Future<String> Function(JavaScriptTextInputDialogRequest request)?
+            callback = weakThis.target?._onJavaScriptTextInputDialog;
+        if (callback != null) {
+          final JavaScriptTextInputDialogRequest request =
+              JavaScriptTextInputDialogRequest(
+                  message: prompt,
+                  url: frame.request.url,
+                  defaultText: defaultText);
+          final String result = await callback.call(request);
+          return result;
+        }
+
+        return '';
+      },
     );
 
     _webView.setUIDelegate(_uiDelegate);
@@ -270,6 +310,13 @@ class WebKitWebViewController extends PlatformWebViewController {
   WebKitNavigationDelegate? _currentNavigationDelegate;
 
   void Function(PlatformWebViewPermissionRequest)? _onPermissionRequestCallback;
+
+  Future<void> Function(JavaScriptAlertDialogRequest request)?
+      _onJavaScriptAlertDialog;
+  Future<bool> Function(JavaScriptConfirmDialogRequest request)?
+      _onJavaScriptConfirmDialog;
+  Future<String> Function(JavaScriptTextInputDialogRequest request)?
+      _onJavaScriptTextInputDialog;
 
   WebKitWebViewControllerCreationParams get _webKitParams =>
       params as WebKitWebViewControllerCreationParams;
@@ -557,6 +604,27 @@ class WebKitWebViewController extends PlatformWebViewController {
   /// Defaults to true in previous versions.
   Future<void> setInspectable(bool inspectable) {
     return _webView.setInspectable(inspectable);
+  }
+
+  @override
+  Future<void> setOnJavaScriptAlertDialog(
+      Future<void> Function(JavaScriptAlertDialogRequest request)
+          onJavaScriptAlertDialog) async {
+    _onJavaScriptAlertDialog = onJavaScriptAlertDialog;
+  }
+
+  @override
+  Future<void> setOnJavaScriptConfirmDialog(
+      Future<bool> Function(JavaScriptConfirmDialogRequest request)
+          onJavaScriptConfirmDialog) async {
+    _onJavaScriptConfirmDialog = onJavaScriptConfirmDialog;
+  }
+
+  @override
+  Future<void> setOnJavaScriptTextInputDialog(
+      Future<String> Function(JavaScriptTextInputDialogRequest request)
+          onJavaScriptTextInputDialog) async {
+    _onJavaScriptTextInputDialog = onJavaScriptTextInputDialog;
   }
 }
 

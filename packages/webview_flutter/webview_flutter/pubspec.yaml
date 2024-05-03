@@ -29,7 +29,10 @@ dependencies:
     git:
       url: https://gitee.com/openharmony-sig/flutter_packages.git
       path: packages/webview_flutter/webview_flutter_platform_interface
-  webview_flutter_wkwebview: ^3.0.0
+  webview_flutter_wkwebview:
+    git:
+      url: https://gitee.com/openharmony-sig/flutter_packages.git
+      path: packages/webview_flutter/webview_flutter_wkwebview
   webview_flutter_ohos:
     git:
       url: "https://gitee.com/openharmony-sig/flutter_packages.git"
