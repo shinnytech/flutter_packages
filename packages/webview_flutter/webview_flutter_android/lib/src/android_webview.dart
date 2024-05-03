@@ -1033,6 +1033,9 @@ class WebChromeClient extends JavaObject {
     this.onPermissionRequest,
     this.onGeolocationPermissionsShowPrompt,
     this.onGeolocationPermissionsHidePrompt,
+    this.onJsAlert,
+    this.onJsConfirm,
+    this.onJsPrompt,
     @visibleForTesting super.binaryMessenger,
     @visibleForTesting super.instanceManager,
   }) : super.detached() {
@@ -1052,6 +1055,9 @@ class WebChromeClient extends JavaObject {
     this.onPermissionRequest,
     this.onGeolocationPermissionsShowPrompt,
     this.onGeolocationPermissionsHidePrompt,
+    this.onJsAlert,
+    this.onJsConfirm,
+    this.onJsPrompt,
     super.binaryMessenger,
     super.instanceManager,
   }) : super.detached();
@@ -1096,6 +1102,19 @@ class WebChromeClient extends JavaObject {
     WebChromeClient instance,
   )? onGeolocationPermissionsHidePrompt;
 
+  /// Notify the host application that the web page wants to display a
+  /// JavaScript alert() dialog.
+  final Future<void> Function(String url, String message)? onJsAlert;
+
+  /// Notify the host application that the web page wants to display a
+  /// JavaScript confirm() dialog.
+  final Future<bool> Function(String url, String message)? onJsConfirm;
+
+  /// Notify the host application that the web page wants to display a
+  /// JavaScript prompt() dialog.
+  final Future<String> Function(
+      String url, String message, String defaultValue)? onJsPrompt;
+
   /// Sets the required synchronous return value for the Java method,
   /// `WebChromeClient.onShowFileChooser(...)`.
   ///
@@ -1125,6 +1144,78 @@ class WebChromeClient extends JavaObject {
     );
   }
 
+  /// Sets the required synchronous return value for the Java method,
+  /// `WebChromeClient.onJsAlert(...)`.
+  ///
+  /// The Java method, `WebChromeClient.onJsAlert(...)`, requires
+  /// a boolean to be returned and this method sets the returned value for all
+  /// calls to the Java method.
+  ///
+  /// Setting this to true indicates that the client is handling all console
+  /// messages.
+  ///
+  /// Requires [onJsAlert] to be nonnull.
+  ///
+  /// Defaults to false.
+  Future<void> setSynchronousReturnValueForOnJsAlert(
+      bool value,
+      ) {
+    if (value && onJsAlert == null) {
+      throw StateError(
+        'Setting this to true requires `onJsAlert` to be nonnull.',
+      );
+    }
+    return api.setSynchronousReturnValueForOnJsAlertFromInstance(this, value);
+  }
+
+  /// Sets the required synchronous return value for the Java method,
+  /// `WebChromeClient.onJsConfirm(...)`.
+  ///
+  /// The Java method, `WebChromeClient.onJsConfirm(...)`, requires
+  /// a boolean to be returned and this method sets the returned value for all
+  /// calls to the Java method.
+  ///
+  /// Setting this to true indicates that the client is handling all console
+  /// messages.
+  ///
+  /// Requires [onJsConfirm] to be nonnull.
+  ///
+  /// Defaults to false.
+  Future<void> setSynchronousReturnValueForOnJsConfirm(
+      bool value,
+      ) {
+    if (value && onJsConfirm == null) {
+      throw StateError(
+        'Setting this to true requires `onJsConfirm` to be nonnull.',
+      );
+    }
+    return api.setSynchronousReturnValueForOnJsConfirmFromInstance(this, value);
+  }
+
+  /// Sets the required synchronous return value for the Java method,
+  /// `WebChromeClient.onJsPrompt(...)`.
+  ///
+  /// The Java method, `WebChromeClient.onJsPrompt(...)`, requires
+  /// a boolean to be returned and this method sets the returned value for all
+  /// calls to the Java method.
+  ///
+  /// Setting this to true indicates that the client is handling all console
+  /// messages.
+  ///
+  /// Requires [onJsPrompt] to be nonnull.
+  ///
+  /// Defaults to false.
+  Future<void> setSynchronousReturnValueForOnJsPrompt(
+      bool value,
+      ) {
+    if (value && onJsPrompt == null) {
+      throw StateError(
+        'Setting this to true requires `onJsPrompt` to be nonnull.',
+      );
+    }
+    return api.setSynchronousReturnValueForOnJsPromptFromInstance(this, value);
+  }
+
   @override
   WebChromeClient copy() {
     return WebChromeClient.detached(
@@ -1132,6 +1223,9 @@ class WebChromeClient extends JavaObject {
       onShowFileChooser: onShowFileChooser,
       onGeolocationPermissionsShowPrompt: onGeolocationPermissionsShowPrompt,
       onGeolocationPermissionsHidePrompt: onGeolocationPermissionsHidePrompt,
+      onJsAlert: onJsAlert,
+      onJsConfirm: onJsConfirm,
+      onJsPrompt: onJsPrompt,
       binaryMessenger: _api.binaryMessenger,
       instanceManager: _api.instanceManager,
     );

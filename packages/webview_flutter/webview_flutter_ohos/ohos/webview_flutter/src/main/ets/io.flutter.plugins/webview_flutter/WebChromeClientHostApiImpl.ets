@@ -41,6 +41,12 @@ export interface WebChromeClient {
   onConsoleMessage(message: ConsoleMessage): void;
 
   onCreateWindow(webView: WebViewPlatformView, isDialog: boolean, isUserGesture: boolean, handler: ControllerHandler): void;
+
+  onJsAlert(webView: WebViewPlatformView, url: string, message: string, result: JsResult): boolean;
+
+  onJsConfirm(webView: WebViewPlatformView, url: string, message: string, result: JsResult): boolean;
+
+  onJsPrompt(webView: WebViewPlatformView, url: string, message: string, defaultValue: string, result: JsResult): boolean;
 }
 
 export class WebChromeClientHostApiImpl extends WebChromeClientHostApi {
@@ -70,6 +76,21 @@ export class WebChromeClientHostApiImpl extends WebChromeClientHostApi {
     const webChromeClient: WebChromeClientImpl = this.instanceManager.getInstance(instanceId);
     webChromeClient.setReturnValueForOnShowFileChooser(value);
   }
+
+  setSynchronousReturnValueForOnJsAlert(instanceId: number, value: boolean) {
+    const webChromeClient: WebChromeClientImpl = this.instanceManager.getInstance(instanceId);
+    webChromeClient.setReturnValueForOnJsAlert(value);
+  }
+
+  setSynchronousReturnValueForOnJsConfirm(instanceId: number, value: boolean) {
+    const webChromeClient: WebChromeClientImpl = this.instanceManager.getInstance(instanceId);
+    webChromeClient.setReturnValueForOnJsConfirm(value);
+  }
+
+  setSynchronousReturnValueForOnJsPrompt(instanceId: number, value: boolean) {
+    const webChromeClient: WebChromeClientImpl = this.instanceManager.getInstance(instanceId);
+    webChromeClient.setReturnValueForOnJsPrompt(value);
+  }
 }
 
 export class WebChromeClientCreator {
@@ -78,45 +99,6 @@ export class WebChromeClientCreator {
   }
 }
 
-class SecureWebChromeClient implements WebChromeClient {
-  onProgressChanged(view: WebViewPlatformView, progress: number) {
-    Log.i(TAG, "onProgressChanged");
-  }
-
-  onGeolocationPermissionsShowPrompt(origin: string, callback: JsGeolocation) {
-    Log.i(TAG, "onGeolocationPermissionsShowPrompt");
-  }
-
-  onGeolocationPermissionsHidePrompt() {
-    Log.i(TAG, "onGeolocationPermissionsHidePrompt");
-  }
-
-  onShowFileChooser(
-    webView: WebViewPlatformView, filePathCallback: FileSelectorResult, fileChooserParams: FileSelectorParam
-  ) {
-    return true;
-  }
-
-  onPermissionRequest(request: PermissionRequest) {
-    Log.i(TAG, "onPermissionRequest");
-  }
-
-  onConsoleMessage(message: ConsoleMessage) {
-    Log.i(TAG, "onConsoleMessage");
-  }
-
-  onCreateWindow(webView: WebViewPlatformView, isDialog: boolean, isUserGesture: boolean, handler: ControllerHandler) {
-    if (webView.getDialogController() != null) {
-      webView.getDialogController()?.close();
-    }
-    let newWebViewController: web_webview.WebviewController = new web_webview.WebviewController();
-    let dialogController: CustomDialogController = new CustomDialogController({
-      builder: NewWebView({ webViewController: newWebViewController })
-    })
-    dialogController.open();
-    handler.setWebController(newWebViewController);
-  }
-}
 
 @CustomDialog
 struct NewWebView {
@@ -137,18 +119,37 @@ struct NewWebView {
   }
 }
 
-class WebChromeClientImpl extends SecureWebChromeClient {
+class WebChromeClientImpl implements WebChromeClient {
   private flutterApi: WebChromeClientFlutterApiImpl;
   private returnValueForOnShowFileChooser: boolean = false;
 
+  private returnValueForOnJsAlert : boolean = false;
+  private returnValueForOnJsConfirm : boolean = false;
+  private returnValueForOnJsPrompt : boolean = false;
+
   constructor(flutterApi: WebChromeClientFlutterApiImpl) {
-    super();
     this.flutterApi = flutterApi;
   }
 
   private emptyReply: Reply<void> = {
     reply: (reply) => {
     }
+  }
+
+  onConsoleMessage(message: ConsoleMessage) {
+    Log.i(TAG, "onConsoleMessage");
+  }
+
+  onCreateWindow(webView: WebViewPlatformView, isDialog: boolean, isUserGesture: boolean, handler: ControllerHandler) {
+    if (webView.getDialogController() != null) {
+      webView.getDialogController()?.close();
+    }
+    let newWebViewController: web_webview.WebviewController = new web_webview.WebviewController();
+    let dialogController: CustomDialogController = new CustomDialogController({
+      builder: NewWebView({ webViewController: newWebViewController })
+    })
+    dialogController.open();
+    handler.setWebController(newWebViewController);
   }
 
   onProgressChanged(view: WebViewPlatformView, progress: number) {
@@ -187,6 +188,65 @@ class WebChromeClientImpl extends SecureWebChromeClient {
 
   setReturnValueForOnShowFileChooser(value: boolean) {
     this.returnValueForOnShowFileChooser = value;
+  }
+
+  setReturnValueForOnJsAlert(value: boolean) {
+    this.returnValueForOnJsAlert = value;
+  }
+
+  setReturnValueForOnJsConfirm(value: boolean) {
+    this.returnValueForOnJsConfirm = value;
+  }
+
+  setReturnValueForOnJsPrompt(value: boolean) {
+    this.returnValueForOnJsPrompt = value;
+  }
+
+  onJsAlert(webView: WebViewPlatformView, url: string, message: string, result: JsResult) {
+    if (this.returnValueForOnJsAlert) {
+      this.flutterApi.onJsAlertImpl(this, url, message, {
+        reply: () => {
+          result.handleConfirm();
+        }
+      });
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  onJsConfirm(webView: WebViewPlatformView, url: string, message: string, result: JsResult) {
+    if (this.returnValueForOnJsConfirm) {
+      this.flutterApi.onJsConfirmImpl(this, url, message, {
+        reply: (data: boolean | null) => {
+          if (data) {
+            result.handleConfirm();
+          } else {
+            result.handleCancel();
+          }
+        }
+      })
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  onJsPrompt(webView: WebViewPlatformView, url: string, message: string, defaultValue: string, result: JsResult) {
+    if (this.returnValueForOnJsPrompt) {
+      this.flutterApi.onJsPromptImpl(this, url, message, defaultValue, {
+        reply: (data: string | null) => {
+          if (data != null) {
+            result.handlePromptConfirm(data);
+          } else {
+            result.handleCancel();
+          }
+        }
+      })
+      return true;
+    } else {
+      return false;
+    }
   }
 }
 

@@ -159,6 +159,31 @@ export class WebChromeClientFlutterApiImpl extends WebChromeClientFlutterApi {
     );
   }
 
+  onJsAlertImpl(
+    instance: WebChromeClient,
+    url: string,
+    message: string,
+    callback: Reply<void>) {
+    this.onJsAlert(this.getIdentifierForClient(instance), url, message, callback);
+  }
+
+  onJsConfirmImpl(
+    instance: WebChromeClient,
+    url: string,
+    message: string,
+    callback: Reply<boolean | null>) {
+    this.onJsConfirm(this.getIdentifierForClient(instance), url, message, callback);
+  }
+
+  onJsPromptImpl(
+    instance: WebChromeClient,
+    url: string,
+    message: string,
+    defaultValue: string,
+    callback: Reply<string | null>) {
+    this.onJsPrompt(this.getIdentifierForClient(instance), url, message, defaultValue, callback);
+  }
+
   getIdentifierForClient(webChromeClient: WebChromeClient): number {
     const identifier: number = this.instanceManager.getIdentifier(webChromeClient);
     if (identifier == null) {

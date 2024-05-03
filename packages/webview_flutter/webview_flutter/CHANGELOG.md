@@ -1,3 +1,9 @@
+## 4.6.0
+
+* Adds support for custom handling of JavaScript dialogs. See
+  `WebViewController.setOnJavaScriptAlertDialog`, `WebViewController.setOnJavaScriptConfirmDialog`
+  and `WebViewController.setOnJavaScriptTextInputDialog`.
+
 ## 4.2.4
 
 * Adds pub topics to package metadata.

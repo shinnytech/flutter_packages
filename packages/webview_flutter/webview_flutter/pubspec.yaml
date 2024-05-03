@@ -21,9 +21,18 @@ flutter:
 dependencies:
   flutter:
     sdk: flutter
-  webview_flutter_android: ^3.0.0
-  webview_flutter_platform_interface: ^2.3.0
-  webview_flutter_wkwebview: ^3.0.0
+  webview_flutter_android:
+    git:
+      url: https://gitee.com/openharmony-sig/flutter_packages.git
+      path: packages/webview_flutter/webview_flutter_android
+  webview_flutter_platform_interface:
+    git:
+      url: https://gitee.com/openharmony-sig/flutter_packages.git
+      path: packages/webview_flutter/webview_flutter_platform_interface
+  webview_flutter_wkwebview:
+    git:
+      url: https://gitee.com/openharmony-sig/flutter_packages.git
+      path: packages/webview_flutter/webview_flutter_wkwebview
   webview_flutter_ohos:
     git:
       url: "https://gitee.com/openharmony-sig/flutter_packages.git"

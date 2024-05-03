@@ -1,3 +1,7 @@
+## 2.9.0
+
+* Adds support to show JavaScript dialog. See `PlatformWebViewController.setOnJavaScriptAlertDialog`, `PlatformWebViewController.setOnJavaScriptConfirmDialog` and `PlatformWebViewController.setOnJavaScriptTextInputDialog`.
+
 ## 2.5.1
 
 * Adds pub topics to package metadata.

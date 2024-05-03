@@ -64,6 +64,9 @@ export struct OhosWebView {
           dialogController.open();
           event.handler.setWebController(newWebViewController);
         })
+        .onAlert(DynamicUtils.getParams(this.params, "onJsAlert"))
+        .onConfirm(DynamicUtils.getParams(this.params, "onJsConfirm"))
+        .onPrompt(DynamicUtils.getParams(this.params, "onJsPrompt"))
     }
   }
 }
