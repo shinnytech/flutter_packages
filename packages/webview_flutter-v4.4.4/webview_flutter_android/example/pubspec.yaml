@@ -16,7 +16,7 @@ description: Demonstrates how to use the webview_flutter_android plugin.
 publish_to: none
 
 environment:
-  sdk: ">=2.19.6 <4.0.0"
+  sdk: ">=2.19.0 <4.0.0"
   flutter: ">=3.7.0"
 
 dependencies:
