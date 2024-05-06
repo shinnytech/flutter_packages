@@ -391,7 +391,7 @@ export class WebViewPlatformView extends PlatformView {
 
   private onJsPrompt = (event: ESObject): boolean => {
     if (this.webChromeClient && event) {
-      return this.webChromeClient.onJsPrompt(this, event.url, event.message, "", event.result);
+      return this.webChromeClient.onJsPrompt(this, event.url, event.message, event.value, event.result);
     }
     return true;
   }
