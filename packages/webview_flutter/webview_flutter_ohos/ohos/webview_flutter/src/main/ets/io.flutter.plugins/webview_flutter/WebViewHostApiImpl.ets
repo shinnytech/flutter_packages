@@ -546,6 +546,7 @@ class WebSettingsImpl implements WebSettings {
   }
 
   setUserAgentString(userAgentString: string) {
+    DynamicUtils.setParams(this.params, "userAgentString", userAgentString);
     this.webView.getController().setCustomUserAgent(userAgentString);
   }
 
