@@ -408,9 +408,8 @@ export default class SharedPreferencesOhosPlugin implements FlutterPlugin, Share
       let stringValue = (value as string);
       if (stringValue.startsWith(LIST_IDENTIFIER)) {
         let strList: ESObject = this.listEncoder.decode(stringValue.substring(LIST_IDENTIFIER.length));
-        //将形似  '["Earth","Moon","Sun"]' 这样的字符串转换为 数组  []
-        let t:ESObject = strList.replaceAll('"' ,"").split("");
-        return t.splice(1,t.length-2).join("").split(",");
+        let t: ESObject = JSON.parse(strList);
+        return t;
       }
     }
     return value;
@@ -438,5 +437,3 @@ class ListEncoder implements SharedPreferencesListEncoder {
     return undefined
   }
 }
-
-
