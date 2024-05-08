@@ -55,6 +55,7 @@ export struct OhosWebView {
         .fileAccess(DynamicUtils.getParams(this.params, "fileAccess"))
         .textZoomRatio(DynamicUtils.getParams(this.params, "textZoomRatio"))
         .onScroll(DynamicUtils.getParams(this.params, "onScroll"))
+        .onControllerAttached(DynamicUtils.getParams(this.params, "onControllerAttached"))
         .onWindowNew((event) => {
           let newWebViewController: web_webview.WebviewController = new web_webview.WebviewController();
           let dialogController: CustomDialogController = new CustomDialogController({
@@ -66,16 +67,6 @@ export struct OhosWebView {
         .onAlert(DynamicUtils.getParams(this.params, "onJsAlert"))
         .onConfirm(DynamicUtils.getParams(this.params, "onJsConfirm"))
         .onPrompt(DynamicUtils.getParams(this.params, "onJsPrompt"))
-        .onControllerAttached(() => {
-          let onControllerAttached: () => void = DynamicUtils.getParams(this.params, "onControllerAttached")
-          if(onControllerAttached) {
-            onControllerAttached()
-          }
-          let agent: string = DynamicUtils.getParams(this.params, "userAgentString")
-          if (agent) {
-            this.controller.setCustomUserAgent(agent)
-          }
-        })
     }
   }
 }

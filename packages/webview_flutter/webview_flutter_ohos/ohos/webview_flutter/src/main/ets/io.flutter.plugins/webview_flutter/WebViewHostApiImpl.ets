@@ -545,8 +545,8 @@ class WebSettingsImpl implements WebSettings {
     DynamicUtils.setParams(this.params, "javaScriptAccess", flag);
   }
 
-  setUserAgentString(userAgentString: string) {
-    DynamicUtils.setParams(this.params, "userAgentString", userAgentString);
+  async setUserAgentString(userAgentString: string) {
+    await this.webView.waitControllerAttached();
     this.webView.getController().setCustomUserAgent(userAgentString);
   }
 
