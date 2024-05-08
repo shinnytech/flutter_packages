@@ -42,3 +42,10 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+pubspec.lock
+GeneratedPluginRegistrant*
+ohos/**/oh_modules
+ohos/**.har
+ohos/**/BuildProfile.ets
+ohos/**/oh-package-lock.json5
