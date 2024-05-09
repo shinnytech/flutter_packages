@@ -564,7 +564,9 @@ class WebSettingsImpl implements WebSettings {
   setTextZoom(textZoom: number) {
     DynamicUtils.setParams(this.params, "textZoomRatio", textZoom);
   }
-  getUserAgentString(): string {
+
+  async getUserAgentString(): Promise<string> {
+    await this.webView.waitControllerAttached();
     return this.webView.getController().getCustomUserAgent();
   }
 }
