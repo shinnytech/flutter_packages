@@ -1,18 +1,17 @@
 /node_modules
 /oh_modules
-/.preview
-/build
-/.cxx
-/.test
 /local.properties
 /.idea
 **/build
 /.hvigor
+.cxx
 /.clangd
 /.clang-format
 /.clang-tidy
+**/.test
 
-*.har
-**/BuildProfile.ets
+/entry/libs/arm64-v8a/libflutter.so
+/entry/src/main/resources/rawfile/flutter_assets
+**.har
 **/oh-package-lock.json5
-**/src/main/resources/rawfile/flutter_assets/
+BuildProfile.ets

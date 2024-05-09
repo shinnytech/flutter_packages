@@ -14,22 +14,30 @@
 */
 
 {
-  "app": {
-    "signingConfigs": [],
-    "products": [
-      {
-        "name": "default",
-        "signingConfig": "default",
-        "compileSdkVersion": "4.1.0(11)",
-        "compatibleSdkVersion": "4.1.0(11)",
-        "runtimeOS": "HarmonyOS",
-      }
-    ]
+  "apiType": "stageMode",
+  "buildOption": {
   },
-  "modules": [
+  "buildOptionSet": [
     {
-      "name": "VideoPlayerOhos",
-      "srcPath": "./VideoPlayerOhos"
+      "name": "release",
+      "arkOptions": {
+        "obfuscation": {
+          "ruleOptions": {
+            "enable": true,
+            "files": [
+              "./obfuscation-rules.txt"
+            ]
+          },
+          "consumerFiles": [
+            "./consumer-rules.txt"
+          ]
+        }
+      },
     },
+  ],
+  "targets": [
+    {
+      "name": "default"
+    }
   ]
 }

@@ -42,3 +42,10 @@ app.*.map.json
 
 # Exceptions to above rules.
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
+
+pubspec.lock
+GeneratedPluginRegistrant*
+ohos/**/oh_modules
+ohos/**.har
+ohos/**/BuildProfile.ets
+ohos/**/oh-package-lock.json5
