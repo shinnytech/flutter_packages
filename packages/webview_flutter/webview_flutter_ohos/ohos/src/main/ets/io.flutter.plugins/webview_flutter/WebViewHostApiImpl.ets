@@ -310,6 +310,9 @@ export class WebViewPlatformView extends PlatformView {
 
   private onLoadIntercept = (event: ESObject) => {
     Log.i(TAG, "onLoadIntercept event = " + JSON.stringify(event))
+    if(event.data.getRequestUrl() == 'loaded:///'){
+      return true;
+    }
     if (this.webViewClint) {
       return this.webViewClint.shouldOverrideUrlLoading(this, event.data);
     }
