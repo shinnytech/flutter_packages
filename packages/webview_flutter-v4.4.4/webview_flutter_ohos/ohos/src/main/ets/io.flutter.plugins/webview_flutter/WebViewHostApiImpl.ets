@@ -532,7 +532,8 @@ class WebSettingsImpl implements WebSettings {
     DynamicUtils.setParams(this.params, "javaScriptAccess", flag);
   }
 
-  setUserAgentString(userAgentString: string) {
+  async setUserAgentString(userAgentString: string) {
+    await this.webView.waitControllerAttached();
     this.webView.getController().setCustomUserAgent(userAgentString);
   }
 
@@ -567,7 +568,9 @@ class WebSettingsImpl implements WebSettings {
   setTextZoom(textZoom: number) {
     DynamicUtils.setParams(this.params, "textZoomRatio", textZoom);
   }
-  getUserAgentString(): string {
+
+  async getUserAgentString(): Promise<string> {
+    await this.webView.waitControllerAttached();
     return this.webView.getController().getCustomUserAgent();
   }
 }

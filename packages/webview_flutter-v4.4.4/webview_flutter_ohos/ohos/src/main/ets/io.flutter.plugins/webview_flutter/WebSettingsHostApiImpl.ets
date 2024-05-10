@@ -44,7 +44,7 @@ export interface WebSettings {
 
   setTextZoom(textZoom: number) : void;
 
-  getUserAgentString(): string
+  getUserAgentString(): Promise<string>
 }
 
 export class WebSettingsCreator {
@@ -135,7 +135,7 @@ export class WebSettingsHostApiImpl extends WebSettingsHostApi {
     webSettings.setTextZoom(textZoom);
   }
 
-  getUserAgentString(instanceId: number): string {
+  getUserAgentString(instanceId: number): Promise<string> {
     const webSettings:WebSettings = this.instanceManager.getInstance(instanceId);
     return webSettings.getUserAgentString();
   }
