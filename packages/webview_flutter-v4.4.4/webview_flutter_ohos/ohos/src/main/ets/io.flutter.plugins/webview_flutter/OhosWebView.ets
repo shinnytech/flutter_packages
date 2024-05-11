@@ -30,6 +30,7 @@ export struct OhosWebView {
           src: DynamicUtils.getParams(this.params, "src"),
           controller: this.controller
         })
+        .backgroundColor(DynamicUtils.getParams(this.params, "backgroundColor"))
         .onDownloadStart(DynamicUtils.getParams(this.params, "onDownloadStart"))
         .onPageBegin(DynamicUtils.getParams(this.params, "onPageBegin"))
         .onPageEnd(DynamicUtils.getParams(this.params, "onPageEnd"))
