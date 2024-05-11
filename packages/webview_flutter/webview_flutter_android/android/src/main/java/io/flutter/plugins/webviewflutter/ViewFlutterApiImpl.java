@@ -4,45 +4,44 @@
 
 package io.flutter.plugins.webviewflutter;
 
-import android.webkit.WebView;
+import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 import io.flutter.plugin.common.BinaryMessenger;
-import io.flutter.plugins.webviewflutter.GeneratedAndroidWebView.WebViewFlutterApi;
-import java.util.Objects;
+import io.flutter.plugins.webviewflutter.GeneratedAndroidWebView.ViewFlutterApi;
 
 /**
- * Flutter API implementation for `WebView`.
+ * Flutter API implementation for `View`.
  *
  * <p>This class may handle adding native instances that are attached to a Dart instance or passing
  * arguments of callbacks methods to a Dart instance.
  */
-public class WebViewFlutterApiImpl {
+public class ViewFlutterApiImpl {
   // To ease adding additional methods, this value is added prematurely.
   @SuppressWarnings({"unused", "FieldCanBeLocal"})
   private final BinaryMessenger binaryMessenger;
 
   private final InstanceManager instanceManager;
-  private WebViewFlutterApi api;
+  private ViewFlutterApi api;
 
   /**
-   * Constructs a {@link WebViewFlutterApiImpl}.
+   * Constructs a {@link ViewFlutterApiImpl}.
    *
    * @param binaryMessenger used to communicate with Dart over asynchronous messages
    * @param instanceManager maintains instances stored to communicate with attached Dart objects
    */
-  public WebViewFlutterApiImpl(
+  public ViewFlutterApiImpl(
       @NonNull BinaryMessenger binaryMessenger, @NonNull InstanceManager instanceManager) {
     this.binaryMessenger = binaryMessenger;
     this.instanceManager = instanceManager;
-    api = new WebViewFlutterApi(binaryMessenger);
+    api = new ViewFlutterApi(binaryMessenger);
   }
 
   /**
-   * Stores the `WebView` instance and notifies Dart to create and store a new `WebView` instance
-   * that is attached to this one. If `instance` has already been added, this method does nothing.
+   * Stores the `View` instance and notifies Dart to create and store a new `View` instance that is
+   * attached to this one. If `instance` has already been added, this method does nothing.
    */
-  public void create(@NonNull WebView instance, @NonNull WebViewFlutterApi.Reply<Void> callback) {
+  public void create(@NonNull View instance, @NonNull ViewFlutterApi.Reply<Void> callback) {
     if (!instanceManager.containsInstance(instance)) {
       api.create(instanceManager.addHostCreatedInstance(instance), callback);
     }
@@ -54,23 +53,7 @@ public class WebViewFlutterApiImpl {
    * <p>This is only visible for testing.
    */
   @VisibleForTesting
-  void setApi(@NonNull WebViewFlutterApi api) {
+  void setApi(@NonNull ViewFlutterApi api) {
     this.api = api;
-  }
-
-  public void onScrollChanged(
-      @NonNull WebView instance,
-      @NonNull Long left,
-      @NonNull Long top,
-      @NonNull Long oldLeft,
-      @NonNull Long oldTop,
-      @NonNull WebViewFlutterApi.Reply<Void> callback) {
-    api.onScrollChanged(
-        Objects.requireNonNull(instanceManager.getIdentifierForStrongReference(instance)),
-        left,
-        top,
-        oldLeft,
-        oldTop,
-        callback);
   }
 }
