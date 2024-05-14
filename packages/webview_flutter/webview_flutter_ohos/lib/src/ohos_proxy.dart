@@ -36,7 +36,9 @@ class OhosWebViewProxy {
   });
 
   /// Constructs a [ohos_webview.WebView].
-  final ohos_webview.WebView Function() createOhosWebView;
+  final ohos_webview.WebView Function({
+    void Function(int left, int top, int oldLeft, int oldTop)? onScrollChanged,
+  }) createOhosWebView;
 
   /// Constructs a [ohos_webview.WebChromeClient].
   final ohos_webview.WebChromeClient Function({
@@ -55,6 +57,15 @@ class OhosWebViewProxy {
         onGeolocationPermissionsShowPrompt,
     void Function(ohos_webview.WebChromeClient instance)?
         onGeolocationPermissionsHidePrompt,
+    void Function(ohos_webview.WebChromeClient instance,
+            ohos_webview.ConsoleMessage message)?
+        onConsoleMessage,
+    void Function(
+            ohos_webview.WebChromeClient instance,
+            ohos_webview.View view,
+            ohos_webview.CustomViewCallback callback)?
+        onShowCustomView,
+    void Function(ohos_webview.WebChromeClient instance)? onHideCustomView,
     Future<void> Function(String url, String message)? onJsAlert,
     Future<bool> Function(String url, String message)? onJsConfirm,
     Future<String> Function(String url, String message, String defaultValue)?
@@ -84,6 +95,12 @@ class OhosWebViewProxy {
     void Function(ohos_webview.WebView webView, String url)? urlLoading,
     void Function(ohos_webview.WebView webView, String url, bool isReload)?
         doUpdateVisitedHistory,
+    void Function(
+      ohos_webview.WebView webView,
+      ohos_webview.HttpAuthHandler handler,
+      String host,
+      String realm,
+    )? onReceivedHttpAuthRequest,
   }) createOhosWebViewClient;
 
   /// Constructs a [ohos_webview.FlutterAssetManager].

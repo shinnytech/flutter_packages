@@ -39,10 +39,6 @@ dependency_overrides:
   webview_flutter_platform_interface:
     path: ../../webview_flutter_platform_interface
 
-dependency_overrides:
-  path_provider_ohos:
-    path: ../../../path_provider/path_provider_ohos
-
 dev_dependencies:
   espresso: ^0.2.0
   flutter_test:

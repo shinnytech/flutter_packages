@@ -1097,6 +1097,24 @@ export class WebViewFlutterApi {
       (channelReply: ESObject) => callback.reply(null)
     );
   }
+
+  onScrollChanged(
+    webViewInstanceIdArg: number,
+    leftArg: number,
+    topArg: number,
+    oldLeftArg: number,
+    oldTopArg: number,
+    callback: Reply<void>,
+  ) {
+    const channel: BasicMessageChannel<ESObject> = new BasicMessageChannel<ESObject>(
+        this.binaryMessenger,
+        "dev.flutter.pigeon.webview_flutter_android.WebViewFlutterApi.onScrollChanged",
+        WebViewFlutterApi.getCodec());
+    channel.send(
+      [webViewInstanceIdArg, leftArg, topArg, oldLeftArg, oldTopArg],
+      (channelReply: ESObject) => callback.reply(null)
+    );
+  }
 }
 
 export enum ConsoleMessageLevel {
@@ -1260,7 +1278,7 @@ class WebChromeClientFlutterApiCodec extends StandardMessageCodec {
 }
 
 export abstract class WebChromeClientFlutterApi {
-  private binaryMessenger: BinaryMessenger;
+  protected binaryMessenger: BinaryMessenger;
 
   constructor(binaryMessenger: BinaryMessenger) {
     this.binaryMessenger = binaryMessenger;
@@ -1319,6 +1337,38 @@ export abstract class WebChromeClientFlutterApi {
     )
     channel.send(
       [instanceIdArg, requestInstanceIdArg],
+      (channelReply: ESObject) => callback.reply(null)
+    );
+  }
+
+  onShowCustomView(
+    instanceIdArg: number,
+    viewIdentifierArg: number,
+    callbackIdentifierArg: number,
+    callback: Reply<void>
+  ) {
+    const channel: BasicMessageChannel<ESObject> = new BasicMessageChannel<ESObject>(
+      this.binaryMessenger,
+      "dev.flutter.pigeon.webview_flutter_ohos.WebChromeClientFlutterApi.onShowCustomView",
+      WebChromeClientFlutterApi.getCodec()
+    )
+    channel.send(
+      [instanceIdArg, viewIdentifierArg, callbackIdentifierArg],
+      (channelReply: ESObject) => callback.reply(null)
+    );
+  }
+
+  onHideCustomView(
+    instanceIdArg: number,
+    callback: Reply<void>
+  ) {
+    const channel: BasicMessageChannel<ESObject> = new BasicMessageChannel<ESObject>(
+      this.binaryMessenger,
+      "dev.flutter.pigeon.webview_flutter_ohos.WebChromeClientFlutterApi.onHideCustomView",
+      WebChromeClientFlutterApi.getCodec()
+    )
+    channel.send(
+      [instanceIdArg],
       (channelReply: ESObject) => callback.reply(null)
     );
   }
@@ -1436,6 +1486,8 @@ export abstract class WebChromeClientHostApi {
 
   abstract setSynchronousReturnValueForOnShowFileChooser(instanceId: number, value: boolean): void;
 
+  abstract setSynchronousReturnValueForOnConsoleMessage(instanceId: number, value: boolean): void;
+
   abstract setSynchronousReturnValueForOnJsAlert(instanceId: number, value: boolean): void;
 
   abstract setSynchronousReturnValueForOnJsConfirm(instanceId: number, value: boolean): void;
@@ -1492,6 +1544,38 @@ export abstract class WebChromeClientHostApi {
               const valueArg: boolean = args[1];
               try {
                 api.setSynchronousReturnValueForOnShowFileChooser(
+                  instanceIdArg, valueArg
+                );
+                wrapped.insert(null, 0);
+              } catch (err) {
+                const wrappedError: ArrayList<ESObject> = GeneratedOhosWebView.wrapError(err);
+                wrapped = wrappedError;
+              }
+              reply.reply(wrapped.convertToArray());
+            }
+          }
+        );
+      } else {
+        channel.setMessageHandler(null);
+      }
+    }
+    {
+      const channel: BasicMessageChannel<ESObject> =
+      new BasicMessageChannel<ESObject>(
+        binaryMessenger,
+        "dev.flutter.pigeon.webview_flutter_ohos.WebChromeClientHostApi.setSynchronousReturnValueForOnConsoleMessage",
+        WebChromeClientHostApi.getCodec()
+      );
+      if (api != null) {
+        channel.setMessageHandler(
+          {
+            onMessage: (message: ESObject, reply: Reply<ESObject>) => {
+              let wrapped: ArrayList<ESObject> = new ArrayList<ESObject>();
+              const args: Array<ESObject> = message;
+              const instanceIdArg: number = args[0];
+              const valueArg: boolean = args[1];
+              try {
+                api.setSynchronousReturnValueForOnConsoleMessage(
                   instanceIdArg, valueArg
                 );
                 wrapped.insert(null, 0);
@@ -1954,7 +2038,7 @@ class WebViewClientFlutterApiCodec extends StandardMessageCodec {
 }
 
 export abstract class WebViewClientFlutterApi {
-  private binaryMessenger: BinaryMessenger;
+  protected binaryMessenger: BinaryMessenger;
 
   constructor(argBinaryMessenger: BinaryMessenger) {
     this.binaryMessenger = argBinaryMessenger;
@@ -2050,6 +2134,25 @@ export abstract class WebViewClientFlutterApi {
       (channelReply: ESObject) => callback.reply(null)
     );
   }
+
+  onReceivedHttpAuthRequest(
+    instanceIdArg: number,
+    webViewInstanceIdArg: number,
+    httpAuthHandlerInstanceIdArg: number,
+    hostArg: string,
+    realmArg: string,
+    callback: Reply<void>
+  ) {
+    const channel: BasicMessageChannel<ESObject> = new BasicMessageChannel<ESObject>(
+      this.binaryMessenger,
+      "dev.flutter.pigeon.webview_flutter_ohos.WebViewClientFlutterApi.onReceivedHttpAuthRequest",
+      WebViewClientFlutterApi.getCodec()
+    );
+    channel.send(
+      [instanceIdArg, webViewInstanceIdArg, httpAuthHandlerInstanceIdArg, hostArg, realmArg],
+      (channelReply: ESObject) => callback.reply(null)
+    );
+  }
 }
 
 export abstract class WebSettingsHostApi {
@@ -2082,6 +2185,8 @@ export abstract class WebSettingsHostApi {
   abstract setAllowFileAccess(instanceId: number, enabled: boolean): void;
 
   abstract setTextZoom(instanceId: number, textZoom: number): void;
+
+  abstract getUserAgentString(instanceId: number): string;
 
   static getCodec(): MessageCodec<ESObject> {
     return new StandardMessageCodec();
@@ -2565,6 +2670,35 @@ export abstract class WebSettingsHostApi {
         channel.setMessageHandler(null);
       }
     }
+    {
+      const channel: BasicMessageChannel<ESObject> =
+      new BasicMessageChannel<ESObject>(
+        binaryMessenger,
+        "dev.flutter.pigeon.webview_flutter_ohos.WebSettingsHostApi.getUserAgentString",
+        WebSettingsHostApi.getCodec()
+      );
+      if (api != null) {
+        channel.setMessageHandler(
+          {
+            onMessage: (message: ESObject, reply: Reply<ESObject>) => {
+              let wrapped: ArrayList<ESObject> = new ArrayList<ESObject>();
+              const args: Array<ESObject> = message;
+              const instanceIdArg: number = args[0];
+              try {
+                let output = api.getUserAgentString(instanceIdArg);
+                wrapped.insert(output, 0);
+              } catch (err) {
+                const wrappedError: ArrayList<ESObject> = GeneratedOhosWebView.wrapError(err);
+                wrapped = wrappedError;
+              }
+              reply.reply(wrapped.convertToArray());
+            }
+          }
+        );
+      } else {
+        channel.setMessageHandler(null);
+      }
+    }
   }
 }
 
@@ -2703,6 +2837,126 @@ export class GeolocationPermissionsCallbackFlutterApi {
     );
 
   }
+}
+
+export abstract class HttpAuthHandlerHostApi {
+  abstract useHttpAuthUsernamePassword(instanceId: number): boolean;
+
+  abstract cancel(instanceId: number): void;
+
+  abstract proceed(instanceId: number, username: string, password: string): void;
+
+  static getCodec(): MessageCodec<ESObject> {
+    return new StandardMessageCodec();
+  }
+
+  static setup(binaryMessenger: BinaryMessenger, api: HttpAuthHandlerHostApi) {
+    {
+      const channel: BasicMessageChannel<ESObject> = new BasicMessageChannel<ESObject>(
+        binaryMessenger,
+        "dev.flutter.pigeon.webview_flutter_ohos.HttpAuthHandlerHostApi.useHttpAuthUsernamePassword",
+        HttpAuthHandlerHostApi.getCodec()
+      );
+      if (api != null) {
+        channel.setMessageHandler(
+          new MessageHandlerBuilder((message: ESObject, reply: Reply<ESObject>) => {
+            let wrapped: ArrayList<ESObject> = new ArrayList<ESObject>();
+            const args: Array<ESObject> = message;
+            const instanceIdentifierArg: number = args[0];
+            try {
+              let output: boolean = api.useHttpAuthUsernamePassword(instanceIdentifierArg);
+              wrapped.insert(output, 0);
+            } catch (err) {
+              const wrappedError: ArrayList<ESObject> = GeneratedOhosWebView.wrapError(err);
+              wrapped = wrappedError;
+            }
+            reply.reply(wrapped.convertToArray());
+          })
+        )
+      } else {
+        channel.setMessageHandler(null);
+      }
+    }
+    {
+      const channel: BasicMessageChannel<ESObject> = new BasicMessageChannel<ESObject>(
+        binaryMessenger,
+        "dev.flutter.pigeon.webview_flutter_ohos.HttpAuthHandlerHostApi.cancel",
+        HttpAuthHandlerHostApi.getCodec()
+      );
+      if (api != null) {
+        channel.setMessageHandler(
+          new MessageHandlerBuilder((message: ESObject, reply: Reply<ESObject>) => {
+            let wrapped: ArrayList<ESObject> = new ArrayList<ESObject>();
+            const args: Array<ESObject> = message;
+            const instanceIdentifierArg: number = args[0];
+            try {
+              api.cancel(instanceIdentifierArg);
+              wrapped.insert(null, 0);
+            } catch (err) {
+              const wrappedError: ArrayList<ESObject> = GeneratedOhosWebView.wrapError(err);
+              wrapped = wrappedError;
+            }
+            reply.reply(wrapped.convertToArray());
+          })
+        )
+      } else {
+        channel.setMessageHandler(null);
+      }
+    }
+    {
+      const channel: BasicMessageChannel<ESObject> = new BasicMessageChannel<ESObject>(
+        binaryMessenger,
+        "dev.flutter.pigeon.webview_flutter_ohos.HttpAuthHandlerHostApi.proceed",
+        HttpAuthHandlerHostApi.getCodec()
+      );
+      if (api != null) {
+        channel.setMessageHandler(
+          new MessageHandlerBuilder((message: ESObject, reply: Reply<ESObject>) => {
+            let wrapped: ArrayList<ESObject> = new ArrayList<ESObject>();
+            const args: Array<ESObject> = message;
+            const instanceIdentifierArg: number = args[0] as number;
+            const usernameArg: string = args[1] as string;
+            const passwordArg: string = args[2] as string;
+            try {
+              api.proceed(instanceIdentifierArg, usernameArg, passwordArg);
+              wrapped.insert(null, 0);
+            } catch (err) {
+              const wrappedError: ArrayList<ESObject> = GeneratedOhosWebView.wrapError(err);
+              wrapped = wrappedError;
+            }
+            reply.reply(wrapped.convertToArray());
+          })
+        )
+      } else {
+        channel.setMessageHandler(null);
+      }
+    }
+  }
+}
+
+export class HttpAuthHandlerFlutterApi {
+  private binaryMessenger: BinaryMessenger;
+
+  constructor(binaryMessenger: BinaryMessenger) {
+    this.binaryMessenger = binaryMessenger;
+  }
+
+  static getCodec(): MessageCodec<ESObject> {
+    return new StandardMessageCodec();
+  }
+
+  create(instanceIdArg: number, callback: Reply<void>): void {
+    const channel: BasicMessageChannel<ESObject> = new BasicMessageChannel<ESObject>(
+      this.binaryMessenger,
+      "dev.flutter.pigeon.webview_flutter_ohos.HttpAuthHandlerFlutterApi.create",
+      HttpAuthHandlerHostApi.getCodec()
+    );
+    channel.send(
+      [instanceIdArg],
+      (channelReply: ESObject) => callback.reply(null)
+    );
+  }
+
 }
 
 export abstract class CookieManagerHostApi {
@@ -2867,6 +3121,105 @@ export class PermissionRequestFlutterApi {
       (channelReply: ESObject) => callback.reply(null)
     );
 
+  }
+}
+
+export abstract class CustomViewCallbackHostApi {
+  abstract onCustomViewHidden(identifier: number): void;
+
+  static getCodec(): MessageCodec<ESObject> {
+    return new StandardMessageCodec();
+  }
+
+  static setup(binaryMessenger: BinaryMessenger, api: CustomViewCallbackHostApi) {
+    {
+      const channel: BasicMessageChannel<ESObject> = new BasicMessageChannel<ESObject>(
+        binaryMessenger,
+        "dev.flutter.pigeon.webview_flutter_ohos.CustomViewCallbackHostApi.onCustomViewHidden",
+        CustomViewCallbackHostApi.getCodec()
+      );
+      if (api != null) {
+        channel.setMessageHandler(
+          new MessageHandlerBuilder((message: ESObject, reply: Reply<ESObject>) => {
+            let wrapped: ArrayList<ESObject> = new ArrayList<ESObject>();
+            const args: Array<ESObject> = message;
+            const instanceIdArg: number = args[0];
+            const resourcesArg: string[] = args[1];
+            try {
+              api.onCustomViewHidden(instanceIdArg);
+              wrapped.insert(null, 0);
+            } catch (err) {
+              const wrappedError: ArrayList<ESObject> = GeneratedOhosWebView.wrapError(err);
+              wrapped = wrappedError;
+            }
+            reply.reply(wrapped.convertToArray());
+          })
+        )
+      }
+      else {
+        channel.setMessageHandler(null);
+      }
+    }
+  }
+}
+
+export interface HttpAuthHandler {
+  cancel(): void;
+
+  proceed(username: string, password: string): void;
+
+  useHttpAuthUsernamePassword(): boolean;
+}
+
+export interface CustomViewCallback {
+  onCustomViewHidden(): void;
+}
+
+export class CustomViewCallbackFlutterApi {
+  binaryMessenger: BinaryMessenger;
+
+  constructor(binaryMessenger: BinaryMessenger) {
+    this.binaryMessenger = binaryMessenger;
+  }
+
+  static getCodec(): MessageCodec<ESObject> {
+    return new StandardMessageCodec();
+  }
+
+  create(identifierArg: number, callback: Reply<void>) {
+    const channel: BasicMessageChannel<ESObject> = new BasicMessageChannel<ESObject>(
+      this.binaryMessenger,
+      "dev.flutter.pigeon.webview_flutter_ohos.CustomViewCallbackFlutterApi.create",
+      CustomViewCallbackFlutterApi.getCodec()
+    );
+    channel.send(
+      [identifierArg],
+      (channelReply: ESObject) => callback.reply(null)
+    );
+  }
+}
+
+export class ViewFlutterApi {
+  binaryMessenger: BinaryMessenger;
+
+  constructor(binaryMessenger: BinaryMessenger) {
+    this.binaryMessenger = binaryMessenger;
+  }
+
+  static getCodec(): MessageCodec<ESObject> {
+    return new StandardMessageCodec();
+  }
+
+  create(identifierArg: number, callback: Reply<void>) {
+    const channel: BasicMessageChannel<ESObject> = new BasicMessageChannel<ESObject>(
+      this.binaryMessenger,
+      "dev.flutter.pigeon.webview_flutter_ohos.ViewFlutterApi.create",
+      ViewFlutterApi.getCodec()
+    );
+    channel.send(
+      [identifierArg],
+      (channelReply: ESObject) => callback.reply(null)
+    );
   }
 }
 
@@ -3137,7 +3490,7 @@ export abstract class JavaScriptChannelHostApi {
   abstract create(instanceId: number, channelName: string);
 
   static getCodec(): MessageCodec<ESObject> {
-    return new StandardMessageCodec();
+    return WebChromeClientFlutterApiCodec.INSTANCE;
   }
 
   static setup(binaryMessenger: BinaryMessenger, api: JavaScriptChannelHostApi) {

@@ -13,7 +13,7 @@
 * limitations under the License.
 */
 
-import { Reply, WebViewClientHostApi } from './GeneratedOhosWebView';
+import { Reply, WebViewClientHostApi, HttpAuthHandler } from './GeneratedOhosWebView';
 import { InstanceManager } from './InstanceManager';
 import { WebViewClientFlutterApiImpl } from './WebViewClientFlutterApiImpl';
 import { WebViewPlatformView } from './WebViewHostApiImpl';
@@ -28,6 +28,13 @@ export interface WebViewClient {
   shouldOverrideUrlLoading(view: WebViewPlatformView, request: WebResourceRequest): boolean;
 
   doUpdateVisitedHistory(view: WebViewPlatformView, url: string, isReload: boolean): void;
+  
+  onReceivedHttpAuthRequest(
+    view: WebViewPlatformView,
+    handler: HttpAuthHandler,
+    host: string,
+    realm: string
+  ): void;
 }
 
 export class WebViewClientImpl implements WebViewClient {
@@ -65,6 +72,14 @@ export class WebViewClientImpl implements WebViewClient {
   doUpdateVisitedHistory(view: WebViewPlatformView, url: string, isReload: boolean) {
     this.flutterApi.doUpdateVisitedHistoryImpl(this, view, url, isReload, this.emptyReply);
   }
+
+  onReceivedHttpAuthRequest(
+    view: WebViewPlatformView,
+    handler: HttpAuthHandler,
+    host: string,
+    realm: string) {
+  this.flutterApi.onReceivedHttpAuthRequestImpl(this, view, handler, host, realm, this.emptyReply);
+}
 
   setReturnValueForShouldOverrideUrlLoading(value: boolean) {
     this.returnValueForShouldOverrideUrlLoading = value;

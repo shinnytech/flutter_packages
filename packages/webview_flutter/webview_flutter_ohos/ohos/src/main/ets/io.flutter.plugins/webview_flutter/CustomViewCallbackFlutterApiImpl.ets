@@ -14,44 +14,27 @@
 */
 
 import { BinaryMessenger } from '@ohos/flutter_ohos/src/main/ets/plugin/common/BinaryMessenger';
-import { Reply, WebViewFlutterApi, WebViewHostApi } from './GeneratedOhosWebView';
-import { InstanceManager } from './InstanceManager';
-import { WebViewPlatformView } from './WebViewHostApiImpl';
+import { CustomViewCallback, CustomViewCallbackFlutterApi, Reply } from './GeneratedOhosWebView';
+import { InstanceManager } from './InstanceManager'
 
-export class WebViewFlutterApiImpl {
-  private binaryMessenger: BinaryMessenger;
-  private instanceManager: InstanceManager;
-  private api: WebViewFlutterApi;
+export class CustomViewCallbackFlutterApiImpl {
+  binaryMessenger: BinaryMessenger;
+  instanceManager: InstanceManager;
+  api: CustomViewCallbackFlutterApi;
 
   constructor(binaryMessenger: BinaryMessenger, instanceManager: InstanceManager) {
     this.binaryMessenger = binaryMessenger;
     this.instanceManager = instanceManager;
-    this.api = new WebViewFlutterApi(binaryMessenger);
+    this.api = new CustomViewCallbackFlutterApi(binaryMessenger);
   }
 
-  create(instance: WebViewPlatformView, callback: Reply<void>): void {
+  create(instance: CustomViewCallback, callback: Reply<void>) {
     if (!this.instanceManager.containsInstance(instance)) {
       this.api.create(this.instanceManager.addHostCreatedInstance(instance), callback);
     }
   }
 
-  setApi(api: WebViewFlutterApi): void {
+  setApi(api: CustomViewCallbackFlutterApi) {
     this.api = api;
-  }
-
-  onScrollChanged(
-    instance: WebViewHostApi,
-    left: number,
-    top: number,
-    oldLeft: number,
-    oldTop: number,
-    callback: Reply<void>): void {
-    this.api.onScrollChanged(
-        this.instanceManager.getIdentifier(instance),
-        left,
-        top,
-        oldLeft,
-        oldTop,
-        callback);
   }
 }
