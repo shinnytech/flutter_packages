@@ -45,6 +45,8 @@ export interface WebSettings {
   setAllowFileAccess(enabled: boolean): void;
 
   setTextZoom(textZoom: number): void;
+
+  getUserAgentString(): string;
 }
 
 export class WebSettingsCreator {
@@ -137,5 +139,10 @@ export class WebSettingsHostApiImpl extends WebSettingsHostApi {
   setTextZoom(instanceId: number, textZoom: number) {
     const webSettings:WebSettings = this.instanceManager.getInstance(instanceId);
     webSettings.setTextZoom(textZoom);
+  }
+
+  getUserAgentString(instanceId: number): string {
+    const webSettings:WebSettings = this.instanceManager.getInstance(instanceId);
+    return webSettings.getUserAgentString();
   }
 }

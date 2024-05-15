@@ -4,6 +4,7 @@
 
 import 'common/instance_manager.dart';
 import 'foundation/foundation.dart';
+import 'ui_kit/ui_kit.dart';
 import 'web_kit/web_kit.dart';
 
 // This convenience method was added because Dart doesn't support constant
@@ -29,6 +30,7 @@ class WebKitProxy {
     this.defaultWebsiteDataStore = _defaultWebsiteDataStore,
     this.createNavigationDelegate = WKNavigationDelegate.new,
     this.createUIDelegate = WKUIDelegate.new,
+    this.createUIScrollViewDelegate = UIScrollViewDelegate.new,
   });
 
   /// Constructs a [WKWebView].
@@ -71,6 +73,14 @@ class WebKitProxy {
     void Function(WKWebView webView, NSError error)?
         didFailProvisionalNavigation,
     void Function(WKWebView webView)? webViewWebContentProcessDidTerminate,
+    void Function(
+      WKWebView webView,
+      NSUrlAuthenticationChallenge challenge,
+      void Function(
+        NSUrlSessionAuthChallengeDisposition disposition,
+        NSUrlCredential? credential,
+      ) completionHandler,
+    )? didReceiveAuthenticationChallenge,
   }) createNavigationDelegate;
 
   /// Constructs a [WKUIDelegate].
@@ -102,4 +112,13 @@ class WebKitProxy {
     )? runJavaScriptTextInputDialog,
     InstanceManager? instanceManager,
   }) createUIDelegate;
+
+  /// Constructs a [UIScrollViewDelegate].
+  final UIScrollViewDelegate Function({
+    void Function(
+      UIScrollView scrollView,
+      double x,
+      double y,
+    )? scrollViewDidScroll,
+  }) createUIScrollViewDelegate;
 }

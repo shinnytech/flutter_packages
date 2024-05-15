@@ -42,6 +42,7 @@ export struct OhosWebView {
         .onGeolocationHide(DynamicUtils.getParams(this.params, "onGeolocationHide"))
         .onShowFileSelector(DynamicUtils.getParams(this.params, "onShowFileSelector"))
         .onPermissionRequest(DynamicUtils.getParams(this.params, "onPermissionRequest"))
+        .onConsole(DynamicUtils.getParams(this.params, "onConsoleMessage"))
         // .onWindowNew(DynamicUtils.getParams(this.params, "onWindowNew"))
         .onWindowExit(DynamicUtils.getParams(this.params, "onWindowExit"))
         .domStorageAccess(DynamicUtils.getParams(this.params, "domStorageAccess"))
@@ -56,7 +57,7 @@ export struct OhosWebView {
         .textZoomRatio(DynamicUtils.getParams(this.params, "textZoomRatio"))
         .onScroll(DynamicUtils.getParams(this.params, "onScroll"))
         .onControllerAttached(DynamicUtils.getParams(this.params, "onControllerAttached"))
-        .onWindowNew((event) => {
+        .onWindowNew((event: ESObject) => {
           let newWebViewController: web_webview.WebviewController = new web_webview.WebviewController();
           let dialogController: CustomDialogController = new CustomDialogController({
             builder: NewWebView({ webViewController: newWebViewController })
