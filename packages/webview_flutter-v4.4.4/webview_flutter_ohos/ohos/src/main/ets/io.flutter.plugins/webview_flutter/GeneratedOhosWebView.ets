@@ -3121,7 +3121,7 @@ export abstract class JavaScriptChannelHostApi {
               const channelNameArg: string = args[1];
               try {
                 api.create(instanceIdArg, channelNameArg);
-                wrapped.insert(0, null);
+                wrapped.insert(null, 0);
               } catch (err) {
                 const wrappedError: ArrayList<ESObject> = GeneratedOhosWebView.wrapError(err);
                 wrapped = wrappedError;
@@ -3163,7 +3163,7 @@ export abstract class OhosObjectHostApi {
               const identifierArg: number = args[0];
               try {
                 api.dispose(identifierArg);
-                wrapped.insert(0, null);
+                wrapped.insert(null, 0);
               } catch (err) {
                 const wrappedError: ArrayList<ESObject> = GeneratedOhosWebView.wrapError(err);
                 wrapped = wrappedError;
@@ -3241,7 +3241,7 @@ export abstract class InstanceManagerHostApi {
 
               try {
                 api.clear();
-                wrapped.insert(0, null);
+                wrapped.insert(null, 0);
               } catch (err) {
                 const wrappedError: ArrayList<ESObject> = GeneratedOhosWebView.wrapError(err);
                 wrapped = wrappedError;
