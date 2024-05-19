@@ -15,6 +15,7 @@
 
 import { BinaryMessenger } from '@ohos/flutter_ohos/src/main/ets/plugin/common/BinaryMessenger';
 import { CustomViewCallbackFlutterApiImpl } from './CustomViewCallbackFlutterApiImpl';
+import { DVModel } from '@ohos/flutter_ohos/src/main/ets/view/DynamicView/dynamicView';
 import { FileChooserParamsFlutterApiImpl } from './FileChooserParamsFlutterApiImpl';
 import GeneratedOhosWebView, {
   ConsoleMessageLevel,
@@ -142,7 +143,7 @@ export class WebChromeClientFlutterApiImpl extends WebChromeClientFlutterApi {
 
   onShowCustomViewImpl(
     instance: WebChromeClient,
-    view: View,
+    view: DVModel,
     customViewCallback: CustomViewCallback,
     callback: Reply<void>
   ) {
