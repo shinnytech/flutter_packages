@@ -20,7 +20,7 @@ import { OhosWebView } from './OhosWebView';
 import { WebChromeClientFlutterApiImpl } from './WebChromeClientFlutterApiImpl';
 import { WebViewPlatformView } from './WebViewHostApiImpl'
 import { WebViewClient } from './WebViewClientHostApiImpl';
-import { BuilderParams, DVModelParameters } from '@ohos/flutter_ohos/src/main/ets/view/DynamicView/dynamicView'
+import { BuilderParams, DVModelParameters, DVModel } from '@ohos/flutter_ohos/src/main/ets/view/DynamicView/dynamicView'
 import web_webview from '@ohos.web.webview'
 
 const TAG: string = "WebChromeClientHostApiImpl";
@@ -160,7 +160,7 @@ class WebChromeClientImpl implements WebChromeClient {
     )
   }
 
-  onShowCustomView(view: View, callback: CustomViewCallback) {
+  onShowCustomView(view: DVModel, callback: CustomViewCallback) {
     this.flutterApi.onShowCustomViewImpl(this, view, callback, this.emptyReply);
   }
 
