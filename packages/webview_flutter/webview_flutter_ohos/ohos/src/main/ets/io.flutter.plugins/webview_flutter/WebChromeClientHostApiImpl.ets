@@ -14,13 +14,13 @@
 */
 
 import Log from '@ohos/flutter_ohos/src/main/ets/util/Log';
-import { Reply, WebChromeClientHostApi } from './GeneratedOhosWebView';
+import { Reply, WebChromeClientHostApi, CustomViewCallback, HttpAuthHandler } from './GeneratedOhosWebView';
 import { InstanceManager } from './InstanceManager';
 import { OhosWebView } from './OhosWebView';
 import { WebChromeClientFlutterApiImpl } from './WebChromeClientFlutterApiImpl';
 import { WebViewPlatformView } from './WebViewHostApiImpl'
 import { WebViewClient } from './WebViewClientHostApiImpl';
-import { BuilderParams, DVModelParameters } from '@ohos/flutter_ohos/src/main/ets/view/DynamicView/dynamicView'
+import { BuilderParams, DVModelParameters, DVModel } from '@ohos/flutter_ohos/src/main/ets/view/DynamicView/dynamicView'
 import web_webview from '@ohos.web.webview'
 
 const TAG: string = "WebChromeClientHostApiImpl";
@@ -77,6 +77,11 @@ export class WebChromeClientHostApiImpl extends WebChromeClientHostApi {
     webChromeClient.setReturnValueForOnShowFileChooser(value);
   }
 
+  setSynchronousReturnValueForOnConsoleMessage(instanceId: number, value: boolean) {
+    const webChromeClient: WebChromeClientImpl = this.instanceManager.getInstance(instanceId);
+    webChromeClient.setReturnValueForOnConsoleMessage(value);
+  }
+
   setSynchronousReturnValueForOnJsAlert(instanceId: number, value: boolean) {
     const webChromeClient: WebChromeClientImpl = this.instanceManager.getInstance(instanceId);
     webChromeClient.setReturnValueForOnJsAlert(value);
@@ -122,6 +127,7 @@ struct NewWebView {
 class WebChromeClientImpl implements WebChromeClient {
   private flutterApi: WebChromeClientFlutterApiImpl;
   private returnValueForOnShowFileChooser: boolean = false;
+  private returnValueForOnConsoleMessage: boolean = false;
 
   private returnValueForOnJsAlert : boolean = false;
   private returnValueForOnJsConfirm : boolean = false;
@@ -134,10 +140,6 @@ class WebChromeClientImpl implements WebChromeClient {
   private emptyReply: Reply<void> = {
     reply: (reply) => {
     }
-  }
-
-  onConsoleMessage(message: ConsoleMessage) {
-    Log.i(TAG, "onConsoleMessage");
   }
 
   onCreateWindow(webView: WebViewPlatformView, isDialog: boolean, isUserGesture: boolean, handler: ControllerHandler) {
@@ -156,6 +158,14 @@ class WebChromeClientImpl implements WebChromeClient {
     this.flutterApi.onProgressChangedImpl(
       this, view, progress, this.emptyReply
     )
+  }
+
+  onShowCustomView(view: DVModel, callback: CustomViewCallback) {
+    this.flutterApi.onShowCustomViewImpl(this, view, callback, this.emptyReply);
+  }
+
+  onHideCustomView() {
+    this.flutterApi.onHideCustomViewImpl(this, this.emptyReply);
   }
 
   onGeolocationPermissionsShowPrompt(origin: string, callback: JsGeolocation) {
@@ -186,8 +196,17 @@ class WebChromeClientImpl implements WebChromeClient {
     this.flutterApi.onPermissionRequestImpl(this, request, this.emptyReply);
   }
 
+  onConsoleMessage(consoleMessage: ConsoleMessage): boolean {
+    this.flutterApi.onConsoleMessageImpl(this, consoleMessage, this.emptyReply);
+    return this.returnValueForOnConsoleMessage;
+  }
+
   setReturnValueForOnShowFileChooser(value: boolean) {
     this.returnValueForOnShowFileChooser = value;
+  }
+
+  setReturnValueForOnConsoleMessage(value: boolean) {
+    this.returnValueForOnConsoleMessage = value;
   }
 
   setReturnValueForOnJsAlert(value: boolean) {
@@ -270,5 +289,15 @@ class newWindowWebViewClient implements WebViewClient {
   shouldOverrideUrlLoading(view: WebViewPlatformView, request: WebResourceRequest): boolean {
     view.getController().loadUrl(request.getRequestUrl());
     return true;
+  }
+
+  onReceivedHttpAuthRequest(
+    view: WebViewPlatformView,
+    handler: HttpAuthHandler,
+    host: string,
+    realm: string
+  ): void {
+    // todo
+    Log.i(TAG, "onReceivedHttpAuthRequest");
   }
 }

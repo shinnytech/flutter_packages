@@ -31,6 +31,7 @@ import { DownloadListener } from './DownloadListenerFlutterApiImpl'
 import { DisplayListenerProxy } from './DisplayListenerProxy'
 import { JavaScriptChannel } from './JavaScriptChannel'
 import Log from '@ohos/flutter_ohos/src/main/ets/util/Log';
+import { WebViewFlutterApiImpl } from './WebViewFlutterApiImpl.ets'
 
 const TAG: string = "WebViewHostApiImpl";
 
@@ -42,6 +43,8 @@ export class WebViewHostApiImpl extends WebViewHostApi {
   private binaryMessenger: BinaryMessenger;
 
   private context: common.Context;
+
+  private api?: WebViewFlutterApiImpl;
 
   constructor(
     instanceManager: InstanceManager,
@@ -253,6 +256,17 @@ export class WebViewHostApiImpl extends WebViewHostApi {
   getInstanceManager(): InstanceManager {
     return this.instanceManager;
   }
+
+
+  onScrollChangedImpl(left: number, top: number, oldLeft: number, oldTop: number) {
+    this.onScrollChangedImpl(left, top, oldLeft, oldTop);
+    this.api?.onScrollChanged(
+        this, left, top, oldLeft, oldTop, {reply: () => {} });
+  }
+
+  setApi(api: WebViewFlutterApiImpl) {
+    this.api = api;
+  }
 }
 
 export class WebViewPlatformView extends PlatformView {
@@ -354,6 +368,13 @@ export class WebViewPlatformView extends PlatformView {
     if (this.webChromeClient) {
       this.webChromeClient.onPermissionRequest(event.request);
     }
+  }
+
+  onConsoleMessage = (event: ESObject) => {
+    if (this.webChromeClient) {
+      this.webChromeClient.onConsoleMessage(event.message);
+    }
+    return false;
   }
 
   onWindowNew = (event: ESObject) => {
@@ -469,7 +490,7 @@ export class WebViewPlatformView extends PlatformView {
     if (this.webSettings == null) {
       this.webSettings = new WebSettingsImpl(this);
     }
-    return this.webSettings;
+    return this.webSettings!;
   }
 
   getScrollX(): number {
@@ -634,6 +655,11 @@ class WebSettingsImpl implements WebSettings {
 
   setTextZoom(textZoom: number) {
     this.textZoomRatio = textZoom;
+  }
+
+  getUserAgentString(): string {
+    // todo 获取 UserAgent
+    return '';
   }
 
   getTextZoom() : number{

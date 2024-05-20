@@ -19,15 +19,16 @@ import {
   WebResourceErrorData,
   WebResourceRequestData,
   WebViewClientFlutterApi,
-  WebViewFlutterApi
+  WebViewFlutterApi,
+  HttpAuthHandler,
 } from './GeneratedOhosWebView';
+import { HttpAuthHandlerFlutterApiImpl } from './HttpAuthHandlerFlutterApiImpl';
 import { InstanceManager } from './InstanceManager';
 import { WebViewClient } from './WebViewClientHostApiImpl';
 import { WebViewFlutterApiImpl } from './WebViewFlutterApiImpl';
 import { WebViewHostApiImpl, WebViewPlatformView } from './WebViewHostApiImpl';
 
 export class WebViewClientFlutterApiImpl extends WebViewClientFlutterApi {
-  private binaryMessengerImpl: BinaryMessenger;
   private instanceManager: InstanceManager;
   private webViewFlutterApi: WebViewFlutterApiImpl;
   private emptyReply: Reply<void> = {
@@ -66,7 +67,6 @@ export class WebViewClientFlutterApiImpl extends WebViewClientFlutterApi {
 
   constructor(binaryMessenger: BinaryMessenger, instanceManager: InstanceManager) {
     super(binaryMessenger);
-    this.binaryMessengerImpl = binaryMessenger;
     this.instanceManager = instanceManager;
     this.webViewFlutterApi = new WebViewFlutterApiImpl(binaryMessenger, instanceManager);
   }
@@ -146,6 +146,26 @@ export class WebViewClientFlutterApiImpl extends WebViewClientFlutterApi {
       isReload,
       callback
     )
+  }
+
+  onReceivedHttpAuthRequestImpl(
+    webViewClient: WebViewClient,
+    webview: WebViewPlatformView,
+    httpAuthHandler: HttpAuthHandler,
+    host: string,
+    realm: string,
+    callback: Reply<void>
+  ) {
+    new HttpAuthHandlerFlutterApiImpl(this.binaryMessenger, this.instanceManager)
+        .create(httpAuthHandler, this.emptyReply);
+
+    this.onReceivedHttpAuthRequest(
+        this.instanceManager.getIdentifier(webViewClient),
+        this.instanceManager.getIdentifier(webview),
+        this.instanceManager.getIdentifier(httpAuthHandler),
+        host,
+        realm,
+        callback);
   }
 
   getIdentifierForClient(webViewClient: WebViewClient): number {

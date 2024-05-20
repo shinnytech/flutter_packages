@@ -21,7 +21,7 @@ export class OhosObjectHostApiImpl extends OhosObjectHostApi {
   private instanceManager: InstanceManager;
 
   /**
-   * Constructs a {@link JavaObjectHostApiImpl}.
+   * Constructs a {@link OhosObjectHostApiImpl}.
    *
    * @param instanceManager maintains instances stored to communicate with Dart objects
    */

@@ -3,6 +3,30 @@
 * Adds support for custom handling of JavaScript dialogs. See
   `WebViewController.setOnJavaScriptAlertDialog`, `WebViewController.setOnJavaScriptConfirmDialog`
   and `WebViewController.setOnJavaScriptTextInputDialog`.
+## 4.4.4
+
+* Updates minimum required plugin_platform_interface version to 2.1.7.
+
+## 4.4.3
+
+* Updates minimum supported SDK version to Flutter 3.10/Dart 3.0.
+* Fixes new lint warnings.
+
+## 4.4.2
+
+* Fixes `use_build_context_synchronously` lint violations in the example app.
+
+## 4.4.1
+
+* Exposes `JavaScriptLogLevel` from platform interface.
+
+## 4.4.0
+
+* Adds support to register a callback to receive JavaScript console messages. See `WebViewController.setOnConsoleMessage`.
+
+## 4.3.0
+
+* Adds support to retrieve the user agent. See `WebViewController.getUserAgent`.
 
 ## 4.2.4
 

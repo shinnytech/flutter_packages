@@ -303,8 +303,6 @@ export abstract class WebViewHostApi {
 
   abstract setWebChromeClient(instanceId: number, clientInstanceId: number);
 
-  abstract setBackgroundColor(instanceId: number, color: number);
-
   static getCodec(): MessageCodec<ESObject> {
     return WebViewHostApiCodec.INSTANCE;
   }
@@ -1052,38 +1050,6 @@ export abstract class WebViewHostApi {
                 api.setWebChromeClient(
                   instanceIdArg,
                   clientInstanceIdArg
-                );
-                wrapped.insert(null, 0);
-              } catch (err) {
-                const wrappedError: ArrayList<ESObject> = GeneratedOhosWebView.wrapError(err);
-                wrapped = wrappedError;
-              }
-              reply.reply(wrapped.convertToArray());
-            }
-          }
-        )
-      } else {
-        channel.setMessageHandler(null);
-      }
-    }
-    {
-      const channel: BasicMessageChannel<ESObject> =
-      new BasicMessageChannel<ESObject>(
-        binaryMessenger, "dev.flutter.pigeon.webview_flutter_ohos.WebViewHostApi.setBackgroundColor",
-        WebViewHostApi.getCodec()
-      );
-      if (api != null) {
-        channel.setMessageHandler(
-          {
-            onMessage: (message: ESObject, reply: Reply<ESObject>) => {
-              let wrapped: ArrayList<ESObject> = new ArrayList<ESObject>();
-              const args: Array<ESObject> = message;
-              const instanceIdArg: number = args[0];
-              const colorArg: number = args[1];
-              try {
-                api.setBackgroundColor(
-                  instanceIdArg,
-                  colorArg
                 );
                 wrapped.insert(null, 0);
               } catch (err) {
@@ -2027,6 +1993,8 @@ export abstract class WebSettingsHostApi {
 
   abstract setSupportMultipleWindows(instanceId: number, support: boolean): void;
 
+  abstract setBackgroundColor(instanceId: number, color: number);
+
   abstract setJavaScriptEnabled(instanceId: number, flag: boolean): void;
 
   abstract setUserAgentString(instanceId: number, userAgentString: string): void;
@@ -2175,6 +2143,38 @@ export abstract class WebSettingsHostApi {
             }
           }
         );
+      } else {
+        channel.setMessageHandler(null);
+      }
+    }
+    {
+      const channel: BasicMessageChannel<ESObject> =
+      new BasicMessageChannel<ESObject>(
+        binaryMessenger, "dev.flutter.pigeon.webview_flutter_ohos.WebSettingsHostApi.setBackgroundColor",
+        WebViewHostApi.getCodec()
+      );
+      if (api != null) {
+        channel.setMessageHandler(
+          {
+            onMessage: (message: ESObject, reply: Reply<ESObject>) => {
+              let wrapped: ArrayList<ESObject> = new ArrayList<ESObject>();
+              const args: Array<ESObject> = message;
+              const instanceIdArg: number = args[0];
+              const colorArg: number = args[1];
+              try {
+                api.setBackgroundColor(
+                  instanceIdArg,
+                  colorArg
+                );
+                wrapped.insert(null, 0);
+              } catch (err) {
+                const wrappedError: ArrayList<ESObject> = GeneratedOhosWebView.wrapError(err);
+                wrapped = wrappedError;
+              }
+              reply.reply(wrapped.convertToArray());
+            }
+          }
+        )
       } else {
         channel.setMessageHandler(null);
       }
@@ -3121,7 +3121,7 @@ export abstract class JavaScriptChannelHostApi {
               const channelNameArg: string = args[1];
               try {
                 api.create(instanceIdArg, channelNameArg);
-                wrapped.insert(0, null);
+                wrapped.insert(null, 0);
               } catch (err) {
                 const wrappedError: ArrayList<ESObject> = GeneratedOhosWebView.wrapError(err);
                 wrapped = wrappedError;
@@ -3163,7 +3163,7 @@ export abstract class OhosObjectHostApi {
               const identifierArg: number = args[0];
               try {
                 api.dispose(identifierArg);
-                wrapped.insert(0, null);
+                wrapped.insert(null, 0);
               } catch (err) {
                 const wrappedError: ArrayList<ESObject> = GeneratedOhosWebView.wrapError(err);
                 wrapped = wrappedError;
@@ -3241,7 +3241,7 @@ export abstract class InstanceManagerHostApi {
 
               try {
                 api.clear();
-                wrapped.insert(0, null);
+                wrapped.insert(null, 0);
               } catch (err) {
                 const wrappedError: ArrayList<ESObject> = GeneratedOhosWebView.wrapError(err);
                 wrapped = wrappedError;

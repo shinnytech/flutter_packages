@@ -444,11 +444,6 @@ class WebView extends View {
     return api.setWebChromeClientFromInstance(this, client);
   }
 
-  /// Sets the background color of this WebView.
-  Future<void> setBackgroundColor(Color color) {
-    return api.setBackgroundColorFromInstance(this, color.value);
-  }
-
   @override
   WebView copy() {
     return WebView.detached(
@@ -596,6 +591,11 @@ class WebSettings extends OhosObject {
   /// The default is false.
   Future<void> setSupportMultipleWindows(bool support) {
     return api.setSupportMultipleWindowsFromInstance(this, support);
+  }
+
+  /// Sets the background color of this WebView.
+  Future<void> setBackgroundColor(Color color) {
+    return api.setBackgroundColorFromInstance(this, color.value);
   }
 
   /// Tells the WebView to enable JavaScript execution.

@@ -14,7 +14,7 @@
 */
 
 import { BinaryMessenger } from '@ohos/flutter_ohos/src/main/ets/plugin/common/BinaryMessenger';
-import { Reply, WebViewFlutterApi } from './GeneratedOhosWebView';
+import { Reply, WebViewFlutterApi, WebViewHostApi } from './GeneratedOhosWebView';
 import { InstanceManager } from './InstanceManager';
 import { WebViewPlatformView } from './WebViewHostApiImpl';
 
@@ -37,5 +37,21 @@ export class WebViewFlutterApiImpl {
 
   setApi(api: WebViewFlutterApi): void {
     this.api = api;
+  }
+
+  onScrollChanged(
+    instance: WebViewHostApi,
+    left: number,
+    top: number,
+    oldLeft: number,
+    oldTop: number,
+    callback: Reply<void>): void {
+    this.api.onScrollChanged(
+        this.instanceManager.getIdentifier(instance),
+        left,
+        top,
+        oldLeft,
+        oldTop,
+        callback);
   }
 }

@@ -14,16 +14,20 @@
 */
 
 import { BinaryMessenger } from '@ohos/flutter_ohos/src/main/ets/plugin/common/BinaryMessenger';
+import { CustomViewCallbackFlutterApiImpl } from './CustomViewCallbackFlutterApiImpl';
+import { DVModel } from '@ohos/flutter_ohos/src/main/ets/view/DynamicView/dynamicView';
 import { FileChooserParamsFlutterApiImpl } from './FileChooserParamsFlutterApiImpl';
 import GeneratedOhosWebView, {
   ConsoleMessageLevel,
   ConsoleMessage as FlutterConsoleMessage,
+  CustomViewCallback,
   Reply,
   WebChromeClientFlutterApi
 } from './GeneratedOhosWebView';
 import { GeolocationPermissionsCallbackFlutterApiImpl } from './GeolocationPermissionsCallbackFlutterApiImpl';
 import { InstanceManager } from './InstanceManager';
 import { PermissionRequestFlutterApiImpl } from './PermissionRequestFlutterApiImpl';
+import { ViewFlutterApiImpl } from './ViewFlutterApiImpl';
 import { WebChromeClient } from './WebChromeClientHostApiImpl';
 import { WebViewFlutterApiImpl } from './WebViewFlutterApiImpl';
 import { WebViewPlatformView } from './WebViewHostApiImpl';
@@ -31,12 +35,8 @@ import { WebViewPlatformView } from './WebViewHostApiImpl';
 const TAG: string = "WebChromeClientFlutterApiImpl";
 
 export class WebChromeClientFlutterApiImpl extends WebChromeClientFlutterApi {
-  private binaryMessengerImpl: BinaryMessenger;
-
   private instanceManager: InstanceManager;
-
   private webViewFlutterApi: WebViewFlutterApiImpl;
-
   private emptyReply: Reply<void> = {
     reply: (reply) => {
     }
@@ -61,7 +61,6 @@ export class WebChromeClientFlutterApiImpl extends WebChromeClientFlutterApi {
 
   constructor(binaryMessenger: BinaryMessenger, instanceManager: InstanceManager) {
     super(binaryMessenger);
-    this.binaryMessengerImpl = binaryMessenger;
     this.instanceManager = instanceManager;
     this.webViewFlutterApi = new WebViewFlutterApiImpl(binaryMessenger, instanceManager);
   }
@@ -87,7 +86,7 @@ export class WebChromeClientFlutterApiImpl extends WebChromeClientFlutterApi {
     this.webViewFlutterApi.create(webView, this.emptyReply);
 
     new FileChooserParamsFlutterApiImpl(
-      this.binaryMessengerImpl,
+      this.binaryMessenger,
       this.instanceManager
     ).create(
       fileChooserParams,
@@ -108,7 +107,7 @@ export class WebChromeClientFlutterApiImpl extends WebChromeClientFlutterApi {
     callback: JsGeolocation,
     replyCallback: Reply<void>
   ) {
-    new GeolocationPermissionsCallbackFlutterApiImpl(this.binaryMessengerImpl, this.instanceManager)
+    new GeolocationPermissionsCallbackFlutterApiImpl(this.binaryMessenger, this.instanceManager)
       .create(callback, this.emptyReply);
     this.onGeolocationPermissionsShowPrompt(
       this.instanceManager.getIdentifier(webChromeClient),
@@ -132,12 +131,37 @@ export class WebChromeClientFlutterApiImpl extends WebChromeClientFlutterApi {
     request: PermissionRequest,
     callback: Reply<void>
   ) {
-    new PermissionRequestFlutterApiImpl(this.binaryMessengerImpl, this.instanceManager)
+    new PermissionRequestFlutterApiImpl(this.binaryMessenger, this.instanceManager)
       .create(request, request.getAccessibleResource(), this.emptyReply);
 
     this.onPermissionRequest(
       this.instanceManager.getIdentifier(instance),
       this.instanceManager.getIdentifier(request),
+      callback
+    );
+  }
+
+  onShowCustomViewImpl(
+    instance: WebChromeClient,
+    view: DVModel,
+    customViewCallback: CustomViewCallback,
+    callback: Reply<void>
+  ) {
+    new ViewFlutterApiImpl(this.binaryMessenger, this.instanceManager).create(view, this.emptyReply);
+    new CustomViewCallbackFlutterApiImpl(this.binaryMessenger, this.instanceManager)
+      .create(customViewCallback, this.emptyReply);
+
+    this.onShowCustomView(
+      this.instanceManager.getIdentifier(instance),
+      this.instanceManager.getIdentifier(view),
+      this.instanceManager.getIdentifier(customViewCallback),
+      callback
+    );
+  }
+
+  onHideCustomViewImpl(instance: WebChromeClient, callback: Reply<void>) {
+    this.onHideCustomView(
+      this.instanceManager.getIdentifier(instance),
       callback
     );
   }

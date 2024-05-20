@@ -19,15 +19,18 @@ import { BinaryMessenger } from '@ohos/flutter_ohos/src/main/ets/plugin/common/B
 import PlatformViewRegistry from '@ohos/flutter_ohos/src/main/ets/plugin/platform/PlatformViewRegistry';
 import { OhosObjectHostApiImpl } from './OhosObjectHostApiImpl';
 import { CookieManagerHostApiImpl } from './CookieManagerHostApiImpl';
+import { CustomViewCallbackHostApiImpl } from './CustomViewCallbackHostApiImpl';
 import { DownloadListenerFlutterApiImpl } from './DownloadListenerFlutterApiImpl';
 import { DownloadListenerCreator, DownloadListenerHostApiImpl } from './DownloadListenerHostApiImpl';
 import { FlutterAssetManager, PluginBindingFlutterAssetManager } from './FlutterAssetManager';
 import { FlutterAssetManagerHostApiImpl } from './FlutterAssetManagerHostApiImpl';
 import GeneratedOhosWebView, {
   CookieManagerHostApi,
+  CustomViewCallbackHostApi,
   DownloadListenerHostApi,
   FlutterAssetManagerHostApi,
   GeolocationPermissionsCallbackHostApi,
+  HttpAuthHandlerHostApi,
   InstanceManagerHostApi,
   JavaScriptChannelHostApi,
   PermissionRequestHostApi,
@@ -41,6 +44,7 @@ import GeneratedOhosWebView, {
   WebStorageHostApi
 } from './GeneratedOhosWebView';
 import { GeolocationPermissionsCallbackHostApiImpl } from './GeolocationPermissionsCallbackHostApiImpl';
+import { HttpAuthHandlerHostApiImpl } from './HttpAuthHandlerHostApiImpl';
 import { InstanceManager } from './InstanceManager';
 import { JavaScriptChannelCreator, JavaScriptChannelHostApiImpl } from './JavaScriptChannelHostApiImpl';
 import { PermissionRequestHostApiImpl } from './PermissionRequestHostApiImpl';
@@ -155,6 +159,10 @@ export class WebViewFlutterPlugin implements FlutterPlugin {
       binaryMessenger,
       new GeolocationPermissionsCallbackHostApiImpl(binaryMessenger, this.instanceManager)
     );
+    CustomViewCallbackHostApi.setup(
+      binaryMessenger, new CustomViewCallbackHostApiImpl(binaryMessenger, this.instanceManager));
+    HttpAuthHandlerHostApi.setup(
+      binaryMessenger, new HttpAuthHandlerHostApiImpl(binaryMessenger, this.instanceManager));
   }
 
   onAttachedToEngine(binding: FlutterPluginBinding) {
