@@ -45,7 +45,7 @@ export struct OhosWebView {
         .onGeolocationHide(this.webView.onGeolocationHide)
         .onShowFileSelector(this.webView.onShowFileSelector)
         .onPermissionRequest(this.webView.onPermissionRequest)
-        .onConsole(this.webView.onConsoleMessage))
+        .onConsole(this.webView.onConsoleMessage)
           // .onWindowNew(DynamicUtils.getParams(this.params, "onWindowNew"))
         .onWindowExit(this.webView.onWindowExit)
         .domStorageAccess(this.webView.getWebSettings().getDomStorageEnabled())
