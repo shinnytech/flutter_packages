@@ -1339,6 +1339,31 @@ class OhosNavigationDelegate extends PlatformNavigationDelegate {
           callback(OhosUrlChange(url: url, isReload: isReload));
         }
       },
+      onReceivedHttpAuthRequest: (
+        ohos_webview.WebView webView,
+        ohos_webview.HttpAuthHandler httpAuthHandler,
+        String host,
+        String realm,
+      ) {
+        final void Function(HttpAuthRequest)? callback =
+            weakThis.target?._onHttpAuthRequest;
+        if (callback != null) {
+          callback(
+            HttpAuthRequest(
+              onProceed: (WebViewCredential credential) {
+                httpAuthHandler.proceed(credential.user, credential.password);
+              },
+              onCancel: () {
+                httpAuthHandler.cancel();
+              },
+              host: host,
+              realm: realm,
+            ),
+          );
+        } else {
+          httpAuthHandler.cancel();
+        }
+      },
     );
 
     _downloadListener = (this.params as OhosNavigationDelegateCreationParams)
@@ -1393,6 +1418,7 @@ class OhosNavigationDelegate extends PlatformNavigationDelegate {
   NavigationRequestCallback? _onNavigationRequest;
   LoadRequestCallback? _onLoadRequest;
   UrlChangeCallback? _onUrlChange;
+  HttpAuthRequestCallback? _onHttpAuthRequest;
 
   void _handleNavigation(
     String url, {
@@ -1478,5 +1504,12 @@ class OhosNavigationDelegate extends PlatformNavigationDelegate {
   @override
   Future<void> setOnUrlChange(UrlChangeCallback onUrlChange) async {
     _onUrlChange = onUrlChange;
+  }
+
+  @override
+  Future<void> setOnHttpAuthRequest(
+    HttpAuthRequestCallback onHttpAuthRequest,
+  ) async {
+    _onHttpAuthRequest = onHttpAuthRequest;
   }
 }
