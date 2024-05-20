@@ -853,18 +853,60 @@ class OhosWebViewWidget extends PlatformWebViewWidget {
 
   @override
   Widget build(BuildContext context) {
-    return OhosView(
+    return PlatformViewLink(
+      // Setting a default key using `params` ensures the `PlatformViewLink`
+      // recreates the PlatformView when changes are made.
       key: _ohosParams.key ??
           ValueKey<OhosWebViewWidgetCreationParams>(
               params as OhosWebViewWidgetCreationParams),
       viewType: 'plugins.flutter.io/webview',
-      layoutDirection: _ohosParams.layoutDirection,
-      creationParams: _ohosParams.instanceManager.getIdentifier(
-          (_ohosParams.controller as OhosWebViewController)._webView),
-      creationParamsCodec: const StandardMessageCodec(),
-      gestureRecognizers: _ohosParams.gestureRecognizers,
+      surfaceFactory: (
+          BuildContext context,
+          PlatformViewController controller,
+          ) {
+        return OhosViewSurface(
+          controller: controller as OhosViewController,
+          gestureRecognizers: _ohosParams.gestureRecognizers,
+          hitTestBehavior: PlatformViewHitTestBehavior.opaque,
+        );
+      },
+      onCreatePlatformView: (PlatformViewCreationParams params) {
+        return _initOhosView(
+          params,
+          displayWithHybridComposition:
+          _ohosParams.displayWithHybridComposition,
+        )
+          ..addOnPlatformViewCreatedListener(params.onPlatformViewCreated)
+          ..create();
+      },
     );
   }
+
+  OhosViewController _initOhosView(
+      PlatformViewCreationParams params, {
+        required bool displayWithHybridComposition,
+      }) {
+    if (displayWithHybridComposition) {
+      return _ohosParams.platformViewsServiceProxy.initExpensiveOhosView(
+        id: params.id,
+        viewType: 'plugins.flutter.io/webview',
+        layoutDirection: _ohosParams.layoutDirection,
+        creationParams: _ohosParams.instanceManager.getIdentifier(
+            (_ohosParams.controller as OhosWebViewController)._webView),
+        creationParamsCodec: const StandardMessageCodec(),
+      );
+    } else {
+      return _ohosParams.platformViewsServiceProxy.initSurfaceOhosView(
+        id: params.id,
+        viewType: 'plugins.flutter.io/webview',
+        layoutDirection: _ohosParams.layoutDirection,
+        creationParams: _ohosParams.instanceManager.getIdentifier(
+            (_ohosParams.controller as OhosWebViewController)._webView),
+        creationParamsCodec: const StandardMessageCodec(),
+      );
+    }
+  }
+
 }
 
 /// Signature for the `loadRequest` callback responsible for loading the [url]
