@@ -14,24 +14,24 @@ import '../ohos_webview.dart';
 import 'webview_ohos.dart';
 import 'webview_ohos_widget.dart';
 
-/// Android [WebViewPlatform] that uses [AndroidViewSurface] to build the
+/// Ohos [WebViewPlatform] that uses [OhosViewSurface] to build the
 /// [WebView] widget.
 ///
 /// To use this, set [WebView.platform] to an instance of this class.
 ///
-/// This implementation uses [AndroidViewSurface] to render the [WebView] on
-/// Android. It solves multiple issues related to accessibility and interaction
-/// with the [WebView] at the cost of some performance on Android versions below
+/// This implementation uses [OhosViewSurface] to render the [WebView] on
+/// Ohos. It solves multiple issues related to accessibility and interaction
+/// with the [WebView] at the cost of some performance on Ohos versions below
 /// 10.
 ///
-/// To support transparent backgrounds on all Android devices, this
+/// To support transparent backgrounds on all Ohos devices, this
 /// implementation uses hybrid composition when the opacity of
 /// `CreationParams.backgroundColor` is less than 1.0. See
 /// https://github.com/flutter/flutter/wiki/Hybrid-Composition for more
 /// information.
-class SurfaceAndroidWebView extends AndroidWebView {
-  /// Constructs a [SurfaceAndroidWebView].
-  SurfaceAndroidWebView({@visibleForTesting super.instanceManager});
+class SurfaceOhosWebView extends OhosWebView {
+  /// Constructs a [SurfaceOhosWebView].
+  SurfaceOhosWebView({@visibleForTesting super.instanceManager});
 
   @override
   Widget build({
@@ -42,19 +42,19 @@ class SurfaceAndroidWebView extends AndroidWebView {
     Set<Factory<OneSequenceGestureRecognizer>>? gestureRecognizers,
     required WebViewPlatformCallbacksHandler webViewPlatformCallbacksHandler,
   }) {
-    return WebViewAndroidWidget(
+    return WebViewOhosWidget(
       creationParams: creationParams,
       callbacksHandler: webViewPlatformCallbacksHandler,
       javascriptChannelRegistry: javascriptChannelRegistry,
-      onBuildWidget: (WebViewAndroidPlatformController controller) {
+      onBuildWidget: (WebViewOhosPlatformController controller) {
         return PlatformViewLink(
           viewType: 'plugins.flutter.io/webview',
           surfaceFactory: (
             BuildContext context,
             PlatformViewController controller,
           ) {
-            return AndroidViewSurface(
-              controller: controller as AndroidViewController,
+            return OhosViewSurface(
+              controller: controller as OhosViewController,
               gestureRecognizers: gestureRecognizers ??
                   const <Factory<OneSequenceGestureRecognizer>>{},
               hitTestBehavior: PlatformViewHitTestBehavior.opaque,
@@ -63,15 +63,15 @@ class SurfaceAndroidWebView extends AndroidWebView {
           onCreatePlatformView: (PlatformViewCreationParams params) {
             final Color? backgroundColor = creationParams.backgroundColor;
             return _createViewController(
-              // On some Android devices, transparent backgrounds can cause
+              // On some Ohos devices, transparent backgrounds can cause
               // rendering issues on the non hybrid composition
-              // AndroidViewSurface. This switches the WebView to Hybrid
+              // OhosViewSurface. This switches the WebView to Hybrid
               // Composition when the background color is not 100% opaque.
               hybridComposition:
                   backgroundColor != null && backgroundColor.opacity < 1.0,
               id: params.id,
               viewType: 'plugins.flutter.io/webview',
-              // WebView content is not affected by the Android view's layout direction,
+              // WebView content is not affected by the Ohos view's layout direction,
               // we explicitly set it here so that the widget doesn't require an ambient
               // directionality.
               layoutDirection:
@@ -92,7 +92,7 @@ class SurfaceAndroidWebView extends AndroidWebView {
     );
   }
 
-  AndroidViewController _createViewController({
+  OhosViewController _createViewController({
     required bool hybridComposition,
     required int id,
     required String viewType,
@@ -100,7 +100,7 @@ class SurfaceAndroidWebView extends AndroidWebView {
     required int webViewIdentifier,
   }) {
     if (hybridComposition) {
-      return PlatformViewsService.initExpensiveAndroidView(
+      return PlatformViewsService.initExpensiveOhosView(
         id: id,
         viewType: viewType,
         layoutDirection: layoutDirection,
@@ -108,7 +108,7 @@ class SurfaceAndroidWebView extends AndroidWebView {
         creationParamsCodec: const StandardMessageCodec(),
       );
     }
-    return PlatformViewsService.initSurfaceAndroidView(
+    return PlatformViewsService.initSurfaceOhosView(
       id: id,
       viewType: viewType,
       layoutDirection: layoutDirection,

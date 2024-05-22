@@ -20,23 +20,41 @@ import { WebViewPlatformView } from './WebViewHostApiImpl';
 export interface WebSettings {
   setDomStorageEnabled(flag: boolean): void;
 
+  getDomStorageEnabled(): boolean;
+
   setJavaScriptCanOpenWindowsAutomatically(flag: boolean): void;
+
+  getJavaScriptCanOpenWindowsAutomatically(): boolean;
 
   setSupportMultipleWindows(support: boolean): void;
 
+  getSupportMultipleWindows(): boolean;
+
   setBackgroundColor(color: number): void;
 
+  getBackgroundColor(): string;
+
   setJavaScriptEnabled(flag: boolean): void;
+
+  getJavaScriptEnabled(): boolean;
 
   setUserAgentString(userAgentString: string): void;
 
   setMediaPlaybackRequiresUserGesture(require: boolean): void;
 
+  getMediaPlaybackRequiresUserGesture(): boolean;
+
   setSupportZoom(support: boolean): void;
+
+  getSupportZoom(): boolean;
 
   setLoadWithOverviewMode(overview: boolean): void;
 
+  getLoadWithOverviewMode(): boolean;
+
   setUseWideViewPort(use: boolean): void;
+
+  getUseWideViewPort(): boolean;
 
   setDisplayZoomControls(enabled: boolean): void;
 
@@ -44,7 +62,12 @@ export interface WebSettings {
 
   setAllowFileAccess(enabled: boolean): void;
 
+  getAllowFileAccess(): boolean;
+
   setTextZoom(textZoom: number): void;
+
+  getTextZoom(): number;
+
 
   getUserAgentString(): string;
 }

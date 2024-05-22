@@ -14,9 +14,9 @@ import '../weak_reference_utils.dart';
 import 'webview_ohos_cookie_manager.dart';
 
 /// Creates a [Widget] with a [ohos_webview.WebView].
-class WebViewAndroidWidget extends StatefulWidget {
-  /// Constructs a [WebViewAndroidWidget].
-  const WebViewAndroidWidget({
+class WebViewOhosWidget extends StatefulWidget {
+  /// Constructs a [WebViewOhosWidget].
+  const WebViewOhosWidget({
     super.key,
     required this.creationParams,
     required this.callbacksHandler,
@@ -42,29 +42,29 @@ class WebViewAndroidWidget extends StatefulWidget {
   /// This should only be changed for testing purposes.
   final WebViewProxy webViewProxy;
 
-  /// Manages access to Flutter assets that are part of the Android App bundle.
+  /// Manages access to Flutter assets that are part of the Ohos App bundle.
   ///
   /// This should only be changed for testing purposes.
   final ohos_webview.FlutterAssetManager flutterAssetManager;
 
   /// Callback to build a widget once [ohos_webview.WebView] has been initialized.
-  final Widget Function(WebViewAndroidPlatformController controller)
+  final Widget Function(WebViewOhosPlatformController controller)
       onBuildWidget;
 
   /// Manages the JavaScript storage APIs.
   final ohos_webview.WebStorage? webStorage;
 
   @override
-  State<StatefulWidget> createState() => _WebViewAndroidWidgetState();
+  State<StatefulWidget> createState() => _WebViewOhosWidgetState();
 }
 
-class _WebViewAndroidWidgetState extends State<WebViewAndroidWidget> {
-  late final WebViewAndroidPlatformController controller;
+class _WebViewOhosWidgetState extends State<WebViewOhosWidget> {
+  late final WebViewOhosPlatformController controller;
 
   @override
   void initState() {
     super.initState();
-    controller = WebViewAndroidPlatformController(
+    controller = WebViewOhosPlatformController(
       creationParams: widget.creationParams,
       callbacksHandler: widget.callbacksHandler,
       javascriptChannelRegistry: widget.javascriptChannelRegistry,
@@ -80,10 +80,10 @@ class _WebViewAndroidWidgetState extends State<WebViewAndroidWidget> {
   }
 }
 
-/// Implementation of [WebViewPlatformController] with the Android WebView api.
-class WebViewAndroidPlatformController extends WebViewPlatformController {
-  /// Construct a [WebViewAndroidPlatformController].
-  WebViewAndroidPlatformController({
+/// Implementation of [WebViewPlatformController] with the Ohos WebView api.
+class WebViewOhosPlatformController extends WebViewPlatformController {
+  /// Construct a [WebViewOhosPlatformController].
+  WebViewOhosPlatformController({
     required CreationParams creationParams,
     required this.callbacksHandler,
     required this.javascriptChannelRegistry,
@@ -115,27 +115,27 @@ class WebViewAndroidPlatformController extends WebViewPlatformController {
     }
   }
 
-  final Map<String, WebViewAndroidJavaScriptChannel> _javaScriptChannels =
-      <String, WebViewAndroidJavaScriptChannel>{};
+  final Map<String, WebViewOhosJavaScriptChannel> _javaScriptChannels =
+      <String, WebViewOhosJavaScriptChannel>{};
 
   late final ohos_webview.WebViewClient _webViewClient =
       webViewProxy.createWebViewClient(
     onPageStarted: withWeakReferenceTo(this, (
-      WeakReference<WebViewAndroidPlatformController> weakReference,
+      WeakReference<WebViewOhosPlatformController> weakReference,
     ) {
       return (_, String url) {
         weakReference.target?.callbacksHandler.onPageStarted(url);
       };
     }),
     onPageFinished: withWeakReferenceTo(this, (
-      WeakReference<WebViewAndroidPlatformController> weakReference,
+      WeakReference<WebViewOhosPlatformController> weakReference,
     ) {
       return (_, String url) {
         weakReference.target?.callbacksHandler.onPageFinished(url);
       };
     }),
     onReceivedError: withWeakReferenceTo(this, (
-      WeakReference<WebViewAndroidPlatformController> weakReference,
+      WeakReference<WebViewOhosPlatformController> weakReference,
     ) {
       return (
         _,
@@ -153,7 +153,7 @@ class WebViewAndroidPlatformController extends WebViewPlatformController {
       };
     }),
     onReceivedRequestError: withWeakReferenceTo(this, (
-      WeakReference<WebViewAndroidPlatformController> weakReference,
+      WeakReference<WebViewOhosPlatformController> weakReference,
     ) {
       return (
         _,
@@ -172,7 +172,7 @@ class WebViewAndroidPlatformController extends WebViewPlatformController {
       };
     }),
     urlLoading: withWeakReferenceTo(this, (
-      WeakReference<WebViewAndroidPlatformController> weakReference,
+      WeakReference<WebViewOhosPlatformController> weakReference,
     ) {
       return (_, String url) {
         weakReference.target?._handleNavigationRequest(
@@ -182,7 +182,7 @@ class WebViewAndroidPlatformController extends WebViewPlatformController {
       };
     }),
     requestLoading: withWeakReferenceTo(this, (
-      WeakReference<WebViewAndroidPlatformController> weakReference,
+      WeakReference<WebViewOhosPlatformController> weakReference,
     ) {
       return (_, ohos_webview.WebResourceRequest request) {
         weakReference.target?._handleNavigationRequest(
@@ -210,7 +210,7 @@ class WebViewAndroidPlatformController extends WebViewPlatformController {
   /// This should only be changed for testing purposes.
   final WebViewProxy webViewProxy;
 
-  /// Manages access to Flutter assets that are part of the Android App bundle.
+  /// Manages access to Flutter assets that are part of the Ohos App bundle.
   ///
   /// This should only be changed for testing purposes.
   final ohos_webview.FlutterAssetManager flutterAssetManager;
@@ -221,7 +221,7 @@ class WebViewAndroidPlatformController extends WebViewPlatformController {
       ohos_webview.DownloadListener(
     onDownloadStart: withWeakReferenceTo(
       this,
-      (WeakReference<WebViewAndroidPlatformController> weakReference) {
+      (WeakReference<WebViewOhosPlatformController> weakReference) {
         return (
           String url,
           String userAgent,
@@ -244,9 +244,9 @@ class WebViewAndroidPlatformController extends WebViewPlatformController {
       ohos_webview.WebChromeClient(
           onProgressChanged: withWeakReferenceTo(
     this,
-    (WeakReference<WebViewAndroidPlatformController> weakReference) {
+    (WeakReference<WebViewOhosPlatformController> weakReference) {
       return (_, int progress) {
-        final WebViewAndroidPlatformController? controller =
+        final WebViewOhosPlatformController? controller =
             weakReference.target;
         if (controller != null && controller._hasProgressTracking) {
           controller.callbacksHandler.onProgress(progress);
@@ -297,10 +297,14 @@ class WebViewAndroidPlatformController extends WebViewPlatformController {
       );
     }
 
-    return webView.loadUrl(
+/*    return webView.loadUrl(
       'file:///ohos_asset/$assetFilePath',
       <String, String>{},
-    );
+    );*/
+
+    webView.settings.setAllowFileAccess(true);
+    final String  url = "resources/rawfile/" + assetFilePath;
+    return webView.loadUrl(url, <String, String>{});
   }
 
   @override
@@ -402,8 +406,8 @@ class WebViewAndroidPlatformController extends WebViewPlatformController {
         },
       ).map<Future<void>>(
         (String channelName) {
-          final WebViewAndroidJavaScriptChannel javaScriptChannel =
-              WebViewAndroidJavaScriptChannel(
+          final WebViewOhosJavaScriptChannel javaScriptChannel =
+              WebViewOhosJavaScriptChannel(
                   channelName, javascriptChannelRegistry);
           _javaScriptChannels[channelName] = javaScriptChannel;
           return webView.addJavaScriptChannel(javaScriptChannel);
@@ -423,7 +427,7 @@ class WebViewAndroidPlatformController extends WebViewPlatformController {
         },
       ).map<Future<void>>(
         (String channelName) {
-          final WebViewAndroidJavaScriptChannel javaScriptChannel =
+          final WebViewOhosJavaScriptChannel javaScriptChannel =
               _javaScriptChannels[channelName]!;
           _javaScriptChannels.remove(channelName);
           return webView.removeJavaScriptChannel(javaScriptChannel);
@@ -465,7 +469,7 @@ class WebViewAndroidPlatformController extends WebViewPlatformController {
 
     final Color? backgroundColor = creationParams.backgroundColor;
     if (backgroundColor != null) {
-      webView.setBackgroundColor(backgroundColor);
+      //webView.setBackgroundColor(backgroundColor);
     }
 
     addJavascriptChannels(creationParams.javascriptChannelNames);
@@ -473,7 +477,7 @@ class WebViewAndroidPlatformController extends WebViewPlatformController {
     // TODO(BeMacized): Remove once platform implementations
     // are able to register themselves (Flutter >=2.8),
     // https://github.com/flutter/flutter/issues/94224
-    WebViewCookieManagerPlatform.instance ??= WebViewAndroidCookieManager();
+    WebViewCookieManagerPlatform.instance ??= WebViewOhosCookieManager();
 
     creationParams.cookies
         .forEach(WebViewCookieManagerPlatform.instance!.setCookie);
@@ -579,10 +583,10 @@ class WebViewAndroidPlatformController extends WebViewPlatformController {
 }
 
 /// Exposes a channel to receive calls from javaScript.
-class WebViewAndroidJavaScriptChannel
+class WebViewOhosJavaScriptChannel
     extends ohos_webview.JavaScriptChannel {
-  /// Creates a [WebViewAndroidJavaScriptChannel].
-  WebViewAndroidJavaScriptChannel(
+  /// Creates a [WebViewOhosJavaScriptChannel].
+  WebViewOhosJavaScriptChannel(
     super.channelName,
     this.javascriptChannelRegistry,
   ) : super(

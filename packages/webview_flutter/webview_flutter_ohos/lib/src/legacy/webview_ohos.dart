@@ -15,15 +15,15 @@ import '../ohos_webview.dart';
 import '../instance_manager.dart';
 import 'webview_ohos_widget.dart';
 
-/// Builds an Android webview.
+/// Builds an Ohos webview.
 ///
-/// This is used as the default implementation for [WebView.platform] on Android. It uses
-/// an [AndroidView] to embed the webview in the widget hierarchy, and uses a method channel to
+/// This is used as the default implementation for [WebView.platform] on Ohos. It uses
+/// an [OhosView] to embed the webview in the widget hierarchy, and uses a method channel to
 /// communicate with the platform code.
-class AndroidWebView implements WebViewPlatform {
-  /// Constructs an [AndroidWebView].
-  AndroidWebView({@visibleForTesting InstanceManager? instanceManager})
-      : instanceManager = instanceManager ?? JavaObject.globalInstanceManager;
+class OhosWebView implements WebViewPlatform {
+  /// Constructs an [OhosWebView].
+  OhosWebView({@visibleForTesting InstanceManager? instanceManager})
+      : instanceManager = instanceManager ?? OhosObject.globalInstanceManager;
 
   /// Maintains instances used to communicate with the native objects they
   /// represent.
@@ -39,14 +39,14 @@ class AndroidWebView implements WebViewPlatform {
     WebViewPlatformCreatedCallback? onWebViewPlatformCreated,
     Set<Factory<OneSequenceGestureRecognizer>>? gestureRecognizers,
   }) {
-    return WebViewAndroidWidget(
+    return WebViewOhosWidget(
       creationParams: creationParams,
       callbacksHandler: webViewPlatformCallbacksHandler,
       javascriptChannelRegistry: javascriptChannelRegistry,
-      onBuildWidget: (WebViewAndroidPlatformController controller) {
+      onBuildWidget: (WebViewOhosPlatformController controller) {
         return GestureDetector(
           // We prevent text selection by intercepting the long press event.
-          // This is a temporary stop gap due to issues with text selection on Android:
+          // This is a temporary stop gap due to issues with text selection on Ohos:
           // https://github.com/flutter/flutter/issues/24585 - the text selection
           // dialog is not responding to touch events.
           // https://github.com/flutter/flutter/issues/24584 - the text selection
@@ -54,7 +54,7 @@ class AndroidWebView implements WebViewPlatform {
           // TODO(amirh): remove this when the issues above are fixed.
           onLongPress: () {},
           excludeFromSemantics: true,
-          child: AndroidView(
+          child: OhosView(
             viewType: 'plugins.flutter.io/webview',
             onPlatformViewCreated: (int id) {
               if (onWebViewPlatformCreated != null) {

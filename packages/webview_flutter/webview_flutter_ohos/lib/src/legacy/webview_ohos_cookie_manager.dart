@@ -9,9 +9,9 @@ import 'package:webview_flutter_platform_interface/src/webview_flutter_platform_
 import '../ohos_webview.dart' as ohos_webview;
 
 /// Handles all cookie operations for the current platform.
-class WebViewAndroidCookieManager extends WebViewCookieManagerPlatform {
-  /// Constructs a [WebViewAndroidCookieManager].
-  WebViewAndroidCookieManager({
+class WebViewOhosCookieManager extends WebViewCookieManagerPlatform {
+  /// Constructs a [WebViewOhosCookieManager].
+  WebViewOhosCookieManager({
     @visibleForTesting ohos_webview.CookieManager? cookieManager,
   }) : _cookieManager = cookieManager ?? ohos_webview.CookieManager.instance;
 

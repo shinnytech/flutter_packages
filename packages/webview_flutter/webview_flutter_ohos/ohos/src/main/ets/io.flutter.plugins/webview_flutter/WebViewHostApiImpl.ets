@@ -13,11 +13,11 @@
 * limitations under the License.
 */
 
-import PlatformView from '@ohos/flutter_ohos/src/main/ets/plugin/platform/PlatformView'
+import PlatformView, { Params } from '@ohos/flutter_ohos/src/main/ets/plugin/platform/PlatformView'
 import { DVModel, DVModelParameters } from '@ohos/flutter_ohos/src/main/ets/view/DynamicView/dynamicView'
 import { Result, WebViewHostApi, WebViewPoint } from './GeneratedOhosWebView'
 import web_webview from '@ohos.web.webview'
-import { buildOhosWebView, OhosWebView } from './OhosWebView'
+import { WebBuilder, OhosWebView } from './OhosWebView'
 import { createDVModelFromJson } from '@ohos/flutter_ohos/src/main/ets/view/DynamicView/dynamicViewJson'
 import { DVModelJson } from "./DynamicUtils"
 import { InstanceManager } from './InstanceManager'
@@ -257,7 +257,7 @@ export class WebViewHostApiImpl extends WebViewHostApi {
     return this.instanceManager;
   }
 
-  
+
   onScrollChangedImpl(left: number, top: number, oldLeft: number, oldTop: number) {
     this.onScrollChangedImpl(left, top, oldLeft, oldTop);
     this.api?.onScrollChanged(
@@ -292,7 +292,7 @@ export class WebViewPlatformView extends PlatformView {
 
   private controllerAttached: boolean = false;
 
-  private onDownloadStart = (event: ESObject) => {
+  onDownloadStart = (event: ESObject) => {
     if (this.downloadListener && this.downloadListener.onDownloadStart) {
       this.downloadListener.onDownloadStart(
         event.url,
@@ -304,25 +304,25 @@ export class WebViewPlatformView extends PlatformView {
     }
   }
 
-  private onPageBegin = (event: ESObject) => {
+  onPageBegin = (event: ESObject) => {
     if (this.webViewClint) {
       this.webViewClint.onPageStarted(this, event.url);
     }
   }
 
-  private onPageEnd = (event: ESObject) => {
+  onPageEnd = (event: ESObject) => {
     if (this.webViewClint) {
       this.webViewClint.onPageFinished(this, event.url);
     }
   }
 
-  private onErrorReceive = (event: ESObject) => {
+  onErrorReceive = (event: ESObject) => {
     if (this.webViewClint) {
       this.webViewClint.onReceivedError(this, event.request, event.error);
     }
   }
 
-  private onLoadIntercept = (event: ESObject) => {
+  onLoadIntercept = (event: ESObject) => {
     Log.i(TAG, "onLoadIntercept event = " + JSON.stringify(event))
     if(event.data.getRequestUrl() == 'loaded:///'){
       return true;
@@ -333,127 +333,96 @@ export class WebViewPlatformView extends PlatformView {
     return false;
   }
 
-  private onRefreshAccessedHistory = (event: ESObject) => {
+  onRefreshAccessedHistory = (event: ESObject) => {
     if (this.webViewClint) {
       this.webViewClint.doUpdateVisitedHistory(this, event.url, event.isRefreshed);
     }
   }
 
-  private onProgressChange = (event: ESObject) => {
+  onProgressChange = (event: ESObject) => {
     if (this.webChromeClient) {
       this.webChromeClient.onProgressChanged(this, event.newProgress)
     }
   }
 
-  private onGeolocationShow = (event: ESObject) => {
+  onGeolocationShow = (event: ESObject) => {
     if (this.webChromeClient) {
       this.webChromeClient.onGeolocationPermissionsShowPrompt(event.origin, event.geolocation)
     }
   }
 
-  private onGeolocationHide = () => {
+  onGeolocationHide = () => {
     if (this.webChromeClient) {
       this.webChromeClient.onGeolocationPermissionsHidePrompt();
     }
   }
 
-  private onShowFileSelector = (event: ESObject) => {
+  onShowFileSelector = (event: ESObject) => {
     if (this.webChromeClient) {
       return this.webChromeClient.onShowFileChooser(this, event.result, event.fileSelector)
     }
     return false;
   }
 
-  private onPermissionRequest = (event: ESObject) => {
+  onPermissionRequest = (event: ESObject) => {
     if (this.webChromeClient) {
       this.webChromeClient.onPermissionRequest(event.request);
     }
   }
 
-  private onConsoleMessage = (event: ESObject) => {
+  onConsoleMessage = (event: ESObject) => {
     if (this.webChromeClient) {
       this.webChromeClient.onConsoleMessage(event.message);
     }
     return false;
   }
 
-  private onWindowNew = (event: ESObject) => {
+  onWindowNew = (event: ESObject) => {
     if (this.webChromeClient) {
       this.webChromeClient.onCreateWindow(this, event.isAlert, event.isUserTrigger, event.handler)
     }
   }
 
-  private onWindowExit = () => {
+  onWindowExit = () => {
     if (this.dialogController) {
       this.dialogController.close();
     }
   }
 
-  private onScroll = (event: ESObject) => {
+  onScroll = (event: ESObject) => {
     this.scrollX = event.xOffset;
     this.scrollY = event.yOffset;
   }
 
-  private onControllerAttached = () => {
+  onControllerAttached = () => {
     Log.d(TAG, "onControllerAttached");
     this.controllerAttached = true
   }
 
-  private onJsAlert = (event: ESObject): boolean => {
+  onJsAlert = (event: ESObject): boolean => {
     if (this.webChromeClient && event) {
       return this.webChromeClient.onJsAlert(this, event.url, event.message, event.result);
     }
     return true;
   }
 
-  private onJsConfirm = (event: ESObject): boolean => {
+  onJsConfirm = (event: ESObject): boolean => {
     if (this.webChromeClient && event) {
       return this.webChromeClient.onJsConfirm(this, event.url, event.message, event.result);
     }
     return true;
   }
 
-  private onJsPrompt = (event: ESObject): boolean => {
+  onJsPrompt = (event: ESObject): boolean => {
     if (this.webChromeClient && event) {
       return this.webChromeClient.onJsPrompt(this, event.url, event.message, event.value, event.result);
     }
     return true;
   }
 
-  ohosWebView: DVModelJson = new DVModelJson(
-    "other",
-    [],
-    {
-      src: "",
-      controller: this.controller,
-      onDownloadStart: this.onDownloadStart,
-      onPageBegin: this.onPageBegin,
-      onPageEnd: this.onPageEnd,
-      onErrorReceive: this.onErrorReceive,
-      onLoadIntercept: this.onLoadIntercept,
-      onRefreshAccessedHistory: this.onRefreshAccessedHistory,
-      onProgressChange: this.onProgressChange,
-      onGeolocationShow: this.onGeolocationShow,
-      onGeolocationHide: this.onGeolocationHide,
-      onShowFileSelector: this.onShowFileSelector,
-      onPermissionRequest: this.onPermissionRequest,
-      onConsoleMessage: this.onConsoleMessage,
-      onWindowNew: this.onWindowNew,
-      onWindowExit: this.onWindowExit,
-      onScroll: this.onScroll,
-      onControllerAttached: this.onControllerAttached,
-      onJsAlert: this.onJsAlert,
-      onJsConfirm: this.onJsConfirm,
-      onJsPrompt: this.onJsPrompt,
-    },
-    {},
-    buildOhosWebView
-  )
 
-  private ohosWebViewModel = createDVModelFromJson(this.ohosWebView);
-
-  getView(): DVModel {
-    return this.ohosWebViewModel;
+  getView(): WrappedBuilder<[Params]> {
+    return new WrappedBuilder(WebBuilder);
   }
 
   dispose(): void {
@@ -541,33 +510,64 @@ export class WebViewProxy {
 
 class WebSettingsImpl implements WebSettings {
   private webView: WebViewPlatformView;
-  private params: DVModelParameters;
+  params: DVModelParameters = new DVModelParameters;
+  domStorageAccess: boolean = false;
+  allowWindowOpenMethod : boolean = false;
+  multiWindowAccess : boolean = false;
+  backgroundColor : string = "";
+  javaScriptAccess : boolean = false;
+  mediaPlayGestureAccess : boolean = false;
+  zoomAccess : boolean = false;
+  overviewModeAccess : boolean = false;
+  wideViewModeAccess: boolean = false;
+  fileAccess : boolean = false;
+  textZoomRatio : number = 0;
 
   constructor(webView: WebViewPlatformView) {
     this.webView = webView;
-    this.params = webView.getView().params;
+    //this.params = webView.getView().params;
   }
 
   setDomStorageEnabled(flag: boolean) {
-    DynamicUtils.setParams(this.params, "domStorageAccess", flag);
+    this.domStorageAccess = flag;
+  }
+
+  getDomStorageEnabled() : boolean{
+    return this.domStorageAccess;
   }
 
   setJavaScriptCanOpenWindowsAutomatically(flag: boolean) {
-    DynamicUtils.setParams(this.params, "allowWindowOpenMethod", flag);
+    this.allowWindowOpenMethod = flag;
+  }
+
+  getJavaScriptCanOpenWindowsAutomatically() : boolean{
+    return this.allowWindowOpenMethod;
   }
 
   setSupportMultipleWindows(support: boolean) {
-    DynamicUtils.setParams(this.params, "multiWindowAccess", support);
+    this.multiWindowAccess = support;
+  }
+
+  getSupportMultipleWindows()  : boolean{
+    return this.multiWindowAccess;
   }
 
   setBackgroundColor(color: number) {
     // number 无法实现透明度，所以转成 string
     let colorStr = `#${color.toString(16).padStart(8, '0')}`;
-    DynamicUtils.setParams(this.params, "backgroundColor", colorStr);
+    this.backgroundColor = colorStr;
+  }
+
+  getBackgroundColor() : string{
+    return this.backgroundColor;
   }
 
   setJavaScriptEnabled(flag: boolean) {
-    DynamicUtils.setParams(this.params, "javaScriptAccess", flag);
+    this.javaScriptAccess = flag;
+  }
+
+  getJavaScriptEnabled() : boolean {
+    return this.javaScriptAccess;
   }
 
   async setUserAgentString(userAgentString: string) {
@@ -576,19 +576,35 @@ class WebSettingsImpl implements WebSettings {
   }
 
   setMediaPlaybackRequiresUserGesture(require: boolean) {
-    DynamicUtils.setParams(this.params, "mediaPlayGestureAccess", require);
+    this.mediaPlayGestureAccess = require;
+  }
+
+  getMediaPlaybackRequiresUserGesture() : boolean{
+    return this.mediaPlayGestureAccess;
   }
 
   setSupportZoom(support: boolean) {
-    DynamicUtils.setParams(this.params, "zoomAccess", support);
+    this.zoomAccess = support;
+  }
+
+  getSupportZoom() : boolean{
+    return this.zoomAccess;
   }
 
   setLoadWithOverviewMode(overview: boolean) {
-    DynamicUtils.setParams(this.params, "overviewModeAccess", overview);
+    this.overviewModeAccess = overview;
+  }
+
+  getLoadWithOverviewMode() : boolean {
+    return this.overviewModeAccess;
   }
 
   setUseWideViewPort(use: boolean) {
-    DynamicUtils.setParams(this.params, "wideViewModeAccess", use);
+    this.wideViewModeAccess = use;
+  }
+
+  getUseWideViewPort() : boolean {
+    return this.wideViewModeAccess;
   }
 
   setDisplayZoomControls(enabled: boolean) {
@@ -600,15 +616,24 @@ class WebSettingsImpl implements WebSettings {
   }
 
   setAllowFileAccess(enabled: boolean) {
-    DynamicUtils.setParams(this.params, "fileAccess", enabled);
+    this.fileAccess = enabled;
+  }
+
+  getAllowFileAccess() : boolean {
+    return this.fileAccess;
   }
 
   setTextZoom(textZoom: number) {
-    DynamicUtils.setParams(this.params, "textZoomRatio", textZoom);
+    this.textZoomRatio = textZoom;
   }
 
   getUserAgentString(): string {
     // todo 获取 UserAgent
     return '';
   }
+
+  getTextZoom() : number{
+    return this.textZoomRatio;
+  }
+
 }
