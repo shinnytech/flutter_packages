@@ -75,12 +75,6 @@ export struct OhosWebView {
   }
 }
 
-/*@Builder
-export function buildOhosWebView(param: BuilderParams) {
-  OhosWebView({ params: param.params, controller: DynamicUtils.getParams(param.params, "controller") })
-}*/
-
-
 @Builder
 export function WebBuilder(params: Params) {
   OhosWebView({ params: params,webView : params.platformView as WebViewPlatformView , controller : (params.platformView as WebViewPlatformView).getController()})

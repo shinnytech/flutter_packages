@@ -420,36 +420,6 @@ export class WebViewPlatformView extends PlatformView {
     return true;
   }
 
-  /*  ohosWebView: DVModelJson = new DVModelJson(
-      "other",
-      [],
-      {
-        src: "",
-        controller: this.controller,
-        onDownloadStart: this.onDownloadStart,
-        onPageBegin: this.onPageBegin,
-        onPageEnd: this.onPageEnd,
-        onErrorReceive: this.onErrorReceive,
-        onLoadIntercept: this.onLoadIntercept,
-        onRefreshAccessedHistory: this.onRefreshAccessedHistory,
-        onProgressChange: this.onProgressChange,
-        onGeolocationShow: this.onGeolocationShow,
-        onGeolocationHide: this.onGeolocationHide,
-        onShowFileSelector: this.onShowFileSelector,
-        onPermissionRequest: this.onPermissionRequest,
-        onWindowNew: this.onWindowNew,
-        onWindowExit: this.onWindowExit,
-        onScroll: this.onScroll,
-        onControllerAttached: this.onControllerAttached,
-        onJsAlert: this.onJsAlert,
-        onJsConfirm: this.onJsConfirm,
-        onJsPrompt: this.onJsPrompt,
-      },
-      {},
-      buildOhosWebView
-    )*/
-
-  //private ohosWebViewModel = createDVModelFromJson(this.ohosWebView);
 
   getView(): WrappedBuilder<[Params]> {
     return new WrappedBuilder(WebBuilder);
