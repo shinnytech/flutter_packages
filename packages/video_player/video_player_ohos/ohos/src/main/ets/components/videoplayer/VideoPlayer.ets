@@ -18,7 +18,7 @@ import prompt from '@ohos.promptAction';
 import resourceManager from '@ohos.resourceManager';
 import window from '@ohos.window';
 import Log from '@ohos/flutter_ohos/src/main/ets/util/Log';
-import { SurfaceTextureEntry } from  '@ohos/flutter_ohos/src/main/ets/view/TextureRegistry';
+import { SurfaceTextureEntry } from '@ohos/flutter_ohos/src/main/ets/view/TextureRegistry';
 import image from '@ohos.multimedia.image';
 import { AvplayerStatus, CommonConstants, Events, SliderMode } from './constants/CommonConstants';
 import { PlayConstants } from './constants/PlayConstants';
@@ -33,6 +33,7 @@ import { EventSink, StreamHandler } from '@ohos/flutter_ohos/src/main/ets/plugin
 import { QueuingEventSink } from './QueuingEventSink';
 import { ArrayList, HashMap } from '@kit.ArkTS';
 import { audio } from '@kit.AudioKit';
+import fs from '@ohos.file.fs';
 
 const FORMAT_SS: String = 'ss';
 const FORMAT_DASH: String = 'dash';
@@ -56,6 +57,7 @@ export class VideoPlayer {
   private eventChannel: EventChannel | null = null;
   private eventSink: QueuingEventSink | null = null;
   private interruptMode: audio.InterruptMode = audio.InterruptMode.SHARE_MODE;
+  private fd: number | null = null;
 
   constructor(playerModel: PlayerModel, textureEntry: SurfaceTextureEntry, url: resourceManager.RawFileDescriptor | null, iUrl: string | null, eventChannel: EventChannel, AudioFocus: Boolean) {
     this.playerModel = playerModel;
@@ -88,7 +90,7 @@ export class VideoPlayer {
 
       await this.bindState();
       if (this.iUrl != null) {
-        this.avPlayer.url = this.iUrl;
+        this.avPlayer.url = this.getIUri();
       } else {
         this.avPlayer.fdSrc = this.url!;
       }
@@ -116,7 +118,7 @@ export class VideoPlayer {
         case AvplayerStatus.IDLE:
           this.resetProgress();
           if (this.iUrl) {
-            this.avPlayer.url = this.iUrl;
+            this.avPlayer.url = this.getIUri();
           } else {
             this.avPlayer.fdSrc = this.url!;
           }
@@ -194,6 +196,9 @@ export class VideoPlayer {
     if (this.avPlayer !== null) {
       this.avPlayer.release();
       this.eventChannel?.setStreamHandler(null);
+    }
+    if (this.fd != null) {
+      fs.closeSync(this.fd!);
     }
   }
 
@@ -563,14 +568,29 @@ export class VideoPlayer {
   sendError(error: Object): void {
     this.eventSink?.error("videoError", "video player had error！", error);
   }
+
+  getIUri(): string {
+    let iUrl = this.iUrl;
+    const ohosFilePrefix = 'file://';
+    if (iUrl != null && iUrl.startsWith(ohosFilePrefix)) {
+      const dartFilePrefix = 'file:///';
+      if (iUrl.startsWith(dartFilePrefix)) {
+        iUrl = ohosFilePrefix + iUrl.slice(dartFilePrefix.length);
+      }
+      this.fd = fs.openSync(iUrl, fs.OpenMode.READ_ONLY).fd;
+      iUrl = `fd://${this.fd!.toString()}`;
+    }
+    return iUrl ?? '';
+  }
 }
 
 class StreamHandlerImpl implements StreamHandler {
   private eventSink: QueuingEventSink | null = null;
 
-  constructor(eventSink: QueuingEventSink ) {
+  constructor(eventSink: QueuingEventSink) {
     this.eventSink = eventSink;
   }
+
   onListen(args: Object, events: EventSink): void {
     this.eventSink?.setDelegate(events);
   }
