@@ -17,46 +17,49 @@ import web_webview from '@ohos.web.webview'
 import { DynamicUtils } from "./DynamicUtils"
 
 import { BuilderParams, DVModelParameters } from '@ohos/flutter_ohos/src/main/ets/view/DynamicView/dynamicView'
+import { Params } from '@ohos/flutter_ohos/src/main/ets/plugin/platform/PlatformView';
+import { WebViewPlatformView } from './WebViewHostApiImpl';
 
 @Component
 export struct OhosWebView {
-  @Prop params: DVModelParameters = new DVModelParameters();
+  @Prop params: Params;
+  webView: WebViewPlatformView = new WebViewPlatformView();
   controller: web_webview.WebviewController = new web_webview.WebviewController()
 
   build() {
     Column() {
       Web(
         {
-          src: DynamicUtils.getParams(this.params, "src"),
+          src: "",
           controller: this.controller
         })
-        .backgroundColor(DynamicUtils.getParams(this.params, "backgroundColor"))
-        .onDownloadStart(DynamicUtils.getParams(this.params, "onDownloadStart"))
-        .onPageBegin(DynamicUtils.getParams(this.params, "onPageBegin"))
-        .onPageEnd(DynamicUtils.getParams(this.params, "onPageEnd"))
-        .onErrorReceive(DynamicUtils.getParams(this.params, "onErrorReceive"))
-        .onLoadIntercept(DynamicUtils.getParams(this.params, "onLoadIntercept"))
-        .onRefreshAccessedHistory(DynamicUtils.getParams(this.params, "onRefreshAccessedHistory"))
-        .onProgressChange(DynamicUtils.getParams(this.params, "onProgressChange"))
-        .onGeolocationShow(DynamicUtils.getParams(this.params, "onGeolocationShow"))
-        .onGeolocationHide(DynamicUtils.getParams(this.params, "onGeolocationHide"))
-        .onShowFileSelector(DynamicUtils.getParams(this.params, "onShowFileSelector"))
-        .onPermissionRequest(DynamicUtils.getParams(this.params, "onPermissionRequest"))
-        .onConsole(DynamicUtils.getParams(this.params, "onConsoleMessage"))
+        .backgroundColor(this.webView.getWebSettings().getBackgroundColor())
+        .onDownloadStart(this.webView.onDownloadStart)
+        .onPageBegin(this.webView.onPageBegin)
+        .onPageEnd(this.webView.onPageEnd)
+        .onErrorReceive(this.webView.onErrorReceive)
+        .onLoadIntercept(this.webView.onLoadIntercept)
+        .onRefreshAccessedHistory(this.webView.onRefreshAccessedHistory)
+        .onProgressChange(this.webView.onProgressChange)
+        .onGeolocationShow(this.webView.onGeolocationShow)
+        .onGeolocationHide(this.webView.onGeolocationHide)
+        .onShowFileSelector(this.webView.onShowFileSelector)
+        .onPermissionRequest(this.webView.onPermissionRequest)
+        .onConsole(this.webView.onConsoleMessage)
         // .onWindowNew(DynamicUtils.getParams(this.params, "onWindowNew"))
-        .onWindowExit(DynamicUtils.getParams(this.params, "onWindowExit"))
-        .domStorageAccess(DynamicUtils.getParams(this.params, "domStorageAccess"))
-        .allowWindowOpenMethod(DynamicUtils.getParams(this.params, "allowWindowOpenMethod"))
+        .onWindowExit(this.webView.onWindowExit)
+        .domStorageAccess(this.webView.getWebSettings().getDomStorageEnabled())
+          //.allowWindowOpenMethod(this.webView.getWebSettings().getJavaScriptCanOpenWindowsAutomaticallyd)
         .multiWindowAccess(false)
-        .javaScriptAccess(DynamicUtils.getParams(this.params, "javaScriptAccess"))
-        .mediaPlayGestureAccess(DynamicUtils.getParams(this.params, "mediaPlayGestureAccess"))
-        .zoomAccess(DynamicUtils.getParams(this.params, "zoomAccess"))
-        .overviewModeAccess(DynamicUtils.getParams(this.params, "overviewModeAccess"))
-        .wideViewModeAccess(DynamicUtils.getParams(this.params, "wideViewModeAccess"))
-        .fileAccess(DynamicUtils.getParams(this.params, "fileAccess"))
-        .textZoomRatio(DynamicUtils.getParams(this.params, "textZoomRatio"))
-        .onScroll(DynamicUtils.getParams(this.params, "onScroll"))
-        .onControllerAttached(DynamicUtils.getParams(this.params, "onControllerAttached"))
+        .javaScriptAccess(this.webView.getWebSettings().getJavaScriptEnabled())
+        .mediaPlayGestureAccess(this.webView.getWebSettings().getMediaPlaybackRequiresUserGesture())
+        .zoomAccess(this.webView.getWebSettings().getSupportZoom())
+        .overviewModeAccess(this.webView.getWebSettings().getLoadWithOverviewMode())
+        .wideViewModeAccess(this.webView.getWebSettings().getUseWideViewPort())
+        .fileAccess(this.webView.getWebSettings().getAllowFileAccess())
+        .textZoomRatio(this.webView.getWebSettings().getTextZoom())
+        .onScroll(this.webView.onScroll)
+        .onControllerAttached(this.webView.onControllerAttached)
         .onWindowNew((event) => {
           let newWebViewController: web_webview.WebviewController = new web_webview.WebviewController();
           let dialogController: CustomDialogController = new CustomDialogController({
@@ -70,8 +73,8 @@ export struct OhosWebView {
 }
 
 @Builder
-export function buildOhosWebView(param: BuilderParams) {
-  OhosWebView({ params: param.params, controller: DynamicUtils.getParams(param.params, "controller") })
+export function WebBuilder(params: Params) {
+  OhosWebView({ params: params,webView : params.platformView as WebViewPlatformView , controller : (params.platformView as WebViewPlatformView).getController()})
 }
 
 @CustomDialog

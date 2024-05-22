@@ -18,33 +18,55 @@ import { InstanceManager } from './InstanceManager';
 import { WebViewPlatformView } from './WebViewHostApiImpl';
 
 export interface WebSettings {
-  setDomStorageEnabled(flag: boolean) : void;
+  setDomStorageEnabled(flag: boolean): void;
 
-  setJavaScriptCanOpenWindowsAutomatically(flag: boolean) : void;
+  getDomStorageEnabled(): boolean;
 
-  setSupportMultipleWindows(support: boolean) : void;
+  setJavaScriptCanOpenWindowsAutomatically(flag: boolean): void;
+
+  getJavaScriptCanOpenWindowsAutomatically(): boolean;
+
+  setSupportMultipleWindows(support: boolean): void;
+
+  getSupportMultipleWindows(): boolean;
 
   setBackgroundColor(color: number): void;
 
-  setJavaScriptEnabled(flag: boolean) : void;
+  getBackgroundColor(): string;
 
-  setUserAgentString(userAgentString: string) : void;
+  setJavaScriptEnabled(flag: boolean): void;
 
-  setMediaPlaybackRequiresUserGesture(require: boolean) : void;
+  getJavaScriptEnabled(): boolean;
 
-  setSupportZoom(support: boolean) : void;
+  setUserAgentString(userAgentString: string): void;
 
-  setLoadWithOverviewMode(overview: boolean) : void;
+  setMediaPlaybackRequiresUserGesture(require: boolean): void;
 
-  setUseWideViewPort(use: boolean) : void;
+  getMediaPlaybackRequiresUserGesture(): boolean;
 
-  setDisplayZoomControls(enabled: boolean) : void;
+  setSupportZoom(support: boolean): void;
 
-  setBuiltInZoomControls(enabled: boolean) : void;
+  getSupportZoom(): boolean;
 
-  setAllowFileAccess(enabled: boolean) : void;
+  setLoadWithOverviewMode(overview: boolean): void;
 
-  setTextZoom(textZoom: number) : void;
+  getLoadWithOverviewMode(): boolean;
+
+  setUseWideViewPort(use: boolean): void;
+
+  getUseWideViewPort(): boolean;
+
+  setDisplayZoomControls(enabled: boolean): void;
+
+  setBuiltInZoomControls(enabled: boolean): void;
+
+  setAllowFileAccess(enabled: boolean): void;
+
+  getAllowFileAccess(): boolean;
+
+  setTextZoom(textZoom: number): void;
+
+  getTextZoom(): number;
 
   getUserAgentString(): Promise<string>
 }
