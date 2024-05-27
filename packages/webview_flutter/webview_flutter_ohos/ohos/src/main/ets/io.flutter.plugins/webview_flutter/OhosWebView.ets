@@ -14,11 +14,9 @@
 */
 
 import web_webview from '@ohos.web.webview'
-import { DynamicUtils } from "./DynamicUtils"
-
-import { BuilderParams, DVModelParameters } from '@ohos/flutter_ohos/src/main/ets/view/DynamicView/dynamicView'
 import { Params } from '@ohos/flutter_ohos/src/main/ets/plugin/platform/PlatformView';
 import { WebViewPlatformView } from './WebViewHostApiImpl';
+import { Any } from '@ohos/flutter_ohos';
 
 @Component
 export struct OhosWebView {
@@ -46,10 +44,9 @@ export struct OhosWebView {
         .onShowFileSelector(this.webView.onShowFileSelector)
         .onPermissionRequest(this.webView.onPermissionRequest)
         .onConsole(this.webView.onConsoleMessage)
-          // .onWindowNew(DynamicUtils.getParams(this.params, "onWindowNew"))
         .onWindowExit(this.webView.onWindowExit)
         .domStorageAccess(this.webView.getWebSettings().getDomStorageEnabled())
-          //.allowWindowOpenMethod(this.webView.getWebSettings().getJavaScriptCanOpenWindowsAutomaticallyd)
+        .allowWindowOpenMethod(this.webView.getWebSettings().getJavaScriptCanOpenWindowsAutomatically)
         .multiWindowAccess(false)
         .javaScriptAccess(this.webView.getWebSettings().getJavaScriptEnabled())
         .mediaPlayGestureAccess(this.webView.getWebSettings().getMediaPlaybackRequiresUserGesture())
@@ -60,7 +57,7 @@ export struct OhosWebView {
         .textZoomRatio(this.webView.getWebSettings().getTextZoom())
         .onScroll(this.webView.onScroll)
         .onControllerAttached(this.webView.onControllerAttached)
-        .onWindowNew((event) => {
+        .onWindowNew((event: Any) => {
           let newWebViewController: web_webview.WebviewController = new web_webview.WebviewController();
           let dialogController: CustomDialogController = new CustomDialogController({
             builder: NewWebView({ webViewController: newWebViewController })
@@ -77,7 +74,11 @@ export struct OhosWebView {
 
 @Builder
 export function WebBuilder(params: Params) {
-  OhosWebView({ params: params,webView : params.platformView as WebViewPlatformView , controller : (params.platformView as WebViewPlatformView).getController()})
+  OhosWebView({
+    params: params,
+    webView: params.platformView as WebViewPlatformView,
+    controller: (params.platformView as WebViewPlatformView).getController()
+  })
 }
 
 @CustomDialog
