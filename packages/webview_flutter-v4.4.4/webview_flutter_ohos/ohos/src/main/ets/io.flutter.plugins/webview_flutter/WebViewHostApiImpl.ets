@@ -115,8 +115,13 @@ export class WebViewHostApiImpl extends WebViewHostApi {
   }
 
   postUrl(instanceId: number, url: string, data: Uint8Array): void {
-    // TODO:确认实现方式
     const webView: WebViewPlatformView = this.instanceManager.getInstance(instanceId);
+    await webView.waitControllerAttached();
+    try {
+      webView.getController().postUrl(url,data.buffer);
+    } catch (err) {
+      Log.e(TAG, "postUrl err = " + err);
+    }
   }
 
   getUrl(instanceId: number): string {
