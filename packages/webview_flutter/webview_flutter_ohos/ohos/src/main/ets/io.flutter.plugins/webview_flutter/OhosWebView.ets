@@ -23,14 +23,14 @@ import { WebViewPlatformView } from './WebViewHostApiImpl';
 @Component
 export struct OhosWebView {
   @Prop params: Params;
-  webView: WebViewPlatformView = new WebViewPlatformView();
-  controller: web_webview.WebviewController = new web_webview.WebviewController()
+  webView: WebViewPlatformView = this.params.platformView as WebViewPlatformView;
+  controller: web_webview.WebviewController = this.webView.getController();
 
   build() {
     Column() {
       Web(
         {
-          src: "",
+          src: this.webView.getUrl(),
           controller: this.controller
         })
         .backgroundColor(this.webView.getWebSettings().getBackgroundColor())
