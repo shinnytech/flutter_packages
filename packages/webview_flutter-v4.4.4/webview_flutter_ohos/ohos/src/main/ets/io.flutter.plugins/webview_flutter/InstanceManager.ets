@@ -104,7 +104,7 @@ export class InstanceManager {
 
   getIdentifier(instance: Object): number {
     this.logWarningIfFinalizationListenerHasStopped();
-    const identifier: number = this.identifiers.get(instance) || -1;
+    const identifier: number = this.identifiers.get(instance) ?? -1;
     return identifier;
   }
 
