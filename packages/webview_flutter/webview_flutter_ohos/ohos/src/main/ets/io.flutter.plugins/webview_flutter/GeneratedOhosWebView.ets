@@ -3618,7 +3618,7 @@ export abstract class InstanceManagerHostApi {
 
       const channel: BasicMessageChannel<ESObject> =
       new BasicMessageChannel<ESObject>(
-        binaryMessenger, "dev.flutter.webview_flutter_ohos.InstanceManagerHostApi.clear", OhosObjectHostApi.getCodec()
+        binaryMessenger, "dev.flutter.pigeon.webview_flutter_ohos.InstanceManagerHostApi.clear", OhosObjectHostApi.getCodec()
       );
 
       if (api != null) {
