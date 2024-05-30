@@ -116,7 +116,7 @@ export class WebViewHostApiImpl extends WebViewHostApi {
     return result;
   }
 
-  postUrl(instanceId: number, url: string, data: Uint8Array): void {
+  async postUrl(instanceId: number, url: string, data: Uint8Array):  Promise<void> {
     const webView: WebViewPlatformView = this.instanceManager.getInstance(instanceId);
     await webView.waitControllerAttached();
     try {
