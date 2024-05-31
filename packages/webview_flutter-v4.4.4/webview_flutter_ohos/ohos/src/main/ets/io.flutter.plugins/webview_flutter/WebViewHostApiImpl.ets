@@ -95,6 +95,7 @@ export class WebViewHostApiImpl extends WebViewHostApi {
       }else {
         webView.getController().loadUrl(url, this.toWebHeaders(headers));
       }
+      webView.setUrl(webView.getController().getUrl());
     } catch (err) {
       Log.e(TAG, "loadUrl err = " + err);
     }
@@ -114,9 +115,14 @@ export class WebViewHostApiImpl extends WebViewHostApi {
     return result;
   }
 
-  postUrl(instanceId: number, url: string, data: Uint8Array): void {
-    // TODO:确认实现方式
+  async postUrl(instanceId: number, url: string, data: Uint8Array): Promise<void> {
     const webView: WebViewPlatformView = this.instanceManager.getInstance(instanceId);
+    await webView.waitControllerAttached();
+    try {
+      webView.getController().postUrl(url,data.buffer);
+    } catch (err) {
+      Log.e(TAG, "postUrl err = " + err);
+    }
   }
 
   getUrl(instanceId: number): string {
@@ -262,6 +268,8 @@ export class WebViewPlatformView extends PlatformView {
 
   private controller: web_webview.WebviewController = new web_webview.WebviewController();
 
+  private tempUrl: string = "";
+
   private downloadListener: DownloadListener = {} as ESObject;
 
   private webChromeClient: WebChromeClient | null = null;
@@ -398,6 +406,14 @@ export class WebViewPlatformView extends PlatformView {
 
   getController(): web_webview.WebviewController {
     return this.controller;
+  }
+
+  setUrl(url: string): void {
+    this.tempUrl = url;
+  }
+
+  getUrl(): string {
+    return this.tempUrl;
   }
 
   getWebCookieManager(): web_webview.WebCookieManager {
