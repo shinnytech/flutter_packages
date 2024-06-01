@@ -46,7 +46,7 @@ export struct OhosWebView {
         .onConsole(this.webView.onConsoleMessage)
         .onWindowExit(this.webView.onWindowExit)
         .domStorageAccess(this.webView.getWebSettings().getDomStorageEnabled())
-        .allowWindowOpenMethod(this.webView.getWebSettings().getJavaScriptCanOpenWindowsAutomatically)
+        .allowWindowOpenMethod(this.webView.getWebSettings().getJavaScriptCanOpenWindowsAutomatically())
         .multiWindowAccess(false)
         .javaScriptAccess(this.webView.getWebSettings().getJavaScriptEnabled())
         .mediaPlayGestureAccess(this.webView.getWebSettings().getMediaPlaybackRequiresUserGesture())
