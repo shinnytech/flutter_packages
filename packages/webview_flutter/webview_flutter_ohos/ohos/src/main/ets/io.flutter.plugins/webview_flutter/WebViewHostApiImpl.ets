@@ -73,7 +73,7 @@ export class WebViewHostApiImpl extends WebViewHostApi {
 
   loadData(instanceId: number, data: string, mimeType: string, encoding: string): void {
     const webView: WebViewPlatformView = this.instanceManager.getInstance(instanceId);
-    webView.getController().loadData(data, mimeType, encoding);
+    webView.getController().loadData(data, mimeType, encoding, " ", " ");
   }
 
   async loadDataWithBaseUrl(
@@ -82,7 +82,7 @@ export class WebViewHostApiImpl extends WebViewHostApi {
     const webView: WebViewPlatformView = this.instanceManager.getInstance(instanceId);
     await webView.waitControllerAttached();
     try {
-      webView.getController().loadData(data, mimeType, encoding, baseUrl == null ? "" : baseUrl , historyUrl == null ? "" : historyUrl);
+      webView.getController().loadData(data, mimeType, encoding, baseUrl == null ? " " : baseUrl , historyUrl == null ? " " : historyUrl);
     } catch (err) {
       Log.e(TAG, "loadDataWithBaseUrl err = " + err);
     }
