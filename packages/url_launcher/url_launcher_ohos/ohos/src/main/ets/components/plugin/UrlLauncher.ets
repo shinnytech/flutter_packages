@@ -48,7 +48,6 @@ export class UrlLauncher implements UrlLauncherApi {
 
   constructor(ctx: common.UIAbilityContext) {
     this.context = ctx;
-    this.getPermission();
   }
 
   getPermission() {
