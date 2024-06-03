@@ -10,11 +10,9 @@
 #import "FWFObjectHostApi.h"
 #import "FWFPreferencesHostApi.h"
 #import "FWFScriptMessageHandlerHostApi.h"
-#import "FWFScrollViewDelegateHostApi.h"
 #import "FWFScrollViewHostApi.h"
 #import "FWFUIDelegateHostApi.h"
 #import "FWFUIViewHostApi.h"
-#import "FWFURLCredentialHostApi.h"
 #import "FWFURLHostApi.h"
 #import "FWFUserContentControllerHostApi.h"
 #import "FWFWebViewConfigurationHostApi.h"
@@ -62,58 +60,50 @@
                     instanceManager:[[FWFInstanceManager alloc] init]];
 
         dispatch_async(dispatch_get_main_queue(), ^{
-          [objectApi disposeObjectWithIdentifier:identifier
+          [objectApi disposeObjectWithIdentifier:@(identifier)
                                       completion:^(FlutterError *error) {
                                         NSAssert(!error, @"%@", error);
                                       }];
         });
       }];
-  SetUpFWFWKHttpCookieStoreHostApi(
+  FWFWKHttpCookieStoreHostApiSetup(
       registrar.messenger,
       [[FWFHTTPCookieStoreHostApiImpl alloc] initWithInstanceManager:instanceManager]);
-  SetUpFWFWKNavigationDelegateHostApi(
+  FWFWKNavigationDelegateHostApiSetup(
       registrar.messenger,
       [[FWFNavigationDelegateHostApiImpl alloc] initWithBinaryMessenger:registrar.messenger
                                                         instanceManager:instanceManager]);
-  SetUpFWFNSObjectHostApi(registrar.messenger,
+  FWFNSObjectHostApiSetup(registrar.messenger,
                           [[FWFObjectHostApiImpl alloc] initWithInstanceManager:instanceManager]);
-  SetUpFWFWKPreferencesHostApi(registrar.messenger, [[FWFPreferencesHostApiImpl alloc]
+  FWFWKPreferencesHostApiSetup(registrar.messenger, [[FWFPreferencesHostApiImpl alloc]
                                                         initWithInstanceManager:instanceManager]);
-  SetUpFWFWKScriptMessageHandlerHostApi(
+  FWFWKScriptMessageHandlerHostApiSetup(
       registrar.messenger,
       [[FWFScriptMessageHandlerHostApiImpl alloc] initWithBinaryMessenger:registrar.messenger
                                                           instanceManager:instanceManager]);
-  SetUpFWFUIScrollViewHostApi(registrar.messenger, [[FWFScrollViewHostApiImpl alloc]
+  FWFUIScrollViewHostApiSetup(registrar.messenger, [[FWFScrollViewHostApiImpl alloc]
                                                        initWithInstanceManager:instanceManager]);
-  SetUpFWFWKUIDelegateHostApi(registrar.messenger, [[FWFUIDelegateHostApiImpl alloc]
+  FWFWKUIDelegateHostApiSetup(registrar.messenger, [[FWFUIDelegateHostApiImpl alloc]
                                                        initWithBinaryMessenger:registrar.messenger
                                                                instanceManager:instanceManager]);
-  SetUpFWFUIViewHostApi(registrar.messenger,
+  FWFUIViewHostApiSetup(registrar.messenger,
                         [[FWFUIViewHostApiImpl alloc] initWithInstanceManager:instanceManager]);
-  SetUpFWFWKUserContentControllerHostApi(
+  FWFWKUserContentControllerHostApiSetup(
       registrar.messenger,
       [[FWFUserContentControllerHostApiImpl alloc] initWithInstanceManager:instanceManager]);
-  SetUpFWFWKWebsiteDataStoreHostApi(
+  FWFWKWebsiteDataStoreHostApiSetup(
       registrar.messenger,
       [[FWFWebsiteDataStoreHostApiImpl alloc] initWithInstanceManager:instanceManager]);
-  SetUpFWFWKWebViewConfigurationHostApi(
+  FWFWKWebViewConfigurationHostApiSetup(
       registrar.messenger,
       [[FWFWebViewConfigurationHostApiImpl alloc] initWithBinaryMessenger:registrar.messenger
                                                           instanceManager:instanceManager]);
-  SetUpFWFWKWebViewHostApi(registrar.messenger, [[FWFWebViewHostApiImpl alloc]
+  FWFWKWebViewHostApiSetup(registrar.messenger, [[FWFWebViewHostApiImpl alloc]
                                                     initWithBinaryMessenger:registrar.messenger
                                                             instanceManager:instanceManager]);
-  SetUpFWFNSUrlHostApi(registrar.messenger,
+  FWFNSUrlHostApiSetup(registrar.messenger,
                        [[FWFURLHostApiImpl alloc] initWithBinaryMessenger:registrar.messenger
                                                           instanceManager:instanceManager]);
-  SetUpFWFUIScrollViewDelegateHostApi(
-      registrar.messenger,
-      [[FWFScrollViewDelegateHostApiImpl alloc] initWithBinaryMessenger:registrar.messenger
-                                                        instanceManager:instanceManager]);
-  SetUpFWFNSUrlCredentialHostApi(
-      registrar.messenger,
-      [[FWFURLCredentialHostApiImpl alloc] initWithBinaryMessenger:registrar.messenger
-                                                   instanceManager:instanceManager]);
 
   FWFWebViewFactory *webviewFactory = [[FWFWebViewFactory alloc] initWithManager:instanceManager];
   [registrar registerViewFactory:webviewFactory withId:@"plugins.flutter.io/webview"];

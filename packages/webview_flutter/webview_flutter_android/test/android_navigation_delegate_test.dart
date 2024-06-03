@@ -6,7 +6,6 @@ import 'dart:async';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
-import 'package:mockito/mockito.dart';
 import 'package:webview_flutter_android/src/android_proxy.dart';
 import 'package:webview_flutter_android/src/android_webview.dart'
     as android_webview;
@@ -16,10 +15,7 @@ import 'package:webview_flutter_platform_interface/webview_flutter_platform_inte
 import 'android_navigation_delegate_test.mocks.dart';
 import 'test_android_webview.g.dart';
 
-@GenerateMocks(<Type>[
-  TestInstanceManagerHostApi,
-  android_webview.HttpAuthHandler,
-])
+@GenerateMocks(<Type>[TestInstanceManagerHostApi])
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
@@ -450,67 +446,27 @@ void main() {
       expect(callbackNavigationRequest.url, 'https://www.google.com');
       expect(completer.isCompleted, true);
     });
+  });
 
-    test('onUrlChange', () {
-      final AndroidNavigationDelegate androidNavigationDelegate =
-          AndroidNavigationDelegate(_buildCreationParams());
+  test('onUrlChange', () {
+    final AndroidNavigationDelegate androidNavigationDelegate =
+        AndroidNavigationDelegate(_buildCreationParams());
 
-      late final AndroidUrlChange urlChange;
-      androidNavigationDelegate.setOnUrlChange(
-        (UrlChange change) {
-          urlChange = change as AndroidUrlChange;
-        },
-      );
+    late final AndroidUrlChange urlChange;
+    androidNavigationDelegate.setOnUrlChange(
+      (UrlChange change) {
+        urlChange = change as AndroidUrlChange;
+      },
+    );
 
-      CapturingWebViewClient.lastCreatedDelegate.doUpdateVisitedHistory!(
-        android_webview.WebView.detached(),
-        'https://www.google.com',
-        false,
-      );
+    CapturingWebViewClient.lastCreatedDelegate.doUpdateVisitedHistory!(
+      android_webview.WebView.detached(),
+      'https://www.google.com',
+      false,
+    );
 
-      expect(urlChange.url, 'https://www.google.com');
-      expect(urlChange.isReload, isFalse);
-    });
-
-    test('onReceivedHttpAuthRequest emits host and realm', () {
-      final AndroidNavigationDelegate androidNavigationDelegate =
-          AndroidNavigationDelegate(_buildCreationParams());
-
-      String? callbackHost;
-      String? callbackRealm;
-      androidNavigationDelegate.setOnHttpAuthRequest((HttpAuthRequest request) {
-        callbackHost = request.host;
-        callbackRealm = request.realm;
-      });
-
-      const String expectedHost = 'expectedHost';
-      const String expectedRealm = 'expectedRealm';
-
-      CapturingWebViewClient.lastCreatedDelegate.onReceivedHttpAuthRequest!(
-        android_webview.WebView.detached(),
-        android_webview.HttpAuthHandler(),
-        expectedHost,
-        expectedRealm,
-      );
-
-      expect(callbackHost, expectedHost);
-      expect(callbackRealm, expectedRealm);
-    });
-
-    test('onReceivedHttpAuthRequest calls cancel by default', () {
-      AndroidNavigationDelegate(_buildCreationParams());
-
-      final MockHttpAuthHandler mockAuthHandler = MockHttpAuthHandler();
-
-      CapturingWebViewClient.lastCreatedDelegate.onReceivedHttpAuthRequest!(
-        android_webview.WebView.detached(),
-        mockAuthHandler,
-        'host',
-        'realm',
-      );
-
-      verify(mockAuthHandler.cancel());
-    });
+    expect(urlChange.url, 'https://www.google.com');
+    expect(urlChange.isReload, isFalse);
   });
 }
 
@@ -533,7 +489,6 @@ class CapturingWebViewClient extends android_webview.WebViewClient {
     super.onPageFinished,
     super.onPageStarted,
     super.onReceivedError,
-    super.onReceivedHttpAuthRequest,
     super.onReceivedRequestError,
     super.requestLoading,
     super.urlLoading,
@@ -562,13 +517,7 @@ class CapturingWebChromeClient extends android_webview.WebChromeClient {
     super.onShowFileChooser,
     super.onGeolocationPermissionsShowPrompt,
     super.onGeolocationPermissionsHidePrompt,
-    super.onShowCustomView,
-    super.onHideCustomView,
     super.onPermissionRequest,
-    super.onConsoleMessage,
-    super.onJsAlert,
-    super.onJsConfirm,
-    super.onJsPrompt,
     super.binaryMessenger,
     super.instanceManager,
   }) : super.detached() {

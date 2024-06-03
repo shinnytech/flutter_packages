@@ -17,7 +17,8 @@ void main() {
     late List<MethodCall> log;
 
     setUpAll(() {
-      TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+      _ambiguate(TestDefaultBinaryMessengerBinding.instance)!
+          .defaultBinaryMessenger
           .setMockMethodCallHandler(
         SystemChannels.platform_views,
         (MethodCall call) async {
@@ -37,7 +38,8 @@ void main() {
     });
 
     tearDownAll(() {
-      TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+      _ambiguate(TestDefaultBinaryMessengerBinding.instance)!
+          .defaultBinaryMessenger
           .setMockMethodCallHandler(SystemChannels.platform_views, null);
     });
 
@@ -120,3 +122,9 @@ class TestWebViewPlatformCallbacksHandler
   @override
   void onWebResourceError(WebResourceError error) {}
 }
+
+/// This allows a value of type T or T? to be treated as a value of type T?.
+///
+/// We use this so that APIs that have become non-nullable can still be used
+/// with `!` and `?` on the stable branch.
+T? _ambiguate<T>(T? value) => value;

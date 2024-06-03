@@ -20,38 +20,39 @@
   return self;
 }
 
-- (WKUserContentController *)userContentControllerForIdentifier:(NSInteger)identifier {
-  return (WKUserContentController *)[self.instanceManager instanceForIdentifier:identifier];
+- (WKUserContentController *)userContentControllerForIdentifier:(NSNumber *)identifier {
+  return (WKUserContentController *)[self.instanceManager
+      instanceForIdentifier:identifier.longValue];
 }
 
-- (void)createFromWebViewConfigurationWithIdentifier:(NSInteger)identifier
-                             configurationIdentifier:(NSInteger)configurationIdentifier
+- (void)createFromWebViewConfigurationWithIdentifier:(nonnull NSNumber *)identifier
+                             configurationIdentifier:(nonnull NSNumber *)configurationIdentifier
                                                error:(FlutterError *_Nullable *_Nonnull)error {
   WKWebViewConfiguration *configuration = (WKWebViewConfiguration *)[self.instanceManager
-      instanceForIdentifier:configurationIdentifier];
+      instanceForIdentifier:configurationIdentifier.longValue];
   [self.instanceManager addDartCreatedInstance:configuration.userContentController
-                                withIdentifier:identifier];
+                                withIdentifier:identifier.longValue];
 }
 
-- (void)addScriptMessageHandlerForControllerWithIdentifier:(NSInteger)identifier
-                                         handlerIdentifier:(NSInteger)handler
+- (void)addScriptMessageHandlerForControllerWithIdentifier:(nonnull NSNumber *)identifier
+                                         handlerIdentifier:(nonnull NSNumber *)handler
                                                     ofName:(nonnull NSString *)name
                                                      error:
                                                          (FlutterError *_Nullable *_Nonnull)error {
   [[self userContentControllerForIdentifier:identifier]
       addScriptMessageHandler:(id<WKScriptMessageHandler>)[self.instanceManager
-                                  instanceForIdentifier:handler]
+                                  instanceForIdentifier:handler.longValue]
                          name:name];
 }
 
-- (void)removeScriptMessageHandlerForControllerWithIdentifier:(NSInteger)identifier
+- (void)removeScriptMessageHandlerForControllerWithIdentifier:(nonnull NSNumber *)identifier
                                                          name:(nonnull NSString *)name
                                                         error:(FlutterError *_Nullable *_Nonnull)
                                                                   error {
   [[self userContentControllerForIdentifier:identifier] removeScriptMessageHandlerForName:name];
 }
 
-- (void)removeAllScriptMessageHandlersForControllerWithIdentifier:(NSInteger)identifier
+- (void)removeAllScriptMessageHandlersForControllerWithIdentifier:(nonnull NSNumber *)identifier
                                                             error:
                                                                 (FlutterError *_Nullable *_Nonnull)
                                                                     error {
@@ -65,14 +66,14 @@
   }
 }
 
-- (void)addUserScriptForControllerWithIdentifier:(NSInteger)identifier
+- (void)addUserScriptForControllerWithIdentifier:(nonnull NSNumber *)identifier
                                       userScript:(nonnull FWFWKUserScriptData *)userScript
                                            error:(FlutterError *_Nullable *_Nonnull)error {
   [[self userContentControllerForIdentifier:identifier]
       addUserScript:FWFNativeWKUserScriptFromScriptData(userScript)];
 }
 
-- (void)removeAllUserScriptsForControllerWithIdentifier:(NSInteger)identifier
+- (void)removeAllUserScriptsForControllerWithIdentifier:(nonnull NSNumber *)identifier
                                                   error:(FlutterError *_Nullable *_Nonnull)error {
   [[self userContentControllerForIdentifier:identifier] removeAllUserScripts];
 }

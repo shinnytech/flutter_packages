@@ -39,7 +39,6 @@ class NavigationDelegate {
   ///
   /// {@template webview_fluttter.NavigationDelegate.constructor}
   /// `onUrlChange`: invoked when the underlying web view changes to a new url.
-  /// `onHttpAuthRequest`: invoked when the web view is requesting authentication.
   /// {@endtemplate}
   NavigationDelegate({
     FutureOr<NavigationDecision> Function(NavigationRequest request)?
@@ -49,7 +48,6 @@ class NavigationDelegate {
     void Function(int progress)? onProgress,
     void Function(WebResourceError error)? onWebResourceError,
     void Function(UrlChange change)? onUrlChange,
-    void Function(HttpAuthRequest request)? onHttpAuthRequest,
   }) : this.fromPlatformCreationParams(
           const PlatformNavigationDelegateCreationParams(),
           onNavigationRequest: onNavigationRequest,
@@ -58,7 +56,6 @@ class NavigationDelegate {
           onProgress: onProgress,
           onWebResourceError: onWebResourceError,
           onUrlChange: onUrlChange,
-          onHttpAuthRequest: onHttpAuthRequest,
         );
 
   /// Constructs a [NavigationDelegate] from creation params for a specific
@@ -101,7 +98,6 @@ class NavigationDelegate {
     void Function(int progress)? onProgress,
     void Function(WebResourceError error)? onWebResourceError,
     void Function(UrlChange change)? onUrlChange,
-    void Function(HttpAuthRequest request)? onHttpAuthRequest,
   }) : this.fromPlatform(
           PlatformNavigationDelegate(params),
           onNavigationRequest: onNavigationRequest,
@@ -110,7 +106,6 @@ class NavigationDelegate {
           onProgress: onProgress,
           onWebResourceError: onWebResourceError,
           onUrlChange: onUrlChange,
-          onHttpAuthRequest: onHttpAuthRequest,
         );
 
   /// Constructs a [NavigationDelegate] from a specific platform implementation.
@@ -124,7 +119,6 @@ class NavigationDelegate {
     this.onProgress,
     this.onWebResourceError,
     void Function(UrlChange change)? onUrlChange,
-    HttpAuthRequestCallback? onHttpAuthRequest,
   }) {
     if (onNavigationRequest != null) {
       platform.setOnNavigationRequest(onNavigationRequest!);
@@ -143,9 +137,6 @@ class NavigationDelegate {
     }
     if (onUrlChange != null) {
       platform.setOnUrlChange(onUrlChange);
-    }
-    if (onHttpAuthRequest != null) {
-      platform.setOnHttpAuthRequest(onHttpAuthRequest);
     }
   }
 

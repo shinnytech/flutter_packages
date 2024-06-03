@@ -1,44 +1,3 @@
-## 3.15.0
-
-* Adds support for `setOnScrollPositionChange` method to the `AndroidWebViewController`.
-
-## 3.14.0
-
-* Adds support to show JavaScript dialog. See `AndroidWebViewController.setOnJavaScriptAlertDialog`, `AndroidWebViewController.setOnJavaScriptConfirmDialog` and `AndroidWebViewController.setOnJavaScriptTextInputDialog`.
-
-## 3.13.2
-
-* Fixes new lint warnings.
-
-## 3.13.1
-
-* Bumps androidx.annotation:annotation from 1.7.0 to 1.7.1.
-
-## 3.13.0
-
-* Adds support for `PlatformNavigationDelegate.setOnHttpAuthRequest`.
-
-## 3.12.1
-
-* Fixes `use_build_context_synchronously` lint violations in the example app.
-
-## 3.12.0
-
-* Adds support for `PlatformWebViewController.getUserAgent`.
-
-## 3.11.0
-
-* Adds support to register a callback to receive JavaScript console messages. See `AndroidWebViewController.onConsoleMessage`.
-
-## 3.10.1
-
-* Bumps androidx.annotation:annotation from 1.5.0 to 1.7.0.
-
-## 3.10.0
-
-* Adds support for playing video in fullscreen. See
-  `AndroidWebViewController.setCustomWidgetCallbacks`.
-
 ## 3.9.5
 
 * Updates pigeon to 11 and removes unneeded enum wrappers.
@@ -55,7 +14,7 @@
 ## 3.9.2
 
 * Fixes bug where `PlatformWebViewWidget` doesn't rebuild when the controller or PlatformView
-  implementation flag changes.
+  implementation flag changes. 
 
 ## 3.9.1
 

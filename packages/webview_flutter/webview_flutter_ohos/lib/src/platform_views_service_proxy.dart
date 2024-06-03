@@ -24,8 +24,8 @@ class PlatformViewsServiceProxy {
   /// Constructs a [PlatformViewsServiceProxy].
   const PlatformViewsServiceProxy();
 
-  /// Proxy method for [PlatformViewsService.initExpensiveAndroidView].
-  ExpensiveOhosViewController initExpensiveOhosView({
+  /// Proxy method for [PlatformViewsService.initOhosView].
+  OhosViewController initOhosView({
     required int id,
     required String viewType,
     required TextDirection layoutDirection,
@@ -33,32 +33,13 @@ class PlatformViewsServiceProxy {
     MessageCodec<dynamic>? creationParamsCodec,
     VoidCallback? onFocus,
   }) {
-    return PlatformViewsService.initExpensiveOhosView(
-      id: id,
-      viewType: viewType,
-      layoutDirection: layoutDirection,
-      creationParams: creationParams,
-      creationParamsCodec: creationParamsCodec,
-      onFocus: onFocus,
-    );
-  }
-
-  /// Proxy method for [PlatformViewsService.initSurfaceAndroidView].
-  SurfaceOhosViewController initSurfaceOhosView({
-    required int id,
-    required String viewType,
-    required TextDirection layoutDirection,
-    dynamic creationParams,
-    MessageCodec<dynamic>? creationParamsCodec,
-    VoidCallback? onFocus,
-  }) {
-    return PlatformViewsService.initSurfaceOhosView(
-      id: id,
-      viewType: viewType,
-      layoutDirection: layoutDirection,
-      creationParams: creationParams,
-      creationParamsCodec: creationParamsCodec,
-      onFocus: onFocus,
-    );
+    return PlatformViewsService.initOhosView(
+        id: id,
+        viewType: viewType,
+        layoutDirection: layoutDirection,
+        creationParams: creationParams,
+        creationParamsCodec: creationParamsCodec,
+        onFocus: onFocus,
+      );
   }
 }

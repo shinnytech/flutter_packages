@@ -7,7 +7,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:webview_flutter_platform_interface/webview_flutter_platform_interface.dart';
-import 'package:webview_flutter_wkwebview/src/common/web_kit.g.dart';
 import 'package:webview_flutter_wkwebview/src/foundation/foundation.dart';
 import 'package:webview_flutter_wkwebview/src/web_kit/web_kit.dart';
 import 'package:webview_flutter_wkwebview/src/webkit_proxy.dart';
@@ -205,9 +204,7 @@ void main() {
           WKWebView.detached(),
           const WKNavigationAction(
             request: NSUrlRequest(url: 'https://www.google.com'),
-            targetFrame: WKFrameInfo(
-                isMainFrame: false,
-                request: NSUrlRequest(url: 'https://google.com')),
+            targetFrame: WKFrameInfo(isMainFrame: false),
             navigationType: WKNavigationType.linkActivated,
           ),
         ),
@@ -216,44 +213,6 @@ void main() {
 
       expect(callbackRequest.url, 'https://www.google.com');
       expect(callbackRequest.isMainFrame, isFalse);
-    });
-
-    test('onHttpBasicAuthRequest emits host and realm', () {
-      final WebKitNavigationDelegate iosNavigationDelegate =
-          WebKitNavigationDelegate(
-        const WebKitNavigationDelegateCreationParams(
-          webKitProxy: WebKitProxy(
-            createNavigationDelegate: CapturingNavigationDelegate.new,
-          ),
-        ),
-      );
-
-      String? callbackHost;
-      String? callbackRealm;
-
-      iosNavigationDelegate.setOnHttpAuthRequest((HttpAuthRequest request) {
-        callbackHost = request.host;
-        callbackRealm = request.realm;
-      });
-
-      const String expectedHost = 'expectedHost';
-      const String expectedRealm = 'expectedRealm';
-
-      CapturingNavigationDelegate
-              .lastCreatedDelegate.didReceiveAuthenticationChallenge!(
-          WKWebView.detached(),
-          NSUrlAuthenticationChallenge.detached(
-            protectionSpace: NSUrlProtectionSpace.detached(
-              host: expectedHost,
-              realm: expectedRealm,
-              authenticationMethod: NSUrlAuthenticationMethod.httpBasic,
-            ),
-          ),
-          (NSUrlSessionAuthChallengeDisposition disposition,
-              NSUrlCredential? credential) {});
-
-      expect(callbackHost, expectedHost);
-      expect(callbackRealm, expectedRealm);
     });
   });
 }
@@ -267,7 +226,6 @@ class CapturingNavigationDelegate extends WKNavigationDelegate {
     super.didFailProvisionalNavigation,
     super.decidePolicyForNavigationAction,
     super.webViewWebContentProcessDidTerminate,
-    super.didReceiveAuthenticationChallenge,
   }) : super.detached() {
     lastCreatedDelegate = this;
   }
@@ -280,9 +238,6 @@ class CapturingUIDelegate extends WKUIDelegate {
   CapturingUIDelegate({
     super.onCreateWebView,
     super.requestMediaCapturePermission,
-    super.runJavaScriptAlertDialog,
-    super.runJavaScriptConfirmDialog,
-    super.runJavaScriptTextInputDialog,
     super.instanceManager,
   }) : super.detached() {
     lastCreatedDelegate = this;

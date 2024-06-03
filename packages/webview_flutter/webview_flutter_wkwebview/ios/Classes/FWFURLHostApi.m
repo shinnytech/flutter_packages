@@ -29,7 +29,7 @@
 }
 
 - (nullable NSString *)
-    absoluteStringForNSURLWithIdentifier:(NSInteger)identifier
+    absoluteStringForNSURLWithIdentifier:(nonnull NSNumber *)identifier
                                    error:(FlutterError *_Nullable __autoreleasing *_Nonnull)error {
   NSURL *instance = [self urlForIdentifier:identifier error:error];
   if (*error) {
@@ -39,14 +39,14 @@
   return instance.absoluteString;
 }
 
-- (nullable NSURL *)urlForIdentifier:(NSInteger)identifier
+- (nullable NSURL *)urlForIdentifier:(NSNumber *)identifier
                                error:(FlutterError *_Nullable __autoreleasing *_Nonnull)error {
-  NSURL *instance = (NSURL *)[self.instanceManager instanceForIdentifier:identifier];
+  NSURL *instance = (NSURL *)[self.instanceManager instanceForIdentifier:identifier.longValue];
 
   if (!instance) {
-    NSString *message = [NSString
-        stringWithFormat:@"InstanceManager does not contain an NSURL with identifier: %li",
-                         (long)identifier];
+    NSString *message =
+        [NSString stringWithFormat:@"InstanceManager does not contain an NSURL with identifier: %@",
+                                   identifier];
     *error = [FlutterError errorWithCode:NSInternalInconsistencyException
                                  message:message
                                  details:nil];
@@ -68,7 +68,7 @@
 }
 
 - (void)create:(NSURL *)instance completion:(void (^)(FlutterError *_Nullable))completion {
-  [self.api createWithIdentifier:[self.instanceManager addHostCreatedInstance:instance]
+  [self.api createWithIdentifier:@([self.instanceManager addHostCreatedInstance:instance])
                       completion:completion];
 }
 @end

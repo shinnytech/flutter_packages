@@ -19,26 +19,28 @@
   return self;
 }
 
-- (WKPreferences *)preferencesForIdentifier:(NSInteger)identifier {
-  return (WKPreferences *)[self.instanceManager instanceForIdentifier:identifier];
+- (WKPreferences *)preferencesForIdentifier:(NSNumber *)identifier {
+  return (WKPreferences *)[self.instanceManager instanceForIdentifier:identifier.longValue];
 }
 
-- (void)createWithIdentifier:(NSInteger)identifier error:(FlutterError *_Nullable *_Nonnull)error {
+- (void)createWithIdentifier:(nonnull NSNumber *)identifier
+                       error:(FlutterError *_Nullable *_Nonnull)error {
   WKPreferences *preferences = [[WKPreferences alloc] init];
-  [self.instanceManager addDartCreatedInstance:preferences withIdentifier:identifier];
+  [self.instanceManager addDartCreatedInstance:preferences withIdentifier:identifier.longValue];
 }
 
-- (void)createFromWebViewConfigurationWithIdentifier:(NSInteger)identifier
-                             configurationIdentifier:(NSInteger)configurationIdentifier
+- (void)createFromWebViewConfigurationWithIdentifier:(nonnull NSNumber *)identifier
+                             configurationIdentifier:(nonnull NSNumber *)configurationIdentifier
                                                error:(FlutterError *_Nullable *_Nonnull)error {
   WKWebViewConfiguration *configuration = (WKWebViewConfiguration *)[self.instanceManager
-      instanceForIdentifier:configurationIdentifier];
-  [self.instanceManager addDartCreatedInstance:configuration.preferences withIdentifier:identifier];
+      instanceForIdentifier:configurationIdentifier.longValue];
+  [self.instanceManager addDartCreatedInstance:configuration.preferences
+                                withIdentifier:identifier.longValue];
 }
 
-- (void)setJavaScriptEnabledForPreferencesWithIdentifier:(NSInteger)identifier
-                                               isEnabled:(BOOL)enabled
+- (void)setJavaScriptEnabledForPreferencesWithIdentifier:(nonnull NSNumber *)identifier
+                                               isEnabled:(nonnull NSNumber *)enabled
                                                    error:(FlutterError *_Nullable *_Nonnull)error {
-  [[self preferencesForIdentifier:identifier] setJavaScriptEnabled:enabled];
+  [[self preferencesForIdentifier:identifier] setJavaScriptEnabled:enabled.boolValue];
 }
 @end
