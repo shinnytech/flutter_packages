@@ -59,6 +59,14 @@ abstract class Platform {
   /// To just check if the platform is Fuchsia, use [isFuchsia].
   static const String fuchsia = 'fuchsia';
 
+  /// A string constant to compare with [operatingSystem] to see if the platform
+  /// is Ohos.
+  ///
+  /// Useful in case statements when switching on [operatingSystem].
+  ///
+  /// To just check if the platform is Ohos, use [isOhos].
+  static const String ohos = 'ohos';
+
   /// A list of the possible values that [operatingSystem] can return.
   static const List<String> operatingSystemValues = <String>[
     linux,
@@ -67,6 +75,7 @@ abstract class Platform {
     android,
     iOS,
     fuchsia,
+    ohos
   ];
 
   /// The number of processors of the machine.
@@ -108,6 +117,9 @@ abstract class Platform {
 
   /// True if the operating system is Fuchsia
   bool get isFuchsia => operatingSystem == fuchsia;
+
+  /// True if the operating system is Ohos.
+  bool get isOhos => operatingSystem == ohos;
 
   /// The environment for this process.
   ///
