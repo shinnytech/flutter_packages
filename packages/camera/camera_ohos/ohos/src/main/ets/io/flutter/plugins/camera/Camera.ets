@@ -118,13 +118,14 @@ export class Camera implements CameraCaptureStateListener {
     audioSampleRate: 48000,
     fileFormat: media.ContainerFormatType.CFT_MPEG_4, // 视频文件封装格式，只支持MP4
     videoBitrate: 100000, // 视频比特率
-    videoCodec: media.CodecMimeType.VIDEO_MPEG4, // 视频文件编码格式，支持mpeg4和avc两种格式
+    videoCodec: media.CodecMimeType.VIDEO_AVC, // 视频文件编码格式，支持mpeg4和avc两种格式
     videoFrameWidth: 640, // 视频分辨率的宽
     videoFrameHeight: 480, // 视频分辨率的高
     videoFrameRate: 30 // 视频帧率
   };
   private phAccessHelper: photoAccessHelper.PhotoAccessHelper;
   private videoPath: string | undefined = undefined;
+  private videoId: string | undefined = undefined;
 
   constructor(
     ability: UIAbility,
@@ -751,10 +752,10 @@ export class Camera implements CameraCaptureStateListener {
           profile: this.aVRecorderProfile,
           url: `fd://${fd}`,
           rotation: 90, // 90°为默认竖屏显示角度，如果由于设备原因或应用期望以其他方式显示等原因，请根据实际情况调整该参数
-          location: { latitude: 30, longitude: 130 }
         };
-        await this.avRecorder.prepare(aVRecorderConfig);
-        let videoId = await this.avRecorder.getInputSurface();
+        await this.avRecorder.prepare(aVRecorderConfig).then(async () =>{
+          this.videoId = await this.avRecorder?.getInputSurface();
+        });
         this.cameraOutputCapability = CameraUtils.getSupportedOutputCapability(this.cameraDevice!, camera.SceneMode.NORMAL_VIDEO, this.cameraManager);
         let previewProfile = this.cameraOutputCapability?.previewProfiles[0];
         this.previewOutput = this.cameraManager.createPreviewOutput(previewProfile, this.flutterTexture.getSurfaceId()
@@ -763,7 +764,7 @@ export class Camera implements CameraCaptureStateListener {
         let videoProfile: undefined | camera.VideoProfile = videoProfilesArray.find((profile: camera.VideoProfile) => {
           return profile.size.width === this.aVRecorderProfile.videoFrameWidth && profile.size.height === this.aVRecorderProfile.videoFrameHeight;
         })
-        this.videoOutput = this.cameraManager.createVideoOutput(videoProfile, videoId);
+        this.videoOutput = this.cameraManager.createVideoOutput(videoProfile, this.videoId);
         this.videoSession = this.cameraManager.createSession(camera.SceneMode.NORMAL_VIDEO) as camera.VideoSession;
         this.videoSession?.beginConfig();
         await this.cameraInput?.open();
