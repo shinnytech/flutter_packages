@@ -23,38 +23,29 @@ class CameraPreview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var _angle = 0.0;
-    if (controller.description.lensDirection == CameraLensDirection.back) {
-      _angle = 90 * math.pi / 180;
-    } else {
-      _angle = -90 * math.pi / 180;
-    }
 
     return controller.value.isInitialized
         ? ValueListenableBuilder<CameraValue>(
-            valueListenable: controller,
-            builder: (BuildContext context, Object? value, Widget? child) {
-              final double cameraAspectRatio =
-                  controller.value.previewSize!.height /
-                      controller.value.previewSize!.width;
-              return AspectRatio(
-                aspectRatio: _isLandscape()
-                    ? cameraAspectRatio
-                    : (1 / cameraAspectRatio),
-                child: Transform.rotate(
-                  angle: _angle,
-                  child: Stack(
-                    fit: StackFit.expand,
-                    children: <Widget>[
-                      _wrapInRotatedBox(child: controller.buildPreview()),
-                      child ?? Container(),
-                    ],
-                  ),
-                ),
-              );
-            },
-            child: child,
-          )
+      valueListenable: controller,
+      builder: (BuildContext context, Object? value, Widget? child) {
+        final double cameraAspectRatio =
+            controller.value.previewSize!.width /
+                controller.value.previewSize!.height;
+        return AspectRatio(
+          aspectRatio: _isLandscape()
+              ? cameraAspectRatio
+              : (1 / cameraAspectRatio),
+          child: Stack(
+            fit: StackFit.expand,
+            children: <Widget>[
+              _wrapInRotatedBox(child: controller.buildPreview()),
+              child ?? Container(),
+            ],
+          ),
+        );
+      },
+      child: child,
+    )
         : Container();
   }
 
@@ -90,7 +81,7 @@ class CameraPreview extends StatelessWidget {
     return controller.value.isRecordingVideo
         ? controller.value.recordingOrientation!
         : (controller.value.previewPauseOrientation ??
-            controller.value.lockedCaptureOrientation ??
-            controller.value.deviceOrientation);
+        controller.value.lockedCaptureOrientation ??
+        controller.value.deviceOrientation);
   }
 }
