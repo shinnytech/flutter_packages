@@ -68,6 +68,7 @@ export struct OhosWebView {
         .onAlert(this.webView.onJsAlert)
         .onConfirm(this.webView.onJsConfirm)
         .onPrompt(this.webView.onJsPrompt)
+        .mixedMode(MixedMode.All)
     }
   }
 }
