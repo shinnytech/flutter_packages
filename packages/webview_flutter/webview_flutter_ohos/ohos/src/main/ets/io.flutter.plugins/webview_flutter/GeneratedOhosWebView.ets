@@ -3043,8 +3043,8 @@ export abstract class CookieManagerHostApi {
             const identifierArg: number = args[0];
             const resultCallback: Result<Boolean> = new ResultBuilder<Boolean>(
               (result: Boolean) => {
-                wrapped.insert(null, 0);
-                reply.reply(wrapped);
+                wrapped.insert(result, 0);              
+                reply.reply(wrapped.convertToArray());
               }, (err) => {
               const wrappedError: ArrayList<ESObject> = GeneratedOhosWebView.wrapError(err);
               reply.reply(wrappedError.convertToArray());
