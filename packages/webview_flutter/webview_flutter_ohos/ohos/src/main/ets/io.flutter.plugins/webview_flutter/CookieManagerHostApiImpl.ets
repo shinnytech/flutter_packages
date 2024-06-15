@@ -50,7 +50,7 @@ export class CookieManagerHostApiImpl extends CookieManagerHostApi {
   }
 
   removeAllCookies(identifier: number, result: Result<boolean> ) {
-    web_webview.WebCookieManager.deleteEntireCookie()
+    web_webview.WebCookieManager.clearAllCookiesSync()
     result.success(true)
   }
 
