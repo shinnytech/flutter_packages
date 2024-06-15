@@ -219,9 +219,10 @@ export class WebViewHostApiImpl extends WebViewHostApi {
     webView.setWebViewClient(this.instanceManager.getInstance(webViewClientInstanceId));
   }
 
-  addJavaScriptChannel(instanceId: number, javaScriptChannelInstanceId: number): void {
+  async addJavaScriptChannel(instanceId: number, javaScriptChannelInstanceId: number): Promise<void> {
     const webView: WebViewPlatformView = this.instanceManager.getInstance(instanceId);
     const javaScriptChannel: JavaScriptChannel = this.instanceManager.getInstance(javaScriptChannelInstanceId);
+    await webView.waitControllerAttached();
     try {
       webView.getController().registerJavaScriptProxy(
         {
@@ -235,11 +236,6 @@ export class WebViewHostApiImpl extends WebViewHostApi {
       webView.getController().refresh()
     } catch (err) {
       Log.e(TAG, "addJavaScriptChannel err = " + err);
-      setTimeout(
-        () => {
-          this.addJavaScriptChannel(instanceId, javaScriptChannelInstanceId)
-        }, 500
-      )
     }
   }
 
