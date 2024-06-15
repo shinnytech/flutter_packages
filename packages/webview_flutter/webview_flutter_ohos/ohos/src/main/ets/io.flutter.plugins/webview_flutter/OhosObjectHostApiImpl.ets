@@ -31,10 +31,6 @@ export class OhosObjectHostApiImpl extends OhosObjectHostApi {
   }
 
   dispose(identifier: number) {
-    const instance: ESObject = this.instanceManager.getInstance(identifier);
-    if (instance instanceof WebViewPlatformView) {
-       (instance as ESObject).destroy();
-    }
     this.instanceManager.remove(identifier);
   }
 }
