@@ -66,6 +66,7 @@ export struct OhosWebView {
           dialogController.open();
           event.handler.setWebController(newWebViewController);
         })
+        .mixedMode(MixedMode.All)
     }
   }
 }
