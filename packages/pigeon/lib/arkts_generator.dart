@@ -283,6 +283,8 @@ if (this.$fieldName instanceof Array) {
         if (customEnumNames.contains(field.type.baseName)) {
           indent.add(
               '${field.type.baseName}[${field.type.baseName}[arr[$i] as number]]');
+        } else if (customClassNames.contains(field.type.baseName)) {
+          indent.add('arr[$i] instanceof Array ? ${field.type.baseName}.fromList(arr[$i] as Object[]) : null');
         } else {
           final String type = _arkTSTypeForDartType(field.type);
           indent.add('arr[$i] as $type');
