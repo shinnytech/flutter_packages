@@ -398,6 +398,7 @@ export class WebViewPlatformView extends PlatformView {
   }
 
   dispose(): void {
+    this.controller.stopAllMedia();
   }
 
   getController(): web_webview.WebviewController {
