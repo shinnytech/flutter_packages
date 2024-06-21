@@ -326,13 +326,13 @@ export class WebViewPlatformView extends PlatformView {
     }
   }
 
-  onLoadIntercept = (event: ESObject) => {
-    Log.i(TAG, "onLoadIntercept event = " + JSON.stringify(event))
-    if(event.data.getRequestUrl() == 'loaded:///'){
+  onOverrideUrlLoading = (request: WebResourceRequest) => {
+    Log.i(TAG, "onOverrideUrlLoading request = " + JSON.stringify(request))
+    if(request.getRequestUrl() == 'loaded:///'){
       return true;
     }
     if (this.webViewClint) {
-      return this.webViewClint.shouldOverrideUrlLoading(this, event.data);
+      return this.webViewClint.shouldOverrideUrlLoading(this, request);
     }
     return false;
   }
