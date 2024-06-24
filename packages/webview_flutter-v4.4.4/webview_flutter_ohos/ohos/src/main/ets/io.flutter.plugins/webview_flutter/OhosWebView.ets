@@ -36,7 +36,6 @@ export struct OhosWebView {
         .onPageBegin(this.webView.onPageBegin)
         .onPageEnd(this.webView.onPageEnd)
         .onErrorReceive(this.webView.onErrorReceive)
-        .onLoadIntercept(this.webView.onLoadIntercept)
         .onRefreshAccessedHistory(this.webView.onRefreshAccessedHistory)
         .onProgressChange(this.webView.onProgressChange)
         .onGeolocationShow(this.webView.onGeolocationShow)
@@ -67,6 +66,7 @@ export struct OhosWebView {
           event.handler.setWebController(newWebViewController);
         })
         .mixedMode(MixedMode.All)
+        .onOverrideUrlLoading(this.webView.onOverrideUrlLoading)
     }
   }
 }

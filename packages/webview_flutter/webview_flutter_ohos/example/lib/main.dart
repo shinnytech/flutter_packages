@@ -37,8 +37,8 @@ const String kNavigationExamplePage = '''
 The navigation delegate is set to block navigation to the youtube website.
 </p>
 <ul>
-<ul><a href="https://www.youtube.com/">https://www.youtube.com/</a></ul>
-<ul><a href="https://www.google.com/">https://www.google.com/</a></ul>
+<ul><a href="https://www.iqiyi.com/">https://www.iqiyi.com/</a></ul>
+<ul><a href="https://www.baidu.com/">https://www.baidu.com/</a></ul>
 </ul>
 </body>
 </html>
@@ -195,7 +195,7 @@ Page resource error:
           ''');
           })
           ..setOnNavigationRequest((NavigationRequest request) {
-            if (request.url.contains('pub.dev')) {
+            if (request.url.contains('iqiyi')) {
               debugPrint('blocking navigation to ${request.url}');
               return NavigationDecision.prevent;
             }

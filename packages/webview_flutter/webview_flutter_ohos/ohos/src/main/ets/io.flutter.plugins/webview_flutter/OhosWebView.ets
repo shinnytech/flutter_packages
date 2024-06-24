@@ -36,7 +36,6 @@ export struct OhosWebView {
         .onPageBegin(this.webView.onPageBegin)
         .onPageEnd(this.webView.onPageEnd)
         .onErrorReceive(this.webView.onErrorReceive)
-        .onLoadIntercept(this.webView.onLoadIntercept)
         .onRefreshAccessedHistory(this.webView.onRefreshAccessedHistory)
         .onProgressChange(this.webView.onProgressChange)
         .onGeolocationShow(this.webView.onGeolocationShow)
@@ -70,6 +69,7 @@ export struct OhosWebView {
         .onConfirm(this.webView.onJsConfirm)
         .onPrompt(this.webView.onJsPrompt)
         .mixedMode(MixedMode.All)
+        .onOverrideUrlLoading(this.webView.onOverrideUrlLoading)
     }
   }
 }
