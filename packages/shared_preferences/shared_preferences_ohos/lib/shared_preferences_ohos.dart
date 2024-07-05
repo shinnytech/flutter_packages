@@ -37,6 +37,7 @@ class SharedPreferencesOhos extends SharedPreferencesStorePlatform {
   }
 
   static const String _defaultPrefix = 'flutter.';
+  static const String _doublePrefix = "VGhpcyBpcyB0aGUgcHJlZml4IGZvciBhIGRvdWJsZS4";
 
   @override
   Future<bool> remove(String key) async {
@@ -47,13 +48,18 @@ class SharedPreferencesOhos extends SharedPreferencesStorePlatform {
   Future<bool> setValue(String valueType, String key, Object value) async {
     switch (valueType) {
       case 'String':
+        if((value as String).startsWith(_doublePrefix)) {
+          throw PlatformException(
+              code: 'InvalidOperation',
+              message: 'StorageError: This string cannot be stored as it clashes with special identifier prefixes');
+        }
         return _api.setString(key, value as String);
       case 'Bool':
         return _api.setBool(key, value as bool);
       case 'Int':
         return _api.setInt(key, value as int);
       case 'Double':
-        return _api.setDouble(key, value as double);
+        return _api.setString(key, "$_doublePrefix$value");
       case 'StringList':
         return _api.setStringList(key, value as List<String>);
     }
@@ -106,8 +112,14 @@ class SharedPreferencesOhos extends SharedPreferencesStorePlatform {
   Future<Map<String, Object>> getAllWithParameters(
       GetAllParameters parameters) async {
     final PreferencesFilter filter = parameters.filter;
-    final Map<String?, Object?> data =
+    Map<String?, Object?> data =
         await _api.getAll(filter.prefix, filter.allowList?.toList());
+    data = data.map((key, value) {
+      if(value is String && value.startsWith(_doublePrefix)) {
+        return MapEntry(key, double.tryParse(value.substring(_doublePrefix.length)));
+      }
+      return MapEntry(key, value);
+    });
     return data.cast<String, Object>();
   }
 }
