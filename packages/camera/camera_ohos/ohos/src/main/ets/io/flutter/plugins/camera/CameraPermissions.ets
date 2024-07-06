@@ -23,9 +23,7 @@ const cameraPermission: Array<Permissions> =
   ['ohos.permission.CAMERA',
     'ohos.permission.MICROPHONE',
     'ohos.permission.READ_IMAGEVIDEO',
-    'ohos.permission.WRITE_IMAGEVIDEO',
-    'ohos.permission.READ_MEDIA',
-    'ohos.permission.WRITE_MEDIA'];
+    'ohos.permission.WRITE_IMAGEVIDEO'];
 
 const audioPermission: Array<Permissions> = ['ohos.permission.CAPTURE_VOICE_DOWNLINK_AUDIO'];
 

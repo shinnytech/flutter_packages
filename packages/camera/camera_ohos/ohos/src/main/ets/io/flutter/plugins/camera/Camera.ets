@@ -38,7 +38,6 @@ import { ImageStreamReader } from './media/ImageStreamReader';
 import { BusinessError } from '@kit.BasicServicesKit';
 import { CameraState } from './CameraState';
 import { AutoFocusFeature } from './features/autofocus/AutoFocusFeature';
-import mediaLibrary from '@ohos.multimedia.mediaLibrary';
 import fileIO from '@ohos.fileio';
 import { DeviceOrientationManager } from './features/sensororientation/DeviceOrientationManager';
 import { Point } from './features/Point';

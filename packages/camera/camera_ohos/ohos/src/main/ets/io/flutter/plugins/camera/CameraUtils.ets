@@ -16,7 +16,6 @@
 import camera from '@ohos.multimedia.camera';
 import { BusinessError } from '@ohos.base';
 import { HashMap } from '@kit.ArkTS';
-import mediaLibrary from '@ohos.multimedia.mediaLibrary';
 import DateTimeUtil from './utlis/DateTimeUtil';
 import { DeviceOrientation } from '@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/PlatformChannel';
 
@@ -43,10 +42,8 @@ const CameraDeviceMap = (cameraManager: camera.CameraManager): HashMap<string, c
 }
 
 export class CameraUtils {
-  private static mediaLibraryTest: mediaLibrary.MediaLibrary;
 
   constructor(context: Context) {
-    CameraUtils.mediaLibraryTest = mediaLibrary.getMediaLibrary(context);
   }
 
   static getCameraManager(context: Context): camera.CameraManager {
@@ -144,53 +141,6 @@ export class CameraUtils {
   static getSupportedOutputCapability(device: camera.CameraDevice, mode: camera.SceneMode, manager: camera.CameraManager): camera.CameraOutputCapability {
     let capability: camera.CameraOutputCapability = manager.getSupportedOutputCapability(device, mode);
     return capability;
-  }
-
-  static async createAndGetUri(mediaType: mediaLibrary.MediaType): Promise<mediaLibrary.FileAsset> {
-    let dateTimeUtil: DateTimeUtil = new DateTimeUtil();
-    let info: FileInfo = CameraUtils.getInfoFromMediaType(mediaType);
-    let name: string = `${dateTimeUtil.getDate()}_${dateTimeUtil.getTime()}`;
-    let displayName: string = `${info.prefix}${name}${info.suffix}`;
-    let publicPath: string = await CameraUtils.mediaLibraryTest.getPublicDirectory(
-      info.directory
-    );
-    let fileAsset: mediaLibrary.FileAsset = await CameraUtils.mediaLibraryTest.createAsset(
-      mediaType,
-      displayName,
-      publicPath
-    );
-    return fileAsset;
-  }
-
-  static getInfoFromMediaType(mediaType: mediaLibrary.MediaType): FileInfo {
-    let fileInfo: FileInfo = {
-      prefix: '',
-      suffix: '',
-      directory: 0
-    };
-    switch (mediaType) {
-      case mediaLibrary.MediaType.FILE:
-        fileInfo.prefix = 'FILE_';
-        fileInfo.suffix = '.txt';
-        fileInfo.directory = mediaLibrary.DirectoryType.DIR_DOCUMENTS;
-        break;
-      case mediaLibrary.MediaType.IMAGE:
-        fileInfo.prefix = 'IMG_';
-        fileInfo.suffix = '.jpg';
-        fileInfo.directory = mediaLibrary.DirectoryType.DIR_IMAGE;
-        break;
-      case mediaLibrary.MediaType.VIDEO:
-        fileInfo.prefix = 'VID_';
-        fileInfo.suffix = '.mp4';
-        fileInfo.directory = mediaLibrary.DirectoryType.DIR_VIDEO;
-        break;
-      case mediaLibrary.MediaType.AUDIO:
-        fileInfo.prefix = 'AUD_';
-        fileInfo.suffix = '.wav';
-        fileInfo.directory = mediaLibrary.DirectoryType.DIR_AUDIO;
-        break;
-    }
-    return fileInfo;
   }
 
   //检测是否有闪光灯
