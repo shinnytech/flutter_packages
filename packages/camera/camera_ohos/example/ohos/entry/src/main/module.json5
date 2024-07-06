@@ -78,26 +78,6 @@
         }
       },
       {
-        "name": "ohos.permission.READ_MEDIA",
-        "reason": "$string:reason",
-        "usedScene": {
-          "abilities": [
-            "FormAbility"
-          ],
-          "when": "inuse"
-        }
-      },
-      {
-        "name": "ohos.permission.WRITE_MEDIA",
-        "reason": "$string:reason",
-        "usedScene": {
-          "abilities": [
-            "FormAbility"
-          ],
-          "when": "inuse"
-        }
-      },
-      {
         "name": "ohos.permission.READ_IMAGEVIDEO",
         "reason": "$string:reason",
         "usedScene": {
