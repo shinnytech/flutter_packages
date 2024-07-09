@@ -24,6 +24,10 @@ export struct OhosWebView {
   webView: WebViewPlatformView = this.params.platformView as WebViewPlatformView;
   controller: web_webview.WebviewController = this.webView.getController();
 
+  aboutToAppear() {
+    this.webView.getWebSettings().setSupportZoom(true);
+  }
+
   build() {
     Column() {
       Web(
@@ -67,6 +71,14 @@ export struct OhosWebView {
         })
         .mixedMode(MixedMode.All)
         .onOverrideUrlLoading(this.webView.onOverrideUrlLoading)
+        .gesture(
+          PinchGesture({ fingers: 2})
+            .onActionUpdate((event: GestureEvent) => {
+              if (event) {
+                this.controller.zoom(event.scale);
+              }
+            })
+        )
     }
   }
 }
