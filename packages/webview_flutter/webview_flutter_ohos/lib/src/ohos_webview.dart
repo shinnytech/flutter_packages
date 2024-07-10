@@ -812,53 +812,56 @@ class WebViewClient extends OhosObject {
     super.instanceManager,
   }) : super.detached();
 
+  /// @ohos.web.netErrorList (ArkWeb网络协议栈错误列表)
+  /// https://developer.huawei.com/consumer/cn/doc/harmonyos-references-V5/js-apis-neterrorlist-V5
+
   /// User authentication failed on server.
-  static const int errorAuthentication = 2300094;
+  static const int errorAuthentication = -100;
 
   /// Malformed URL.
-  static const int errorBadUrl = 2300003;
+  static const int errorBadUrl = -300;
 
   /// Failed to connect to the server.
-  static const int errorConnect = 2300007;
+  static const int errorConnect = -106;
 
   /// Failed to perform SSL handshake.
-  static const int errorFailedSslHandshake = -11;
+  static const int errorFailedSslHandshake = -148;
 
   /// Generic file error.
-  static const int errorFile = -13;
+  static const int errorFile = -16;
 
   /// File not found.
-  static const int errorFileNotFound = 2301002;
+  static const int errorFileNotFound = -808;
 
   /// Server or proxy hostname lookup failed.
-  static const int errorHostLookup = 2300005;
+  static const int errorHostLookup = -121;
 
   /// Failed to read or write to the server.
-  static const int errorIO = -7;
+  static const int errorIO = -1;
 
   /// User authentication failed on proxy.
-  static const int errorProxyAuthentication = -5;
+  static const int errorProxyAuthentication = -115;
 
   /// Too many redirects.
-  static const int errorRedirectLoop = 2300047;
+  static const int errorRedirectLoop = -303;
 
   /// Connection timed out.
-  static const int errorTimeout = 2300028;
+  static const int errorTimeout = -409;
 
   /// Too many requests during this load.
-  static const int errorTooManyRequests = 21900004;
+  static const int errorTooManyRequests = -114;
 
   /// Generic error.
-  static const int errorUnknown = 2300999;
+  static const int errorUnknown = -9;
 
   /// Resource load was canceled by Safe Browsing.
-  static const int errorUnsafeResource = -16;
+  static const int errorUnsafeResource = -311;
 
   /// Unsupported authentication scheme (not basic or digest).
-  static const int errorUnsupportedAuthScheme = -3;
+  static const int errorUnsupportedAuthScheme = -339;
 
   /// Unsupported URI scheme.
-  static const int errorUnsupportedScheme = -10;
+  static const int errorUnsupportedScheme = -301;
 
   /// Pigeon Host Api implementation for [WebViewClient].
   @visibleForTesting
