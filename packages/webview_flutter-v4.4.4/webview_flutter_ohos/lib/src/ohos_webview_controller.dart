@@ -1167,6 +1167,10 @@ class OhosWebResourceError extends WebResourceError {
         return WebResourceErrorType.unsupportedScheme;
     }
 
+    if (errorCode < 0) {
+      return WebResourceErrorType.unknown;
+    }
+
     throw ArgumentError(
       'Could not find a WebResourceErrorType for errorCode: $errorCode',
     );
