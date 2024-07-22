@@ -640,9 +640,9 @@ class WebSettingsImpl implements WebSettings {
     this.textZoomRatio = textZoom;
   }
 
-  getUserAgentString(): string {
-    // todo 获取 UserAgent
-    return '';
+  async getUserAgentString(): Promise<string> {
+    await this.webView.waitControllerAttached();
+    return this.webView.getController().getCustomUserAgent();
   }
 
   getTextZoom() : number{
