@@ -182,8 +182,13 @@ export class VideoPlayer {
       this.sendBufferingUpdate(infoType, value);
     });
 
-    this.avPlayer.on(Events.ERROR, (err: Object) => {
+    this.avPlayer.on(Events.ERROR, (err: BusinessError) => {
       Log.e(TAG, "avPlayer Events.ERROR: " + JSON.stringify(err));
+      // 播放直播视频时，设置 loop 会报错，而 loop 一定会设置(video_player.dart 中初始化之后会 _applyLooping)，所以屏蔽掉该报错
+      // message: Unsupport Capability: The stream is live stream, not support loop
+      if(err.code == 801) {
+        return;
+      }
       this.avPlayer?.reset();
       this.sendError(err);
     })
