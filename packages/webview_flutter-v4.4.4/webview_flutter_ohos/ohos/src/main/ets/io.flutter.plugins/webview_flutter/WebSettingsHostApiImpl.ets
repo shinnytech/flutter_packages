@@ -69,6 +69,8 @@ export interface WebSettings {
   getTextZoom(): number;
 
   getUserAgentString(): Promise<string>
+
+  onTextZoomChanged(callback: (ratio: number) => void): void;
 }
 
 export class WebSettingsCreator {

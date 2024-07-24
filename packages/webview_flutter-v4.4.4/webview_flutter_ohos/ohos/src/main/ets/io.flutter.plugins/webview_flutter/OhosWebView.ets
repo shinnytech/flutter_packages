@@ -24,8 +24,13 @@ export struct OhosWebView {
   webView: WebViewPlatformView = this.params.platformView as WebViewPlatformView;
   controller: web_webview.WebviewController = this.webView.getController();
 
+  @State textZoomRatio: number = this.webView.getWebSettings().getTextZoom();
+
   aboutToAppear() {
     this.webView.getWebSettings().setSupportZoom(true);
+    this.webView.getWebSettings().onTextZoomChanged((ratio: number) => {
+      this.textZoomRatio = ratio;
+    });
   }
 
   build() {
@@ -57,7 +62,7 @@ export struct OhosWebView {
         .overviewModeAccess(this.webView.getWebSettings().getLoadWithOverviewMode())
         .wideViewModeAccess(this.webView.getWebSettings().getUseWideViewPort())
         .fileAccess(this.webView.getWebSettings().getAllowFileAccess())
-        .textZoomRatio(this.webView.getWebSettings().getTextZoom())
+        .textZoomRatio(this.textZoomRatio)
         .onScroll(this.webView.onScroll)
         .onControllerAttached(this.webView.onControllerAttached)
         .overScrollMode(OverScrollMode.ALWAYS)
