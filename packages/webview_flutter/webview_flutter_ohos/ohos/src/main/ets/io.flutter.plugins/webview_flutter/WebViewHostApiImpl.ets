@@ -535,6 +535,7 @@ class WebSettingsImpl implements WebSettings {
   wideViewModeAccess: boolean = false;
   fileAccess : boolean = false;
   textZoomRatio : number = 0;
+  textZoomRatioCallback?: (ratio: number) => void;  
 
   constructor(webView: WebViewPlatformView) {
     this.webView = webView;
@@ -638,6 +639,7 @@ class WebSettingsImpl implements WebSettings {
 
   setTextZoom(textZoom: number) {
     this.textZoomRatio = textZoom;
+    this.textZoomRatioCallback && this.textZoomRatioCallback(textZoom);    
   }
 
   async getUserAgentString(): Promise<string> {
@@ -649,4 +651,8 @@ class WebSettingsImpl implements WebSettings {
     return this.textZoomRatio;
   }
 
+  onTextZoomChanged(callback: (ratio: number) => void): void {
+    this.textZoomRatioCallback = callback;
+  }
+  
 }
