@@ -296,6 +296,8 @@ export class WebViewPlatformView extends PlatformView {
 
   private controllerAttached: boolean = false;
 
+  private onDisposeCallback?: () => void;
+
   onDownloadStart = (event: ESObject) => {
     if (this.downloadListener && this.downloadListener.onDownloadStart) {
       this.downloadListener.onDownloadStart(
@@ -403,6 +405,10 @@ export class WebViewPlatformView extends PlatformView {
     this.controllerAttached = true
   }
 
+  setOnDisposeCallback(callback: () => void) {
+    this.onDisposeCallback = callback;
+  }
+
   onJsAlert = (event: ESObject): boolean => {
     if (this.webChromeClient && event) {
       return this.webChromeClient.onJsAlert(this, event.url, event.message, event.result);
@@ -431,6 +437,7 @@ export class WebViewPlatformView extends PlatformView {
 
   dispose(): void {
     this.controller.stopAllMedia();
+    this.onDisposeCallback && this.onDisposeCallback();
   }
 
   getController(): web_webview.WebviewController {
