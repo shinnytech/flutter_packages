@@ -642,9 +642,9 @@ class WebSettingsImpl implements WebSettings {
     this.textZoomRatioCallback && this.textZoomRatioCallback(textZoom);    
   }
 
-  getUserAgentString(): string {
-    // todo 获取 UserAgent
-    return '';
+   getUserAgentString(): string {
+    this.webView.waitControllerAttached();
+    return this.webView.getController().getCustomUserAgent();
   }
 
   getTextZoom() : number{
