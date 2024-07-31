@@ -284,6 +284,8 @@ export class WebViewPlatformView extends PlatformView {
 
   private controllerAttached: boolean = false;
 
+  private onDisposeCallback?: () => void;
+
   onDownloadStart = (event: ESObject) => {
     if (this.downloadListener && this.downloadListener.onDownloadStart) {
       this.downloadListener.onDownloadStart(
@@ -392,6 +394,9 @@ export class WebViewPlatformView extends PlatformView {
   }
 
 
+  setOnDisposeCallback(callback: () => void) {
+    this.onDisposeCallback = callback;
+  }
 
   getView(): WrappedBuilder<[Params]> {
     return new WrappedBuilder(WebBuilder);
@@ -399,6 +404,7 @@ export class WebViewPlatformView extends PlatformView {
 
   dispose(): void {
     this.controller.stopAllMedia();
+    this.onDisposeCallback && this.onDisposeCallback();
   }
 
   getController(): web_webview.WebviewController {
