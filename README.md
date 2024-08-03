@@ -8,14 +8,14 @@
 
 | 仓库名 | 依赖路径 | 类型 |
 | ----- | --------------------------------------------- | ----- |
-| pigeon | packages/pigeons | 工具库 |
-| file_selector | packages/file_selector/file_selector | 插件 |
-| image_picker | packages/image_picker/image_picker | 插件 |
-| animations | packages/animations | 新增示例 |
-| url_launcher | packages/url_launcher/url_launcher | 插件 |
-| shared_preferences | packages/shared_preferences/shared_preferences | 插件 |
-| path_provuder | packages/path_provuder/path_provuder | 插件 |
-| local_auth | packages/local_auth/local_auth | 插件 |
+| [pigeon](https://gitee.com/openharmony-sig/flutter_packages/tree/master/packages/pigeon) | packages/pigeons | 工具库 |
+| [file_selector](https://gitee.com/openharmony-sig/flutter_packages/tree/master/packages/file_selector) | packages/file_selector/file_selector | 插件 |
+| [image_picker](https://gitee.com/openharmony-sig/flutter_packages/tree/master/packages/image_picker) | packages/image_picker/image_picker | 插件 |
+| [animations](https://gitee.com/openharmony-sig/flutter_packages/tree/master/packages/animations) | packages/animations | 新增示例 |
+| [url_launcher](https://gitee.com/openharmony-sig/flutter_packages/tree/master/packages/url_launcher) | packages/url_launcher/url_launcher | 插件 |
+| [shared_preferences](https://gitee.com/openharmony-sig/flutter_packages/tree/master/packages/shared_preferences) | packages/shared_preferences/shared_preferences | 插件 |
+| [path_provvder](https://gitee.com/openharmony-sig/flutter_packages/tree/master/packages/path_provider) | packages/path_provuder/path_provider | 插件 |
+| [local_auth](https://gitee.com/openharmony-sig/flutter_packages/tree/master/packages/local_auth) | packages/local_auth/local_auth | 插件 |
     
 ## 如何引用这些库
 
