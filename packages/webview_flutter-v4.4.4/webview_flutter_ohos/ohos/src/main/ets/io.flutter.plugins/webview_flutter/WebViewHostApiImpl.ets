@@ -368,7 +368,7 @@ export class WebViewPlatformView extends PlatformView {
     if (this.webChromeClient) {
       return this.webChromeClient.onConsoleMessage(event.message);
     }
-    return false;
+    return true;
   }
 
   onWindowNew = (event: ESObject) => {

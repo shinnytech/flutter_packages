@@ -20,6 +20,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:flutter/foundation.dart';  
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:webview_flutter_ohos/webview_flutter_ohos.dart';
@@ -673,8 +674,10 @@ class SampleMenu extends StatelessWidget {
   Future<void> _onLogExample() {
     webViewController
         .setOnConsoleMessage((JavaScriptConsoleMessage consoleMessage) {
-      debugPrint(
+      if (kDebugMode) {  
+        debugPrint(
           '== JS == ${consoleMessage.level.name}: ${consoleMessage.message}');
+      } 
     });
     return webViewController.loadHtmlString(kLogExamplePage);
   }
