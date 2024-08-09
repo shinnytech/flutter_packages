@@ -70,7 +70,6 @@ export struct OhosWebView {
           .textZoomRatio(this.textZoomRatio)
           .onScroll(this.webView.onScroll)
           .onControllerAttached(this.webView.onControllerAttached)
-          .overScrollMode(OverScrollMode.ALWAYS)
           .onWindowNew((event: Any) => {
             let newWebViewController: web_webview.WebviewController = new web_webview.WebviewController();
             let dialogController: CustomDialogController = new CustomDialogController({
