@@ -71,7 +71,6 @@ export class Camera implements CameraCaptureStateListener {
   cameraFeatures: CameraFeatures;
   private imageFormatGroup: string | null = null;
   private videoRenderer: VideoRenderer | null = null;
-  // private initialCameraFacing: number;
   private flutterTexture: SurfaceTextureEntry;
   private resolutionPreset: ResolutionPreset;
   private enableAudio: boolean;
@@ -81,20 +80,12 @@ export class Camera implements CameraCaptureStateListener {
   private cameraFeatureFactory: CameraFeatureFactory;
   private ability: Ability;
   private cameraCaptureCallback: CameraCaptureCallback;
-  // backgroundHandler: Function;
-  // private backgroundHandlerThread: Function;
   private cameraDevice: camera.CameraDevice | null = null;
   private cameraInput: camera.CameraInput | null = null;
-  // captureSession: CameraCaptureSession;
   private imageReceiver: image.ImageReceiver | null = null;
   imageStreamReader: ImageStreamReader | null = null;
   private previewOutput: camera.PreviewOutput | null = null;
-  // previewRequestBuilder: CaptureRequest.Builder;
-  // private mediaRecorder: MediaRecorder;
-  // recordingVideo: boolean;
-  /** True when the preview is paused. */
-  private pausedPreview: boolean = false;
-  // private captureFile: File;
+  private pausedPreview: boolean = false; // 暂停预览
   private captureTimeouts: CaptureTimeoutsWrapper;
   private captureProps: CameraCaptureProperties;
   private cameraManager: camera.CameraManager;
@@ -104,12 +95,12 @@ export class Camera implements CameraCaptureStateListener {
   private captureFile: fs.File | null = null;
   private cameraOutputCapability: camera.CameraOutputCapability | null = null;
   private initialCameraFacing: number = 0;
-  private session: camera.PhotoSession | camera.VideoSession | null = null;
+  private photoSession: camera.PhotoSession | null = null;
   private videoSession: camera.VideoSession | null = null;
   private cameras: Array<camera.CameraDevice> | null = null;
   private photoOutPut: camera.PhotoOutput | null = null;
   private fd: number = -1;
-  private isVideoMode: boolean = false;
+  private isVideoMode: boolean = false; // 视频模式
   private aVRecorderProfile: media.AVRecorderProfile = {
     audioChannels: 2,
     audioCodec: media.CodecMimeType.AUDIO_AAC,
@@ -249,7 +240,7 @@ export class Camera implements CameraCaptureStateListener {
     const focusPoint: camera.Point | null
       = (point.x == null || point.y == null) ? null : { x: point.x, y: point.y };
     try {
-      this.session!.setFocusPoint(focusPoint);
+      this.photoSession!.setFocusPoint(focusPoint);
       result.success(null);
     } catch (error) {
       result.error("setFocusPointFailed", "Could not set focus point.", null);
@@ -260,7 +251,7 @@ export class Camera implements CameraCaptureStateListener {
     let nowFocusMode: camera.FocusMode = camera.FocusMode.FOCUS_MODE_AUTO
 
     try {
-      nowFocusMode = this.session!.getFocusMode()
+      nowFocusMode = this.photoSession!.getFocusMode()
       if (nowFocusMode == camera.FocusMode.FOCUS_MODE_MANUAL) {
         nowFocusMode = camera.FocusMode.FOCUS_MODE_AUTO
       } else if (nowFocusMode == camera.FocusMode.FOCUS_MODE_CONTINUOUS_AUTO) {
@@ -280,7 +271,7 @@ export class Camera implements CameraCaptureStateListener {
     if (!this.pausedPreview) {
       switch (newMode) {
         case camera.FocusMode.FOCUS_MODE_LOCKED:
-          if (this.session == null) {
+          if (this.photoSession == null) {
             console.info("[unlockAutoFocus] captureSession null, returning");
             return;
           }
@@ -296,7 +287,7 @@ export class Camera implements CameraCaptureStateListener {
     }
 
     try {
-      this.session!.setFocusMode(newMode)
+      this.photoSession!.setFocusMode(newMode)
       result?.success(null)
     } catch (error) {
       result?.error("setFocusModeFailed", "Could not set focus point", null)
@@ -306,11 +297,11 @@ export class Camera implements CameraCaptureStateListener {
 
   setExposureOffset(result: MethodResult, offset: number) {
     const exposureOffsetFeature: ExposureOffsetFeature = this.cameraFeatures.getExposureOffset();
-    exposureOffsetFeature.setValue(offset, this.session!);
+    exposureOffsetFeature.setValue(offset, this.photoSession!);
 
     // todo: 待完善，ohos文档需要判断补偿值是否在支持范围
     try {
-      this.session!.setExposureBias(offset);
+      this.photoSession!.setExposureBias(offset);
       result.success(exposureOffsetFeature.getValue());
     } catch (error) {
       result.error("setExposureOffsetFailed", "Could not set exposure offset.", null);
@@ -318,26 +309,27 @@ export class Camera implements CameraCaptureStateListener {
   }
 
   public getMaxZoomLevel(): number {
-    return this.cameraFeatures.getZoomLevel().getMaximumZoomLevel(this.session!);
+    return this.cameraFeatures.getZoomLevel().getMaximumZoomLevel(this.photoSession!);
   }
 
   public getMinZoomLevel(): number {
-    return this.cameraFeatures.getZoomLevel().getMinimumZoomLevel(this.session!);
+    return this.cameraFeatures.getZoomLevel().getMinimumZoomLevel(this.photoSession!);
   }
 
   public setZoomLevel(result: MethodResult, zoom: number): void {
     const zoomLevel: ZoomLevelFeature = this.cameraFeatures.getZoomLevel();
-    let maxZoom: number = zoomLevel.getMaximumZoomLevel(this.session!);
-    let minZoom: number = zoomLevel.getMinimumZoomLevel(this.session!);
+    let maxZoom: number = zoomLevel.getMaximumZoomLevel(this.photoSession!);
+    let minZoom: number = zoomLevel.getMinimumZoomLevel(this.photoSession!);
 
     if (zoom > maxZoom || zoom < minZoom) {
-      result.error("ZOOM_ERROR", "Zoom level out of bounds (zoom level should be between " + minZoom + " and " + maxZoom + ").", null);
+      result.error("ZOOM_ERROR",
+        "Zoom level out of bounds (zoom level should be between " + minZoom + " and " + maxZoom + ").", null);
       return;
     }
 
     zoomLevel.setValue(zoom);
     try {
-      this.session!.setZoomRatio(zoom);
+      this.photoSession!.setZoomRatio(zoom);
     } catch (error) {
       result.error("setZoomLevelFailed", "Could not set exposure point.", null);
     }
@@ -351,13 +343,25 @@ export class Camera implements CameraCaptureStateListener {
     this.cameraFeatures.getSensorOrientation().unlockCaptureOrientation();
   }
 
+  // 暂停预览
   public pausePreview(): void {
-    // todo:
+    if (this.isVideoMode) {
+      // 录像模式，停止videoSession
+      this.videoSession?.stop();
+    } else {
+      // 拍照模式，停止session
+      this.photoSession?.stop();
+    }
     this.pausedPreview = true;
   }
 
+  // 恢复预览
   public resumePreview(): void {
-    // todo:
+    if (this.isVideoMode) {
+      this.videoSession?.start();
+    } else {
+      this.photoSession?.start();
+    }
     this.pausedPreview = false;
   }
 
@@ -369,7 +373,7 @@ export class Camera implements CameraCaptureStateListener {
       = (point.x == null || point.y == null) ? null : { x: point.x, y: point.y };
 
     try {
-      this.session!.setMeteringPoint(exposurePoint);
+      this.photoSession!.setMeteringPoint(exposurePoint);
       result.success(null);
     } catch (error) {
       result.error("setExposurePointFailed", "Could not set exposure point.", null);
@@ -379,7 +383,7 @@ export class Camera implements CameraCaptureStateListener {
   // 设置曝光模式。
   // 进行设置之前，需要先检查设备是否支持指定的曝光模式，可使用方法isExposureModeSupported。
   setExposureMode(result: MethodResult, newMode: camera.ExposureMode) {
-    // if (CameraUtils.isExposureModeSupported(this.session!, newMode)) {
+    // if (CameraUtils.isExposureModeSupported(this.photoSession!, newMode)) {
     //   result.error("setExposureModeFailed", "The exposure mode is unsupported.", null);
     //   return;
     // }
@@ -400,7 +404,7 @@ export class Camera implements CameraCaptureStateListener {
     exposureLockFeature.setValue(newMode);
 
     try {
-      this.session!.setExposureMode(newMode);
+      this.photoSession!.setExposureMode(newMode);
       result.success(null)
     } catch (error) {
       result.error("setExposureModeFailed", "The setExposureMode call failed", null);
@@ -412,12 +416,12 @@ export class Camera implements CameraCaptureStateListener {
   // 设备是否支持闪光灯，可使用方法hasFlash。
   // 设备是否支持指定的闪光灯模式，可使用方法isFlashModeSupported。
   setFlashMode(result: MethodResult, newMode: camera.FlashMode) {
-    if (!CameraUtils.hasFlash(this.session!)) {
+    if (!CameraUtils.hasFlash(this.photoSession!)) {
       result.error("setFlashModeFailed", "The camera device does not have flash.", null);
       return;
     }
 
-    if (!CameraUtils.isFlashModeSupported(this.session!, newMode)) {
+    if (!CameraUtils.isFlashModeSupported(this.photoSession!, newMode)) {
       result.error("setFlashModeFailed", " The flash mode is unsupported.", null);
       return;
     }
@@ -427,7 +431,7 @@ export class Camera implements CameraCaptureStateListener {
     flashFeature.setValue(newMode);
 
     try {
-      this.session!.setFlashMode(newMode);
+      this.photoSession!.setFlashMode(newMode);
       result.success(null);
     } catch (error) {
       result.error("setFlashModeFailed", "The setFlashMode call failed", null);
@@ -435,15 +439,15 @@ export class Camera implements CameraCaptureStateListener {
   }
 
   getMinExposureOffset() {
-    return this.cameraFeatures.getExposureOffset().getMinExposureOffset(this.session!);
+    return this.cameraFeatures.getExposureOffset().getMinExposureOffset(this.photoSession!);
   }
 
   getMaxExposureOffset() {
-    return this.cameraFeatures.getExposureOffset().getMaxExposureOffset(this.session!);
+    return this.cameraFeatures.getExposureOffset().getMaxExposureOffset(this.photoSession!);
   }
 
   getExposureOffsetStepSize() {
-    return this.cameraFeatures.getExposureOffset().getExposureOffsetStepSize(this.session!);
+    return this.cameraFeatures.getExposureOffset().getExposureOffsetStepSize(this.photoSession!);
   }
 
   async takePicture(result: MethodResult) {
@@ -496,7 +500,7 @@ export class Camera implements CameraCaptureStateListener {
   }
 
   async lockAutoFocus(): Promise<void> {
-    if (this.session == null) {
+    if (this.photoSession == null) {
       console.error(TAG, "[unlockAutoFocus] captureSession null, returning");
       return;
     }
@@ -528,7 +532,7 @@ export class Camera implements CameraCaptureStateListener {
 
   // todo:
   unlockAutoFocus(): void {
-    if (this.session == null) {
+    if (this.photoSession == null) {
       console.info("[unlockAutoFocus] captureSession null, returning");
       return;
     }
@@ -584,6 +588,8 @@ export class Camera implements CameraCaptureStateListener {
           fs.close(this.captureFile);
           result.success(this.videoPath);
           this.captureFile = null;
+          this.isVideoMode = false;
+          this.open(this.imageFormatGroup);
         });
       }
     } catch (e) {
@@ -601,7 +607,8 @@ export class Camera implements CameraCaptureStateListener {
   }
 
   async startRegularPreview() {
-    this.cameraOutputCapability = CameraUtils.getSupportedOutputCapability(this.cameraDevice!, camera.SceneMode.NORMAL_PHOTO, this.cameraManager)
+    this.cameraOutputCapability =
+      CameraUtils.getSupportedOutputCapability(this.cameraDevice!, camera.SceneMode.NORMAL_PHOTO, this.cameraManager)
     let captureSize: camera.Size = this.cameraFeatures.getResolution().getCaptureSize();
 
     let previewProfile = this.cameraOutputCapability.previewProfiles.find((profile: camera.Profile) => {
@@ -615,19 +622,24 @@ export class Camera implements CameraCaptureStateListener {
     let rSurfaceId = await this.imageReceiver!.getReceivingSurfaceId();
     this.photoOutPut = this.cameraManager.createPhotoOutput(photoProfile, rSurfaceId);
 
-    this.session = this.cameraManager.createSession(camera.SceneMode.NORMAL_PHOTO) as camera.PhotoSession;
-    this.session.beginConfig();
-    this.session.addInput(this.cameraInput);
-    this.session.addOutput(this.previewOutput);
-    this.session.addOutput(this.photoOutPut);
-    await this.session.commitConfig();
-    await this.session.start();
+    this.photoSession = this.cameraManager.createSession(camera.SceneMode.NORMAL_PHOTO) as camera.PhotoSession;
+    this.photoSession.beginConfig();
+    this.photoSession.addInput(this.cameraInput);
+    this.photoSession.addOutput(this.previewOutput);
+    this.photoSession.addOutput(this.photoOutPut);
+    await this.photoSession.commitConfig();
+    await this.photoSession.start();
+    if (this.pausedPreview) {
+      await this.photoSession.stop();
+    }
   }
 
 
   startPreviewWithVideoRendererStream() {
     // todo ohos无法实现videoRenderer，此方法是否需要
-    if (this.videoRenderer == null) return;
+    if (this.videoRenderer == null) {
+      return;
+    }
 
     const lockedOrientation: DeviceOrientation | null =
       this.cameraFeatures.getSensorOrientation().getLockedCaptureOrientation();
@@ -701,7 +713,7 @@ export class Camera implements CameraCaptureStateListener {
   }
 
   async prepareMediaRecorder(cameraManager: camera.CameraManager,
-                             cameraOutputCapability: camera.CameraOutputCapability, url: string) {
+    cameraOutputCapability: camera.CameraOutputCapability, url: string) {
     Log.i(TAG, "prepareMediaRecorder");
     if (this.avRecorder != null) {
       this.avRecorder.release();
@@ -723,9 +735,8 @@ export class Camera implements CameraCaptureStateListener {
   async startCapture(record: boolean, stream: boolean) {
 
     try {
-      if (this.session != undefined && !this.isVideoMode) {
-        await this.session?.stop()
-        this.isVideoMode = true;
+      if (this.photoSession != undefined && !this.isVideoMode) {
+        await this.photoSession?.stop()
       }
     } catch (e) {
       Log.d(TAG, "session stop error")
@@ -738,6 +749,7 @@ export class Camera implements CameraCaptureStateListener {
       Log.d(TAG, "videoSession stop error")
     }
 
+    this.isVideoMode = true;
     media.createAVRecorder(async (error, recorder) => {
       if (recorder != null) {
         this.avRecorder = recorder;
@@ -752,16 +764,19 @@ export class Camera implements CameraCaptureStateListener {
           url: `fd://${fd}`,
           rotation: 90, // 90°为默认竖屏显示角度，如果由于设备原因或应用期望以其他方式显示等原因，请根据实际情况调整该参数
         };
-        await this.avRecorder.prepare(aVRecorderConfig).then(async () =>{
+        await this.avRecorder.prepare(aVRecorderConfig).then(async () => {
           this.videoId = await this.avRecorder?.getInputSurface();
         });
-        this.cameraOutputCapability = CameraUtils.getSupportedOutputCapability(this.cameraDevice!, camera.SceneMode.NORMAL_VIDEO, this.cameraManager);
+        this.cameraOutputCapability =
+          CameraUtils.getSupportedOutputCapability(this.cameraDevice!, camera.SceneMode.NORMAL_VIDEO,
+            this.cameraManager);
         let previewProfile = this.cameraOutputCapability?.previewProfiles[0];
         this.previewOutput = this.cameraManager.createPreviewOutput(previewProfile, this.flutterTexture.getSurfaceId()
           .toString());
         let videoProfilesArray: Array<camera.VideoProfile> = this.cameraOutputCapability?.videoProfiles;
         let videoProfile: undefined | camera.VideoProfile = videoProfilesArray.find((profile: camera.VideoProfile) => {
-          return profile.size.width === this.aVRecorderProfile.videoFrameWidth && profile.size.height === this.aVRecorderProfile.videoFrameHeight;
+          return profile.size.width === this.aVRecorderProfile.videoFrameWidth &&
+            profile.size.height === this.aVRecorderProfile.videoFrameHeight;
         })
         this.videoOutput = this.cameraManager.createVideoOutput(videoProfile, this.videoId);
         this.videoSession = this.cameraManager.createSession(camera.SceneMode.NORMAL_VIDEO) as camera.VideoSession;
@@ -780,7 +795,11 @@ export class Camera implements CameraCaptureStateListener {
         } catch (e) {
           Log.d(TAG, "startAVRecorder error")
         }
-
+        setTimeout(() => {
+          if (this.pausedPreview) {
+            this.videoSession?.stop();
+          }
+        }, 100);
       } else {
         Log.e(TAG, "startVideo createAVRecorder fail :" + error.message);
       }
@@ -790,7 +809,7 @@ export class Camera implements CameraCaptureStateListener {
   // todo 此方法是否需要,ohos已经已经在拍照前创建了captureSession
   createCaptureSession() {
     // Close any existing capture session.
-    this.session = null;
+    this.photoSession = null;
   }
 
 
@@ -853,10 +872,10 @@ export class Camera implements CameraCaptureStateListener {
   }
 
   closeCaptureSession(): void {
-    if (this.session != null) {
-      this.session.stop();
-      this.session.release();
-      this.session = null;
+    if (this.photoSession != null) {
+      this.photoSession.stop();
+      this.photoSession.release();
+      this.photoSession = null;
     }
   }
 
@@ -883,7 +902,7 @@ export class Camera implements CameraCaptureStateListener {
     if (this.cameraDevice) {
       // this.cameraDevice.close();
       this.cameraDevice = null;
-      this.session = null;
+      this.photoSession = null;
     } else {
       this.closeCaptureSession();
 
@@ -959,11 +978,11 @@ export class Camera implements CameraCaptureStateListener {
   }
 
   private async releaseSession() {
-    if (this.session) {
+    if (this.photoSession) {
       try {
-        await this.session.stop();
-        this.session.release();
-        this.session = null;
+        await this.photoSession.stop();
+        this.photoSession.release();
+        this.photoSession = null;
       } catch (e) {
       }
     }
