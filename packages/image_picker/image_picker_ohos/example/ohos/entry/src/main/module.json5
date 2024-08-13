@@ -58,7 +58,7 @@
         }
       },
       {
-        "name" :  "ohos.permission.READ_MEDIA",
+        "name" :  "ohos.permission.READ_IMAGEVIDEO",
         "reason": "$string:EntryAbility_desc",
         "usedScene": {
           "abilities": [

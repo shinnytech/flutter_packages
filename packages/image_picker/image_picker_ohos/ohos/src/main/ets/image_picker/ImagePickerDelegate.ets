@@ -263,7 +263,7 @@ export default class ImagePickerDelegate {
       }
     }
     abilityAccessCtrl.createAtManager()
-      .requestPermissionsFromUser(this.context, ['ohos.permission.READ_MEDIA'])
+      .requestPermissionsFromUser(this.context, ['ohos.permission.READ_IMAGEVIDEO'])
       .then(async (permission) => {
         if(permission.authResults[0] !== 0){
           return
