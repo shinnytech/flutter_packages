@@ -78,6 +78,27 @@ export class VideoPlayerApiImpl {
     let textureId: number = flutterRenderer.getTextureId();
     Log.i(TAG, "enter getRawFd, textureId=" + textureId);
     let surfaceTextureEntry: SurfaceTextureEntry  = flutterRenderer.registerTexture(textureId);
+    if(asset != null) {
+      let avImageGenerator = await media.createAVImageGenerator();
+      avImageGenerator.fdSrc = await this.getContext().resourceManager.getRawFd("flutter_assets/" + asset);
+      let pixelMap = await avImageGenerator.fetchFrameByTime(0, media.AVImageQueryOptions.AV_IMAGE_QUERY_NEXT_SYNC, {
+        width: -1,
+        height: -1
+      });
+      avImageGenerator.release();
+      flutterRenderer.setTextureBackGroundPixelMap(textureId, pixelMap);
+    } else if(uri != null && uri.startsWith("fd://")) {
+      let avImageGenerator = await media.createAVImageGenerator();
+      avImageGenerator.fdSrc = {
+        fd: Number.parseInt(uri.replace("fd://", ""))
+      };
+      let pixelMap = await avImageGenerator.fetchFrameByTime(0, media.AVImageQueryOptions.AV_IMAGE_QUERY_NEXT_SYNC, {
+        width: -1,
+        height: -1
+      });
+      avImageGenerator.release();
+      flutterRenderer.setTextureBackGroundPixelMap(textureId, pixelMap);
+    }
     let eventChannel: EventChannel = new EventChannel(this.flutterState.getBinaryMessenger(), "flutter.io/videoPlayer/videoEvents" + textureId.toString());
     if (asset != null) {
       let rawFileDescriptor: resourceManager.RawFileDescriptor = await this.getContext().resourceManager.getRawFd("flutter_assets/" + asset);
