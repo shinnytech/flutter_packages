@@ -2186,7 +2186,7 @@ export abstract class WebSettingsHostApi {
 
   abstract setTextZoom(instanceId: number, textZoom: number): void;
 
-  abstract getUserAgentString(instanceId: number): string;
+  abstract getUserAgentString(instanceId: number): Promise<string>;
 
   static getCodec(): MessageCodec<ESObject> {
     return new StandardMessageCodec();
@@ -2680,12 +2680,12 @@ export abstract class WebSettingsHostApi {
       if (api != null) {
         channel.setMessageHandler(
           {
-            onMessage: (message: ESObject, reply: Reply<ESObject>) => {
+            onMessage: async (message: ESObject, reply: Reply<ESObject>) => {
               let wrapped: ArrayList<ESObject> = new ArrayList<ESObject>();
               const args: Array<ESObject> = message;
               const instanceIdArg: number = args[0];
               try {
-                let output = api.getUserAgentString(instanceIdArg);
+                let output = await api.getUserAgentString(instanceIdArg);
                 wrapped.insert(output, 0);
               } catch (err) {
                 const wrappedError: ArrayList<ESObject> = GeneratedOhosWebView.wrapError(err);

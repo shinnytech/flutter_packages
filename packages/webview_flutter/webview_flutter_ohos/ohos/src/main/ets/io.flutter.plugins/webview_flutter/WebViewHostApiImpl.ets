@@ -649,8 +649,8 @@ class WebSettingsImpl implements WebSettings {
     this.textZoomRatioCallback && this.textZoomRatioCallback(textZoom);    
   }
 
-   getUserAgentString(): string {
-    this.webView.waitControllerAttached();
+   async getUserAgentString(): Promise<string> {
+    await this.webView.waitControllerAttached();
     return this.webView.getController().getCustomUserAgent();
   }
 
