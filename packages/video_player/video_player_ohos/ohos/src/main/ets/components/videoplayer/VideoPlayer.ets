@@ -57,6 +57,7 @@ export class VideoPlayer {
   private eventChannel: EventChannel | null = null;
   private eventSink: QueuingEventSink | null = null;
   private interruptMode: audio.InterruptMode = audio.InterruptMode.INDEPENDENT_MODE;
+  private fd: number | null = null;
 
   constructor(playerModel: PlayerModel, textureEntry: SurfaceTextureEntry, url: resourceManager.RawFileDescriptor | null, iUrl: string | null, eventChannel: EventChannel, AudioFocus: Boolean) {
     this.playerModel = playerModel;
