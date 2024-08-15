@@ -1321,14 +1321,14 @@ class PermissionRequest extends OhosObject {
         super.detached();
 
   /// Resource belongs to audio capture device, like microphone.
-  static const String audioCapture = 'ohos.webkit.resource.AUDIO_CAPTURE';
+  static const String audioCapture = 'TYPE_AUDIO_CAPTURE';
 
   /// Resource will allow sysex messages to be sent to or received from MIDI
   /// devices.
-  static const String midiSysex = 'ohos.webkit.resource.MIDI_SYSEX';
+  static const String midiSysex = 'TYPE_MIDI_SYSEX';
 
   /// Resource belongs to video capture device, like camera.
-  static const String videoCapture = 'ohos.webkit.resource.VIDEO_CAPTURE';
+  static const String videoCapture = 'TYPE_VIDEO_CAPTURE';
 
   /// Resource belongs to protected media identifier.
   static const String protectedMediaId =
