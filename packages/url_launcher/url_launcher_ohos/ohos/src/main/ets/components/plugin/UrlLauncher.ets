@@ -34,11 +34,12 @@ class SendMessageParams {
 }
 
 export class UrlLauncher implements UrlLauncherApi {
-  static LAUNCH_TYPE_TEL: string = 'tel';
-  static LAUNCH_TYPE_WEB: string = 'http';
-  static LAUNCH_TYPE_MAILTO: string = 'mailto';
-  static LAUNCH_TYPE_SMS: string = 'sms';
-  static LAUNCH_TYPE_FILE: string = 'file';
+  static LAUNCH_TYPE_TEL: string = 'tel:';
+  static LAUNCH_TYPE_WEB_HTTP: string = 'http:';
+  static LAUNCH_TYPE_WEB_HTTPS: string = 'https:';
+  static LAUNCH_TYPE_MAILTO: string = 'mailto:';
+  static LAUNCH_TYPE_SMS: string = 'sms:';
+  static LAUNCH_TYPE_FILE: string = 'file:';
 
   static MMS_BUNDLE_NAME = "com.ohos.mms";
   static MMS_ABILITY_NAME = "com.ohos.mms.MainAbility";
@@ -72,7 +73,16 @@ export class UrlLauncher implements UrlLauncherApi {
   }
 
   canLaunchUrl(url: string): boolean {
-    return true;
+    let encodedUri = encodeURI(url);
+    if (encodedUri.startsWith(UrlLauncher.LAUNCH_TYPE_TEL) ||
+        encodedUri.startsWith(UrlLauncher.LAUNCH_TYPE_WEB_HTTP) ||
+        encodedUri.startsWith(UrlLauncher.LAUNCH_TYPE_WEB_HTTPS) ||
+        encodedUri.startsWith(UrlLauncher.LAUNCH_TYPE_MAILTO) ||
+        encodedUri.startsWith(UrlLauncher.LAUNCH_TYPE_SMS) ||
+        encodedUri.startsWith(UrlLauncher.LAUNCH_TYPE_FILE)) {
+      return true;
+    }
+    return false;
   }
 
   launchUrl(url: string, headers: Map<string, string>): boolean {
@@ -81,7 +91,8 @@ export class UrlLauncher implements UrlLauncherApi {
     Log.d(TAG, 'launchUrl. url:' + url + '  eurl:' + encodedUri);
     if (encodedUri.startsWith(UrlLauncher.LAUNCH_TYPE_TEL)) {
       return this.launchTel(url);
-    } else if (encodedUri.startsWith(UrlLauncher.LAUNCH_TYPE_WEB)) {
+    } else if (encodedUri.startsWith(UrlLauncher.LAUNCH_TYPE_WEB_HTTP) ||
+               encodedUri.startsWith(UrlLauncher.LAUNCH_TYPE_WEB_HTTPS)) {
       return this.launchWeb(url, headers);
     } else if (encodedUri.startsWith(UrlLauncher.LAUNCH_TYPE_MAILTO)) {
       return this.launchMail(url);
