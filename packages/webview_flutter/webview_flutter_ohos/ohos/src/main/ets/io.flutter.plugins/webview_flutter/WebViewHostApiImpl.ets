@@ -43,7 +43,6 @@ export class WebViewHostApiImpl extends WebViewHostApi {
   private binaryMessenger: BinaryMessenger;
 
   private context: common.Context;
-
   private api?: WebViewFlutterApiImpl;
 
   constructor(
@@ -431,7 +430,7 @@ export class WebViewPlatformView extends PlatformView {
     return true;
   }
 
-  getType(): string{
+  getType(): string {
     return 'web';
   }
 
