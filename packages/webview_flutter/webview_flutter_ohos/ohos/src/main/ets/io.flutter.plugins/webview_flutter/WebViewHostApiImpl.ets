@@ -273,10 +273,6 @@ export class WebViewHostApiImpl extends WebViewHostApi {
 
 export class WebViewPlatformView extends PlatformView {
 
-  getType(): string{
-    return 'web';
-  }
-
   private WebCookieManager: web_webview.WebCookieManager = new web_webview.WebCookieManager();
 
   private controller: web_webview.WebviewController = new web_webview.WebviewController();
@@ -435,6 +431,9 @@ export class WebViewPlatformView extends PlatformView {
     return true;
   }
 
+  getType(): string{
+    return 'web';
+  }
 
   getView(): WrappedBuilder<[Params]> {
     return new WrappedBuilder(WebBuilder);
