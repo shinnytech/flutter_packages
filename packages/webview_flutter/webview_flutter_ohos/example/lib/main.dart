@@ -163,6 +163,14 @@ class WebViewExample extends StatefulWidget {
 class _WebViewExampleState extends State<WebViewExample> {
   late final PlatformWebViewController _controller;
 
+  Future<String> getUserAgent() async {
+    String userAgent = await _controller.getUserAgent() ?? '';
+    if(defaultTargetPlatform != TargetPlatform.ohos){
+      return userAgent;
+    }
+    return '$userAgent HuaweiBrower';
+  }
+
   @override
   void initState() {
     super.initState();
@@ -231,6 +239,10 @@ Page resource error:
           uri: Uri.parse('https://flutter.dev'),
         ),
       );
+
+    getUserAgent().then((String userAgent){
+      _controller.setUserAgent(userAgent);
+    });
   }
 
   @override
