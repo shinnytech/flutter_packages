@@ -32,6 +32,7 @@ class WebViewConfiguration {
     this.enableJavaScript = true,
     this.enableDomStorage = true,
     this.headers = const <String, String>{},
+    this.harmonyBrowserPage = '',
   });
 
   /// Whether or not JavaScript is enabled for the web content.
@@ -51,4 +52,7 @@ class WebViewConfiguration {
   /// [Browser.EXTRA_HEADERS](https://developer.android.com/reference/android/provider/Browser#EXTRA_HEADERS)
   /// Not all browsers support this, so it is not guaranteed to be honored.
   final Map<String, String> headers;
+
+  /// In app webview page router for harmonyOS.
+  final String harmonyBrowserPage;
 }

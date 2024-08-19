@@ -93,11 +93,25 @@ export class WebViewOptions {
     this.headers = setterArg;
   }
 
+  private harmonyBrowserPage: string = '';
+
+  public getHarmonyBrowserPage(): string {
+    return this.harmonyBrowserPage;
+  }
+
+  public setHarmonyBrowserPage(setterArg: string): void {
+    if (setterArg == null) {
+      throw new ReferenceError("Nonnull field \"harmonyBrowserPage\" is null.");
+    }
+    this.harmonyBrowserPage = setterArg;
+  }
+
   toList(): Array<ESObject> {
     let toListResult = new Array<Object>();
     toListResult.push(this.enableJavaScript);
     toListResult.push(this.enableDomStorage);
     toListResult.push(this.headers);
+    toListResult.push(this.harmonyBrowserPage);
     return toListResult;
   }
 
@@ -109,6 +123,8 @@ export class WebViewOptions {
     result.setEnableDomStorage(enableDomStorage);
     let headers = list[2];
     result.setHeaders(headers as Map<string, string>);
+    let harmonyBrowserPage = list[3] as string;
+    result.setHarmonyBrowserPage(harmonyBrowserPage);
     return result;
   }
 
