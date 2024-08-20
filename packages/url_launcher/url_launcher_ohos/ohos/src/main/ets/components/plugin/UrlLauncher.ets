@@ -24,6 +24,7 @@ import Log from '@ohos/flutter_ohos/src/main/ets/util/Log';
 import call from '@ohos.telephony.call';
 import i18n from '@ohos.i18n';
 import abilityAccessCtrl, { Permissions } from '@ohos.abilityAccessCtrl';
+import bundleManager from '@ohos.bundle.bundleManager';
 
 const TAG = 'UrlLauncher'
 
@@ -74,6 +75,7 @@ export class UrlLauncher implements UrlLauncherApi {
 
   canLaunchUrl(url: string): boolean {
     let encodedUri = encodeURI(url);
+    // Trick：由于 sms、tel、file、mailto 用 bundleManager.canOpenLink 判断会报 17700055 错误，这里暂时保留 if 这段条件判断代码
     if (encodedUri.startsWith(UrlLauncher.LAUNCH_TYPE_TEL) ||
         encodedUri.startsWith(UrlLauncher.LAUNCH_TYPE_WEB_HTTP) ||
         encodedUri.startsWith(UrlLauncher.LAUNCH_TYPE_WEB_HTTPS) ||
@@ -82,10 +84,25 @@ export class UrlLauncher implements UrlLauncherApi {
         encodedUri.startsWith(UrlLauncher.LAUNCH_TYPE_FILE)) {
       return true;
     }
-    return false;
+
+    try {
+      // 除了 sms、tel、file、mailto、http、https 开头的这六种 uri 之外的，用下面的方法判断是否支持打开。
+      // 需要在 src/main/module.json5 的 querySchemes 中增加对应的头部信息，例如打开 "amapuri://route/plan/?did=xxx"，module.json5 的样例：{ "module": { "querySchemes": [ "amapuri" ] } }
+      if (bundleManager.canOpenLink(encodedUri)) {
+        return true;
+      }
+      return false;
+    } catch (error) {
+      Log.e(TAG, 'canOpenLink error: ', JSON.stringify(error));
+      return false;
+    }
   }
 
   launchUrl(url: string, headers: Map<string, string>): boolean {
+    if (!this.canLaunchUrl(url)) {
+      return false;
+    }
+
     this.ensureContext();
     let encodedUri = encodeURI(url);
     Log.d(TAG, 'launchUrl. url:' + url + '  eurl:' + encodedUri);
@@ -101,8 +118,7 @@ export class UrlLauncher implements UrlLauncherApi {
     } else if (encodedUri.startsWith(UrlLauncher.LAUNCH_TYPE_FILE)) {
       return this.launchFile(url);
     } else {
-      Log.w(TAG, 'launch type unsurppoted. url:' + url);
-      return false;
+      return this.launchOther(url);
     }
   }
 
@@ -214,6 +230,19 @@ export class UrlLauncher implements UrlLauncherApi {
       this.context.startAbility(want)
     } catch (e) {
       Log.e(TAG, 'launchMail failed. err:' + JSON.stringify(e))
+      return false
+    }
+    return true;
+  }
+
+  launchOther(url: string): boolean {
+    let want: Want = {
+      uri: url,
+    }
+    try {
+      this.context.startAbility(want)
+    } catch (e) {
+      Log.e(TAG, 'launchOther failed. err:' + JSON.stringify(e))
       return false
     }
     return true;
