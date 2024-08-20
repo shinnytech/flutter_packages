@@ -62,6 +62,7 @@ abstract class UrlLauncherPlatform extends PlatformInterface {
     required bool universalLinksOnly,
     required Map<String, String> headers,
     String? webOnlyWindowName,
+    String? harmonyBrowserPage,
   }) {
     throw UnimplementedError('launch() has not been implemented.');
   }
@@ -84,6 +85,7 @@ abstract class UrlLauncherPlatform extends PlatformInterface {
           options.mode == PreferredLaunchMode.externalNonBrowserApplication,
       headers: options.webViewConfiguration.headers,
       webOnlyWindowName: options.webOnlyWindowName,
+      harmonyBrowserPage: options.webViewConfiguration.harmonyBrowserPage,
     );
   }
 
