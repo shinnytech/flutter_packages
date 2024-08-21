@@ -56,7 +56,7 @@ export class VideoPlayer {
   private textureEntry: SurfaceTextureEntry;
   private eventChannel: EventChannel | null = null;
   private eventSink: QueuingEventSink | null = null;
-  private interruptMode: audio.InterruptMode = audio.InterruptMode.SHARE_MODE;
+  private interruptMode: audio.InterruptMode = audio.InterruptMode.INDEPENDENT_MODE;
   private fd: number | null = null;
 
   constructor(playerModel: PlayerModel, textureEntry: SurfaceTextureEntry, url: resourceManager.RawFileDescriptor | null, iUrl: string | null, eventChannel: EventChannel, AudioFocus: Boolean) {
@@ -67,7 +67,7 @@ export class VideoPlayer {
     this.iUrl = iUrl;
     this.eventChannel = eventChannel;
     if (AudioFocus == true) {
-      this.interruptMode = audio.InterruptMode.INDEPENDENT_MODE;
+      this.interruptMode = audio.InterruptMode.SHARE_MODE;
       Log.i(TAG, "set interruptMode : " + this.interruptMode);
     }
     Log.i(TAG, "surfaceId : " + this.surfaceId);

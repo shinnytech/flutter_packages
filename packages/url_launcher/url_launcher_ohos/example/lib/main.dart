@@ -87,6 +87,7 @@ class _MyHomePageState extends State<MyHomePage> {
       enableDomStorage: false,
       universalLinksOnly: false,
       headers: <String, String>{'my_header_key': 'my_header_value'},
+      harmonyBrowserPage: 'pages/LaunchInAppPage',
     )) {
       throw Exception('Could not launch $url');
     }
@@ -101,6 +102,7 @@ class _MyHomePageState extends State<MyHomePage> {
       enableDomStorage: false,
       universalLinksOnly: false,
       headers: <String, String>{},
+      harmonyBrowserPage: 'pages/LaunchInAppPage',
     )) {
       throw Exception('Could not launch $url');
     }
@@ -115,6 +117,7 @@ class _MyHomePageState extends State<MyHomePage> {
       enableDomStorage: true,
       universalLinksOnly: false,
       headers: <String, String>{},
+      harmonyBrowserPage: 'pages/LaunchInAppPage',
     )) {
       throw Exception('Could not launch $url');
     }

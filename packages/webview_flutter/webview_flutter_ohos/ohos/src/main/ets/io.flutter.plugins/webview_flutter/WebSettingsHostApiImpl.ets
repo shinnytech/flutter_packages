@@ -69,7 +69,7 @@ export interface WebSettings {
   getTextZoom(): number;
 
 
-  getUserAgentString(): string;
+  getUserAgentString(): Promise<string>;
   
   onTextZoomChanged(callback: (ratio: number) => void): void;
 }
@@ -166,7 +166,7 @@ export class WebSettingsHostApiImpl extends WebSettingsHostApi {
     webSettings.setTextZoom(textZoom);
   }
 
-  getUserAgentString(instanceId: number): string {
+  getUserAgentString(instanceId: number): Promise<string> {
     const webSettings:WebSettings = this.instanceManager.getInstance(instanceId);
     return webSettings.getUserAgentString();
   }

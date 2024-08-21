@@ -25,6 +25,7 @@ import call from '@ohos.telephony.call';
 import i18n from '@ohos.i18n';
 import abilityAccessCtrl, { Permissions } from '@ohos.abilityAccessCtrl';
 import bundleManager from '@ohos.bundle.bundleManager';
+import router from '@ohos.router'
 
 const TAG = 'UrlLauncher'
 
@@ -264,11 +265,8 @@ export class UrlLauncher implements UrlLauncherApi {
 
   openUrlInWebView(url: string, options: WebViewOptions): boolean {
     try {
-      this.context?.startAbility({
-        action: 'ohos.want.action.viewData',
-        entities: ['entity.system.browsable'],
-        uri: url,
-      });
+      let harmonyBrowserPage = options.getHarmonyBrowserPage();
+      router.pushUrl({ url: harmonyBrowserPage, params: {'url': url, 'options': options} })
     } catch (e) {
       return false;
     }

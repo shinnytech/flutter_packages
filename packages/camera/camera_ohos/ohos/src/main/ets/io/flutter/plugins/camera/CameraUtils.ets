@@ -197,7 +197,7 @@ export class CameraUtils {
 
   // 获取支持的最小变焦范围
   public static getMinZoomRatio(captureSession: camera.PhotoSession | camera.VideoSession): number {
-    let minZoomRatio: number = -1;
+    let minZoomRatio: number = -10;
     try {
       let zoomRatioRange: Array<number> = captureSession.getZoomRatioRange();
       minZoomRatio = Math.min(...zoomRatioRange);
@@ -211,7 +211,7 @@ export class CameraUtils {
 
   // 获取支持的最大变焦范围
   public static getMaxZoomRatio(captureSession: camera.PhotoSession | camera.VideoSession): number {
-    let maxZoomRatio: number = 1;
+    let maxZoomRatio: number = 10;
     try {
       let zoomRatioRange: Array<number> = captureSession.getZoomRatioRange();
       maxZoomRatio = Math.max(...zoomRatioRange);
@@ -238,7 +238,7 @@ export class CameraUtils {
 
   // 查询最小曝光补偿值
   public static getMinExposureBias(captureSession: camera.PhotoSession | camera.VideoSession): number {
-    let minExposure: number = -1;
+    let minExposure: number = -10;
     try {
       let biasRangeArray = captureSession.getExposureBiasRange();
       if (biasRangeArray.length > 1) {
@@ -254,7 +254,7 @@ export class CameraUtils {
 
   // 查询最大曝光补偿值
   public static getMaxExposureBias(captureSession: camera.PhotoSession | camera.VideoSession): number {
-    let maxExposure: number = 1;
+    let maxExposure: number = 10;
     try {
       let biasRangeArray = captureSession.getExposureBiasRange();
       if (biasRangeArray.length > 1) {
