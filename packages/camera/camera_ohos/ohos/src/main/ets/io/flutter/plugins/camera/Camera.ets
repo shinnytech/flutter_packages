@@ -329,20 +329,25 @@ export class Camera implements CameraCaptureStateListener {
   }
 
   // 暂停预览
-  public async pausePreview() {
-    await this.getCurSession().stop();
+  public async pausePreview(result: MethodResult) {
+    try {
+      await this.previewOutput?.stop();
+    } catch (e) {
+    }
     this.pausedPreview = true;
+    result.success(null);
   }
 
   // 恢复预览
-  public async resumePreview() {
-    if (this.isVideoMode) {
-      this.getCurSession().beginConfig();
-      this.getCurSession().addOutput(this.previewOutput);
-      await this.getCurSession().commitConfig();
+  public async resumePreview(result: MethodResult) {
+    try {
+      if (this.pausedPreview) {
+        await this.previewOutput?.start();
+      }
+    } catch (e) {
     }
-    await this.getCurSession().start();
     this.pausedPreview = false;
+    result.success(null);
   }
 
   // 设置曝光区域中心点
@@ -602,15 +607,16 @@ export class Camera implements CameraCaptureStateListener {
     this.videoSession = this.cameraManager.createSession(camera.SceneMode.NORMAL_VIDEO) as camera.VideoSession;
     this.videoSession?.beginConfig();
     this.videoSession?.addInput(this.cameraInput);
-    if (!this.pausedPreview) {
-      this.videoSession?.addOutput(this.previewOutput);
-    }
+    this.videoSession?.addOutput(this.previewOutput);
     this.videoSession?.addOutput(this.videoOutput);
     await this.videoSession?.commitConfig();
     await this.videoSession?.start();
+    if (this.pausedPreview) {
+      this.previewOutput.stop();
+    }
     if (this.recordingVideo && this.avRecorder != undefined && this.avRecorder.state === 'paused') {
       // 录像中且暂停状态
-    } else{
+    } else {
       await this.videoOutput.start();
     }
   }
@@ -640,7 +646,7 @@ export class Camera implements CameraCaptureStateListener {
     await this.photoSession.commitConfig();
     await this.photoSession.start();
     if (this.pausedPreview) {
-      await this.photoSession.stop();
+      await this.previewOutput.stop();
     }
   }
 
@@ -739,14 +745,15 @@ export class Camera implements CameraCaptureStateListener {
         this.videoSession?.beginConfig();
         await this.cameraInput?.open();
         this.videoSession?.addInput(this.cameraInput);
-        if (!this.pausedPreview) {
-          this.videoSession?.addOutput(this.previewOutput);
-        }
+        this.videoSession?.addOutput(this.previewOutput);
         this.videoSession?.addOutput(this.videoOutput);
         await this.videoSession?.commitConfig();
         await this.videoSession?.start();
         await this.videoOutput.start();
         try {
+          if (this.pausedPreview) {
+            await this.previewOutput.stop();
+          }
           if (record) {
             await this.avRecorder.start();
           }

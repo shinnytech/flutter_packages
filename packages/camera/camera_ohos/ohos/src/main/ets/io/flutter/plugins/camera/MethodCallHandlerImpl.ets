@@ -353,16 +353,18 @@ export class MethodCallHandlerImpl implements MethodCallHandler {
       }
       case 'pausePreview': {
         try {
-          this.camera!.pausePreview();
-          result.success(null);
+          this.camera!.pausePreview(result);
         } catch (e) {
           this.handleException(e, result);
         }
         break;
       }
       case 'resumePreview': {
-        this.camera!.resumePreview();
-        result.success(null);
+        try {
+          this.camera!.resumePreview(result);
+        } catch (e) {
+          this.handleException(e, result);
+        }
       }
         break;
       case 'setDescriptionWhileRecording': {
