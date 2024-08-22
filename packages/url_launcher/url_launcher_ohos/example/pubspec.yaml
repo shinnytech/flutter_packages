@@ -30,7 +30,9 @@ dependencies:
     # the parent directory to use the current plugin's version.
     path: ../
   url_launcher_platform_interface:
-    path: ../../url_launcher_platform_interface
+    git:
+      url: https://gitee.com/openharmony-sig/flutter_packages.git
+      path: packages/url_launcher/url_launcher_platform_interface
 
 dev_dependencies:
   flutter_test:
