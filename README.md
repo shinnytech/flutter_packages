@@ -55,7 +55,7 @@ dependencies:
 
 示例：在某个Flutter兼容OpenHarmony项目中加入支持OpenHarmony平台的path_provider库依赖；
 
-可参考示例：https://gitee.com/openharmony-sig/flutter_samples/tree/master/ohos/pictures_provider_demo。
+可参考示例：https://gitee.com/openharmony-sig/flutter_samples/tree/master/ohos/pictures_provider_demo
 
 ## FAQ
 
