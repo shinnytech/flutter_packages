@@ -51,11 +51,11 @@ dependencies:
 
 2、项目根目录运行`flutter pub get`；（ohos/entry/oh-package.json5会自动添加相关插件har依赖）
 
-3、在业务代码中调用path_provider相关api，确保其在OpenHarmony平台上的兼容性与稳定性。
+3、在业务代码中调用path_provider相关api，它会在OpenHarmony平台正常运行。
 
-示例：在一个兼容OpenHarmony的flutter项目中，添加支持OpenHarmony的path_provider库依赖；
+示例：在某个Flutter兼容OpenHarmony项目中加入支持OpenHarmony平台的path_provider库依赖；
 
-参考代码示例：https://gitee.com/openharmony-sig/flutter_samples/tree/master/ohos/pictures_provider_demo
+可参考示例：https://gitee.com/openharmony-sig/flutter_samples/tree/master/ohos/pictures_provider_demo
 
 ## FAQ
 
