@@ -72,7 +72,6 @@ class UrlLauncherOhos extends UrlLauncherPlatform {
     required bool universalLinksOnly,
     required Map<String, String> headers,
     String? webOnlyWindowName,
-    String? harmonyBrowserPage,
   }) async {
     final bool succeeded;
     if (useWebView) {
@@ -81,8 +80,7 @@ class UrlLauncherOhos extends UrlLauncherPlatform {
           WebViewOptions(
               enableJavaScript: enableJavaScript,
               enableDomStorage: enableDomStorage,
-              headers: headers,
-              harmonyBrowserPage: harmonyBrowserPage!));
+              headers: headers));
     } else {
       succeeded = await _hostApi.launchUrl(url, headers);
     }

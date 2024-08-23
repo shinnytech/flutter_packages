@@ -34,7 +34,6 @@ class InAppWebViewConfiguration {
     this.enableJavaScript = true,
     this.enableDomStorage = true,
     this.headers = const <String, String>{},
-    this.harmonyBrowserPage = '',
   });
 
   /// Whether or not JavaScript is enabled for the web content.
@@ -45,9 +44,6 @@ class InAppWebViewConfiguration {
 
   /// Additional headers to pass in the load request.
   final Map<String, String> headers;
-
-  /// In app webview page router for harmonyOS.
-  final String harmonyBrowserPage;
 }
 
 /// Options for [launchUrl].

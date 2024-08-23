@@ -25,7 +25,6 @@ class WebViewOptions {
     required this.enableJavaScript,
     required this.enableDomStorage,
     required this.headers,
-    required this.harmonyBrowserPage,
   });
 
   bool enableJavaScript;
@@ -34,14 +33,11 @@ class WebViewOptions {
 
   Map<String?, String?> headers;
 
-  String harmonyBrowserPage;
-
   Object encode() {
     return <Object?>[
       enableJavaScript,
       enableDomStorage,
       headers,
-      harmonyBrowserPage,
     ];
   }
 
@@ -51,7 +47,6 @@ class WebViewOptions {
       enableJavaScript: result[0]! as bool,
       enableDomStorage: result[1]! as bool,
       headers: (result[2] as Map<Object?, Object?>?)!.cast<String?, String?>(),
-      harmonyBrowserPage: result[3]! as String,
     );
   }
 }

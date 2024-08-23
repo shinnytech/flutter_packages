@@ -32,10 +32,7 @@ flutter:
 dependencies:
   flutter:
     sdk: flutter
-  url_launcher_platform_interface:
-    git:
-      url: https://gitee.com/openharmony-sig/flutter_packages.git
-      path: packages/url_launcher/url_launcher_platform_interface
+  url_launcher_platform_interface: ^2.0.3
 
 dev_dependencies:
   flutter_test:

@@ -71,7 +71,6 @@ Future<bool> launch(
   Map<String, String> headers = const <String, String>{},
   Brightness? statusBarBrightness,
   String? webOnlyWindowName,
-  String? harmonyBrowserPage,
 }) async {
   final Uri? url = Uri.tryParse(urlString.trimLeft());
   final bool isWebURL =
@@ -109,7 +108,6 @@ Future<bool> launch(
     universalLinksOnly: universalLinksOnly,
     headers: headers,
     webOnlyWindowName: webOnlyWindowName,
-    harmonyBrowserPage: harmonyBrowserPage,
   );
 
   if (statusBarBrightness != null &&
