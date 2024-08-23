@@ -36,6 +36,8 @@ import resourceManager from '@ohos.resourceManager';
 import common from '@ohos.app.ability.common';
 import { media } from '@kit.MediaKit';
 import { EventChannel } from '@ohos/flutter_ohos';
+import { GlobalContext } from './util/GlobalContext';
+import { window } from '@kit.ArkUI';
 
 const TAG: string = "VideoPlayerApiImpl";
 export class VideoPlayerApiImpl {
@@ -67,6 +69,8 @@ export class VideoPlayerApiImpl {
   }
 
   async create(arg: CreateMessage): Promise<TextureMessage> {
+    let windowClass = await window.getLastWindow(this.getContext())
+    GlobalContext.getContext().setObject("windowClass", windowClass)
     Log.i(TAG, "enter create");
     if (this.flutterState == null) {
       throw new Error("Illegal flutterState null.");
