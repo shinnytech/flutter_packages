@@ -25,6 +25,8 @@ import call from '@ohos.telephony.call';
 import i18n from '@ohos.i18n';
 import abilityAccessCtrl, { Permissions } from '@ohos.abilityAccessCtrl';
 import router from '@ohos.router'
+import promptAction from '@ohos.promptAction';
+import { BusinessError } from '@kit.BasicServicesKit';
 
 const TAG = 'UrlLauncher'
 
@@ -235,12 +237,23 @@ export class UrlLauncher implements UrlLauncherApi {
   }
 
   openUrlInWebView(url: string, options: WebViewOptions): boolean {
-    try {
-      let harmonyBrowserPage = options.getHarmonyBrowserPage();
-      router.pushUrl({ url: harmonyBrowserPage, params: {'url': url, 'options': options} })
-    } catch (e) {
+    let headers = options.getHeaders();
+    if (!headers.has('harmony_browser_page')) {
+      promptAction.showToast({
+        message: '请在 launch 函数的 headers 参数中添加 harmony_browser_page 和对应的值，并在鸿蒙工程中增加对应的页面和配置路由',
+      });
       return false;
     }
+
+    let harmonyBrowserPage = headers.get('harmony_browser_page');
+    router.pushUrl({ url: harmonyBrowserPage, params: {'url': url, 'options': options} }).catch((error: BusinessError) => {
+      Log.e(TAG, 'Failed to open url: ', harmonyBrowserPage, ', Error: ', JSON.stringify(error));
+      if (error.code == 100002) {
+        promptAction.showToast({
+          message: harmonyBrowserPage + ' 页面不存在，或者没有在 main_pages.json 中声明',
+        });
+      }
+    });
     return true;
   }
 

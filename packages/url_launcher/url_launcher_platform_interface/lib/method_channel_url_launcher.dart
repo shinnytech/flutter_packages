@@ -39,7 +39,6 @@ class MethodChannelUrlLauncher extends UrlLauncherPlatform {
     required bool universalLinksOnly,
     required Map<String, String> headers,
     String? webOnlyWindowName,
-    String? harmonyBrowserPage,
   }) {
     return _channel.invokeMethod<bool>(
       'launch',
@@ -51,7 +50,6 @@ class MethodChannelUrlLauncher extends UrlLauncherPlatform {
         'enableDomStorage': enableDomStorage,
         'universalLinksOnly': universalLinksOnly,
         'headers': headers,
-        'harmonyBrowserPage': harmonyBrowserPage ?? '',
       },
     ).then((bool? value) => value ?? false);
   }

@@ -13,7 +13,6 @@ InAppWebViewConfiguration convertConfiguration(WebViewConfiguration config) {
     enableJavaScript: config.enableJavaScript,
     enableDomStorage: config.enableDomStorage,
     headers: config.headers,
-    harmonyBrowserPage: config.harmonyBrowserPage,
   );
 }
 
