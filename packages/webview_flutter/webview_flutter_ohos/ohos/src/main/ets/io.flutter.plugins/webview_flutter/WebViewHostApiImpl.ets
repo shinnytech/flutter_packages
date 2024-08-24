@@ -377,7 +377,14 @@ export class WebViewPlatformView extends PlatformView {
   }
 
   onConsoleMessage = (event: ESObject) => {
-    // Frequent console message printing, temporarily closed
+    let message:ConsoleMessage = event.message;
+    if (message.getMessageLevel() == MessageLevel.Error || message.getMessageLevel() == MessageLevel.Warn) {
+      if (this.webChromeClient) {
+        this.webChromeClient.onConsoleMessage(event.message);
+      }
+    } else {
+      Log.d(TAG, "logLevel: " + message.getMessageLevel() + " "+ message.getMessage());
+    }
     return true;
   }
 
