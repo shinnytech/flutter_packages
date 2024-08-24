@@ -32,7 +32,6 @@ import { DisplayListenerProxy } from './DisplayListenerProxy'
 import { JavaScriptChannel } from './JavaScriptChannel'
 import Log from '@ohos/flutter_ohos/src/main/ets/util/Log';
 import { WebViewFlutterApiImpl } from './WebViewFlutterApiImpl.ets'
-import BuildProfile from '../../../../../BuildProfile'
 
 const TAG: string = "WebViewHostApiImpl";
 
@@ -378,13 +377,7 @@ export class WebViewPlatformView extends PlatformView {
   }
 
   onConsoleMessage = (event: ESObject) => {
-    let buildModeName: string = BuildProfile.BUILD_MODE_NAME.toLowerCase();
-    if (buildModeName == 'release' || buildModeName == 'profile') {
-      return true;
-    }
-    if (this.webChromeClient) {
-      this.webChromeClient.onConsoleMessage(event.message);
-    }
+    // Frequent console message printing, temporarily closed
     return true;
   }
 
