@@ -77,29 +77,6 @@
           "when": "inuse"
         }
       },
-      {
-        "name": "ohos.permission.READ_IMAGEVIDEO",
-        "reason": "$string:reason",
-        "usedScene": {
-          "abilities": [
-            "FormAbility"
-          ],
-          "when": "inuse"
-        }
-      },
-      {
-        "name": "ohos.permission.WRITE_IMAGEVIDEO",
-        "reason": "$string:reason",
-        "usedScene": {
-          "abilities": [
-            "FormAbility"
-          ],
-          "when": "inuse"
-        }
-      },
-      //      {
-      //        "name": "ohos.permission.CAPTURE_VOICE_DOWNLINK_AUDIO"
-      //      }
     ]
   }
 }
