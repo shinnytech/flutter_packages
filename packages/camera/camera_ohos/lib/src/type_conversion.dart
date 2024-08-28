@@ -16,10 +16,11 @@ CameraImageData cameraImageFromPlatformData(Map<dynamic, dynamic> data) {
       lensAperture: double.parse(data['lensAperture'].toString()),
       sensorExposureTime: data['sensorExposureTime'] as int?,
       sensorSensitivity: double.parse(data['sensorSensitivity'].toString()),
-      planes: List.unmodifiable(
-          (data['planes'] as List).map(
-                  (dynamic planeData) => _cameraImagePlaneFromPlatformData(
-                  planeData as Map<dynamic, dynamic>))));
+      planes: List<CameraImagePlane>.unmodifiable(
+          (data['planes'] as List<dynamic>).map<CameraImagePlane>(
+                  (dynamic planeData) =>
+                  _cameraImagePlaneFromPlatformData(
+                      planeData as Map<dynamic, dynamic>))));
 }
 
 CameraImageFormat _cameraImageFormatFromPlatformData(dynamic data) {
@@ -30,7 +31,7 @@ ImageFormatGroup _imageFormatGroupFromPlatformData(dynamic data) {
   switch (data) {
     case 35:
       return ImageFormatGroup.yuv420;
-    case 2000:
+    case 256:
       return ImageFormatGroup.jpeg;
     case 17:
       return ImageFormatGroup.nv21;
