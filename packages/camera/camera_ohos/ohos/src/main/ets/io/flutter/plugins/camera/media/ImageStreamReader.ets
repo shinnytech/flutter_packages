@@ -66,11 +66,11 @@ export class ImageStreamReader {
     _image: image.Image,
     imgComponent: image.Component): ArrayList<HashMap<string, object>> {
     let planes: ArrayList<HashMap<string, object>> = new ArrayList();
-    let planeBuffer: HashMap<string, Object> = new HashMap<string, Object>();
 
+    let planeBuffer: HashMap<string, Object> = new HashMap<string, Object>();
     planeBuffer.set("bytesPerRow", imgComponent.rowStride);
     planeBuffer.set("bytesPerPixel", imgComponent.pixelStride);
-    planeBuffer.set("bytes", imgComponent.byteBuffer);
+    planeBuffer.set("bytes", new Uint8Array(imgComponent.byteBuffer));
     planes.add(planeBuffer);
 
     return planes;
