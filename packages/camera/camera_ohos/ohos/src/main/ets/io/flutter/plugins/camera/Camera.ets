@@ -694,8 +694,48 @@ export class Camera implements CameraCaptureStateListener {
 
   startPreviewWithImageStream(imageStreamChannel: EventChannel) {
     this.setStreamHandler(imageStreamChannel);
-    this.startCapture(false, true);
-    Log.i(TAG, "startPreviewWithImageStream");
+    this.startImageStream();
+  }
+
+  async startImageStream() {
+    try {
+      if (this.photoSession != null) {
+        await this.photoSession?.stop()
+      }
+    } catch (e) {
+    }
+    try {
+      if (this.videoSession != null) {
+        await this.videoSession?.stop();
+      }
+    } catch (e) {
+    }
+
+    let profiles =
+      CameraUtils.getSupportedOutputCapability(this.cameraDevice!, camera.SceneMode.NORMAL_PHOTO, this.cameraManager)
+    let previewProfiles: Array<camera.Profile> = profiles.previewProfiles;
+    let captureSize: camera.Size = this.cameraFeatures.getResolution().getCaptureSize();
+    let previewProfilesObj = previewProfiles.find((profile: camera.Profile) => {
+      return profile.size.width === captureSize.width && profile.size.height === captureSize.height;
+    });
+    let previewProfilesObj2 = previewProfiles.find((profile: camera.Profile) => {
+      return profile.size.width === captureSize.width && profile.size.height === captureSize.height;
+    });
+
+    this.previewOutput =
+      this.cameraManager.createPreviewOutput(previewProfilesObj, this.flutterTexture.getSurfaceId().toString());
+    let imageReceiverSurfaceId: string = await this.imageStreamReader!.getReceivingSurfaceId();
+    let previewOutput2: camera.PreviewOutput =
+      this.cameraManager.createPreviewOutput(previewProfilesObj2, imageReceiverSurfaceId);
+
+    this.photoSession = this.cameraManager.createSession(camera.SceneMode.NORMAL_PHOTO) as camera.PhotoSession;
+    this.photoSession.beginConfig();
+    await this.cameraInput?.open();
+    this.photoSession.addInput(this.cameraInput);
+    this.photoSession.addOutput(this.previewOutput);
+    this.photoSession.addOutput(previewOutput2);
+    await this.photoSession.commitConfig();
+    await this.photoSession.start();
   }
 
   async prepareMediaRecorder(cameraManager: camera.CameraManager,
