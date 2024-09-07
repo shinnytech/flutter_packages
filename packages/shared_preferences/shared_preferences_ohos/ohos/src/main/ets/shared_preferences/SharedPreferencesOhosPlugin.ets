@@ -265,8 +265,7 @@ export default class SharedPreferencesOhosPlugin implements FlutterPlugin, Share
       Log.e(TAG, "Failed to delete. " + JSON.stringify(err));
       return false;
     }
-    return false;
-  }F
+  }
 
   setString(key: string, value: string): Promise<void> {
     if (value.startsWith(LIST_IDENTIFIER)) {
