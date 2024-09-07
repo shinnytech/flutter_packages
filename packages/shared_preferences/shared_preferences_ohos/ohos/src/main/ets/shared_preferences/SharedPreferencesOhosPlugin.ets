@@ -251,19 +251,22 @@ export default class SharedPreferencesOhosPlugin implements FlutterPlugin, Share
 
   remove(key: string): boolean {
     try {
+      let result = true
       this.preferences?.delete(key, (err: ESObject) => {
         if (err) {
           Log.w(TAG, "Failed to delete.  message =" + err.message);
-          return false;
+          result =  false;
         }
         Log.i(TAG, "Succeeded in deleting.");
-        return true;
+        this.preferences?.flush();
       })
+      return result;
     } catch (err) {
       Log.e(TAG, "Failed to delete. " + JSON.stringify(err));
+      return false;
     }
     return false;
-  }
+  }F
 
   setString(key: string, value: string): Promise<void> {
     if (value.startsWith(LIST_IDENTIFIER)) {
