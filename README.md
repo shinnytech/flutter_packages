@@ -164,7 +164,7 @@
 | 154 | [web_benchmarks](https://pub.dev/packages/web_benchmarks) | 0.1.0+8 | [web_benchmarks](https://gitee.com/openharmony-sig/flutter_packages/tree/master/packages/web_benchmarks) | 未适配 |
 | 155 | [webview_flutter_platform_interface](https://pub.dev/packages/webview_flutter_platform_interface) | 2.6.0 | [webview_flutter_platform_interface](https://gitee.com/openharmony-sig/flutter_packages/tree/master/packages/webview_flutter_platform_interface-v2.10.0) | 未适配 |
 | 156 | [xdg_directories](https://pub.dev/packages/xdg_directories) | 1.0.3 | [xdg_directories](https://gitee.com/openharmony-sig/flutter_packages/tree/master/packages/xdg_directories) | 未适配 |
-| 157 | [stack_trace](https://pub.dev/packages/stack_trace) | 1.11.1 | - | <nobr>无需适配</nobr> |
+| 157 | [stack_trace](https://pub.dev/packages/stack_trace) | 1.11.1 | - | <span style="white-space: nowrap;">无需适配</span> |
 | 158 | [vector_math](https://pub.dev/packages/vector_math) | 2.1.4 | - | 无需适配 |
 | 159 | [collection](https://pub.dev/packages/collection) | 1.18.0 | - | 无需适配 |
 | 160 | [source_span](https://pub.dev/packages/source_span) | 1.10.0 | - | 无需适配 |
