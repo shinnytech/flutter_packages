@@ -37,6 +37,7 @@ import HashMap from '@ohos.util.HashMap';
 import UIAbility from '@ohos.app.ability.UIAbility';
 import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
 import { BusinessError } from '@ohos.base';
+import { cameraPicker, camera } from '@kit.CameraKit';
 
 export default class ImagePickerDelegate {
   readonly REQUEST_CODE_CHOOSE_IMAGE_FROM_GALLERY = 2342;
@@ -254,31 +255,14 @@ export default class ImagePickerDelegate {
   }
 
   async launchTakeVideoWithCameraWant(duration: number): Promise<void> {
-    let want: Want = {
-      "action": wantConstant.Action.ACTION_VIDEO_CAPTURE,
-      parameters: {
-        callBundleName: "flutter_embedding",
-        "supportMultiMode": false,
-        durationLimit: duration
-      }
+    let pickerProfile: cameraPicker.PickerProfile = {
+      cameraPosition: camera.CameraPosition.CAMERA_POSITION_BACK,
+      videoDuration: duration
     }
-    abilityAccessCtrl.createAtManager()
-      .requestPermissionsFromUser(this.context, ['ohos.permission.READ_IMAGEVIDEO'])
-      .then(async (permission) => {
-        if(permission.authResults[0] !== 0){
-          return
-        }
-        let result: ESObject = null;
-        if (this.context) {
-          result = await this.context.startAbilityForResult(want);
-        }
-        if (result && result.want && result.want.parameters) {
-          let uri = result["want"]["parameters"].resourceUri as string;
-          let code = result["resultCode"] as number;
-          this.handlerCaptureImageResult(code, uri);
-        }
 
-      });
+    cameraPicker.pick(this.context, [cameraPicker.PickerMediaType.VIDEO], pickerProfile).then((pickerResult: cameraPicker.PickerResult) => {
+      this.handlerCaptureImageResult(pickerResult.resultCode, pickerResult.resultUri);
+    })
   }
 
   async chooseImageFromGallery(options: ImageSelectionOptions, usePhotoPicker: boolean, result: Result<ArrayList<string>>): Promise<void> {
