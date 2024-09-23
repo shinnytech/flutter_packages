@@ -548,7 +548,7 @@ class WebSettingsImpl implements WebSettings {
   zoomAccess : boolean = false;
   overviewModeAccess : boolean = false;
   wideViewModeAccess: boolean = false;
-  fileAccess : boolean = false;
+  fileAccess : boolean = true;
   textZoomRatio : number = 0;
   textZoomRatioCallback?: (ratio: number) => void;  
 
