@@ -56,13 +56,28 @@ export class AuthenticationHelper {
     if (allowCredentials) {
       this.authParam = {
         challenge: new Uint8Array([49, 49, 49, 49, 49, 49]),
-        authType: [
-          userAuth.UserAuthType.FINGERPRINT,
-          userAuth.UserAuthType.FACE,
-          userAuth.UserAuthType.PIN
-        ],
+        authType: [],
         authTrustLevel: userAuth.AuthTrustLevel.ATL1,
       };
+      const argAuthType:string = call.argument("authType")
+      switch (argAuthType) {
+        case 'FACE':
+          this.authParam.authType.push(userAuth.UserAuthType.FACE);
+          break;
+        case 'FINGERPRINT':
+          this.authParam.authType.push(userAuth.UserAuthType.FINGERPRINT);
+          break;
+        case 'PIN':
+          this.authParam.authType.push(userAuth.UserAuthType.PIN);
+          break;
+        default:
+          this.authParam.authType = [
+            userAuth.UserAuthType.FINGERPRINT,
+            userAuth.UserAuthType.FACE,
+            userAuth.UserAuthType.PIN
+          ];
+          break;
+      }
       this.widgetParam = {
         title: call.argument("localizedReason"),
       }

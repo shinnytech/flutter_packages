@@ -23,6 +23,7 @@ class OhosAuthMessages extends AuthMessages {
     this.goToSettingsButton,
     this.goToSettingsDescription,
     this.signInTitle,
+    this.authType,
   });
 
   /// Hint message advising the user how to authenticate with biometrics.
@@ -70,6 +71,10 @@ class OhosAuthMessages extends AuthMessages {
   /// Maximum 60 characters.
   final String? signInTitle;
 
+  /// This is used to select the biometric type:
+  /// FACE、FINGERPRINT、PIN.
+  final String? authType;
+
   @override
   Map<String, String> get args {
     return <String, String>{
@@ -88,6 +93,7 @@ class OhosAuthMessages extends AuthMessages {
       'goToSettingDescription':
           goToSettingsDescription ?? ohosGoToSettingsDescription,
       'signInTitle': signInTitle ?? ohosSignInTitle,
+      'authType': authType ?? '',
     };
   }
 
@@ -107,7 +113,8 @@ class OhosAuthMessages extends AuthMessages {
               other.deviceCredentialsSetupDescription &&
           goToSettingsButton == other.goToSettingsButton &&
           goToSettingsDescription == other.goToSettingsDescription &&
-          signInTitle == other.signInTitle;
+          signInTitle == other.signInTitle &&
+          authType == other.authType;
 
   @override
   int get hashCode => Object.hash(
@@ -121,7 +128,8 @@ class OhosAuthMessages extends AuthMessages {
       deviceCredentialsSetupDescription,
       goToSettingsButton,
       goToSettingsDescription,
-      signInTitle);
+      signInTitle,
+      authType);
 }
 
 // Default strings for OhosAuthMessages. Currently supports English.
