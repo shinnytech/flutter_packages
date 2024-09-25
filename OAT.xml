@@ -85,7 +85,7 @@
 
         <filefilterlist>
             <filefilter name="defaultFilter" desc="Files not to check">
-                <filteritem type="filename" name="*.iml|*.json|*.txt|*.md" desc="desc files"/>
+                <filteritem type="filename" name="*.iml|*.json|*.txt|*.md|*.yaml" desc="desc files"/>
                 <filteritem type="filename" name="*.png|*.ico|*.jpg|*.webp|*.ttf|*.enc|*.mp3|*.gif" desc="app resource files"/>
                 <filteritem type="filename" name="*.so|*.har" desc="engine二进制文件,不影响兼容性"/>
                 <filteritem type="filename" name="*.tgz" desc="hvigor本地插件,不影响兼容性"/>
@@ -300,6 +300,7 @@
 				<filteritem type='filepath' name="packages/in_app_purchase/in_app_purchase_ohos/lib" desc='不影响兼容性'/>
 				<filteritem type='filepath' name="packages/in_app_purchase/in_app_purchase_ohos/example/integration_test" desc='不影响兼容性'/>
 				<filteritem type='filepath' name="packages/in_app_purchase/in_app_purchase_ohos/example/lib" desc='不影响兼容性'/>
+				<filteritem type='filepath' name="packages/in_app_purchase/in_app_purchase_ohos/AUTHORS" desc='二进制文件,不影响兼容性'/>
             </filefilter>
             <filefilter name="defaultPolicyFilter" desc="Filters for compatibility，license header policies">
                 <filteritem type='filepath' name="packages/pigeon/example/app/ohos/entry/src/main/ets/plugins/Messages.ets" desc='BSDStyleLicense,不影响兼容性'/>
