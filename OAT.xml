@@ -296,6 +296,10 @@
 				<filteritem type='filepath' name="packages/in_app_purchase/in_app_purchase/example/test_driver" desc='不影响兼容性'/>
 				<filteritem type='filepath' name="packages/in_app_purchase/in_app_purchase/test" desc='不影响兼容性'/>
 				<filteritem type='filepath' name="packages/in_app_purchase/in_app_purchase/lib" desc='不影响兼容性'/>
+				<filteritem type='filepath' name="packages/in_app_purchase/in_app_purchase/lib" desc='不影响兼容性'/>
+				<filteritem type='filepath' name="packages/in_app_purchase/in_app_purchase_ohos/lib" desc='不影响兼容性'/>
+				<filteritem type='filepath' name="packages/in_app_purchase/in_app_purchase_ohos/example/integration_test" desc='不影响兼容性'/>
+				<filteritem type='filepath' name="packages/in_app_purchase/in_app_purchase_ohos/example/lib" desc='不影响兼容性'/>
             </filefilter>
             <filefilter name="defaultPolicyFilter" desc="Filters for compatibility，license header policies">
                 <filteritem type='filepath' name="packages/pigeon/example/app/ohos/entry/src/main/ets/plugins/Messages.ets" desc='BSDStyleLicense,不影响兼容性'/>
