@@ -27,7 +27,7 @@ dependency_overrides:
   in_app_purchase_ohos:
     path: ../../in_app_purchase_ohos
 
-	dev_dependencies:
+dev_dependencies:
   flutter_test:
     sdk: flutter
   integration_test:
