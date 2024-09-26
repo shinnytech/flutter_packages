@@ -29,11 +29,5 @@ dev_dependencies:
   integration_test:
     sdk: flutter
 
-dependency_overrides:
-  in_app_purchase_ohos:
-    git:
-      url: "https://gitee.com/openharmony-sig/flutter_packages.git"
-      path: "packages/in_app_purchase/in_app_purchase_ohos"
-
 flutter:
   uses-material-design: true
