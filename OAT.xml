@@ -60,6 +60,14 @@
                     path=".*"
                     rule="may"
                     type="copyright"/>
+				<policyitem
+                    desc=""
+                    filefilter="copyrightPolicyFilter"
+                    group="defaultGroup"
+                    name="SwanLink (Jiangsu) Technology Development Co., LTD."
+                    path=".*"
+                    rule="may"
+                    type="copyright"/>	
                 <policyitem
                     desc="Developed By The Flutter Authors. All rights reserved."
                     filefilter="copyrightPolicyFilter"
