@@ -578,10 +578,6 @@ export class VideoPlayer {
     let iUrl = this.iUrl;
     const ohosFilePrefix = 'file://';
     if (iUrl != null && iUrl.startsWith(ohosFilePrefix)) {
-      const dartFilePrefix = 'file:///';
-      if (iUrl.startsWith(dartFilePrefix)) {
-        iUrl = ohosFilePrefix + iUrl.slice(dartFilePrefix.length);
-      }
       this.fd = fs.openSync(iUrl, fs.OpenMode.READ_ONLY).fd;
       iUrl = `fd://${this.fd!.toString()}`;
     }
