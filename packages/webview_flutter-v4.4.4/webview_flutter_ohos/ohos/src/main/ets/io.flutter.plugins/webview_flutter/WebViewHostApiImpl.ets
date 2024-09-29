@@ -509,7 +509,7 @@ class WebSettingsImpl implements WebSettings {
   backgroundColor : string = "";
   javaScriptAccess : boolean = false;
   mediaPlayGestureAccess : boolean = false;
-  zoomAccess : boolean = false;
+  zoomAccess : boolean = true;
   overviewModeAccess : boolean = false;
   wideViewModeAccess: boolean = false;
   fileAccess : boolean = true;
