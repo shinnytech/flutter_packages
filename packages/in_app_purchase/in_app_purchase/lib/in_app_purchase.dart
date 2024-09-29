@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:in_app_purchase_android/in_app_purchase_android.dart';
 import 'package:in_app_purchase_platform_interface/in_app_purchase_platform_interface.dart';
 import 'package:in_app_purchase_storekit/in_app_purchase_storekit.dart';
+import 'package:in_app_purchase_ohos/in_app_purchase_ohos.dart';
 
 export 'package:in_app_purchase_platform_interface/in_app_purchase_platform_interface.dart'
     show
@@ -37,6 +38,8 @@ class InAppPurchase implements InAppPurchasePlatformAdditionProvider {
     } else if (defaultTargetPlatform == TargetPlatform.iOS ||
         defaultTargetPlatform == TargetPlatform.macOS) {
       InAppPurchaseStoreKitPlatform.registerPlatform();
+    } else if (defaultTargetPlatform == TargetPlatform.ohos) {
+      InAppPurchaseOhosPlatform.registerPlatform();
     }
 
     _instance = InAppPurchase._();
@@ -195,7 +198,7 @@ class InAppPurchase implements InAppPurchasePlatformAdditionProvider {
   /// Restored purchases are delivered through the [purchaseStream] with a
   /// status of [PurchaseStatus.restored]. You should listen for these purchases,
   /// validate their receipts, deliver the content and mark the purchase complete
-  /// by calling the [finishPurchase] method for each purchase.
+  /// by calling the [completePurchase] method for each purchase.
   ///
   /// This does not return consumed products. If you want to restore unused
   /// consumable products, you need to persist consumable product information
