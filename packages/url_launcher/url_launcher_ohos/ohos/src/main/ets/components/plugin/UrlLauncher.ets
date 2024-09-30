@@ -136,7 +136,7 @@ export class UrlLauncher implements UrlLauncherApi {
   }
 
   launchSms(url: string): boolean {
-    let phoneNum = this.parseUrl(url, UrlLauncher.LAUNCH_TYPE_SMS + ':');
+    let phoneNum = this.parseUrl(url, UrlLauncher.LAUNCH_TYPE_SMS);
     let formatNum = this.format(phoneNum);
 
     let msgParam = new SendMessageParams();
