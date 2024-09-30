@@ -93,7 +93,7 @@ export default class ImagePickerPlugin implements FlutterPlugin, AbilityAware {
     }
   }
 
-  async pickImages(source: SourceSpecification, options: ImageSelectionOptions, generalOptions: GeneralOptions, result: Result<ArrayList<string>>): Promise<void> {
+  pickImages(source: SourceSpecification, options: ImageSelectionOptions, generalOptions: GeneralOptions, result: Result<ArrayList<string>>) {
     let delegate: ImagePickerDelegate | null = this.getImagePickerDelegate();
     if (delegate == null) {
       let temp: Error =
@@ -107,7 +107,7 @@ export default class ImagePickerPlugin implements FlutterPlugin, AbilityAware {
     } else {
       switch (source.getType()) {
         case SourceType.GALLERY: {
-          await delegate.chooseImageFromGallery(options, generalOptions.getUsePhotoPicker(), result);
+          delegate.chooseImageFromGallery(options, generalOptions.getUsePhotoPicker(), result);
           break;
         }
         case SourceType.CAMERA: {
