@@ -38,6 +38,7 @@ import { media } from '@kit.MediaKit';
 import { EventChannel } from '@ohos/flutter_ohos';
 import { GlobalContext } from './util/GlobalContext';
 import { window } from '@kit.ArkUI';
+import { image } from '@kit.ImageKit';
 
 const TAG: string = "VideoPlayerApiImpl";
 export class VideoPlayerApiImpl {
@@ -45,6 +46,7 @@ export class VideoPlayerApiImpl {
   private flutterState: FlutterState | null = null;
   private binding: AbilityPluginBinding | null = null;
   private AudioFocus: Boolean = false;
+  private pixelMap: image.PixelMap | null = null;
 
   constructor(flutterState: FlutterState | null, binding: AbilityPluginBinding | null) {
     this.flutterState = flutterState;
@@ -85,23 +87,23 @@ export class VideoPlayerApiImpl {
     if (asset != null) {
       let avImageGenerator = await media.createAVImageGenerator();
       avImageGenerator.fdSrc = await this.getContext().resourceManager.getRawFd("flutter_assets/" + asset);
-      let pixelMap = await avImageGenerator.fetchFrameByTime(0, media.AVImageQueryOptions.AV_IMAGE_QUERY_NEXT_SYNC, {
+      this.pixelMap = await avImageGenerator.fetchFrameByTime(0, media.AVImageQueryOptions.AV_IMAGE_QUERY_NEXT_SYNC, {
         width: -1,
         height: -1
       });
       avImageGenerator.release();
-      flutterRenderer.setTextureBackGroundPixelMap(textureId, pixelMap);
+      flutterRenderer.setTextureBackGroundPixelMap(textureId, this.pixelMap);
     } else if (uri != null && uri.startsWith("fd://")) {
       let avImageGenerator = await media.createAVImageGenerator();
       avImageGenerator.fdSrc = {
         fd: Number.parseInt(uri.replace("fd://", ""))
       };
-      let pixelMap = await avImageGenerator.fetchFrameByTime(0, media.AVImageQueryOptions.AV_IMAGE_QUERY_NEXT_SYNC, {
+      this.pixelMap = await avImageGenerator.fetchFrameByTime(0, media.AVImageQueryOptions.AV_IMAGE_QUERY_NEXT_SYNC, {
         width: -1,
         height: -1
       });
       avImageGenerator.release();
-      flutterRenderer.setTextureBackGroundPixelMap(textureId, pixelMap);
+      flutterRenderer.setTextureBackGroundPixelMap(textureId, this.pixelMap);  
     }
     let eventChannel: EventChannel = new EventChannel(this.flutterState.getBinaryMessenger(), "flutter.io/videoPlayer/videoEvents" + textureId.toString());
     if (asset != null) {
