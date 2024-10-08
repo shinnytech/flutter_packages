@@ -225,7 +225,7 @@ export class VideoPlayer {
 
   seekTo(position: number) {
     if (this.avPlayer !== null) {
-      this.avPlayer.seek(position, media.SeekMode.SEEK_PREV_SYNC);
+      this.avPlayer.seek(position, media.SeekMode.SEEK_CLOSEST);
     }
   }
 
