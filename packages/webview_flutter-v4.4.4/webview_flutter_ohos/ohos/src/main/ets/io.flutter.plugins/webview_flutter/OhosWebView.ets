@@ -28,7 +28,6 @@ export struct OhosWebView {
   @State disposed: boolean = false;
 
   aboutToAppear() {
-    this.webView.getWebSettings().setSupportZoom(true);
     this.webView.getWebSettings().onTextZoomChanged((ratio: number) => {
       this.textZoomRatio = ratio;
     });
@@ -83,7 +82,7 @@ export struct OhosWebView {
           .gesture(
             PinchGesture({ fingers: 2 })
               .onActionUpdate((event: GestureEvent) => {
-                if (event) {
+                if (event && this.webView.getWebSettings().getSupportZoom()) {
                   this.controller.zoom(event.scale);
                 }
               })

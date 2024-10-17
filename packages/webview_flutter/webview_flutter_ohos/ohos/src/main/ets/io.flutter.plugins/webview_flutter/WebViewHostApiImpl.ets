@@ -81,7 +81,8 @@ export class WebViewHostApiImpl extends WebViewHostApi {
     const webView: WebViewPlatformView = this.instanceManager.getInstance(instanceId);
     await webView.waitControllerAttached();
     try {
-      webView.getController().loadData(data, mimeType, encoding, baseUrl == null ? " " : baseUrl , historyUrl == null ? " " : historyUrl);
+      // 当baseUrl为空时，其值默认为resource://rawfile/。这样设置是为了解决<a href="">标签锚点无效问题。
+      webView.getController().loadData(data, mimeType, encoding, baseUrl == null || baseUrl.trim().length === 0 ? "resource://rawfile/" : baseUrl , historyUrl == null ? " " : historyUrl);
     } catch (err) {
       Log.e(TAG, "loadDataWithBaseUrl err = " + err);
     }
@@ -545,7 +546,7 @@ class WebSettingsImpl implements WebSettings {
   backgroundColor : string = "";
   javaScriptAccess : boolean = false;
   mediaPlayGestureAccess : boolean = false;
-  zoomAccess : boolean = false;
+  zoomAccess : boolean = true;
   overviewModeAccess : boolean = false;
   wideViewModeAccess: boolean = false;
   fileAccess : boolean = true;

@@ -60,6 +60,22 @@
                     path=".*"
                     rule="may"
                     type="copyright"/>
+				<policyitem
+                    desc=""
+                    filefilter="copyrightPolicyFilter"
+                    group="defaultGroup"
+                    name="SwanLink (Jiangsu) Technology Development Co., LTD."
+                    path=".*"
+                    rule="may"
+                    type="copyright"/>	
+				<policyitem
+                    desc=""
+                    filefilter="copyrightPolicyFilter"
+                    group="defaultGroup"
+                    name="Huawei Technologies Co., Ltd."
+                    path=".*"
+                    rule="may"
+                    type="copyright"/>
                 <policyitem
                     desc="Developed By The Flutter Authors. All rights reserved."
                     filefilter="copyrightPolicyFilter"
@@ -85,8 +101,8 @@
 
         <filefilterlist>
             <filefilter name="defaultFilter" desc="Files not to check">
-                <filteritem type="filename" name="*.iml|*.json|*.txt" desc="desc files"/>
-                <filteritem type="filename" name="*.png|*.ico|*.jpg|*.webp|*.ttf|*.enc|*.mp3" desc="app resource files"/>
+                <filteritem type="filename" name="*.iml|*.json|*.txt|*.md|*.yaml" desc="desc files"/>
+                <filteritem type="filename" name="*.png|*.ico|*.jpg|*.webp|*.ttf|*.enc|*.mp3|*.gif" desc="app resource files"/>
                 <filteritem type="filename" name="*.so|*.har" desc="engine二进制文件,不影响兼容性"/>
                 <filteritem type="filename" name="*.tgz" desc="hvigor本地插件,不影响兼容性"/>
                 <filteritem type="filename" name="**.json5" desc="配置文件，flutter插件项目编译时会重写覆盖"/>
@@ -286,6 +302,21 @@
                 <filteritem type='filepath' name="packages/camera/camera_ohos/example/ohos/har/har_product/libflutter.so.debug.10" desc='二进制文件,不影响兼容性'/>
                 <filteritem type='filepath' name="packages/camera/camera_ohos/example/ohos/har/har_product/libflutter.so.release.10" desc='二进制文件,不影响兼容性'/>
                 <filteritem type='filepath' name="packages/camera/camera_ohos/example/ohos/har/har_product/libflutter.so.profile.10" desc='二进制文件,不影响兼容性'/>
+				<filteritem type='filepath' name="packages/in_app_purchase/in_app_purchase_android" desc='不影响兼容性'/>
+				<filteritem type='filepath' name="packages/in_app_purchase/in_app_purchase_storekit" desc='不影响兼容性'/>
+				<filteritem type='filepath' name="packages/in_app_purchase/in_app_purchase_platform_interface" desc='平台接口目录,不影响兼容性'/>
+				<filteritem type='filepath' name="packages/in_app_purchase/in_app_purchase/example/android" desc='不影响兼容性'/>
+				<filteritem type='filepath' name="packages/in_app_purchase/in_app_purchase/example/integration_test" desc='不影响兼容性'/>
+				<filteritem type='filepath' name="packages/in_app_purchase/in_app_purchase/example/ios" desc='不影响兼容性'/>
+				<filteritem type='filepath' name="packages/in_app_purchase/in_app_purchase/example/macos" desc='不影响兼容性'/>
+				<filteritem type='filepath' name="packages/in_app_purchase/in_app_purchase/example/test_driver" desc='不影响兼容性'/>
+				<filteritem type='filepath' name="packages/in_app_purchase/in_app_purchase/test" desc='不影响兼容性'/>
+				<filteritem type='filepath' name="packages/in_app_purchase/in_app_purchase/lib" desc='不影响兼容性'/>
+				<filteritem type='filepath' name="packages/in_app_purchase/in_app_purchase/lib" desc='不影响兼容性'/>
+				<filteritem type='filepath' name="packages/in_app_purchase/in_app_purchase_ohos/lib" desc='不影响兼容性'/>
+				<filteritem type='filepath' name="packages/in_app_purchase/in_app_purchase_ohos/example/integration_test" desc='不影响兼容性'/>
+				<filteritem type='filepath' name="packages/in_app_purchase/in_app_purchase_ohos/example/lib" desc='不影响兼容性'/>
+				<filteritem type='filepath' name="packages/in_app_purchase/in_app_purchase_ohos/AUTHORS" desc='二进制文件,不影响兼容性'/>
             </filefilter>
             <filefilter name="defaultPolicyFilter" desc="Filters for compatibility，license header policies">
                 <filteritem type='filepath' name="packages/pigeon/example/app/ohos/entry/src/main/ets/plugins/Messages.ets" desc='BSDStyleLicense,不影响兼容性'/>

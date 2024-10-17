@@ -92,6 +92,7 @@ class _MyAppState extends State<_MyApp> {
 
     final ProductDetailsResponse productDetailResponse =
         await _inAppPurchase.queryProductDetails(_kProductIds.toSet());
+    var productDetails = productDetailResponse.productDetails;
     if (productDetailResponse.error != null) {
       setState(() {
         _queryProductError = productDetailResponse.error!.message;
@@ -149,13 +150,18 @@ class _MyAppState extends State<_MyApp> {
     if (_queryProductError == null) {
       stack.add(
         ListView(
-          children: <Widget>[
-            _buildConnectionCheckTile(),
-            _buildProductList(),
-            _buildConsumableBox(),
-            _buildRestoreButton(),
-          ],
-        ),
+            children: Platform.operatingSystem == 'ohos'
+                ? <Widget>[
+                    _buildConnectionCheckTile(),
+                    _buildProductList(),
+                    _buildConsumableBox(),
+                  ]
+                : <Widget>[
+                    _buildConnectionCheckTile(),
+                    _buildProductList(),
+                    _buildConsumableBox(),
+                    _buildRestoreButton(),
+                  ]),
       );
     } else {
       stack.add(Center(
@@ -164,7 +170,7 @@ class _MyAppState extends State<_MyApp> {
     }
     if (_purchasePending) {
       stack.add(
-        const Stack(
+        Stack(
           children: <Widget>[
             Opacity(
               opacity: 0.3,
@@ -259,10 +265,12 @@ class _MyAppState extends State<_MyApp> {
           subtitle: Text(
             productDetails.description,
           ),
-          trailing: previousPurchase != null && Platform.isIOS
-              ? IconButton(
-                  onPressed: () => confirmPriceChange(context),
-                  icon: const Icon(Icons.upgrade))
+          trailing: previousPurchase != null
+              ? Platform.isIOS
+                  ? IconButton(
+                      onPressed: () => confirmPriceChange(context),
+                      icon: const Icon(Icons.upgrade))
+                  : SizedBox.shrink()
               : TextButton(
                   style: TextButton.styleFrom(
                     backgroundColor: Colors.green[800],
