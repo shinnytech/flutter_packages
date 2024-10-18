@@ -5,7 +5,6 @@
 [![pub package](https://img.shields.io/pub/v/video_player.svg)](https://pub.dev/packages/video_player)
 
 A Flutter plugin for iOS, Android and Web for playing back video on a Widget surface.
-harmonyos-references-V5/js-apis-media-V5#avplayer9
 |             | Android | iOS   | Web   |
 |-------------|---------|-------|-------|
 | **Support** | SDK 16+ | 11.0+ | Any\* |
