@@ -1,6 +1,5 @@
 # video_player_ohos
-
-A new Flutter project.
+[Supported video specifications](https://developer.huawei.com/consumer/cn/doc/harmonyos-references-V5/js-apis-media-V5#avplayer9)
 
 ## Getting Started
 
