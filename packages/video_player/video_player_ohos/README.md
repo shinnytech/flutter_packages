@@ -1,5 +1,5 @@
 # video_player_ohos
-[Supported video specifications](https://developer.huawei.com/consumer/cn/doc/harmonyos-references-V5/js-apis-media-V5#avplayer9)
+[Supported video formats](https://developer.huawei.com/consumer/cn/doc/harmonyos-references-V5/js-apis-media-V5#avplayer9)
 
 ## Getting Started
 

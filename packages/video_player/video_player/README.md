@@ -9,7 +9,7 @@ A Flutter plugin for iOS, Android and Web for playing back video on a Widget sur
 |-------------|---------|-------|-------|
 | **Support** | SDK 16+ | 11.0+ | Any\* |
 
-[Supported video specifications](https://developer.huawei.com/consumer/cn/doc/harmonyos-references-V5/js-apis-media-V5#avplayer9)
+[Supported video formats](https://developer.huawei.com/consumer/cn/doc/harmonyos-references-V5/js-apis-media-V5#avplayer9)
 
 
 ![The example app running in iOS](https://github.com/flutter/packages/blob/main/packages/video_player/video_player/doc/demo_ipod.gif?raw=true)
