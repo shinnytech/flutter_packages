@@ -135,7 +135,6 @@ export class VideoPlayer {
           this.duration = this.avPlayer.duration;
           break;
         case AvplayerStatus.PLAYING:
-          this.setBright();
           this.status = CommonConstants.STATUS_START;
           this.watchStatus();
           break;
