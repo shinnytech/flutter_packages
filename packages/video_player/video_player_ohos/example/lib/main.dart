@@ -34,7 +34,7 @@ class _App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 2,
+      length: 3,
       child: Scaffold(
         key: const ValueKey<String>('home_page'),
         appBar: AppBar(
@@ -131,7 +131,7 @@ class _LocalFileVideo extends StatefulWidget {
 
 class _LocalFileVideoState extends State<_LocalFileVideo> {
   late MiniController _controller;
-  late int fileFd;
+  int? fileFd;
 
   Future<void> selectorFile() async {
     print("selectorFile");
@@ -141,8 +141,8 @@ class _LocalFileVideoState extends State<_LocalFileVideo> {
       uniformTypeIdentifiers: <String>['public.video'],
     );
     final FileSelector instance = FileSelector();
-    fileFd = (await instance
-        .openFile(acceptedTypeGroups: <XTypeGroup>[typeGroup]))!;
+    fileFd = await instance
+        .openFile(acceptedTypeGroups: <XTypeGroup>[typeGroup]);
   }
 
   @override
@@ -153,14 +153,15 @@ class _LocalFileVideoState extends State<_LocalFileVideo> {
 
   void getFileFd() {
     print("getFileFd");
-    selectorFile().then((_) => setState(() {
-      _controller = MiniController.file(fileFd);
+    selectorFile().then((value) {
+      _controller = MiniController.file(fileFd ?? 0);
       _controller.addListener(() {
         setState(() {});
       });
-      _controller.initialize().then((_) => setState(() {}));
-      _controller.play();
-    }));
+      _controller.initialize().whenComplete(() {
+        _controller.play();
+      });
+    });
   }
 
   @override
@@ -232,7 +233,7 @@ class _BumbleBeeRemoteVideoState extends State<_BumbleBeeRemoteVideo> {
     _controller.addListener(() {
       setState(() {});
     });
-    _controller.initialize();
+    _controller.initialize().whenComplete(() => _controller.play());
   }
 
   @override

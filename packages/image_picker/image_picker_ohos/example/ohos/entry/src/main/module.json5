@@ -57,16 +57,6 @@
           "when": "inuse"
         }
       },
-      {
-        "name" :  "ohos.permission.READ_MEDIA",
-        "reason": "$string:EntryAbility_desc",
-        "usedScene": {
-          "abilities": [
-            "EntryAbility"
-          ],
-          "when": "inuse"
-        }
-      }
     ]
   }
 }

@@ -56,7 +56,7 @@ export class VideoPlayer {
   private textureEntry: SurfaceTextureEntry;
   private eventChannel: EventChannel | null = null;
   private eventSink: QueuingEventSink | null = null;
-  private interruptMode: audio.InterruptMode = audio.InterruptMode.SHARE_MODE;
+  private interruptMode: audio.InterruptMode = audio.InterruptMode.INDEPENDENT_MODE;
   private fd: number | null = null;
 
   constructor(playerModel: PlayerModel, textureEntry: SurfaceTextureEntry, url: resourceManager.RawFileDescriptor | null, iUrl: string | null, eventChannel: EventChannel, AudioFocus: Boolean) {
@@ -67,7 +67,7 @@ export class VideoPlayer {
     this.iUrl = iUrl;
     this.eventChannel = eventChannel;
     if (AudioFocus == true) {
-      this.interruptMode = audio.InterruptMode.INDEPENDENT_MODE;
+      this.interruptMode = audio.InterruptMode.SHARE_MODE;
       Log.i(TAG, "set interruptMode : " + this.interruptMode);
     }
     Log.i(TAG, "surfaceId : " + this.surfaceId);
@@ -224,7 +224,7 @@ export class VideoPlayer {
 
   seekTo(position: number) {
     if (this.avPlayer !== null) {
-      this.avPlayer.seek(position, media.SeekMode.SEEK_PREV_SYNC);
+      this.avPlayer.seek(position, media.SeekMode.SEEK_CLOSEST);
     }
   }
 
@@ -577,10 +577,6 @@ export class VideoPlayer {
     let iUrl = this.iUrl;
     const ohosFilePrefix = 'file://';
     if (iUrl != null && iUrl.startsWith(ohosFilePrefix)) {
-      const dartFilePrefix = 'file:///';
-      if (iUrl.startsWith(dartFilePrefix)) {
-        iUrl = ohosFilePrefix + iUrl.slice(dartFilePrefix.length);
-      }
       this.fd = fs.openSync(iUrl, fs.OpenMode.READ_ONLY).fd;
       iUrl = `fd://${this.fd!.toString()}`;
     }

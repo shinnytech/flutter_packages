@@ -505,11 +505,7 @@ if (this.$fieldName instanceof Array) {
         indent.nest(2, () {
           indent
               .write('binaryMessenger, "$channelName", ${api.name}.getCodec()');
-          if (taskQueue != null) {
-            indent.addln(', $taskQueue);');
-          } else {
-            indent.addln(');');
-          }
+          indent.addln(');');
         });
       });
       indent.write('if (api != null) ');

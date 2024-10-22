@@ -43,7 +43,6 @@ export class WebViewHostApiImpl extends WebViewHostApi {
   private binaryMessenger: BinaryMessenger;
 
   private context: common.Context;
-
   private api?: WebViewFlutterApiImpl;
 
   constructor(
@@ -82,7 +81,8 @@ export class WebViewHostApiImpl extends WebViewHostApi {
     const webView: WebViewPlatformView = this.instanceManager.getInstance(instanceId);
     await webView.waitControllerAttached();
     try {
-      webView.getController().loadData(data, mimeType, encoding, baseUrl == null ? " " : baseUrl , historyUrl == null ? " " : historyUrl);
+      // 当baseUrl为空时，其值默认为resource://rawfile/。这样设置是为了解决<a href="">标签锚点无效问题。
+      webView.getController().loadData(data, mimeType, encoding, baseUrl == null || baseUrl.trim().length === 0 ? "resource://rawfile/" : baseUrl , historyUrl == null ? " " : historyUrl);
     } catch (err) {
       Log.e(TAG, "loadDataWithBaseUrl err = " + err);
     }
@@ -272,6 +272,7 @@ export class WebViewHostApiImpl extends WebViewHostApi {
 }
 
 export class WebViewPlatformView extends PlatformView {
+
   private WebCookieManager: web_webview.WebCookieManager = new web_webview.WebCookieManager();
 
   private controller: web_webview.WebviewController = new web_webview.WebviewController();
@@ -295,6 +296,8 @@ export class WebViewPlatformView extends PlatformView {
   private returnValueForShouldOverrideUrlLoading: boolean = false;
 
   private controllerAttached: boolean = false;
+
+  private onDisposeCallback?: () => void;
 
   onDownloadStart = (event: ESObject) => {
     if (this.downloadListener && this.downloadListener.onDownloadStart) {
@@ -375,10 +378,15 @@ export class WebViewPlatformView extends PlatformView {
   }
 
   onConsoleMessage = (event: ESObject) => {
-    if (this.webChromeClient) {
-      this.webChromeClient.onConsoleMessage(event.message);
+    let message:ConsoleMessage = event.message;
+    if (message.getMessageLevel() == MessageLevel.Error || message.getMessageLevel() == MessageLevel.Warn) {
+      if (this.webChromeClient) {
+        this.webChromeClient.onConsoleMessage(event.message);
+      }
+    } else {
+      Log.d(TAG, "logLevel: " + message.getMessageLevel() + " "+ message.getMessage());
     }
-    return false;
+    return true;
   }
 
   onWindowNew = (event: ESObject) => {
@@ -403,6 +411,10 @@ export class WebViewPlatformView extends PlatformView {
     this.controllerAttached = true
   }
 
+  setOnDisposeCallback(callback: () => void) {
+    this.onDisposeCallback = callback;
+  }
+
   onJsAlert = (event: ESObject): boolean => {
     if (this.webChromeClient && event) {
       return this.webChromeClient.onJsAlert(this, event.url, event.message, event.result);
@@ -424,6 +436,9 @@ export class WebViewPlatformView extends PlatformView {
     return true;
   }
 
+  getType(): string {
+    return 'web';
+  }
 
   getView(): WrappedBuilder<[Params]> {
     return new WrappedBuilder(WebBuilder);
@@ -431,6 +446,7 @@ export class WebViewPlatformView extends PlatformView {
 
   dispose(): void {
     this.controller.stopAllMedia();
+    this.onDisposeCallback && this.onDisposeCallback();
   }
 
   getController(): web_webview.WebviewController {
@@ -530,10 +546,10 @@ class WebSettingsImpl implements WebSettings {
   backgroundColor : string = "";
   javaScriptAccess : boolean = false;
   mediaPlayGestureAccess : boolean = false;
-  zoomAccess : boolean = false;
+  zoomAccess : boolean = true;
   overviewModeAccess : boolean = false;
   wideViewModeAccess: boolean = false;
-  fileAccess : boolean = false;
+  fileAccess : boolean = true;
   textZoomRatio : number = 0;
   textZoomRatioCallback?: (ratio: number) => void;  
 
@@ -642,8 +658,8 @@ class WebSettingsImpl implements WebSettings {
     this.textZoomRatioCallback && this.textZoomRatioCallback(textZoom);    
   }
 
-   getUserAgentString(): string {
-    this.webView.waitControllerAttached();
+   async getUserAgentString(): Promise<string> {
+    await this.webView.waitControllerAttached();
     return this.webView.getController().getCustomUserAgent();
   }
 

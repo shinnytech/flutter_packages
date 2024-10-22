@@ -20,6 +20,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:flutter/foundation.dart';  
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:webview_flutter_ohos/webview_flutter_ohos.dart';
@@ -162,6 +163,14 @@ class WebViewExample extends StatefulWidget {
 class _WebViewExampleState extends State<WebViewExample> {
   late final PlatformWebViewController _controller;
 
+  Future<String> getUserAgent() async {
+    String userAgent = await _controller.getUserAgent() ?? '';
+    if(defaultTargetPlatform != TargetPlatform.ohos){
+      return userAgent;
+    }
+    return '$userAgent HuaweiBrower';
+  }
+
   @override
   void initState() {
     super.initState();
@@ -170,7 +179,7 @@ class _WebViewExampleState extends State<WebViewExample> {
       OhosWebViewControllerCreationParams(),
     )
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
-      ..setBackgroundColor(const Color(0x80000000))
+      ..setBackgroundColor(const Color(0x00000000))
       ..setPlatformNavigationDelegate(
         PlatformNavigationDelegate(
           const PlatformNavigationDelegateCreationParams(),
@@ -230,6 +239,10 @@ Page resource error:
           uri: Uri.parse('https://flutter.dev'),
         ),
       );
+
+    getUserAgent().then((String userAgent){
+      _controller.setUserAgent(userAgent);
+    });
   }
 
   @override
@@ -673,8 +686,10 @@ class SampleMenu extends StatelessWidget {
   Future<void> _onLogExample() {
     webViewController
         .setOnConsoleMessage((JavaScriptConsoleMessage consoleMessage) {
-      debugPrint(
+      if (kDebugMode) {  
+        debugPrint(
           '== JS == ${consoleMessage.level.name}: ${consoleMessage.message}');
+      } 
     });
     return webViewController.loadHtmlString(kLogExamplePage);
   }

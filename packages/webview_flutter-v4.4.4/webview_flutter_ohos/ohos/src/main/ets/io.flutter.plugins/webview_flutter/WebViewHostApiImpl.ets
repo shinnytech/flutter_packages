@@ -284,6 +284,8 @@ export class WebViewPlatformView extends PlatformView {
 
   private controllerAttached: boolean = false;
 
+  private onDisposeCallback?: () => void;
+
   onDownloadStart = (event: ESObject) => {
     if (this.downloadListener && this.downloadListener.onDownloadStart) {
       this.downloadListener.onDownloadStart(
@@ -363,10 +365,15 @@ export class WebViewPlatformView extends PlatformView {
   }
 
   onConsoleMessage = (event: ESObject) => {
-    if (this.webChromeClient) {
-      return this.webChromeClient.onConsoleMessage(event.message);
+    let message:ConsoleMessage = event.message;
+    if (message.getMessageLevel() == MessageLevel.Error || message.getMessageLevel() == MessageLevel.Warn) {
+      if (this.webChromeClient) {
+        this.webChromeClient.onConsoleMessage(event.message);
+      }
+    } else {
+      Log.d(TAG, "logLevel: " + message.getMessageLevel() + " "+ message.getMessage());
     }
-    return false;
+    return true;
   }
 
   onWindowNew = (event: ESObject) => {
@@ -392,6 +399,9 @@ export class WebViewPlatformView extends PlatformView {
   }
 
 
+  setOnDisposeCallback(callback: () => void) {
+    this.onDisposeCallback = callback;
+  }
 
   getView(): WrappedBuilder<[Params]> {
     return new WrappedBuilder(WebBuilder);
@@ -399,6 +409,7 @@ export class WebViewPlatformView extends PlatformView {
 
   dispose(): void {
     this.controller.stopAllMedia();
+    this.onDisposeCallback && this.onDisposeCallback();
   }
 
   getController(): web_webview.WebviewController {
@@ -498,10 +509,10 @@ class WebSettingsImpl implements WebSettings {
   backgroundColor : string = "";
   javaScriptAccess : boolean = false;
   mediaPlayGestureAccess : boolean = false;
-  zoomAccess : boolean = false;
+  zoomAccess : boolean = true;
   overviewModeAccess : boolean = false;
   wideViewModeAccess: boolean = false;
-  fileAccess : boolean = false;
+  fileAccess : boolean = true;
   textZoomRatio : number = 0;
   textZoomRatioCallback?: (ratio: number) => void;
 

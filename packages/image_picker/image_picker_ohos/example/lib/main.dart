@@ -341,7 +341,7 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title!),
       ),
       body: Center(
-        child: !kIsWeb && defaultTargetPlatform == TargetPlatform.android
+        child: !kIsWeb && (defaultTargetPlatform == TargetPlatform.android || defaultTargetPlatform == TargetPlatform.ohos)
             ? FutureBuilder<void>(
                 future: retrieveLostData(),
                 builder: (BuildContext context, AsyncSnapshot<void> snapshot) {

@@ -13,15 +13,11 @@
  * limitations under the License.
  */
 import ArrayList from '@ohos.util.ArrayList';
-import Want from '@ohos.app.ability.Want';
 import Log from '@ohos/flutter_ohos/src/main/ets/util/Log';
 import fs from '@ohos.file.fs'
 import common from '@ohos.app.ability.common';
-import wantConstant from '@ohos.ability.wantConstant';
-import bundleManager from '@ohos.bundle.bundleManager';
 import ImagePickerCache, { CacheType } from './ImagePickerCache'
 import FileUtils from './FileUtils'
-import StartOptions from '@ohos.app.ability.StartOptions';
 import {
   FlutterError,
   ImageSelectionOptions,
@@ -35,8 +31,9 @@ import {
 import ImageResizer from './ImageResizer';
 import HashMap from '@ohos.util.HashMap';
 import UIAbility from '@ohos.app.ability.UIAbility';
-import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
 import { BusinessError } from '@ohos.base';
+import { cameraPicker, camera } from '@kit.CameraKit';
+import { photoAccessHelper } from '@kit.MediaLibraryKit'
 
 export default class ImagePickerDelegate {
   readonly REQUEST_CODE_CHOOSE_IMAGE_FROM_GALLERY = 2342;
@@ -53,6 +50,8 @@ export default class ImagePickerDelegate {
   private pendingCameraMediaUri: string | null = null;
   private pendingCallState: PendingCallState | null = null;
   private context: common.UIAbilityContext | null = null;
+  private photoPicker = new photoAccessHelper.PhotoViewPicker();
+  private cameraPosition: camera.CameraPosition = camera.CameraPosition.CAMERA_POSITION_BACK;
 
   constructor(ability: UIAbility, imageResizer: ImageResizer, cache: ImagePickerCache, context?: common.UIAbilityContext,
               pendingImageOptions?: ImageSelectionOptions, pendingVideoOptions?: VideoSelectionOptions,
@@ -65,8 +64,14 @@ export default class ImagePickerDelegate {
     this.context = ability.context;
   }
 
-  /* 当前默认调用仅支持后置摄像头 */
   setCameraDevice(device: CameraDevice): void {
+    if (device == CameraDevice.REAR) {
+      this.cameraPosition = camera.CameraPosition.CAMERA_POSITION_BACK;
+    }
+
+    if (device == CameraDevice.FRONT) {
+      this.cameraPosition = camera.CameraPosition.CAMERA_POSITION_FRONT;
+    }
   }
 
   saveStateBeforeResult(): void {
@@ -129,40 +134,42 @@ export default class ImagePickerDelegate {
     return result.build ? result.build() : null;
   }
 
+  chooseMedia(maxMultiple: number, handleType: string, type?: photoAccessHelper.PhotoViewMIMETypes) {
+    let photoSelectOptions = new photoAccessHelper.PhotoSelectOptions();
+    photoSelectOptions.MIMEType = type;
+    photoSelectOptions.maxSelectNumber = maxMultiple;
+
+    this.photoPicker.select(photoSelectOptions).then((photoSelectResult: photoAccessHelper.PhotoSelectResult) => {
+      this.handleResultType(handleType, 0, photoSelectResult.photoUris)
+    }).catch((err: BusinessError) => {
+      this.handleResultType(handleType, -1, [])
+      Log.e(ImagePickerDelegate.TAG, `PhotoViewPicker.select failed whih err: ${err}`)
+    })
+  }
+
+  handleResultType(handleType: string, code: number, uris: Array<string>) {
+    switch (handleType) {
+      case 'handleChooseVideoResult':
+        this.handleChooseVideoResult(code, uris);
+        break;
+      case 'handleChooseImageResult':
+        this.handleChooseImageResult(code, uris);
+        break;
+      case 'handleChooseMediaResult':
+        this.handleChooseMediaResult(code, uris);
+        break;
+    }
+  }
+
+  // 选择多个图片或者多个视频
   chooseMediaFromGallery(options: MediaSelectionOptions, generalOptions: GeneralOptions,
                          result: Result<ArrayList<string>>): void {
     if (!this.setPendingOptionsAndResult(options.getImageSelectionOptions(), null, result)) {
       this.finishWithAlreadyActiveError(result);
       return;
     }
-    this.launchPickMediaFromGalleryWant(generalOptions);
-  }
 
-  launchPickMediaFromGalleryWant(generalOptions: GeneralOptions): void {
-    let config: Want = {
-      action: 'ohos.want.action.photoPicker',
-      type: generalOptions.getAllowMultiple() ? 'multipleselect' : 'singleselect',
-      parameters: {
-        uri: generalOptions.getAllowMultiple() ? 'multipleselect' : 'singleselect',
-        maxSelectCount: generalOptions.getAllowMultiple() ? 9 : 1,
-        filterMediaType: 'FILTER_MEDIA_TYPE_ALL'
-      }
-    };
-    let options: StartOptions = {
-      displayId: 0,
-    };
-    if (!this.context) {
-      return
-    }
-    this.context.startAbilityForResult(config, options).then(result => {
-      if (result && result.want && result.want.parameters) {
-        let uris: Array<string> = result.want.parameters['select-item-list'] as Array<string>;
-        let code = result["resultCode"] as number;
-        Log.i(ImagePickerDelegate.TAG, "startAbilityForResult : " + JSON.stringify(result.want.parameters));
-        this.handleChooseMediaResult(code, uris);
-      }
-
-    });
+    this.chooseMedia(generalOptions.getAllowMultiple() ? 9 : 1, 'handleChooseMediaResult')
   }
 
   handleChooseMediaResult(code: number, uris: Array<string>): void {
@@ -197,41 +204,14 @@ export default class ImagePickerDelegate {
     this.finishWithListSuccess(pathList);
   }
 
+  // 选择一个视频
   chooseVideoFromGallery(options: VideoSelectionOptions, usePhotoPicker: boolean, result: Result<ArrayList<string>>): void {
     if (!this.setPendingOptionsAndResult(null, options, result)) {
       this.finishWithAlreadyActiveError(result);
       return;
     }
 
-    this.launchPickVideoFromGalleryWant(usePhotoPicker);
-  }
-
-  async launchPickVideoFromGalleryWant(usePhotoPicker: boolean): Promise<void> {
-    Log.i(ImagePickerDelegate.TAG, "launchPickVideoFromGalleryWant enter");
-    let config: Want = {
-      action: 'ohos.want.action.photoPicker',
-      type: 'singleselect',
-      parameters: {
-        uri: 'singleselect',
-        maxSelectCount: 1,
-        filterMediaType: 'FILTER_MEDIA_TYPE_VIDEO'
-      }
-    };
-
-    let options: StartOptions = {
-      displayId: 0,
-    };
-    let result: ESObject = null
-    if (this.context) {
-      result = await this.context.startAbilityForResult(config, options);
-    }
-
-    if (result && result.want && result.want.parameters) {
-      let uris = result.want.parameters['select-item-list'] as Array<string>;
-      let code = result.resultCode as number;
-      this.handleChooseVideoResult(code, uris);
-    }
-
+    this.chooseMedia(1, 'handleChooseVideoResult', photoAccessHelper.PhotoViewMIMETypes.VIDEO_TYPE);
   }
 
   handleChooseVideoResult(code: number, uris: Array<string>): void {
@@ -243,6 +223,7 @@ export default class ImagePickerDelegate {
     }
   }
 
+  // 唤起相机录像
   takeVideoWithCamera(options: VideoSelectionOptions, result: Result<ArrayList<string>>): void {
     if (!this.setPendingOptionsAndResult(null, options, result)) {
       this.finishWithAlreadyActiveError(result);
@@ -254,67 +235,25 @@ export default class ImagePickerDelegate {
   }
 
   async launchTakeVideoWithCameraWant(duration: number): Promise<void> {
-    let want: Want = {
-      "action": wantConstant.Action.ACTION_VIDEO_CAPTURE,
-      parameters: {
-        callBundleName: "flutter_embedding",
-        "supportMultiMode": false,
-        durationLimit: duration
-      }
+    let pickerProfile: cameraPicker.PickerProfile = {
+      cameraPosition: this.cameraPosition,
+      videoDuration: duration
     }
-    abilityAccessCtrl.createAtManager()
-      .requestPermissionsFromUser(this.context, ['ohos.permission.READ_MEDIA'])
-      .then(async (permission) => {
-        if(permission.authResults[0] !== 0){
-          return
-        }
-        let result: ESObject = null;
-        if (this.context) {
-          result = await this.context.startAbilityForResult(want);
-        }
-        if (result && result.want && result.want.parameters) {
-          let uri = result["want"]["parameters"].resourceUri as string;
-          let code = result["resultCode"] as number;
-          this.handlerCaptureImageResult(code, uri);
-        }
 
-      });
+    cameraPicker.pick(this.context, [cameraPicker.PickerMediaType.VIDEO], pickerProfile).then((pickerResult: cameraPicker.PickerResult) => {
+      this.handlerCaptureImageResult(pickerResult.resultCode, pickerResult.resultUri);
+    })
   }
 
-  async chooseImageFromGallery(options: ImageSelectionOptions, usePhotoPicker: boolean, result: Result<ArrayList<string>>): Promise<void> {
+  // 选择单个图片
+  chooseImageFromGallery(options: ImageSelectionOptions, usePhotoPicker: boolean, result: Result<ArrayList<string>>) {
     Log.i(ImagePickerDelegate.TAG, "chooseImageFromGallery enter");
     if (!this.setPendingOptionsAndResult(options, null, result)) {
       this.finishWithAlreadyActiveError(result);
       return;
     }
 
-    await this.launchPickImageFromGalleryWant(usePhotoPicker);
-  }
-
-  async launchPickImageFromGalleryWant(usePhotoPicker: boolean): Promise<void> {
-    Log.i(ImagePickerDelegate.TAG, "launchPickImageFromGalleryWant enter");
-    let config: Want = {
-      action: 'ohos.want.action.photoPicker',
-      type: 'singleselect',
-      parameters: {
-        uri: 'singleselect',
-        maxSelectCount: 1,
-        filterMediaType: 'FILTER_MEDIA_TYPE_IMAGE'
-      }
-    };
-
-    let options: StartOptions = {
-      displayId: 0,
-    };
-    let result: ESObject = null;
-    if (this.context) {
-      result = await this.context.startAbilityForResult(config, options);
-    }
-    if (result && result.want && result.want.parameters) {
-      let uris = result?.want?.parameters['select-item-list'] as Array<string>;
-      let code = result.resultCode as number;
-      this.handleChooseImageResult(code, uris);
-    }
+    this.chooseMedia(1, 'handleChooseImageResult', photoAccessHelper.PhotoViewMIMETypes.IMAGE_TYPE)
   }
 
   handleChooseImageResult(code: number, uris: Array<string>): void {
@@ -326,41 +265,17 @@ export default class ImagePickerDelegate {
     }
   }
 
+  // 选择多个图片
   chooseMultiImagesFromGallery(options: ImageSelectionOptions, usePhotoPicker: boolean, result: Result<ArrayList<string>>): void {
     if (!this.setPendingOptionsAndResult(options, null, result)) {
       this.finishWithAlreadyActiveError(result);
       return;
     }
 
-    this.launchMultiPickImageFromGalleryWant(usePhotoPicker);
+    this.chooseMedia(9, 'handleChooseMediaResult', photoAccessHelper.PhotoViewMIMETypes.IMAGE_TYPE)
   }
 
-  async launchMultiPickImageFromGalleryWant(usePhotoPicker: boolean): Promise<void> {
-    let config: Want = {
-      action: 'ohos.want.action.photoPicker',
-      type: 'multipleselect',
-      parameters: {
-        uri: 'multipleselect',
-        maxSelectCount: 9,
-        filterMediaType: 'FILTER_MEDIA_TYPE_IMAGE'
-      }
-    };
-
-    let options: StartOptions = {
-      displayId: 0,
-    };
-    let result: ESObject = null;
-    if (this.context) {
-      result = await this.context.startAbilityForResult(config, options);
-    }
-    if (result && result.want && result.want.parameters) {
-      let uris = result?.want?.parameters['select-item-list'] as Array<string>;
-      let resultCode = result.resultCode as number;
-      this.handleChooseMediaResult(resultCode, uris);
-    }
-
-  }
-
+  // 唤起相机拍照
   takeImageWithCamera(options: ImageSelectionOptions, result: Result<ArrayList<string>>): void {
     if (!this.setPendingOptionsAndResult(options, null, result)) {
       this.finishWithAlreadyActiveError(result);
@@ -369,36 +284,15 @@ export default class ImagePickerDelegate {
     this.launchTakeImageWithCameraWant();
   }
 
-  async launchTakeImageWithCameraWant(): Promise<void> {
-    let bundleFlags = bundleManager.BundleFlag.GET_BUNDLE_INFO_DEFAULT;
-    let bundleName = ""
-    try {
-      let t = await bundleManager.getBundleInfoForSelf(bundleFlags)
-      bundleName = t.name
-    } catch (err) {
-      let message = (err as BusinessError).message;
-      Log.e('getBundleInfoForSelf failed: %{public}s', message);
+  launchTakeImageWithCameraWant() {
+    let pickerProfile: cameraPicker.PickerProfile = {
+      cameraPosition: this.cameraPosition,
     }
 
-    let want: Want = {
-      "action": wantConstant.Action.ACTION_IMAGE_CAPTURE,
-      parameters: {
-        callBundleName: bundleName || "flutter_embedding",
-        "supportMultiMode": false
-      }
-    }
-    let result: ESObject = null
-    if (this.context) {
-      result = await this.context.startAbilityForResult(want);
-    }
-
-    if (!result) {
-      return
-    }
-    let uri = result["want"]["parameters"].resourceUri as string;
-    let code = result["resultCode"] as number;
-    this.pendingCameraMediaUri = uri;
-    this.handlerCaptureImageResult(code, uri);
+    cameraPicker.pick(this.context, [cameraPicker.PickerMediaType.PHOTO], pickerProfile).then((pickerResult: cameraPicker.PickerResult) => {
+      this.pendingCameraMediaUri = pickerResult.resultUri;
+      this.handlerCaptureImageResult(pickerResult.resultCode, pickerResult.resultUri);
+    })
   }
 
   setPendingOptionsAndResult(imageOptions: ImageSelectionOptions | null, videoOptions: VideoSelectionOptions | null,
