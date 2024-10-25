@@ -717,6 +717,11 @@ class WebSettings extends OhosObject {
     return api.getUserAgentStringFromInstance(this);
   }
 
+  /// Enables or disables full screen rotate within WebView.
+  Future<void> setAllowFullScreenRotate(bool enabled) {
+    return api.setAllowFullScreenRotateInstance(this, enabled);
+  }
+
   @override
   WebSettings copy() {
     return WebSettings.detached(
