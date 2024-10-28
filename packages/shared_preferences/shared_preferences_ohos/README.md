@@ -1,6 +1,6 @@
-# shared\_preferences\_android
+# shared\_preferences\_ohos
 
-The Android implementation of [`shared_preferences`][1].
+The OpenHarmony implementation of [`shared_preferences`][1].
 
 ## Usage
 
