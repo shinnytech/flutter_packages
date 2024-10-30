@@ -2918,7 +2918,7 @@ export class FileChooserParamsFlutterApi {
     isCaptureEnabledArg: boolean,
     acceptTypesArg: string[],
     modeArg: FileChooserMode,
-    //filenameHintArg:string,
+    filenameHintArg:string,
     callback: Reply<void>
   ) {
     const channel: BasicMessageChannel<ESObject> = new BasicMessageChannel<ESObject>(
@@ -2928,7 +2928,7 @@ export class FileChooserParamsFlutterApi {
     );
     channel.send(
       [instanceIdArg, isCaptureEnabledArg, acceptTypesArg, modeArg,
-      //filenameHintArg
+      filenameHintArg
       ],
       (channelReply: ESObject) => callback.reply(null)
     );
