@@ -9,6 +9,8 @@ A Flutter plugin for launching a URL.
 |             | Android | iOS   | Linux | macOS  | Web | Windows     |
 |-------------|---------|-------|-------|--------|-----|-------------|
 | **Support** | SDK 16+ | 11.0+ | Any   | 10.14+ | Any | Windows 10+ |
+## Postscript
+Ohos does not support jumping to the App Store at this time
 
 ## Usage
 

@@ -81,7 +81,7 @@ export class WebViewHostApiImpl extends WebViewHostApi {
     const webView: WebViewPlatformView = this.instanceManager.getInstance(instanceId);
     await webView.waitControllerAttached();
     try {
-      // 当baseUrl为空时，其值默认为resource://rawfile/。这样设置的原因是为了解决<a href="">标签锚点无效的问题。
+      // 当baseUrl为空时，其值默认为resource://rawfile/。这样设置是为了解决<a href="">标签锚点无效问题。
       webView.getController().loadData(data, mimeType, encoding, baseUrl == null || baseUrl.trim().length === 0 ? "resource://rawfile/" : baseUrl , historyUrl == null ? " " : historyUrl);
     } catch (err) {
       Log.e(TAG, "loadDataWithBaseUrl err = " + err);
@@ -551,7 +551,7 @@ class WebSettingsImpl implements WebSettings {
   wideViewModeAccess: boolean = false;
   fileAccess : boolean = true;
   textZoomRatio : number = 0;
-  textZoomRatioCallback?: (ratio: number) => void;  
+  textZoomRatioCallback?: (ratio: number) => void;
 
   constructor(webView: WebViewPlatformView) {
     this.webView = webView;
@@ -655,7 +655,7 @@ class WebSettingsImpl implements WebSettings {
 
   setTextZoom(textZoom: number) {
     this.textZoomRatio = textZoom;
-    this.textZoomRatioCallback && this.textZoomRatioCallback(textZoom);    
+    this.textZoomRatioCallback && this.textZoomRatioCallback(textZoom);
   }
 
    async getUserAgentString(): Promise<string> {
@@ -670,5 +670,5 @@ class WebSettingsImpl implements WebSettings {
   onTextZoomChanged(callback: (ratio: number) => void): void {
     this.textZoomRatioCallback = callback;
   }
-  
+
 }

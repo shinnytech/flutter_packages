@@ -1,6 +1,6 @@
-# camera\_android
+# camera\_ohos
 
-The Android implementation of [`camera`][1].
+The OpenHarmony implementation of [`camera`][1].
 
 ## Usage
 

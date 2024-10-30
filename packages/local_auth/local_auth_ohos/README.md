@@ -1,6 +1,6 @@
-# local\_auth\_android
+# local\_auth\_ohos
 
-The Android implementation of [`local_auth`][1].
+The OpenHarmony implementation of [`local_auth`][1].
 
 ## Usage
 
