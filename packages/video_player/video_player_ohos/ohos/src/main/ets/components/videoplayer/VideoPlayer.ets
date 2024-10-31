@@ -58,14 +58,16 @@ export class VideoPlayer {
   private eventSink: QueuingEventSink | null = null;
   private interruptMode: audio.InterruptMode = audio.InterruptMode.INDEPENDENT_MODE;
   private fd: number | null = null;
+  private headers: Record<string, string> | null;
 
-  constructor(playerModel: PlayerModel, textureEntry: SurfaceTextureEntry, url: resourceManager.RawFileDescriptor | null, iUrl: string | null, eventChannel: EventChannel, AudioFocus: Boolean) {
+  constructor(playerModel: PlayerModel, textureEntry: SurfaceTextureEntry, url: resourceManager.RawFileDescriptor | null, iUrl: string | null, eventChannel: EventChannel, AudioFocus: Boolean, headers: Record<string, string> | null) {
     this.playerModel = playerModel;
     this.textureEntry = textureEntry;
     this.surfaceId = textureEntry.getSurfaceId().toString();
     this.url = url;
     this.iUrl = iUrl;
     this.eventChannel = eventChannel;
+    this.headers = headers;
     if (AudioFocus == true) {
       this.interruptMode = audio.InterruptMode.SHARE_MODE;
       Log.i(TAG, "set interruptMode : " + this.interruptMode);
@@ -93,6 +95,13 @@ export class VideoPlayer {
         this.avPlayer.url = this.getIUri();
       } else {
         this.avPlayer.fdSrc = this.url!;
+      }
+
+      if (this.headers != null) {
+        let mediaSource: media.MediaSource = media.createMediaSourceWithUrl(this.iUrl, this.headers);
+        let playbackStrategy: media.PlaybackStrategy = {preferredWidth: 1, preferredHeight: 2, preferredBufferDuration: 20, preferredHdr: false};
+        // 设置媒体来源和播放策略
+        await this.avPlayer.setMediaSource(mediaSource, playbackStrategy);
       }
     }
   }
