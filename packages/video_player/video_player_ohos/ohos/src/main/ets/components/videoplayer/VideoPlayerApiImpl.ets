@@ -81,8 +81,11 @@ export class VideoPlayerApiImpl {
     let flutterRenderer = this.flutterState.getTextureRegistry();
     let uri: string = arg.getUri();
     let asset: string = arg.getAsset();
-    let header: Record<string, string> = {};
+    let header: Record<string, string> | null = null;
     arg.getHttpHeaders().forEach((value, key) => {
+      if (!header) {
+        header = {}
+      }
       header[key.toString()] = value.toString();
     })
     let textureId: number = flutterRenderer.getTextureId();

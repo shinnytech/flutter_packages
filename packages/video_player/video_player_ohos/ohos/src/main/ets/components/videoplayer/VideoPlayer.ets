@@ -91,15 +91,23 @@ export class VideoPlayer {
       );
 
       await this.bindState();
-      if (this.iUrl != null) {
-        this.avPlayer.url = this.getIUri();
-      } else {
-        this.avPlayer.fdSrc = this.url!;
-      }
 
-      if (this.headers != null) {
+      /// 同时设置avPlayer.url和avPlayer.setMediaSource会导致直播视频无法正确播放
+      /// 目前无法确定其他设置了header的视频能不能正常使用，暂时先这样使用
+      if (!this.headers) {
+        if (this.iUrl != null) {
+          this.avPlayer.url = this.getIUri();
+        } else {
+          this.avPlayer.fdSrc = this.url!;
+        }
+      } else {
         let mediaSource: media.MediaSource = media.createMediaSourceWithUrl(this.iUrl, this.headers);
-        let playbackStrategy: media.PlaybackStrategy = {preferredWidth: 1, preferredHeight: 2, preferredBufferDuration: 20, preferredHdr: false};
+        let playbackStrategy: media.PlaybackStrategy = {
+          preferredWidth: 1,
+          preferredHeight: 2,
+          preferredBufferDuration: 20,
+          preferredHdr: false
+        };
         // 设置媒体来源和播放策略
         await this.avPlayer.setMediaSource(mediaSource, playbackStrategy);
       }
@@ -168,7 +176,9 @@ export class VideoPlayer {
               this.url = globalVideoList[this.index].src;
             }
           }
-          this.avPlayer.reset();
+          /// 网络直播视频采用分片操作方式，这个地方使用reset会导致无法正常播放
+          /// 不确定其他场景影响，暂时使用，原生上也不需要在这个地方设置reset
+          // this.avPlayer.reset();
           break;
         case AvplayerStatus.RELEASED:
           this.avPlayer.release();
@@ -194,7 +204,8 @@ export class VideoPlayer {
       Log.e(TAG, "avPlayer Events.ERROR: " + JSON.stringify(err));
       // 播放直播视频时，设置 loop 会报错，而 loop 一定会设置(video_player.dart 中初始化之后会 _applyLooping)，所以屏蔽掉该报错
       // message: Unsupport Capability: The stream is live stream, not support loop
-      if(err.code == 801) {
+      /// 网络直播会有许多关于5400102和5400103的报错，需要跳过，不然直播视频无法正常播放
+      if(err.code == 801 || err.code == 5400102 || err.code == 5400103) {
         return;
       }
       this.avPlayer?.reset();
