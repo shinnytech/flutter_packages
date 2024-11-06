@@ -176,9 +176,6 @@ export class VideoPlayer {
               this.url = globalVideoList[this.index].src;
             }
           }
-          /// 网络直播视频采用分片操作方式，这个地方使用reset会导致无法正常播放
-          /// 不确定其他场景影响，暂时使用，原生上也不需要在这个地方设置reset
-          // this.avPlayer.reset();
           break;
         case AvplayerStatus.RELEASED:
           this.avPlayer.release();
