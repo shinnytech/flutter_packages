@@ -443,11 +443,10 @@ export class WebViewPlatformView extends PlatformView {
   onFullScreenEnter = (event: ESObject) => {
     let context = getContext(this) as common.UIAbilityContext;
     let windowClass = context.windowStage.getMainWindowSync();
-    windowClass.setWindowLayoutFullScreen(true);
     windowClass.setWindowSystemBarEnable([]);
     this.rotation = windowClass.getPreferredOrientation();
     let orientation: number = display.getDefaultDisplaySync().orientation;
-    let isAllowFullScreenRotate = this.getWebSettings()?.getAllowFullScreenRotate()
+    let isAllowFullScreenRotate = this.getWebSettings()?.getAllowFullScreenRotate();
     if (isAllowFullScreenRotate && (orientation == display.Orientation.PORTRAIT || orientation == display.Orientation.PORTRAIT_INVERTED)) {
       windowClass.setPreferredOrientation(window.Orientation.LANDSCAPE);
     }
@@ -456,7 +455,6 @@ export class WebViewPlatformView extends PlatformView {
   onFullScreenExit = () => {
     let context = getContext(this) as common.UIAbilityContext;
     let windowClass = context.windowStage.getMainWindowSync();
-    windowClass.setWindowLayoutFullScreen(false);
     windowClass.setWindowSystemBarEnable(['status', 'navigation']);
     windowClass.setPreferredOrientation(this.rotation);
   }
