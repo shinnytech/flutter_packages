@@ -32,6 +32,8 @@ import { DisplayListenerProxy } from './DisplayListenerProxy'
 import { JavaScriptChannel } from './JavaScriptChannel'
 import Log from '@ohos/flutter_ohos/src/main/ets/util/Log';
 import { WebViewFlutterApiImpl } from './WebViewFlutterApiImpl.ets'
+import window from '@ohos.window'
+import display from '@ohos.display'
 
 const TAG: string = "WebViewHostApiImpl";
 
@@ -299,6 +301,8 @@ export class WebViewPlatformView extends PlatformView {
 
   private onDisposeCallback?: () => void;
 
+  private rotation: number = 0;
+
   onDownloadStart = (event: ESObject) => {
     if (this.downloadListener && this.downloadListener.onDownloadStart) {
       this.downloadListener.onDownloadStart(
@@ -436,6 +440,25 @@ export class WebViewPlatformView extends PlatformView {
     return true;
   }
 
+  onFullScreenEnter = (event: ESObject) => {
+    let context = getContext(this) as common.UIAbilityContext;
+    let windowClass = context.windowStage.getMainWindowSync();
+    windowClass.setWindowSystemBarEnable([]);
+    this.rotation = windowClass.getPreferredOrientation();
+    let orientation: number = display.getDefaultDisplaySync().orientation;
+    let isAllowFullScreenRotate = this.getWebSettings()?.getAllowFullScreenRotate();
+    if (isAllowFullScreenRotate && (orientation == display.Orientation.PORTRAIT || orientation == display.Orientation.PORTRAIT_INVERTED)) {
+      windowClass.setPreferredOrientation(window.Orientation.LANDSCAPE);
+    }
+  }
+
+  onFullScreenExit = () => {
+    let context = getContext(this) as common.UIAbilityContext;
+    let windowClass = context.windowStage.getMainWindowSync();
+    windowClass.setWindowSystemBarEnable(['status', 'navigation']);
+    windowClass.setPreferredOrientation(this.rotation);
+  }
+  
   getType(): string {
     return 'web';
   }
@@ -552,6 +575,7 @@ class WebSettingsImpl implements WebSettings {
   fileAccess : boolean = true;
   textZoomRatio : number = 0;
   textZoomRatioCallback?: (ratio: number) => void;
+  isAllowFullScreenRotate: boolean = false;
 
   constructor(webView: WebViewPlatformView) {
     this.webView = webView;
@@ -671,4 +695,11 @@ class WebSettingsImpl implements WebSettings {
     this.textZoomRatioCallback = callback;
   }
 
+  setAllowFullScreenRotate(enabled: boolean) {
+    this.isAllowFullScreenRotate = enabled;
+  }
+
+  getAllowFullScreenRotate() : boolean {
+    return this.isAllowFullScreenRotate;
+  }
 }

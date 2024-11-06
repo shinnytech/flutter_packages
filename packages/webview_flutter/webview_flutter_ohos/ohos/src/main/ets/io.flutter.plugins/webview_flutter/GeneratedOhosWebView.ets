@@ -2188,6 +2188,8 @@ export abstract class WebSettingsHostApi {
 
   abstract getUserAgentString(instanceId: number): Promise<string>;
 
+  abstract setAllowFullScreenRotate(instanceId: number, enabled: boolean): void;
+
   static getCodec(): MessageCodec<ESObject> {
     return new StandardMessageCodec();
   }
@@ -2687,6 +2689,38 @@ export abstract class WebSettingsHostApi {
               try {
                 let output = await api.getUserAgentString(instanceIdArg);
                 wrapped.insert(output, 0);
+              } catch (err) {
+                const wrappedError: ArrayList<ESObject> = GeneratedOhosWebView.wrapError(err);
+                wrapped = wrappedError;
+              }
+              reply.reply(wrapped.convertToArray());
+            }
+          }
+        );
+      } else {
+        channel.setMessageHandler(null);
+      }
+    }
+    {
+      const channel: BasicMessageChannel<ESObject> =
+      new BasicMessageChannel<ESObject>(
+        binaryMessenger,
+        "dev.flutter.pigeon.webview_flutter_ohos.WebSettingsHostApi.setAllowFullScreenRotate",
+        WebSettingsHostApi.getCodec()
+      );
+      if (api != null) {
+        channel.setMessageHandler(
+          {
+            onMessage: (message: ESObject, reply: Reply<ESObject>) => {
+              let wrapped: ArrayList<ESObject> = new ArrayList<ESObject>();
+              const args: Array<ESObject> = message;
+              const instanceIdArg: number = args[0];
+              const enabledArg: boolean = args[1];
+              try {
+                api.setAllowFullScreenRotate(
+                  instanceIdArg, enabledArg
+                );
+                wrapped.insert(null, 0);
               } catch (err) {
                 const wrappedError: ArrayList<ESObject> = GeneratedOhosWebView.wrapError(err);
                 wrapped = wrappedError;

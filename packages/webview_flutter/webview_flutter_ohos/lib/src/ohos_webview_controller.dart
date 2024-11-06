@@ -39,6 +39,7 @@ class OhosWebViewControllerCreationParams
     extends PlatformWebViewControllerCreationParams {
   /// Creates a new [OhosWebViewControllerCreationParams] instance.
   OhosWebViewControllerCreationParams({
+    bool? this.isAllowFullScreenRotate = false,
     @visibleForTesting this.ohosWebViewProxy = const OhosWebViewProxy(),
     @visibleForTesting ohos_webview.WebStorage? ohosWebStorage,
   })  : ohosWebStorage =
@@ -50,16 +51,21 @@ class OhosWebViewControllerCreationParams
     // Recommended placeholder to prevent being broken by platform interface.
     // ignore: avoid_unused_constructor_parameters
     PlatformWebViewControllerCreationParams params, {
+    bool? isAllowFullScreenRotate = false,
     @visibleForTesting
     OhosWebViewProxy ohosWebViewProxy = const OhosWebViewProxy(),
     @visibleForTesting ohos_webview.WebStorage? ohosWebStorage,
   }) {
     return OhosWebViewControllerCreationParams(
+      isAllowFullScreenRotate: isAllowFullScreenRotate,
       ohosWebViewProxy: ohosWebViewProxy,
       ohosWebStorage:
           ohosWebStorage ?? ohos_webview.WebStorage.instance,
     );
   }
+
+  /// Enables or disables full screen rotate within WebView.
+  bool? isAllowFullScreenRotate;
 
   /// Handles constructing objects and calling static methods for the Ohos WebView
   /// native library.
@@ -94,6 +100,7 @@ class OhosWebViewController extends PlatformWebViewController {
             ? params
             : OhosWebViewControllerCreationParams
                 .fromPlatformWebViewControllerCreationParams(params)) {
+    _webView.settings.setAllowFullScreenRotate(params is OhosWebViewControllerCreationParams ? params.isAllowFullScreenRotate ?? false : false);
     _webView.settings.setDomStorageEnabled(true);
     _webView.settings.setJavaScriptCanOpenWindowsAutomatically(true);
     _webView.settings.setSupportMultipleWindows(true);
