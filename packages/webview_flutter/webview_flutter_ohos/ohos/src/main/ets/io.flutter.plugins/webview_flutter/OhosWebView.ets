@@ -45,6 +45,7 @@ export struct OhosWebView {
             controller: this.controller,
             renderMode: RenderMode.SYNC_RENDER
           })
+          .keyboardAvoidMode(WebKeyboardAvoidMode.RESIZE_VISUAL)
           .backgroundColor(this.webView.getWebSettings().getBackgroundColor())
           .onDownloadStart(this.webView.onDownloadStart)
           .onPageBegin(this.webView.onPageBegin)
