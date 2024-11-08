@@ -39,6 +39,11 @@ const FORMAT_SS: String = 'ss';
 const FORMAT_DASH: String = 'dash';
 const FORMAT_HLS: String = 'hls';
 const FORMAT_OTHER: String = 'other';
+
+const OPERATE_ERROR: number = 801;
+const AVPLAYER_STATE_ERROR: number = 5400102;
+const AVPLAYER_IO_ERROR: number = 5400103;
+
 const TAG = 'VideoPlayer'
 export class VideoPlayer {
   private avPlayer: media.AVPlayer | null = null;
@@ -195,7 +200,7 @@ export class VideoPlayer {
       // 播放直播视频时，设置 loop 会报错，而 loop 一定会设置(video_player.dart 中初始化之后会 _applyLooping)，所以屏蔽掉该报错
       // message: Unsupport Capability: The stream is live stream, not support loop
       /// 规避部分错误导致的reset，如：5400102 当前状态机不支持此操作；5400103 出现IO错误
-      if(err.code == 801 || err.code == 5400102 || err.code == 5400103) {
+      if(err.code == OPERATE_ERROR || err.code == AVPLAYER_STATE_ERROR || err.code == AVPLAYER_IO_ERROR) {
         Log.e(TAG, "AvPlayer Avoid Error Reporting: " + JSON.stringify(err));
         return;
       }
