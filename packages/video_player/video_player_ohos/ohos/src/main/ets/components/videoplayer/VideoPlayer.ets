@@ -102,12 +102,7 @@ export class VideoPlayer {
       } else {
         let mediaSource: media.MediaSource = media.createMediaSourceWithUrl(this.url, this.headers);
         /// 网络直播视频必须设置之后才能正常缓存
-        let playbackStrategy: media.PlaybackStrategy = {
-          preferredWidth: 1,
-          preferredHeight: 2,
-          preferredBufferDuration: 20,
-          preferredHdr: false
-        };
+        let playbackStrategy: media.PlaybackStrategy = {};
         // 设置媒体来源和播放策略
         await this.avPlayer.setMediaSource(mediaSource, playbackStrategy);
       }
