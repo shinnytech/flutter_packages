@@ -39,6 +39,11 @@ const FORMAT_SS: String = 'ss';
 const FORMAT_DASH: String = 'dash';
 const FORMAT_HLS: String = 'hls';
 const FORMAT_OTHER: String = 'other';
+
+const OPERATE_ERROR: number = 801;
+const AVPLAYER_STATE_ERROR: number = 5400102;
+const AVPLAYER_IO_ERROR: number = 5400103;
+
 const TAG = 'VideoPlayer'
 export class VideoPlayer {
   private avPlayer: media.AVPlayer | null = null;
@@ -47,8 +52,8 @@ export class VideoPlayer {
   private status: number = -1;
   private loop: boolean = false;
   private index: number = 0;
-  private url?: resourceManager.RawFileDescriptor | null = {} as resourceManager.RawFileDescriptor;
-  private iUrl: string | null = null;
+  private rawFile?: resourceManager.RawFileDescriptor | null = {} as resourceManager.RawFileDescriptor;
+  private url: string | null = null;
   private surfaceId: string = '';
   private seekTime: number = PlayConstants.PROGRESS_SEEK_TIME;
   private positionX: number = PlayConstants.POSITION_X;
@@ -60,12 +65,12 @@ export class VideoPlayer {
   private fd: number | null = null;
   private headers: Record<string, string> | null;
 
-  constructor(playerModel: PlayerModel, textureEntry: SurfaceTextureEntry, url: resourceManager.RawFileDescriptor | null, iUrl: string | null, eventChannel: EventChannel, AudioFocus: Boolean, headers: Record<string, string> | null) {
+  constructor(playerModel: PlayerModel, textureEntry: SurfaceTextureEntry, rawFile: resourceManager.RawFileDescriptor | null, url: string | null, eventChannel: EventChannel, AudioFocus: Boolean, headers: Record<string, string> | null) {
     this.playerModel = playerModel;
     this.textureEntry = textureEntry;
     this.surfaceId = textureEntry.getSurfaceId().toString();
+    this.rawFile = rawFile;
     this.url = url;
-    this.iUrl = iUrl;
     this.eventChannel = eventChannel;
     this.headers = headers;
     if (AudioFocus == true) {
@@ -91,15 +96,18 @@ export class VideoPlayer {
       );
 
       await this.bindState();
-      if (this.iUrl != null) {
-        this.avPlayer.url = this.getIUri();
-      } else {
-        this.avPlayer.fdSrc = this.url!;
-      }
 
-      if (this.headers != null) {
-        let mediaSource: media.MediaSource = media.createMediaSourceWithUrl(this.iUrl, this.headers);
-        let playbackStrategy: media.PlaybackStrategy = {preferredWidth: 1, preferredHeight: 2, preferredBufferDuration: 20, preferredHdr: false};
+      /// 同时使用avPlayer.url和avPlayer.setMediaSource会导致直播视频无法正确播放
+      if (!this.headers) {
+        if (this.url) {
+          this.avPlayer.url = this.getIUri();
+        } else {
+          this.avPlayer.fdSrc = this.rawFile!;
+        }
+      } else {
+        let mediaSource: media.MediaSource = media.createMediaSourceWithUrl(this.url, this.headers);
+        /// 网络直播视频必须设置之后才能正常缓存
+        let playbackStrategy: media.PlaybackStrategy = {};
         // 设置媒体来源和播放策略
         await this.avPlayer.setMediaSource(mediaSource, playbackStrategy);
       }
@@ -126,10 +134,10 @@ export class VideoPlayer {
       switch (avplayerStatus) {
         case AvplayerStatus.IDLE:
           this.resetProgress();
-          if (this.iUrl) {
+          if (this.url) {
             this.avPlayer.url = this.getIUri();
           } else {
-            this.avPlayer.fdSrc = this.url!;
+            this.avPlayer.fdSrc = this.rawFile!;
           }
           break;
         case AvplayerStatus.INITIALIZED:
@@ -160,15 +168,13 @@ export class VideoPlayer {
           if (!this.loop) {
             let curIndex = this.index + PlayConstants.PLAYER_NEXT;
             let globalVideoList = GlobalContext.getContext().getObject('globalVideoList') as VideoItem[];
-            this.index = (curIndex === globalVideoList.length) ?
-            PlayConstants.PLAYER_FIRST : curIndex;
-            if (this.iUrl) {
-              this.iUrl = globalVideoList[this.index].iSrc;
+            this.index = (curIndex === globalVideoList.length) ? PlayConstants.PLAYER_FIRST : curIndex;
+            if (this.url) {
+              this.url = globalVideoList[this.index].iSrc;
             } else {
-              this.url = globalVideoList[this.index].src;
+              this.rawFile = globalVideoList[this.index].src;
             }
           }
-          this.avPlayer.reset();
           break;
         case AvplayerStatus.RELEASED:
           this.avPlayer.release();
@@ -191,12 +197,14 @@ export class VideoPlayer {
     });
 
     this.avPlayer.on(Events.ERROR, (err: BusinessError) => {
-      Log.e(TAG, "avPlayer Events.ERROR: " + JSON.stringify(err));
       // 播放直播视频时，设置 loop 会报错，而 loop 一定会设置(video_player.dart 中初始化之后会 _applyLooping)，所以屏蔽掉该报错
       // message: Unsupport Capability: The stream is live stream, not support loop
-      if(err.code == 801) {
+      /// 规避部分错误导致的reset，如：5400102 当前状态机不支持此操作；5400103 出现IO错误
+      if(err.code == OPERATE_ERROR || err.code == AVPLAYER_STATE_ERROR || err.code == AVPLAYER_IO_ERROR) {
+        Log.e(TAG, "AvPlayer Avoid Error Reporting: " + JSON.stringify(err));
         return;
       }
+      Log.e(TAG, "avPlayer Events.ERROR: " + JSON.stringify(err));
       this.avPlayer?.reset();
       this.sendError(err);
     })
@@ -297,10 +305,10 @@ export class VideoPlayer {
     let curIndex = this.index - PlayConstants.CONTROL_NEXT;
     this.index = (curIndex === -PlayConstants.CONTROL_NEXT) ?
       (globalVideoList.length - PlayConstants.CONTROL_NEXT) : curIndex;
-    if (this.iUrl) {
-      this.iUrl = globalVideoList[this.index].iSrc;
+    if (this.url) {
+      this.url = globalVideoList[this.index].iSrc;
     } else {
-      this.url = globalVideoList[this.index].src;
+      this.rawFile = globalVideoList[this.index].src;
     }
     this.avPlayer.reset();
   }
@@ -320,10 +328,10 @@ export class VideoPlayer {
     let curIndex = this.index + PlayConstants.CONTROL_NEXT;
     this.index = (curIndex === globalVideoList.length) ?
     PlayConstants.CONTROL_FIRST : curIndex;
-    if (this.iUrl) {
-      this.iUrl = globalVideoList[this.index].iSrc;
+    if (this.url) {
+      this.url = globalVideoList[this.index].iSrc;
     } else {
-      this.url = globalVideoList[this.index].src;
+      this.rawFile = globalVideoList[this.index].src;
     }
     this.avPlayer.reset();
   }
@@ -583,7 +591,7 @@ export class VideoPlayer {
   }
 
   getIUri(): string {
-    let iUrl = this.iUrl;
+    let iUrl = this.url;
     const ohosFilePrefix = 'file://';
     if (iUrl != null && iUrl.startsWith(ohosFilePrefix)) {
       this.fd = fs.openSync(iUrl, fs.OpenMode.READ_ONLY).fd;
