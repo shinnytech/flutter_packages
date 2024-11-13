@@ -580,8 +580,11 @@ export class VideoPlayer {
     } else {
       event.set("event", "bufferingUpdate");
       let range: ArrayList<number> = new ArrayList<number>();
+      range.add(0);
       range.add(bufferingPosition);
-      event.set("values", range);
+      let valuesList: ArrayList<ArrayList<number>> = new ArrayList<ArrayList<number>>();
+      valuesList.add(range);
+      event.set("values", valuesList);
     }
     this.eventSink?.success(event);
   }
