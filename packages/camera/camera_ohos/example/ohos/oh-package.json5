@@ -13,11 +13,6 @@
     "@ohos/hypium": "1.0.6"
   },
   "overrides": {
-    "@ohos/flutter_ohos": "file:./har/flutter.har",
-    "integration_test": "file:./har/integration_test.har",
-    "camera_ohos": "file:./har/camera_ohos.har",
-    "path_provider_ohos": "file:./har/path_provider_ohos.har",
-    "video_player_ohos": "file:./har/video_player_ohos.har",
-    "@ohos/flutter_module": "file:./entry"
+    "@ohos/flutter_ohos": "file:./har/flutter.har"
   }
 }
