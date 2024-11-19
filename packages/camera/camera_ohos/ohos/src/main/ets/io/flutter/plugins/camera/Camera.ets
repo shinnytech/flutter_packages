@@ -270,6 +270,10 @@ export class Camera implements CameraCaptureStateListener {
   }
 
   setFocusMode(result: MethodResult, newMode: camera.FocusMode) {
+    if (!this.getCurSession().isFocusModeSupported(newMode)) {
+      result.error("setFocusModeFailed", "The focus mode is unsupported.", null);
+      return;
+    }
     const autoFocusFeature: AutoFocusFeature = this.cameraFeatures.getAutoFocus();
     autoFocusFeature.setValue(newMode);
 
@@ -370,10 +374,10 @@ export class Camera implements CameraCaptureStateListener {
   // 设置曝光模式。
   // 进行设置之前，需要先检查设备是否支持指定的曝光模式，可使用方法isExposureModeSupported。
   setExposureMode(result: MethodResult, newMode: camera.ExposureMode) {
-    // if (CameraUtils.isExposureModeSupported(this.photoSession!, newMode)) {
-    //   result.error("setExposureModeFailed", "The exposure mode is unsupported.", null);
-    //   return;
-    // }
+    if (!CameraUtils.isExposureModeSupported(this.photoSession!, newMode)) {
+      result.error("setExposureModeFailed", "The exposure mode is unsupported.", null);
+      return;
+    }
 
     let modeExistence: boolean = false;
     Object.values(camera.ExposureMode).forEach(async (value) => {
@@ -760,7 +764,7 @@ export class Camera implements CameraCaptureStateListener {
         this.captureFile = fs.openSync(videoUri, fs.OpenMode.READ_WRITE | fs.OpenMode.CREATE);
         let fd = this.captureFile.fd;
         let displayRotation = display.getDefaultDisplaySync().rotation;
-        let previewRotation = this.previewOutput?.getPreviewRotation(displayRotation);
+        let previewRotation: camera.ImageRotation | undefined = this.previewOutput?.getPreviewRotation(displayRotation);
         // 当前录像配置
         let aVRecorderConfig: media.AVRecorderConfig = {
           audioSourceType: media.AudioSourceType.AUDIO_SOURCE_TYPE_MIC,
