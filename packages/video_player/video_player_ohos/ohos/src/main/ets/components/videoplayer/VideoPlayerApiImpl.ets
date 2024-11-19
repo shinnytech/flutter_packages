@@ -46,7 +46,7 @@ export class VideoPlayerApiImpl {
   private flutterState: FlutterState | null = null;
   private binding: AbilityPluginBinding | null = null;
   private AudioFocus: Boolean = false;
-  private pixelMap: image.PixelMap | null = null;
+  private pixelMaps: HashMap<string, image.PixelMap> = new HashMap();
 
   constructor(flutterState: FlutterState | null, binding: AbilityPluginBinding | null) {
     this.flutterState = flutterState;
@@ -81,38 +81,47 @@ export class VideoPlayerApiImpl {
     let flutterRenderer = this.flutterState.getTextureRegistry();
     let uri: string = arg.getUri();
     let asset: string = arg.getAsset();
+    let header: Record<string, string> | null = null;
+    arg.getHttpHeaders().forEach((value, key) => {
+      if (!header) {
+        header = {}
+      }
+      header[key.toString()] = value.toString();
+    })
     let textureId: number = flutterRenderer.getTextureId();
     Log.i(TAG, "enter getRawFd, textureId=" + textureId);
     let surfaceTextureEntry: SurfaceTextureEntry = flutterRenderer.registerTexture(textureId);
     if (asset != null) {
       let avImageGenerator = await media.createAVImageGenerator();
       avImageGenerator.fdSrc = await this.getContext().resourceManager.getRawFd("flutter_assets/" + asset);
-      this.pixelMap = await avImageGenerator.fetchFrameByTime(0, media.AVImageQueryOptions.AV_IMAGE_QUERY_NEXT_SYNC, {
+      let pixelMap = await avImageGenerator.fetchFrameByTime(0, media.AVImageQueryOptions.AV_IMAGE_QUERY_NEXT_SYNC, {
         width: -1,
         height: -1
       });
+      this.pixelMaps.set(JSON.stringify(arg), pixelMap);
       avImageGenerator.release();
-      flutterRenderer.setTextureBackGroundPixelMap(textureId, this.pixelMap);
+      flutterRenderer.setTextureBackGroundPixelMap(textureId, this.pixelMaps.get(JSON.stringify(arg)));
     } else if (uri != null && uri.startsWith("fd://")) {
       let avImageGenerator = await media.createAVImageGenerator();
       avImageGenerator.fdSrc = {
         fd: Number.parseInt(uri.replace("fd://", ""))
       };
-      this.pixelMap = await avImageGenerator.fetchFrameByTime(0, media.AVImageQueryOptions.AV_IMAGE_QUERY_NEXT_SYNC, {
+      let pixelMap = await avImageGenerator.fetchFrameByTime(0, media.AVImageQueryOptions.AV_IMAGE_QUERY_NEXT_SYNC, {
         width: -1,
         height: -1
       });
+      this.pixelMaps.set(JSON.stringify(arg), pixelMap);
       avImageGenerator.release();
-      flutterRenderer.setTextureBackGroundPixelMap(textureId, this.pixelMap);  
+      flutterRenderer.setTextureBackGroundPixelMap(textureId, this.pixelMaps.get(JSON.stringify(arg)));
     }
     let eventChannel: EventChannel = new EventChannel(this.flutterState.getBinaryMessenger(), "flutter.io/videoPlayer/videoEvents" + textureId.toString());
     if (asset != null) {
       let rawFileDescriptor: resourceManager.RawFileDescriptor = await this.getContext().resourceManager.getRawFd("flutter_assets/" + asset);
-      let videoPlayer = new VideoPlayer(playerModel, surfaceTextureEntry, rawFileDescriptor, null, eventChannel, this.AudioFocus);
+      let videoPlayer = new VideoPlayer(playerModel, surfaceTextureEntry, rawFileDescriptor, null, eventChannel, this.AudioFocus, null);
       await videoPlayer.createAVPlayer();
       this.videoPlayers.set(textureId.toString(), videoPlayer);
     } else if (uri != null) {
-      let videoPlayer = new VideoPlayer(playerModel, surfaceTextureEntry, null, uri, eventChannel, this.AudioFocus);
+      let videoPlayer = new VideoPlayer(playerModel, surfaceTextureEntry, null, uri, eventChannel, this.AudioFocus, header);
       await videoPlayer.createAVPlayer();
       this.videoPlayers.set(textureId.toString(), videoPlayer);
     }

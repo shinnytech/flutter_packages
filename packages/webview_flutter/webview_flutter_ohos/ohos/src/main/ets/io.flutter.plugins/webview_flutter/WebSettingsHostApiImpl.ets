@@ -68,10 +68,13 @@ export interface WebSettings {
 
   getTextZoom(): number;
 
-
   getUserAgentString(): Promise<string>;
   
   onTextZoomChanged(callback: (ratio: number) => void): void;
+
+  setAllowFullScreenRotate(enabled: boolean): void;
+  
+  getAllowFullScreenRotate(): boolean;
 }
 
 export class WebSettingsCreator {
@@ -169,5 +172,10 @@ export class WebSettingsHostApiImpl extends WebSettingsHostApi {
   getUserAgentString(instanceId: number): Promise<string> {
     const webSettings:WebSettings = this.instanceManager.getInstance(instanceId);
     return webSettings.getUserAgentString();
+  }
+
+  setAllowFullScreenRotate(instanceId: number, enabled: boolean) {
+    const webSettings:WebSettings = this.instanceManager.getInstance(instanceId);
+    webSettings.setAllowFullScreenRotate(enabled);
   }
 }

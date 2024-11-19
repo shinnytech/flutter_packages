@@ -95,6 +95,8 @@ export struct OhosWebView {
                 }
               })
           )
+          .onFullScreenEnter(this.webView.onFullScreenEnter)
+          .onFullScreenExit(this.webView.onFullScreenExit)
       }
     }
   }
