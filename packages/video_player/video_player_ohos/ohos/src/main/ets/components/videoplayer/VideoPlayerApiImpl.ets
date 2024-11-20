@@ -22,6 +22,7 @@ import { FlutterRenderer } from '@ohos/flutter_ohos/src/main/ets/embedding/engin
 import { SurfaceTextureEntry } from '@ohos/flutter_ohos/src/main/ets/view/TextureRegistry';
 import { VideoPlayer } from './VideoPlayer';
 import { VideoPlayerApi } from './VideoPlayerApi';
+import { CommonConstants } from './constants/CommonConstants';
 import { CreateMessage, LoopingMessage,
   MixWithOthersMessage,
   PlaybackSpeedMessage,
@@ -92,27 +93,45 @@ export class VideoPlayerApiImpl {
     Log.i(TAG, "enter getRawFd, textureId=" + textureId);
     let surfaceTextureEntry: SurfaceTextureEntry = flutterRenderer.registerTexture(textureId);
     if (asset != null) {
-      let avImageGenerator = await media.createAVImageGenerator();
-      avImageGenerator.fdSrc = await this.getContext().resourceManager.getRawFd("flutter_assets/" + asset);
-      let pixelMap = await avImageGenerator.fetchFrameByTime(0, media.AVImageQueryOptions.AV_IMAGE_QUERY_NEXT_SYNC, {
-        width: -1,
-        height: -1
-      });
-      this.pixelMaps.set(JSON.stringify(arg), pixelMap);
-      avImageGenerator.release();
-      flutterRenderer.setTextureBackGroundPixelMap(textureId, this.pixelMaps.get(JSON.stringify(arg)));
+      Log.i(TAG, "asset create called, asset is" + asset);
+      let avMetaExtractor = await media.createAVMetadataExtractor();
+      avMetaExtractor.fdSrc = await this.getContext().resourceManager.getRawFd("flutter_assets/" + asset);
+      let mateData = await avMetaExtractor.fetchMetadata();
+      if (mateData.hasVideo == CommonConstants.YES) {
+        let avImageGenerator = await media.createAVImageGenerator();
+        Log.i(TAG, "asset video create");
+        avImageGenerator.fdSrc = await this.getContext().resourceManager.getRawFd("flutter_assets/" + asset);
+        let pixelMap = await avImageGenerator.fetchFrameByTime(0, media.AVImageQueryOptions.AV_IMAGE_QUERY_NEXT_SYNC, {
+          width: -1,
+          height: -1
+        });
+        this.pixelMaps.set(JSON.stringify(arg), pixelMap);
+        avImageGenerator.release();
+        flutterRenderer.setTextureBackGroundPixelMap(textureId, this.pixelMaps.get(JSON.stringify(arg)));
+      }
+      avMetaExtractor.release();
     } else if (uri != null && uri.startsWith("fd://")) {
-      let avImageGenerator = await media.createAVImageGenerator();
-      avImageGenerator.fdSrc = {
+      Log.i(TAG, "local create called, file is" + uri);
+      let avMetaExtractor = await media.createAVMetadataExtractor();
+      avMetaExtractor.fdSrc = {
         fd: Number.parseInt(uri.replace("fd://", ""))
       };
-      let pixelMap = await avImageGenerator.fetchFrameByTime(0, media.AVImageQueryOptions.AV_IMAGE_QUERY_NEXT_SYNC, {
-        width: -1,
-        height: -1
-      });
-      this.pixelMaps.set(JSON.stringify(arg), pixelMap);
-      avImageGenerator.release();
-      flutterRenderer.setTextureBackGroundPixelMap(textureId, this.pixelMaps.get(JSON.stringify(arg)));
+      let mateData = await avMetaExtractor.fetchMetadata();
+      if (mateData.hasVideo == CommonConstants.YES) {
+        let avImageGenerator = await media.createAVImageGenerator();
+        Log.i(TAG, "local video create");
+        avImageGenerator.fdSrc = {
+          fd: Number.parseInt(uri.replace("fd://", ""))
+        };
+        let pixelMap = await avImageGenerator.fetchFrameByTime(0, media.AVImageQueryOptions.AV_IMAGE_QUERY_NEXT_SYNC, {
+          width: -1,
+          height: -1
+        });
+        this.pixelMaps.set(JSON.stringify(arg), pixelMap);
+        avImageGenerator.release();
+        flutterRenderer.setTextureBackGroundPixelMap(textureId, this.pixelMaps.get(JSON.stringify(arg)));
+      }
+      avMetaExtractor.release();
     }
     let eventChannel: EventChannel = new EventChannel(this.flutterState.getBinaryMessenger(), "flutter.io/videoPlayer/videoEvents" + textureId.toString());
     if (asset != null) {

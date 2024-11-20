@@ -70,6 +70,10 @@ export class CommonConstants {
    */
   static readonly A_THOUSAND: number = 1000;
   /**
+   * Attribute Value is 'yes'
+   */
+  static readonly YES: string = 'yes';
+  /**
    * Speed set.
    */
   static readonly SPEED_ARRAY: VideoSpeed[] = [
