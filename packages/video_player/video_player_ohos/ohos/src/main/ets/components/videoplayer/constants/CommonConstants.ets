@@ -70,8 +70,8 @@ export class CommonConstants {
    */
   static readonly A_THOUSAND: number = 1000;
   /**
-     * A thousand.
-     */
+   * resource file is video.
+   */
     static readonly YES: string = 'yes';
   /**
    * Speed set.
