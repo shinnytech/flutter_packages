@@ -72,7 +72,7 @@ export class CommonConstants {
   /**
      * A thousand.
      */
-    static readonly HAS_VIDEO: string = 'yes';
+    static readonly YES: string = 'yes';
   /**
    * Speed set.
    */

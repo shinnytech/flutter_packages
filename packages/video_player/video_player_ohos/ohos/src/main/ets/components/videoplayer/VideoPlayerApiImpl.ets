@@ -97,7 +97,7 @@ export class VideoPlayerApiImpl {
       let avMetaExtractor = await media.createAVMetadataExtractor();
       avMetaExtractor.fdSrc = await this.getContext().resourceManager.getRawFd("flutter_assets/" + asset);
       let mateData = await avMetaExtractor.fetchMetadata();
-      if (mateData.hasVideo == CommonConstants.HAS_VIDEO) {
+      if (mateData.hasVideo == CommonConstants.YES) {
         let avImageGenerator = await media.createAVImageGenerator();
         Log.i(TAG, "asset video create");
         avImageGenerator.fdSrc = await this.getContext().resourceManager.getRawFd("flutter_assets/" + asset);
@@ -117,7 +117,7 @@ export class VideoPlayerApiImpl {
         fd: Number.parseInt(uri.replace("fd://", ""))
       };
       let mateData = await avMetaExtractor.fetchMetadata();
-      if (mateData.hasVideo == CommonConstants.HAS_VIDEO) {
+      if (mateData.hasVideo == CommonConstants.YES) {
         let avImageGenerator = await media.createAVImageGenerator();
         Log.i(TAG, "local video create");
         avImageGenerator.fdSrc = {
