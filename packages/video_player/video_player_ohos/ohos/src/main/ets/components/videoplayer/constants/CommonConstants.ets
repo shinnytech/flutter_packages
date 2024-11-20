@@ -72,7 +72,7 @@ export class CommonConstants {
   /**
    * Attribute Value is 'yes'
    */
-    static readonly YES: string = 'yes';
+  static readonly YES: string = 'yes';
   /**
    * Speed set.
    */
