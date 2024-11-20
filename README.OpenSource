@@ -1,7 +1,7 @@
 [
     {
         "Name": "packages",
-        "License": "BSD 3-Clause License",
+        "License": "BSD-3-Clause License",
         "License File": "LICENSE",
         "Version Number": "b8b84b2304f00a3f93ce585cc7a30e1235bde7a0",
         "Owner": "aibin@openvalley.net",
