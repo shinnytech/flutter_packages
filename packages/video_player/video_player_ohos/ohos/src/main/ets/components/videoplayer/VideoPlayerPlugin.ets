@@ -39,18 +39,23 @@ export class VideoPlayerPlugin implements FlutterPlugin, AbilityAware {
   }
 
   onDetachedFromEngine(binding: FlutterPluginBinding): void {
+    Log.i(TAG, "VideoPlayer onDetachedFromEngine");
     this.pluginBinding = null;
+    if (this.videoPlayerApi != null) {
+      this.videoPlayerApi.initialize();
+      this.videoPlayerApi = null;
+    }
   }
 
   onAttachedToAbility(binding: AbilityPluginBinding): void {
     Log.i(TAG, "VideoPlayer onAttachedToAbility");
-    if (this.flutterState != null && this.pluginBinding != null) {
+    if (this.flutterState != null && this.pluginBinding != null && this.videoPlayerApi == null) {
       this.videoPlayerApi = new VideoPlayerApiImpl(this.flutterState, binding);
       this.videoPlayerApi.setup(this.pluginBinding.getBinaryMessenger());
     }
   }
   onDetachedFromAbility(): void {
-    this.videoPlayerApi = null;
+    Log.i(TAG, "VideoPlayer onDetachedFromAbility");
   }
 }
 
