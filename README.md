@@ -7,7 +7,7 @@
 ## OpenHarmony平台已兼容库
 
 | 序号 | 原库名 | 原库基线版本 | 仓库名 | 状态 |
-| ------ | ---- | ---- | ---- | -------- |
+| -------- | ---- | ---- | ---- | -------- |
 | 1 | [pigeon](https://pub.dev/packages/pigeon) | 14.0.0 | [pigeon](https://gitee.com/openharmony-sig/flutter_packages/tree/master/packages/pigeon) | 已适配 |
 | 2 | [file_selector](https://pub.dev/packages/file_selector) | 1.0.1 | [file_selector](https://gitee.com/openharmony-sig/flutter_packages/tree/master/packages/file_selector) | 已适配 |
 | 3 | [image_picker](https://pub.dev/packages/image_picker) | 1.0.4 | [image_picker](https://gitee.com/openharmony-sig/flutter_packages/tree/master/packages/image_picker) | 已适配 |
