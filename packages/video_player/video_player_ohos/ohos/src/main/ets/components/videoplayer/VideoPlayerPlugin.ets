@@ -42,7 +42,7 @@ export class VideoPlayerPlugin implements FlutterPlugin, AbilityAware {
     Log.i(TAG, "VideoPlayer onDetachedFromEngine");
     this.pluginBinding = null;
     if (this.videoPlayerApi != null) {
-      this.videoPlayerApi.initialize();
+      this.videoPlayerApi.detach();
       this.videoPlayerApi = null;
     }
   }
