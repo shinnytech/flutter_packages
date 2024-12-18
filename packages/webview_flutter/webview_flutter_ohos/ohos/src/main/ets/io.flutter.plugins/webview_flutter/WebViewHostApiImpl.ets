@@ -95,6 +95,14 @@ export class WebViewHostApiImpl extends WebViewHostApi {
     await webView.waitControllerAttached();
     try {
       if (url.startsWith("resources/rawfile/")) {
+        try {
+          // 设置允许可以跨域访问的路径列表
+          webView.getController().setPathAllowingUniversalAccess([
+            getContext().resourceDir
+          ])
+        } catch (err) {
+          Log.e(TAG, "setPathAllowingUniversalAccess err = " + err);
+        }
         webView.getController().loadUrl($rawfile(url.replace("resources/rawfile/","")), this.toWebHeaders(headers));
       }else {
         webView.getController().loadUrl(url, this.toWebHeaders(headers));
