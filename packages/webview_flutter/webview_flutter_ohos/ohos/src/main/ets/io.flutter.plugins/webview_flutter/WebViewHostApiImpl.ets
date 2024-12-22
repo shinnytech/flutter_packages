@@ -627,6 +627,7 @@ class WebSettingsImpl implements WebSettings {
   async setUserAgentString(userAgentString: string) {
     await this.webView.waitControllerAttached();
     this.webView.getController().setCustomUserAgent(userAgentString);
+    this.webView.getController().loadUrl(this.webView.getUrl())
   }
 
   setMediaPlaybackRequiresUserGesture(require: boolean) {
