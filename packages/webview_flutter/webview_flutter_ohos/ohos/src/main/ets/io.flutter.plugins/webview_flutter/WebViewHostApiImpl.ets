@@ -627,6 +627,8 @@ class WebSettingsImpl implements WebSettings {
   async setUserAgentString(userAgentString: string) {
     await this.webView.waitControllerAttached();
     this.webView.getController().setCustomUserAgent(userAgentString);
+    // 解决webview无法返回首页的问题，参考文档：https://developer.huawei.com/consumer/cn/doc/harmonyos-faqs-V5/faqs-arkweb-88-V5
+    this.webView.getController().loadUrl(this.webView.getUrl())
   }
 
   setMediaPlaybackRequiresUserGesture(require: boolean) {
