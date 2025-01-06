@@ -64,6 +64,11 @@ export class VideoPlayerApiImpl {
     this.disposeAllPlayers();
   }
 
+  detach(): void {
+    Log.i(TAG, "enter detach")
+    this.disposeAllPlayers();
+  }
+
   getContext(): common.UIAbilityContext {
     if (this.binding == null) {
       throw Error("Illegal binding or context state.");
