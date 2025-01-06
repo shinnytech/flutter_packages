@@ -13,7 +13,6 @@
 * limitations under the License.
 */
 
-// 流水线测试
 
 import { FlutterAbility } from '@ohos/flutter_ohos'
 import { GeneratedPluginRegistrant } from '../plugins/GeneratedPluginRegistrant';
