@@ -63,8 +63,17 @@
                 name="projectPolicy">
                 <policyitem type="copyright" name="Hunan OpenValley Digital Industry Development Co., Ltd." path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="Developed by OpenValley Digital Co., Ltd."/>
                 <policyitem type="copyright" name="Huawei Technologies Co., Ltd." path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="Developed By Huawei Technologies Co., Ltd."/>
-                <policyitem type="copyright" name="SwanLink (Jiangsu) Technology Development Co., LTD." path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="Developed By SwanLink (Jiangsu) Technology Development Co., LTD"/>
+                <policyitem type="copyright" name="Huawei Device Co., Ltd." path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="Developed By Huawei Device Co., Ltd."/>
                 <policyitem type="copyright" name="The Flutter Authors. All rights reserved" path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="Developed By The Flutter Authors. All rights reserved."/>
+                <policyitem type="copyright" name="SwanLink (Jiangsu) Technology Development Co., LTD." path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="Developed By SwanLink (Jiangsu) Technology Development Co., LTD"/>
+                <policyitem type="copyright" name="stuartmorgan" path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="Developed By stuartmorgan"/>
+                <policyitem type="copyright" name="Maurits van Beusekom" path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="Developed By Maurits van Beusekom"/>
+                <policyitem type="copyright" name="Aman Negi" path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="Developed By Aman Negi"/>
+                <policyitem type="copyright" name="Andrew Coutts" path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="Developed By Andrew Coutts"/>
+                <policyitem type="copyright" name="Maurice Parrish" path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="Developed By Maurice Parrish"/>
+                <policyitem type="copyright" name="Navaron Bracke" path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="Developed By Navaron Bracke"/>
+                <policyitem type="copyright" name="BeMacized" path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="Developed By BeMacized"/>
+                <policyitem type="copyright" name="Braden Bagby" path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="Developed By Braden Bagby"/>
                 <policyitem type="license" name="BSD-3-Clause" path=".*" filefilter="defaultPolicyFilter" desc="不影响兼容性"/>
                 <policyitem type="license" name="BSD 3-Clause License" path=".*" filefilter="defaultPolicyFilter" desc="不影响兼容性"/>
                 <policyitem type="license" name="BSD-2-Clause" path=".*" filefilter="defaultPolicyFilter" desc="不影响兼容性"/>
@@ -89,8 +98,8 @@
                 <filteritem type="filename" name="*hvigor-wrapper.js" desc="hvigor配置文件，不手动修改"/>
                 <filteritem type="filename" name="*hvigorw" desc="hvigor配置文件，不手动修改"/>
                 <filteritem type="filename" name="*.json5" desc="项目工程默认文件，不需要添加版权头"/>
-                <filteritem type="filename" name="*Ability.test.ets" desc="项目工程默认文件，不需要添加版权头"/>
-                <filteritem type="filename" name="*List.test.ets" desc="项目工程默认文件，不需要添加版权头"/>
+                <filteritem type="filename" name="*BuildProfile.ets" desc="项目工程默认文件，不需要添加版权头"/>
+                <filteritem type="filename" name="*.test.ets" desc="项目工程默认文件，不需要添加版权头"/>
                 <filteritem type="filename" name="*TestAbility.ets" desc="项目工程默认文件，不需要添加版权头"/>
                 <filteritem type="filename" name="*OpenHarmonyTestRunner.ts" desc="项目工程默认文件，不需要添加版权头"/>
                 <filteritem type="filename" name="*GeneratedPluginRegistrant.ets" desc="项目工程默认文件，不需要添加版权头"/>
