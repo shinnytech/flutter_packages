@@ -2,6 +2,9 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+#ifndef FWFSCRIPTMESSAGEHANDLERHOSTAPI_H
+#define FWFSCRIPTMESSAGEHANDLERHOSTAPI_H
+
 #import <Flutter/Flutter.h>
 #import <WebKit/WebKit.h>
 
@@ -43,3 +46,5 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 NS_ASSUME_NONNULL_END
+
+#endif // FWFSCRIPTMESSAGEHANDLERHOSTAPI_H

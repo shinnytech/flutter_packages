@@ -2,6 +2,9 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+#ifndef FWFOBJECTHOSTAPI_H
+#define FWFOBJECTHOSTAPI_H
+
 #import <Flutter/Flutter.h>
 
 #import "FWFGeneratedWebKitApis.h"
@@ -45,3 +48,5 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 NS_ASSUME_NONNULL_END
+
+#endif // FWFOBJECTHOSTAPI_H

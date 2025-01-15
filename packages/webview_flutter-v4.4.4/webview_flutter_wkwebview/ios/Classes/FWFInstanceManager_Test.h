@@ -2,6 +2,9 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+#ifndef FWFINSTANCEMANAGER_TEST_H
+#define FWFINSTANCEMANAGER_TEST_H
+
 #import "FWFInstanceManager.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -29,3 +32,5 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 NS_ASSUME_NONNULL_END
+
+#endif // FWFINSTANCEMANAGER_TEST_H

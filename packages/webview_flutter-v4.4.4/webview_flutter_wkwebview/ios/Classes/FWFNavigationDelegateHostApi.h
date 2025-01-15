@@ -2,6 +2,9 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+#ifndef FWFNAVIGATIONDELEGATEHOSTAPI_H
+#define FWFNAVIGATIONDELEGATEHOSTAPI_H
+
 #import <Flutter/Flutter.h>
 #import <Foundation/Foundation.h>
 #import <WebKit/WebKit.h>
@@ -43,3 +46,5 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 NS_ASSUME_NONNULL_END
+
+#endif // FWFNAVIGATIONDELEGATEHOSTAPI_H

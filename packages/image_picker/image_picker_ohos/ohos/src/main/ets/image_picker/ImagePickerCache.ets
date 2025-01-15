@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE_ODID file.
 // Based on ImagePickerCache.java originally written by
-// Copyright (C) 2022 stuartmorgan <stuartmorgan@google.com>
+// Copyright 2013 The Flutter Authors.
 
 import common from '@ohos.app.ability.common';
 import data_preferences from '@ohos.data.preferences'

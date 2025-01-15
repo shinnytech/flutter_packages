@@ -64,8 +64,8 @@
                 <policyitem type="copyright" name="Hunan OpenValley Digital Industry Development Co., Ltd." path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="Developed by OpenValley Digital Co., Ltd."/>
                 <policyitem type="copyright" name="Huawei Technologies Co., Ltd." path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="Developed By Huawei Technologies Co., Ltd."/>
                 <policyitem type="copyright" name="Huawei Device Co., Ltd." path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="Developed By Huawei Device Co., Ltd."/>
-                <policyitem type="copyright" name="The Flutter Authors. All rights reserved" path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="Developed By The Flutter Authors. All rights reserved."/>
-                <policyitem type="copyright" name="SwanLink (Jiangsu) Technology Development Co., LTD." path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="Developed By SwanLink (Jiangsu) Technology Development Co., LTD"/>
+                <policyitem type="copyright" name="SwanLink (Jiangsu) Technology Development Co., LTD." path=".*/ohos/.*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="Developed By SwanLink (Jiangsu) Technology Development Co., LTD"/>
+                <policyitem type="copyright" name="The Flutter Authors." path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="Developed By The Flutter Authors."/>
                 <policyitem type="copyright" name="stuartmorgan" path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="Developed By stuartmorgan"/>
                 <policyitem type="copyright" name="Maurits van Beusekom" path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="Developed By Maurits van Beusekom"/>
                 <policyitem type="copyright" name="Aman Negi" path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="Developed By Aman Negi"/>
@@ -81,7 +81,6 @@
                 <policyitem type="license" name="BSDStyleLicense" path=".*" filefilter="defaultPolicyFilter" desc="不影响兼容性"/>
                 <policyitem type="compatibility" name="BSD-3-Clause" path=".*" desc="不影响兼容性"/>
                 <policyitem type="compatibility" name="BSD-2-Clause" path=".*" desc="不影响兼容性"/>
-                <policyitem type="compatibility" name="GPL-2.0+" path=".*" desc="Process that runs independently, invoked by the X process."/>
                 <policyitem type="compatibility" name="Apache-2.0" path=".*" desc="不影响兼容性"/>
                 <policyitem type="compatibility" name="BSDStyleLicense" path=".*" desc="不影响兼容性" />
             </policy>
@@ -99,151 +98,153 @@
                 <filteritem type="filename" name="*hvigorw" desc="hvigor配置文件，不手动修改"/>
                 <filteritem type="filename" name="*.json5" desc="项目工程默认文件，不需要添加版权头"/>
                 <filteritem type="filename" name="*BuildProfile.ets" desc="项目工程默认文件，不需要添加版权头"/>
+                <filteritem type="filename" name="*index.ets|*Index.ets" desc="项目工程默认文件，不需要添加版权头"/>
+                <filteritem type="filename" name="*EntryAbility.ets" desc="项目工程默认文件，不需要添加版权头"/>
                 <filteritem type="filename" name="*.test.ets" desc="项目工程默认文件，不需要添加版权头"/>
                 <filteritem type="filename" name="*TestAbility.ets" desc="项目工程默认文件，不需要添加版权头"/>
                 <filteritem type="filename" name="*OpenHarmonyTestRunner.ts" desc="项目工程默认文件，不需要添加版权头"/>
                 <filteritem type="filename" name="*GeneratedPluginRegistrant.ets" desc="项目工程默认文件，不需要添加版权头"/>
-                <filteritem type="filepath" name="script/*" desc="desc files"/>
-                <filteritem type="filepath" name="third_party/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/xdg_directories/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/cross_file/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/css_colors/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/dynamic_layouts/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/e2e/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/espresso/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/extension_google_sign_in_as_googleapis_auth/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/flutter_adaptive_scaffold/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/flutter_image/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/flutter_lints/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/flutter_markdown/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/flutter_migrate/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/flutter_plugin_android_lifecycle/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/flutter_template_images/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/go_router/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/go_router_builder/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/google_identity_services_web/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/google_maps_flutter/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/google_sign_in/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/integration_test/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/ios_platform_images/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/metrics_center/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/multicast_dns/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/palette_generator/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/platform/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/plugin_platform_interface/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/pointer_interceptor/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/quick_actions/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/rfw/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/standard_message_codec/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/two_dimensional_scrollables/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/web_benchmarks/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/webview_flutter_platform_interface-v2.10.0/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/animations/lib/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/animations/test/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/animations/example/web/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/animations/example/android/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/animations/example/assets/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/animations/example/demo_gifs/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/animations/example/ios/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/animations/example/lib/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/animations/example/screenshots/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/animations/example/test/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/camera/camera_windows/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/camera/camera/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/camera/camera_android/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/camera/camera_android_camerax/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/camera/camera_avfoundation/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/camera/camera_platform_interface/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/camera/camera_web/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/file_selector/file_selector/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/file_selector/file_selector_android/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/file_selector/file_selector_ios/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/file_selector/file_selector_linux/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/file_selector/file_selector_macos/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/file_selector/file_selector_platform_interface/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/file_selector/file_selector_web/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/file_selector/file_selector_windows/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/image_picker/image_picker/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/image_picker/image_picker_android/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/image_picker/image_picker_for_web/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/image_picker/image_picker_ios/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/image_picker/image_picker_linux/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/image_picker/image_picker_macos/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/image_picker/image_picker_platform_interface/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/image_picker/image_picker_windows/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/in_app_purchase/in_app_purchase/example/test_driver/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/in_app_purchase/in_app_purchase/example/android/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/in_app_purchase/in_app_purchase/example/integration_test/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/in_app_purchase/in_app_purchase/example/ios/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/in_app_purchase/in_app_purchase/example/lib/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/in_app_purchase/in_app_purchase/example/macos/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/in_app_purchase/in_app_purchase_storekit/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/in_app_purchase/in_app_purchase/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/in_app_purchase/in_app_purchase_android/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/in_app_purchase/in_app_purchase_platform_interface/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/local_auth/local_auth_windows/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/local_auth/local_auth/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/local_auth/local_auth_android/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/local_auth/local_auth_ios/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/local_auth/local_auth_platform_interface/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/path_provider/path_provider_windows/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/path_provider/path_provider/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/path_provider/path_provider_android/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/path_provider/path_provider_foundation/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/path_provider/path_provider_linux/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/path_provider/path_provider_platform_interface/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/pigeon/tool/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/pigeon/bin/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/pigeon/ci/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/pigeon/doc/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/pigeon/lib/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/pigeon/pigeons/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/pigeon/platform_tests/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/pigeon/test/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/pigeon/example/lib/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/pigeon/example/app/windows/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/pigeon/example/app/android/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/pigeon/example/app/integration_test/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/pigeon/example/app/ios/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/pigeon/example/app/lib/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/pigeon/example/app/macos/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/pigeon/example/app/pigeons/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/pigeon/example/app/test_driver/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/shared_preferences/shared_preferences/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/shared_preferences/shared_preferences_android/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/shared_preferences/shared_preferences_foundation/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/shared_preferences/shared_preferences_linux/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/shared_preferences/shared_preferences_platform_interface/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/shared_preferences/shared_preferences_web/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/shared_preferences/shared_preferences_windows/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/url_launcher/url_launcher_android/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/url_launcher/url_launcher_ios/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/url_launcher/url_launcher_linux/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/url_launcher/url_launcher_macos/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/url_launcher/url_launcher_platform_interface/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/url_launcher/url_launcher_web/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/url_launcher/url_launcher_windows/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/url_launcher/url_launcher/lib/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/url_launcher/url_launcher/test/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/url_launcher/url_launcher/example/macos/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/url_launcher/url_launcher/example/test_driver/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/url_launcher/url_launcher/example/web/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/url_launcher/url_launcher/example/windows/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/url_launcher/url_launcher/example/android/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/url_launcher/url_launcher/example/integration_test/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/url_launcher/url_launcher/example/ios/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/url_launcher/url_launcher/example/lib/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/url_launcher/url_launcher/example/linux/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/webview_flutter/webview_flutter_wkwebview/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/webview_flutter/webview_flutter/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/webview_flutter/webview_flutter_android/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/webview_flutter/webview_flutter_platform_interface/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/webview_flutter/webview_flutter_web/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/webview_flutter-v4.4.4/webview_flutter_platform_interface/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/webview_flutter-v4.4.4/webview_flutter_web/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/webview_flutter-v4.4.4/webview_flutter_wkwebview/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/webview_flutter-v4.4.4/webview_flutter/*" desc="desc files"/>
-                <filteritem type="filepath" name="packages/webview_flutter-v4.4.4/webview_flutter_android/*" desc="desc files"/>
+                <filteritem type="filepath" name="script/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="third_party/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/xdg_directories/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/cross_file/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/css_colors/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/dynamic_layouts/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/e2e/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/espresso/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/extension_google_sign_in_as_googleapis_auth/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/flutter_adaptive_scaffold/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/flutter_image/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/flutter_lints/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/flutter_markdown/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/flutter_migrate/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/flutter_plugin_android_lifecycle/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/flutter_template_images/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/go_router/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/go_router_builder/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/google_identity_services_web/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/google_maps_flutter/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/google_sign_in/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/integration_test/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/ios_platform_images/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/metrics_center/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/multicast_dns/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/palette_generator/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/platform/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/plugin_platform_interface/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/pointer_interceptor/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/quick_actions/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/rfw/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/standard_message_codec/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/two_dimensional_scrollables/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/web_benchmarks/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/webview_flutter_platform_interface-v2.10.0/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/animations/lib/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/animations/test/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/animations/example/web/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/animations/example/android/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/animations/example/assets/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/animations/example/demo_gifs/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/animations/example/ios/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/animations/example/lib/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/animations/example/screenshots/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/animations/example/test/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/camera/camera_windows/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/camera/camera/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/camera/camera_android/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/camera/camera_android_camerax/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/camera/camera_avfoundation/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/camera/camera_platform_interface/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/camera/camera_web/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/file_selector/file_selector/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/file_selector/file_selector_android/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/file_selector/file_selector_ios/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/file_selector/file_selector_linux/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/file_selector/file_selector_macos/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/file_selector/file_selector_platform_interface/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/file_selector/file_selector_web/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/file_selector/file_selector_windows/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/image_picker/image_picker/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/image_picker/image_picker_android/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/image_picker/image_picker_for_web/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/image_picker/image_picker_ios/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/image_picker/image_picker_linux/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/image_picker/image_picker_macos/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/image_picker/image_picker_platform_interface/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/image_picker/image_picker_windows/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/in_app_purchase/in_app_purchase/example/test_driver/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/in_app_purchase/in_app_purchase/example/android/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/in_app_purchase/in_app_purchase/example/integration_test/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/in_app_purchase/in_app_purchase/example/ios/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/in_app_purchase/in_app_purchase/example/lib/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/in_app_purchase/in_app_purchase/example/macos/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/in_app_purchase/in_app_purchase_storekit/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/in_app_purchase/in_app_purchase/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/in_app_purchase/in_app_purchase_android/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/in_app_purchase/in_app_purchase_platform_interface/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/local_auth/local_auth_windows/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/local_auth/local_auth/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/local_auth/local_auth_android/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/local_auth/local_auth_ios/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/local_auth/local_auth_platform_interface/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/path_provider/path_provider_windows/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/path_provider/path_provider/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/path_provider/path_provider_android/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/path_provider/path_provider_foundation/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/path_provider/path_provider_linux/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/path_provider/path_provider_platform_interface/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/pigeon/tool/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/pigeon/bin/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/pigeon/ci/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/pigeon/doc/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/pigeon/lib/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/pigeon/pigeons/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/pigeon/platform_tests/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/pigeon/test/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/pigeon/example/lib/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/pigeon/example/app/windows/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/pigeon/example/app/android/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/pigeon/example/app/integration_test/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/pigeon/example/app/ios/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/pigeon/example/app/lib/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/pigeon/example/app/macos/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/pigeon/example/app/pigeons/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/pigeon/example/app/test_driver/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/shared_preferences/shared_preferences/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/shared_preferences/shared_preferences_android/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/shared_preferences/shared_preferences_foundation/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/shared_preferences/shared_preferences_linux/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/shared_preferences/shared_preferences_platform_interface/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/shared_preferences/shared_preferences_web/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/shared_preferences/shared_preferences_windows/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/url_launcher/url_launcher_android/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/url_launcher/url_launcher_ios/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/url_launcher/url_launcher_linux/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/url_launcher/url_launcher_macos/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/url_launcher/url_launcher_platform_interface/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/url_launcher/url_launcher_web/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/url_launcher/url_launcher_windows/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/url_launcher/url_launcher/lib/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/url_launcher/url_launcher/test/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/url_launcher/url_launcher/example/macos/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/url_launcher/url_launcher/example/test_driver/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/url_launcher/url_launcher/example/web/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/url_launcher/url_launcher/example/windows/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/url_launcher/url_launcher/example/android/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/url_launcher/url_launcher/example/integration_test/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/url_launcher/url_launcher/example/ios/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/url_launcher/url_launcher/example/lib/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/url_launcher/url_launcher/example/linux/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/webview_flutter/webview_flutter_wkwebview/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/webview_flutter/webview_flutter/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/webview_flutter/webview_flutter_android/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/webview_flutter/webview_flutter_platform_interface/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/webview_flutter/webview_flutter_web/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/webview_flutter-v4.4.4/webview_flutter_platform_interface/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/webview_flutter-v4.4.4/webview_flutter_web/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/webview_flutter-v4.4.4/webview_flutter_wkwebview/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/webview_flutter-v4.4.4/webview_flutter/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filepath" name="packages/webview_flutter-v4.4.4/webview_flutter_android/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
             </filefilter>
             <filefilter name="defaultPolicyFilter" desc="Filters for compatibility，license header policies">
             </filefilter>

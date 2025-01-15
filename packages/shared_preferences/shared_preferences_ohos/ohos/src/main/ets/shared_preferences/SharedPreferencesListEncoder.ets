@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE_ODID file.
 // Based on SharedPreferencesListEncoder.java originally written by
-// Copyright (C) 2023 Aman Negi <37607224+AmanNegi@users.noreply.github.com>
+// Copyright 2013 The Flutter Authors.
 
 /**
  * An interface used to provide conversion logic between Array<string> and string for

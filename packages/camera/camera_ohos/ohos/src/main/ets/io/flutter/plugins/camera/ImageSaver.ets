@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE_HW file.
 // Based on ImageSaver.java originally written by
-// Copyright (C) 2022 stuartmorgan <stuartmorgan@google.com>
+// Copyright 2013 The Flutter Authors.
 
 import image from '@ohos.multimedia.image';
 import fs from '@ohos.file.fs';

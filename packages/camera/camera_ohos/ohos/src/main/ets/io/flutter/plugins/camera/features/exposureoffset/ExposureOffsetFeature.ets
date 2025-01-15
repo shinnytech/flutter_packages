@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE_HW file.
 // Based on ExposureOffsetFeature.java originally written by
-// Copyright (C) 2022 stuartmorgan <stuartmorgan@google.com>
+// Copyright 2013 The Flutter Authors.
 
 import { CameraProperties } from '../../CameraProperties';
 import { CameraFeature } from '../CameraFeature';

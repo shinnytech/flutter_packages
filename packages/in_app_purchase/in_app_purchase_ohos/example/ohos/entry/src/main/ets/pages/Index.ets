@@ -1,7 +1,3 @@
-// Copyright (c) 2024 SwanLink (Jiangsu) Technology Development Co., LTD.
-// Use of this source code is governed by a BSD-style license that can be
-// found in the LICENSE_ODID file.
-
 import common from '@ohos.app.ability.common';
 import { FlutterPage } from '@ohos/flutter_ohos'
 

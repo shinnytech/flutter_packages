@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE_ODID file.
 // Based on UrlLauncherPlugin.java originally written by
-// Copyright (C) 2021 stuartmorgan <stuartmorgan@google.com>
+// Copyright 2013 The Flutter Authors.
 
 import AbilityAware from '@ohos/flutter_ohos/src/main/ets/embedding/engine/plugins/ability/AbilityAware';
 import {

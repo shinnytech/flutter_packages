@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE_HW file.
 // Based on CameraPropertiesImpl.java originally written by
-// Copyright (C) 2023 Navaron Bracke <brackenavaron@gmail.com>
+// Copyright 2013 The Flutter Authors.
 
 import { CameraProperties } from './CameraProperties';
 import { camera } from '@kit.CameraKit';

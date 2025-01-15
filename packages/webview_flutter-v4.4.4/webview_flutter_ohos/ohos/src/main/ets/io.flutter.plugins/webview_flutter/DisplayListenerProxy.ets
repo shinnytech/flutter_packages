@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE_ODID file.
 // Based on DisplayListenerProxy.java originally written by
-// Copyright (C) 2021 Maurits van Beusekom <maurits@baseflow.com>
+// Copyright 2013 The Flutter Authors.
 
 import display from '@ohos.display';
 

@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE_ODID file.
 // Based on WebChromeClientHostApiImpl.java originally written by
-// Copyright (C) 2021 Maurice Parrish <bmparr@google.com>
+// Copyright 2013 The Flutter Authors.
 
 import Log from '@ohos/flutter_ohos/src/main/ets/util/Log';
 import { Reply, WebChromeClientHostApi, CustomViewCallback, HttpAuthHandler } from './GeneratedOhosWebView';

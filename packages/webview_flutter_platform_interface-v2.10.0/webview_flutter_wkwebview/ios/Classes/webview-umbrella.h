@@ -2,6 +2,9 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+#ifndef WEBVIEW_UMBRELLA_H
+#define WEBVIEW_UMBRELLA_H
+
 #import <Foundation/Foundation.h>
 
 #import "FLTWebViewFlutterPlugin.h"
@@ -25,3 +28,5 @@
 #import "FWFWebViewFlutterWKWebViewExternalAPI.h"
 #import "FWFWebViewHostApi.h"
 #import "FWFWebsiteDataStoreHostApi.h"
+
+#endif // WEBVIEW_UMBRELLA_H

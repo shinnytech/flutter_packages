@@ -2,6 +2,9 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+#ifndef FWFPREFERENCESHOSTAPI_H
+#define FWFPREFERENCESHOSTAPI_H
+
 #import <Flutter/Flutter.h>
 #import <WebKit/WebKit.h>
 
@@ -20,3 +23,5 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 NS_ASSUME_NONNULL_END
+
+#endif // FWFPREFERENCESHOSTAPI_H

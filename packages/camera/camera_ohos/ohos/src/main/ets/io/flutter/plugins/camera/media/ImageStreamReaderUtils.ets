@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE_HW file.
 // Based on ImageStreamReaderUtils.java originally written by
-// Copyright (C) 2023 Andrew Coutts <andrewjohncoutts@gmail.com>
+// Copyright 2013 The Flutter Authors.
 
 import { ByteBuffer } from '@ohos/flutter_ohos';
 import image from '@ohos.multimedia.image';

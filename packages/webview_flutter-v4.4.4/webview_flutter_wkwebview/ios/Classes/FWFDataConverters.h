@@ -2,6 +2,9 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+#ifndef FWFDATACONVERTERS_H
+#define FWFDATACONVERTERS_H
+
 #import "FWFGeneratedWebKitApis.h"
 
 #import <WebKit/WebKit.h>
@@ -216,3 +219,5 @@ FWFNativeNSURLCredentialPersistenceFromFWFNSUrlCredentialPersistence(
     FWFNSUrlCredentialPersistence value);
 
 NS_ASSUME_NONNULL_END
+
+#endif // FWFDATACONVERTERS_H

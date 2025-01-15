@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE_HW file.
 // Based on Camera.java originally written by
-// Copyright (C) 2022 stuartmorgan <stuartmorgan@google.com>
+// Copyright 2013 The Flutter Authors.
 
 import { media } from '@kit.MediaKit';
 import fs from '@ohos.file.fs';

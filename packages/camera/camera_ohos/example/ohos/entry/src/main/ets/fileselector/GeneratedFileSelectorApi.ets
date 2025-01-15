@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE_ODID file.
 // Based on GeneratedFileSelectorApi.java originally written by
-// Copyright (C) 2023 Maurice Parrish <10687576+bparrishMines@users.noreply.github.com>
+// Copyright 2013 The Flutter Authors.
 
 import { ByteBuffer } from '@ohos/flutter_ohos/src/main/ets/util/ByteBuffer';
 import StandardMessageCodec from '@ohos/flutter_ohos/src/main/ets/plugin/common/StandardMessageCodec';

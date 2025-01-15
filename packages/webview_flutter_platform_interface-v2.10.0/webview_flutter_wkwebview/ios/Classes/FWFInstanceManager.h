@@ -2,6 +2,9 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+#ifndef FWFINSTANCEMANAGER_H
+#define FWFINSTANCEMANAGER_H
+
 #import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -95,3 +98,5 @@ typedef void (^FWFOnDeallocCallback)(long identifier);
 @end
 
 NS_ASSUME_NONNULL_END
+
+#endif // FWFINSTANCEMANAGER_H
