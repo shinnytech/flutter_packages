@@ -1,7 +1,3 @@
-// Copyright (c) 2024 Huawei Device Co., Ltd.
-// Use of this source code is governed by a BSD-style license that can be
-// found in the LICENSE_HW file.
-
 const TEN = 10; // 这是数字10
 const SIXTY = 60; // 时间进制
 const THOUSAND = 1000; // 这是数字1000

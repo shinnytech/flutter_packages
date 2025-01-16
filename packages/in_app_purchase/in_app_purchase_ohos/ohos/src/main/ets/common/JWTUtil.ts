@@ -1,7 +1,3 @@
-// Copyright (c) 2024 Hunan OpenValley Digital Industry Development Co., Ltd.
-// Use of this source code is governed by a BSD-style license that can be
-// found in the LICENSE_ODID file.
-
 import { util } from '@kit.ArkTS';
 
 const centerLineRegex: RegExp = new RegExp('-', 'g');

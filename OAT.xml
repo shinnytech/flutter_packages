@@ -245,6 +245,43 @@
                 <filteritem type="filepath" name="packages/webview_flutter-v4.4.4/webview_flutter_wkwebview/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
                 <filteritem type="filepath" name="packages/webview_flutter-v4.4.4/webview_flutter/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
                 <filteritem type="filepath" name="packages/webview_flutter-v4.4.4/webview_flutter_android/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
+                <filteritem type="filename" name="*FileSelector.ets" desc="desc files"/>
+                <filteritem type="filename" name="*FIleSelectorUtil.ets" desc="desc files"/>
+                <filteritem type="filename" name="*JWTUtil.ts" desc="desc files"/>
+                <filteritem type="filename" name="*TsUtil.ts" desc="desc files"/>
+                <filteritem type="filename" name="*MethodNames.ets" desc="desc files"/>
+                <filteritem type="filename" name="*ProductType.ets" desc="desc files"/>
+                <filteritem type="filename" name="*PurchaseData.ets" desc="desc files"/>
+                <filteritem type="filename" name="*PurchaseOrderPayload.ets" desc="desc files"/>
+                <filteritem type="filename" name="*TransactionState.ts" desc="desc files"/>
+                <filteritem type="filename" name="*MessagePlugin.ets" desc="desc files"/>
+                <filteritem type="filename" name="*Messages.ets" desc="desc files"/>
+                <filteritem type="filename" name="*LaunchInAppPage.ets" desc="desc files"/>
+                <filteritem type="filename" name="*InAppBrowser.ets" desc="desc files"/>
+                <filteritem type="filename" name="*FileSelector.ets" desc="desc files"/>
+                <filteritem type="filename" name="*FileSelectorOhosPlugin.ets" desc="desc files"/>
+                <filteritem type="filename" name="*GeneratedFileSelectorApi.ets" desc="desc files"/>
+                <filteritem type="filename" name="*PlayerModel.ets" desc="desc files"/>
+                <filteritem type="filename" name="*VideoItem.ets" desc="desc files"/>
+                <filteritem type="filename" name="*VideoPlayerApi.ets" desc="desc files"/>
+                <filteritem type="filename" name="*VideoPlayerApiCodec.ets" desc="desc files"/>
+                <filteritem type="filename" name="*VideoPlayerApiImpl.ets" desc="desc files"/>
+                <filteritem type="filename" name="*VideoSpeed.ets" desc="desc files"/>
+                <filteritem type="filename" name="*CommonConstants.ets" desc="desc files"/>
+                <filteritem type="filename" name="*PlayConstants.ets" desc="desc files"/>
+                <filteritem type="filename" name="*DateFormatUtil.ets" desc="desc files"/>
+                <filteritem type="filename" name="*GlobalContext.ets" desc="desc files"/>
+                <filteritem type="filename" name="*DynamicUtils.ets" desc="desc files"/>
+                <filteritem type="filename" name="*OhosObjectHostApiImpl.ets" desc="desc files"/>
+                <filteritem type="filename" name="*OhosWebView.ets" desc="desc files"/>
+                <filteritem type="filename" name="*DynamicUtils.ets" desc="desc files"/>
+                <filteritem type="filename" name="*OhosObjectHostApiImpl.ets" desc="desc files"/>
+                <filteritem type="filename" name="*OhosWebView.ets" desc="desc files"/>
+                <filteritem type="filename" name="*DateTimeUtil.ts" desc="desc files"/>
+                <filteritem type="filename" name="*GlobalContext.ets" desc="desc files"/>
+                <filteritem type="filename" name="*Logger.ts" desc="desc files"/>
+                <filteritem type="filename" name="*PermissionUtils.ets" desc="desc files"/>
+                <filteritem type="filename" name="*TimeUtils.ets" desc="desc files"/>
             </filefilter>
             <filefilter name="defaultPolicyFilter" desc="Filters for compatibility，license header policies">
             </filefilter>
