@@ -225,6 +225,16 @@ export class PlaybackSpeedMessage {
       return media.PlaybackSpeed.SPEED_FORWARD_1_75_X;
     } else if (this.speed == 2.0) {
       return media.PlaybackSpeed.SPEED_FORWARD_2_00_X;
+    } else if (this.speed == 0.5) {
+      return media.PlaybackSpeed.SPEED_FORWARD_0_50_X;
+    } else if (this.speed == 1.5) {
+      return media.PlaybackSpeed.SPEED_FORWARD_1_50_X;
+    } else if (this.speed == 3.0) {
+      return media.PlaybackSpeed.SPEED_FORWARD_3_00_X;
+    } else if (this.speed == 0.25) {
+      return media.PlaybackSpeed.SPEED_FORWARD_0_25_X;
+    } else if (this.speed == 0.125) {
+      return media.PlaybackSpeed.SPEED_FORWARD_0_125_X;
     } else {
       return null;
     }
