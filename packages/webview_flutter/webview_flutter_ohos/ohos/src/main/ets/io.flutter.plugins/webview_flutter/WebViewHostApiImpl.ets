@@ -337,6 +337,11 @@ export class WebViewPlatformView extends PlatformView {
     if(request.getRequestUrl() == 'loaded:///'){
       return true;
     }
+
+    if (this.webViewClint && request.isRequestGesture()) {
+      return this.webViewClint.shouldOverrideUrlLoading(this, request);
+    }
+
     return false;
   }
 
