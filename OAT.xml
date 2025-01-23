@@ -66,14 +66,6 @@
                 <policyitem type="copyright" name="Huawei Device Co., Ltd." path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="Developed By Huawei Device Co., Ltd."/>
                 <policyitem type="copyright" name="SwanLink (Jiangsu) Technology Development Co., LTD." path=".*/ohos/.*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="Developed By SwanLink (Jiangsu) Technology Development Co., LTD"/>
                 <policyitem type="copyright" name="The Flutter Authors." path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="Developed By The Flutter Authors."/>
-                <policyitem type="copyright" name="stuartmorgan" path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="Developed By stuartmorgan"/>
-                <policyitem type="copyright" name="Maurits van Beusekom" path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="Developed By Maurits van Beusekom"/>
-                <policyitem type="copyright" name="Aman Negi" path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="Developed By Aman Negi"/>
-                <policyitem type="copyright" name="Andrew Coutts" path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="Developed By Andrew Coutts"/>
-                <policyitem type="copyright" name="Maurice Parrish" path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="Developed By Maurice Parrish"/>
-                <policyitem type="copyright" name="Navaron Bracke" path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="Developed By Navaron Bracke"/>
-                <policyitem type="copyright" name="BeMacized" path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="Developed By BeMacized"/>
-                <policyitem type="copyright" name="Braden Bagby" path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="Developed By Braden Bagby"/>
                 <policyitem type="license" name="BSD-3-Clause" path=".*" filefilter="defaultPolicyFilter" desc="不影响兼容性"/>
                 <policyitem type="license" name="BSD 3-Clause License" path=".*" filefilter="defaultPolicyFilter" desc="不影响兼容性"/>
                 <policyitem type="license" name="BSD-2-Clause" path=".*" filefilter="defaultPolicyFilter" desc="不影响兼容性"/>
@@ -88,8 +80,8 @@
         <filefilterlist>
             <filefilter name="defaultFilter" desc="Files not to check">
                 <filteritem type="filename" name="*.so|*.har|*.dat|*.jar" desc="二进制文件,不影响兼容性"/>
-                <filteritem type="filename" name="*.xml|*.iml|*.json|*.txt|*.yaml|*.yml|*.md|*.metadata|*.bat|*.podspec|*.storyboard|*.plist|*.xcworkspacedata|*.xcscheme|*.xcsettings|*.xcconfig|*.xcprivacy|*.pbxproj|*.modulema|*.modulemap|*.h|*.m" desc="desc files"/>
-                <filteritem type="filename" name="*.png|*.ico|*.jpg|*.jpeg|*.webp|*.ttf|*.enc|*.mp3|*.mp4|*.ogg|*.gif|*.json5" desc="app resource files"/>
+                <filteritem type="filename" name="*.xml|*.iml|*.json|*.txt|*.yaml|*.yml|*.md|*.metadata|*.bat|*.podspec|*.storyboard|*.plist|*.xcworkspacedata|*.xcscheme|*.xcsettings|*.xcconfig|*.xcprivacy|*.pbxproj|*.modulema|*.modulemap|*.h|*.m|*.srt|*.vtt" desc="desc files"/>
+                <filteritem type="filename" name="*.png|*.ico|*.jpg|*.jpeg|*.webp|*.ttf|*.enc|*.mp3|*.mp4|*.webm|*.ogg|*.gif|*.json5" desc="app resource files"/>
                 <filteritem type="filename" name="LICENSE|README.OpenSource|AUTHORS|CHANGELOG|PATENTS|CODEOWNERS|Podfile" desc="说明文件，不需要添加版权头"/>
                 <filteritem type="filename" name="*.tgz" desc="hvigor配置文件,不影响兼容性"/>
                 <filteritem type="filename" name="*hvigorfile.ts" desc="hvigor配置文件，不手动修改"/>
@@ -104,6 +96,10 @@
                 <filteritem type="filename" name="*TestAbility.ets" desc="项目工程默认文件，不需要添加版权头"/>
                 <filteritem type="filename" name="*OpenHarmonyTestRunner.ts" desc="项目工程默认文件，不需要添加版权头"/>
                 <filteritem type="filename" name="*GeneratedPluginRegistrant.ets" desc="项目工程默认文件，不需要添加版权头"/>
+                <filteritem type="filepath" name="**/example/*" desc="example文件，不需要添加版权头"/>
+                <filteritem type="filepath" name="**/camera/utlis/*" desc="工具文件，不需要添加版权头"/>
+                <filteritem type="filepath" name="**/videoplayer/util/*" desc="工具文件，不需要添加版权头"/>
+                <filteritem type="filepath" name="**/iap_kit_wrappers/*" desc="desc files"/>
                 <filteritem type="filepath" name="script/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
                 <filteritem type="filepath" name="third_party/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
                 <filteritem type="filepath" name="packages/xdg_directories/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
@@ -245,43 +241,6 @@
                 <filteritem type="filepath" name="packages/webview_flutter-v4.4.4/webview_flutter_wkwebview/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
                 <filteritem type="filepath" name="packages/webview_flutter-v4.4.4/webview_flutter/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
                 <filteritem type="filepath" name="packages/webview_flutter-v4.4.4/webview_flutter_android/*" desc="开源库代码（或原库代码文件）,不做侵入式修改"/>
-                <filteritem type="filename" name="*FileSelector.ets" desc="desc files"/>
-                <filteritem type="filename" name="*FIleSelectorUtil.ets" desc="desc files"/>
-                <filteritem type="filename" name="*JWTUtil.ts" desc="desc files"/>
-                <filteritem type="filename" name="*TsUtil.ts" desc="desc files"/>
-                <filteritem type="filename" name="*MethodNames.ets" desc="desc files"/>
-                <filteritem type="filename" name="*ProductType.ets" desc="desc files"/>
-                <filteritem type="filename" name="*PurchaseData.ets" desc="desc files"/>
-                <filteritem type="filename" name="*PurchaseOrderPayload.ets" desc="desc files"/>
-                <filteritem type="filename" name="*TransactionState.ts" desc="desc files"/>
-                <filteritem type="filename" name="*MessagePlugin.ets" desc="desc files"/>
-                <filteritem type="filename" name="*Messages.ets" desc="desc files"/>
-                <filteritem type="filename" name="*LaunchInAppPage.ets" desc="desc files"/>
-                <filteritem type="filename" name="*InAppBrowser.ets" desc="desc files"/>
-                <filteritem type="filename" name="*FileSelector.ets" desc="desc files"/>
-                <filteritem type="filename" name="*FileSelectorOhosPlugin.ets" desc="desc files"/>
-                <filteritem type="filename" name="*GeneratedFileSelectorApi.ets" desc="desc files"/>
-                <filteritem type="filename" name="*PlayerModel.ets" desc="desc files"/>
-                <filteritem type="filename" name="*VideoItem.ets" desc="desc files"/>
-                <filteritem type="filename" name="*VideoPlayerApi.ets" desc="desc files"/>
-                <filteritem type="filename" name="*VideoPlayerApiCodec.ets" desc="desc files"/>
-                <filteritem type="filename" name="*VideoPlayerApiImpl.ets" desc="desc files"/>
-                <filteritem type="filename" name="*VideoSpeed.ets" desc="desc files"/>
-                <filteritem type="filename" name="*CommonConstants.ets" desc="desc files"/>
-                <filteritem type="filename" name="*PlayConstants.ets" desc="desc files"/>
-                <filteritem type="filename" name="*DateFormatUtil.ets" desc="desc files"/>
-                <filteritem type="filename" name="*GlobalContext.ets" desc="desc files"/>
-                <filteritem type="filename" name="*DynamicUtils.ets" desc="desc files"/>
-                <filteritem type="filename" name="*OhosObjectHostApiImpl.ets" desc="desc files"/>
-                <filteritem type="filename" name="*OhosWebView.ets" desc="desc files"/>
-                <filteritem type="filename" name="*DynamicUtils.ets" desc="desc files"/>
-                <filteritem type="filename" name="*OhosObjectHostApiImpl.ets" desc="desc files"/>
-                <filteritem type="filename" name="*OhosWebView.ets" desc="desc files"/>
-                <filteritem type="filename" name="*DateTimeUtil.ts" desc="desc files"/>
-                <filteritem type="filename" name="*GlobalContext.ets" desc="desc files"/>
-                <filteritem type="filename" name="*Logger.ts" desc="desc files"/>
-                <filteritem type="filename" name="*PermissionUtils.ets" desc="desc files"/>
-                <filteritem type="filename" name="*TimeUtils.ets" desc="desc files"/>
             </filefilter>
             <filefilter name="defaultPolicyFilter" desc="Filters for compatibility，license header policies">
             </filefilter>
