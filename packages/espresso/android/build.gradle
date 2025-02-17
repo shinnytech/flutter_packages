@@ -78,7 +78,7 @@ dependencies {
     api 'androidx.test:rules:1.1.0'
 
     // Assertions
-    api 'androidx.test.ext:junit:1.1.5'
+    api 'androidx.test.ext:junit:1.2.1'
     api 'androidx.test.ext:truth:1.5.0'
     api 'com.google.truth:truth:1.1.3'
 
